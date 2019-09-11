@@ -1,0 +1,70 @@
+  @font-face {
+    font-family: Gotham;
+    src: url('../fonts/Gotham-Light.otf');
+}
+
+:root {
+  --black: #000;
+  --green: #25d366;
+  --gray:rgb(217, 218, 219)
+  }
+
+  body {
+    font-family: "Gotham","Open Sans", Arial, sans-serif;
+}
+.green{
+    color: var(--green)
+}
+
+.sidebar_title {
+    font-size: 14px;
+}
+
+
+.sidebar_categories li a {
+    color: rgba(0,0,0,0.8);
+}
+
+.shop {
+    padding-top: 40px;
+}
+.product_item {
+ padding-top: 0px;
+}
+
+
+.shadow {
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+
+.pmd-card {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.product_fav {
+
+    top: 15px;
+    right: 20px;
+
+}
+
+.sidebar_categories {
+    margin-top: 20px;
+}
+
+
+    .tparrows {
+      border-radius: 50%;
+    }
+
+    .tparrows:hover {
+      background: var(--green);
+    }
+.shop_page_nav {
+    margin-top: 40px;
+}
+
+.footer{
+    background-color: var(--gray)
+}
