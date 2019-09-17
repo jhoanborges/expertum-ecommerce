@@ -20,7 +20,7 @@
             <div class="col-lg-3 footer_col mt-3">
                 <div class="footer_column text-center centered">
                  <a class="logo_h " href="index.html">
-                  <img src="{{ asset('img/logo-materile.png') }}" alt="" class="img-fluid"  width="150" />
+                  <img src="{{ asset('img/logo-materile.png') }}" alt="" class="img-fluid"  width="250" />
               </a>
 
           </div>

@@ -66,7 +66,9 @@
                     <div class="sidebar_section">
                         <div class="footer_title mayus mr-5">CATEGORÍAS</div>
                         <ul class="sidebar_categories">
+
                             <li><a href="#">Alimentación</a></li>
+
                             <li><a href="#">Bebé 0 a 12 meses</a></li>
                             <li><a href="#">Ciencia · Experimentos</a></li>
                             <li><a href="#">Deporte y Scooterss</a></li>
@@ -84,6 +86,65 @@
                             <li><a href="#">Teens</a></li>
                         </ul>
                     </div>
+
+
+                    <div class="sidebar_section mt-5">
+                        <div class="footer_title mayus mr-5">más vendidos</div>
+                        <ul class="brands_list">
+                            <li class="row no-gutters h-100">
+                                <div class="col-lg-12">
+                                    
+                                <a href="#" class="d-flex pt-3 pb-3 border-bottom-custom">
+                                    <img src="{{ asset('img/300x300.png') }}" class="top-image img-fluid">
+
+                                    <div class="pmd-card-title pt-0 pb-0 pr-0 align-self-center">
+                                        <ul>
+                                            <li class="top-sub pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
+                                            {{--<li class="top-sub pmd-card-subtitle-text blue body-text">4M-INDUSTRIAL</li>--}}
+                                            <li class="top-sub pmd-card-subtitle-text blue body-text bold black">$49.000</li>
+                                        </ul>
+                                    </div>
+
+                                </a>
+                                </div>
+
+                                                         <div class="col-lg-12">
+                                    
+                                <a href="#" class="d-flex pt-3 pb-3 border-bottom-custom">
+                                    <img src="{{ asset('img/300x300.png') }}" class="top-image img-fluid">
+
+                                    <div class="pmd-card-title pt-0 pb-0 pr-0 align-self-center">
+                                        <ul>
+                                            <li class="top-sub pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
+                                            {{--<li class="top-sub pmd-card-subtitle-text blue body-text">4M-INDUSTRIAL</li>--}}
+                                            <li class="top-sub pmd-card-subtitle-text blue body-text bold black">$49.000</li>
+                                        </ul>
+                                    </div>
+
+                                </a>
+                                </div>
+                                
+                                                         <div class="col-lg-12">
+                                    
+                                <a href="#" class="d-flex pt-3 pb-3">
+                                    <img src="{{ asset('img/300x300.png') }}" class="top-image img-fluid">
+
+                                    <div class="pmd-card-title pt-0 pb-0 pr-0 align-self-center">
+                                        <ul>
+                                            <li class="top-sub pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
+                                            {{--<li class="top-sub pmd-card-subtitle-text blue body-text">4M-INDUSTRIAL</li>--}}
+                                            <li class="top-sub pmd-card-subtitle-text blue body-text bold black">$49.000</li>
+                                        </ul>
+                                    </div>
+
+                                </a>
+                                </div>
+                                
+                            </li>
+
+                        </ul>
+                    </div>
+
                     {{--
                     <div class="sidebar_section filter_by_section">
                         <div class="sidebar_title">Filter By</div>
@@ -225,7 +286,7 @@
         <div class="product_item">
             <!--<div class="product_border"></div>-->
 
-                <img class="img-fluid" src="{{ asset('img/300x300.png') }}" alt="">
+            <img class="img-fluid" src="{{ asset('img/300x300.png') }}" alt="">
 
             <div class="product_content">
 
@@ -250,7 +311,7 @@
         <div class="product_item">
             <!--<div class="product_border"></div>-->
 
-                <img class="img-fluid" src="{{ asset('img/300x300.png') }}" alt="">
+            <img class="img-fluid" src="{{ asset('img/300x300.png') }}" alt="">
 
             <div class="product_content">
 
@@ -275,7 +336,7 @@
         <div class="product_item">
             <!--<div class="product_border"></div>-->
 
-                <img class="img-fluid" src="{{ asset('img/300x300.png') }}" alt="">
+            <img class="img-fluid" src="{{ asset('img/300x300.png') }}" alt="">
 
             <div class="product_content">
 
@@ -300,7 +361,7 @@
         <div class="product_item">
             <!--<div class="product_border"></div>-->
 
-                <img class="img-fluid" src="{{ asset('img/300x300.png') }}" alt="">
+            <img class="img-fluid" src="{{ asset('img/300x300.png') }}" alt="">
 
             <div class="product_content">
 
@@ -329,7 +390,7 @@
         <div class="product_item">
             <!--<div class="product_border"></div>-->
 
-                <img class="img-fluid" src="{{ asset('img/300x300.png') }}" alt="">
+            <img class="img-fluid" src="{{ asset('img/300x300.png') }}" alt="">
 
             <div class="product_content">
 
@@ -353,7 +414,7 @@
         <div class="product_item">
             <!--<div class="product_border"></div>-->
 
-                <img class="img-fluid" src="{{ asset('img/300x300.png') }}" alt="">
+            <img class="img-fluid" src="{{ asset('img/300x300.png') }}" alt="">
 
             <div class="product_content">
 
@@ -377,7 +438,7 @@
         <div class="product_item">
             <!--<div class="product_border"></div>-->
 
-                <img class="img-fluid" src="{{ asset('img/300x300.png') }}" alt="">
+            <img class="img-fluid" src="{{ asset('img/300x300.png') }}" alt="">
 
             <div class="product_content">
 
@@ -401,7 +462,7 @@
         <div class="product_item">
             <!--<div class="product_border"></div>-->
 
-                <img class="img-fluid" src="{{ asset('img/300x300.png') }}" alt="">
+            <img class="img-fluid" src="{{ asset('img/300x300.png') }}" alt="">
 
             <div class="product_content">
 
@@ -421,28 +482,342 @@
                 <li class="product_mark product_new">new</li>
             </ul>
         </div>
+
+
+        <div class="product_item">
+            <!--<div class="product_border"></div>-->
+
+            <img class="img-fluid" src="{{ asset('img/300x300.png') }}" alt="">
+
+            <div class="product_content">
+
+                <div class="pmd-card-title">
+                    <ul>
+                        <li class="pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
+                        <li class="pmd-card-subtitle-text blue body-text">4M-INDUSTRIAL</li>
+                        <li class="pmd-card-subtitle-text blue body-text bold black">$49.000</li>
+                    </ul>
+                </div>
+
+
+            </div>
+            <div class="product_fav"><i class="fas fa-heart"></i></div>
+            <ul class="product_marks">
+                <li class="product_mark product_discount">-25%</li>
+                <li class="product_mark product_new">new</li>
+            </ul>
+        </div>
+
+
+        <div class="product_item">
+            <!--<div class="product_border"></div>-->
+
+            <img class="img-fluid" src="{{ asset('img/300x300.png') }}" alt="">
+
+            <div class="product_content">
+
+                <div class="pmd-card-title">
+                    <ul>
+                        <li class="pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
+                        <li class="pmd-card-subtitle-text blue body-text">4M-INDUSTRIAL</li>
+                        <li class="pmd-card-subtitle-text blue body-text bold black">$49.000</li>
+                    </ul>
+                </div>
+
+
+            </div>
+            <div class="product_fav"><i class="fas fa-heart"></i></div>
+            <ul class="product_marks">
+                <li class="product_mark product_discount">-25%</li>
+                <li class="product_mark product_new">new</li>
+            </ul>
+        </div>
+
+
+        <div class="product_item">
+            <!--<div class="product_border"></div>-->
+
+            <img class="img-fluid" src="{{ asset('img/300x300.png') }}" alt="">
+
+            <div class="product_content">
+
+                <div class="pmd-card-title">
+                    <ul>
+                        <li class="pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
+                        <li class="pmd-card-subtitle-text blue body-text">4M-INDUSTRIAL</li>
+                        <li class="pmd-card-subtitle-text blue body-text bold black">$49.000</li>
+                    </ul>
+                </div>
+
+
+            </div>
+            <div class="product_fav"><i class="fas fa-heart"></i></div>
+            <ul class="product_marks">
+                <li class="product_mark product_discount">-25%</li>
+                <li class="product_mark product_new">new</li>
+            </ul>
+        </div>
+
+
+        <div class="product_item">
+            <!--<div class="product_border"></div>-->
+
+            <img class="img-fluid" src="{{ asset('img/300x300.png') }}" alt="">
+
+            <div class="product_content">
+
+                <div class="pmd-card-title">
+                    <ul>
+                        <li class="pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
+                        <li class="pmd-card-subtitle-text blue body-text">4M-INDUSTRIAL</li>
+                        <li class="pmd-card-subtitle-text blue body-text bold black">$49.000</li>
+                    </ul>
+                </div>
+
+
+            </div>
+            <div class="product_fav"><i class="fas fa-heart"></i></div>
+            <ul class="product_marks">
+                <li class="product_mark product_discount">-25%</li>
+                <li class="product_mark product_new">new</li>
+            </ul>
+        </div>
+
+
+        <div class="product_item">
+            <!--<div class="product_border"></div>-->
+
+            <img class="img-fluid" src="{{ asset('img/300x300.png') }}" alt="">
+
+            <div class="product_content">
+
+                <div class="pmd-card-title">
+                    <ul>
+                        <li class="pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
+                        <li class="pmd-card-subtitle-text blue body-text">4M-INDUSTRIAL</li>
+                        <li class="pmd-card-subtitle-text blue body-text bold black">$49.000</li>
+                    </ul>
+                </div>
+
+
+            </div>
+            <div class="product_fav"><i class="fas fa-heart"></i></div>
+            <ul class="product_marks">
+                <li class="product_mark product_discount">-25%</li>
+                <li class="product_mark product_new">new</li>
+            </ul>
+        </div>
+
+
+        <div class="product_item">
+            <!--<div class="product_border"></div>-->
+
+            <img class="img-fluid" src="{{ asset('img/300x300.png') }}" alt="">
+
+            <div class="product_content">
+
+                <div class="pmd-card-title">
+                    <ul>
+                        <li class="pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
+                        <li class="pmd-card-subtitle-text blue body-text">4M-INDUSTRIAL</li>
+                        <li class="pmd-card-subtitle-text blue body-text bold black">$49.000</li>
+                    </ul>
+                </div>
+
+
+            </div>
+            <div class="product_fav"><i class="fas fa-heart"></i></div>
+            <ul class="product_marks">
+                <li class="product_mark product_discount">-25%</li>
+                <li class="product_mark product_new">new</li>
+            </ul>
+        </div>
+
+
+        <div class="product_item">
+            <!--<div class="product_border"></div>-->
+
+            <img class="img-fluid" src="{{ asset('img/300x300.png') }}" alt="">
+
+            <div class="product_content">
+
+                <div class="pmd-card-title">
+                    <ul>
+                        <li class="pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
+                        <li class="pmd-card-subtitle-text blue body-text">4M-INDUSTRIAL</li>
+                        <li class="pmd-card-subtitle-text blue body-text bold black">$49.000</li>
+                    </ul>
+                </div>
+
+
+            </div>
+            <div class="product_fav"><i class="fas fa-heart"></i></div>
+            <ul class="product_marks">
+                <li class="product_mark product_discount">-25%</li>
+                <li class="product_mark product_new">new</li>
+            </ul>
+        </div>
+
+
+        <div class="product_item">
+            <!--<div class="product_border"></div>-->
+
+            <img class="img-fluid" src="{{ asset('img/300x300.png') }}" alt="">
+
+            <div class="product_content">
+
+                <div class="pmd-card-title">
+                    <ul>
+                        <li class="pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
+                        <li class="pmd-card-subtitle-text blue body-text">4M-INDUSTRIAL</li>
+                        <li class="pmd-card-subtitle-text blue body-text bold black">$49.000</li>
+                    </ul>
+                </div>
+
+
+            </div>
+            <div class="product_fav"><i class="fas fa-heart"></i></div>
+            <ul class="product_marks">
+                <li class="product_mark product_discount">-25%</li>
+                <li class="product_mark product_new">new</li>
+            </ul>
+        </div>
+
+
+
+        <div class="product_item">
+            <!--<div class="product_border"></div>-->
+
+            <img class="img-fluid" src="{{ asset('img/300x300.png') }}" alt="">
+
+            <div class="product_content">
+
+                <div class="pmd-card-title">
+                    <ul>
+                        <li class="pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
+                        <li class="pmd-card-subtitle-text blue body-text">4M-INDUSTRIAL</li>
+                        <li class="pmd-card-subtitle-text blue body-text bold black">$49.000</li>
+                    </ul>
+                </div>
+
+
+            </div>
+            <div class="product_fav"><i class="fas fa-heart"></i></div>
+            <ul class="product_marks">
+                <li class="product_mark product_discount">-25%</li>
+                <li class="product_mark product_new">new</li>
+            </ul>
+        </div>
+
+
+
+        <div class="product_item">
+            <!--<div class="product_border"></div>-->
+
+            <img class="img-fluid" src="{{ asset('img/300x300.png') }}" alt="">
+
+            <div class="product_content">
+
+                <div class="pmd-card-title">
+                    <ul>
+                        <li class="pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
+                        <li class="pmd-card-subtitle-text blue body-text">4M-INDUSTRIAL</li>
+                        <li class="pmd-card-subtitle-text blue body-text bold black">$49.000</li>
+                    </ul>
+                </div>
+
+
+            </div>
+            <div class="product_fav"><i class="fas fa-heart"></i></div>
+            <ul class="product_marks">
+                <li class="product_mark product_discount">-25%</li>
+                <li class="product_mark product_new">new</li>
+            </ul>
+        </div>
+
+
+
+        <div class="product_item">
+            <!--<div class="product_border"></div>-->
+
+            <img class="img-fluid" src="{{ asset('img/300x300.png') }}" alt="">
+
+            <div class="product_content">
+
+                <div class="pmd-card-title">
+                    <ul>
+                        <li class="pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
+                        <li class="pmd-card-subtitle-text blue body-text">4M-INDUSTRIAL</li>
+                        <li class="pmd-card-subtitle-text blue body-text bold black">$49.000</li>
+                    </ul>
+                </div>
+
+
+            </div>
+            <div class="product_fav"><i class="fas fa-heart"></i></div>
+            <ul class="product_marks">
+                <li class="product_mark product_discount">-25%</li>
+                <li class="product_mark product_new">new</li>
+            </ul>
+        </div>
+
+
+
+        <div class="product_item">
+            <!--<div class="product_border"></div>-->
+
+            <img class="img-fluid" src="{{ asset('img/300x300.png') }}" alt="">
+
+            <div class="product_content">
+
+                <div class="pmd-card-title">
+                    <ul>
+                        <li class="pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
+                        <li class="pmd-card-subtitle-text blue body-text">4M-INDUSTRIAL</li>
+                        <li class="pmd-card-subtitle-text blue body-text bold black">$49.000</li>
+                    </ul>
+                </div>
+
+
+            </div>
+            <div class="product_fav"><i class="fas fa-heart"></i></div>
+            <ul class="product_marks">
+                <li class="product_mark product_discount">-25%</li>
+                <li class="product_mark product_new">new</li>
+            </ul>
+        </div>
+
+
+
+
+
+
+
+
+
+
 
 
 
     </div>
 
     <!-- Shop Page Navigation -->
-<div class="container">
-<div class="row">
-    
-    <div class="shop_page_nav d-flex text-center">
-        <div class="page_prev d-flex flex-column align-items-center justify-content-center"><i class="fas fa-chevron-left"></i></div>
-        <ul class="page_nav d-flex flex-row">
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">...</a></li>
-            <li><a href="#">21</a></li>
-        </ul>
-        <div class="page_next d-flex flex-column align-items-center justify-content-center"><i class="fas fa-chevron-right"></i></div>
+    <div class="container">
+        <div class="row">
+
+            <div class="shop_page_nav d-flex text-center">
+                <div class="page_prev d-flex flex-column align-items-center justify-content-center"><i class="fas fa-chevron-left"></i></div>
+                <ul class="page_nav d-flex flex-row">
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">...</a></li>
+                    <li><a href="#">21</a></li>
+                </ul>
+                <div class="page_next d-flex flex-column align-items-center justify-content-center"><i class="fas fa-chevron-right"></i></div>
+            </div>
+        </div>
     </div>
-</div>
-</div>
 </div>
 
 <!--aca-->
@@ -460,7 +835,7 @@
 @include('partials.js.slider')
 <script>
     $(document).ready(function() {
-       $( ".pmd-card" ).hover(
+     $( ".pmd-card" ).hover(
         function() {
             $(this).addClass('shadow').css('cursor', 'pointer');
         }, function() {
