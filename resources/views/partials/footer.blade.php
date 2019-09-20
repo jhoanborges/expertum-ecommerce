@@ -5,11 +5,11 @@
     <div class="row floating-footer-button">
         <div class="col-lg-12 ">
         <button class=" btn btn-secondary">Suscríbete</button>
-            
+
         </div>
-        
+
     </div>
-    
+
 </div>
 
 <footer class="footer">
@@ -82,7 +82,7 @@
 
     <div class="col-lg-3">
         <div class="footer_column">
-            <div class="footer_title">síguenos en</div>
+            <div class="footer_title mayus">síguenos en</div>
             <ul class="footer_list d-inline-flex">
                 <li>
                     <a href="" target="_blank">

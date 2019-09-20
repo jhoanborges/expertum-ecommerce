@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="OneTech shop project">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="shortcut icon" href="{{ asset('img/logo-materile.png') }}" /> 
+<link rel="shortcut icon" href="{{ asset('img/logo-materile.png') }}" />
 <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.css')}}">
 <link href="{{asset('plugins/fontawesome-free-5.0.1/css/fontawesome-all.css')}}" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="{{asset('plugins/OwlCarousel2-2.2.1/owl.carousel.css')}}">
@@ -67,7 +67,7 @@
  <script src="{{url('js/jquery.themepunch.plugins.min.js')}}"></script>
 
 @yield('extra-js')
-  <script src="{{asset('js/theme.js')}}"></script>
+  {{--<script src="{{asset('js/theme.js')}}"></script>--}}
 
 <script src="{{asset('js/shop_custom.js')}}"></script>
   <script >

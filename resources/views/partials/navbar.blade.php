@@ -5,8 +5,8 @@
         <div class="row no-gutters">
           <div class="col-sm-6">
             <div class="">
-       
-       
+
+
               <ul class="right_side">
 
                 <li>
@@ -60,7 +60,7 @@
       <div class="container text-center h-100">
 
 <div class="row  align-items-center h-100 mt-2 no-gutters">
-   
+
        <div class="col-lg-4">
   </div>
 
@@ -78,7 +78,7 @@
 
 </div>
 
-   
+
 
 
 
@@ -100,11 +100,16 @@
           <div class="row w-100 mr-0">
             <div class="col-lg-12 pr-0">
               <ul class="nav center-nav-bar">
-                <li class="nav-item active">
-                  <a class="nav-link" href="index.html">Inicio</a>
+                <li class="nav-item {{Route::currentRouteNamed('home.index') ? 'active' : '' }}">
+                  <a class="nav-link" href="{{ route('home.index') }}">Inicio</a>
                 </li>
+
+                         <li class="nav-item {{Route::currentRouteNamed('store.index') ? 'active' : '' }}">
+                  <a class="nav-link mayus" href="{{ route('store.index') }}">categorías</a>
+                </li>
+{{--}}
                 <li class="nav-item submenu dropdown">
-                  <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                  <a href="{{ route('store.index') }}" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                   aria-expanded="false">Shop</a>
                   <ul class="dropdown-menu">
                     <li class="nav-item">
@@ -121,18 +126,8 @@
                     </li>
                   </ul>
                 </li>
-                <li class="nav-item submenu dropdown">
-                  <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                  aria-expanded="false">Blog</a>
-                  <ul class="dropdown-menu">
-                    <li class="nav-item">
-                      <a class="nav-link" href="blog.html">Categorías</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="single-blog.html">Blog Details</a>
-                    </li>
-                  </ul>
-                </li>
+                --}}
+
                 <li class="nav-item submenu dropdown">
                   <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                   aria-expanded="false">Ofertas</a>

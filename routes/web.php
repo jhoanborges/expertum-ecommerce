@@ -14,3 +14,6 @@
 
 Route::get('/', 'WelcomeController@index')->name('home.index');
 
+
+Route::get('/store', 'StoreController@index')->name('store.index');
+
