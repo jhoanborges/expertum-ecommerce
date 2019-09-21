@@ -64,142 +64,189 @@
                 <!-- Shop Sidebar -->
                 <div class="shop_sidebar">
                     <div class="sidebar_section">
-                        <div class="footer_title mayus ">CATEGORÍAS</div>
-                        <ul class="sidebar_categories">
-
-                            <li><a href="#">Alimentación</a></li>
-
-                            <li><a href="#">Bebé 0 a 12 meses</a></li>
-                            <li><a href="#">Ciencia · Experimentos</a></li>
-                            <li><a href="#">Deporte y Scooterss</a></li>
-                            <li><a href="#">Juegos de mesa</a></li>
-                            <li><a href="#">Juegos de rol</a></li>
-                            <li><a href="#">Libros</a></li>
-                            <li><a href="#">Manualidades</a></li>
-                            <li><a href="#">Mobiliario y decoración</a></li>
-                            <li><a href="#">Morrales, loncheras y termos</a></li>
-                            <li><a href="#">Música</a></li>
-                            <li><a href="#">Primera infancia</a></li>
-                            <li><a href="#">Rompecabezas</a></li>
-                            <li><a href="#">Títeres y muñecos</a></li>
-                            <li><a href="#">Trenes y carros</a></li>
-                            <li><a href="#">Teens</a></li>
-                        </ul>
-                    </div>
-
-
-                    <div class="sidebar_section mt-5">
-                        <div class="footer_title mayus ">más vendidos</div>
-                        <ul class="brands_list">
+                        <ul class="brands_list mt-0">
                             <li class="row no-gutters h-100">
 
-                                <div class="col-lg-12">
+                                <div class="col-lg-12 mb-4">
+                                    <div id="accordion" class="accordion">
+                                        <div class="card  no-borders">
+                                            <div class="card-header pointer collapsed" data-toggle="collapse" href="#collapseOne">
+                                                <a class="card-title mayus">
+                                                    Marcas
+                                                </a>
+                                            </div>
+                                            <div id="collapseOne" class="card-body collapse pl-0 pr-0" data-parent="#accordion" >
+                                               <!-- Simple checkbox with label, checked -->
+                                               <div class="checkbox pmd-default-theme mt-3">
+                                                <label class="pmd-checkbox pmd-checkbox-ripple-effect">
+                                                    <input type="checkbox" value="">
+                                                    <span>4M-Industrial</span>
+                                                </label>
+                                            </div>
 
-                                    <a href="#" class="d-flex pt-3 pb-3 border-bottom-custom">
-                                        <img src="{{ asset('img/dinosaurio-tyrannosaurus-rex-skeleton-4m.jpg') }}" class="top-image img-fluid">
+                                            <!-- Simple checkbox with label, checked -->
+                                            <div class="checkbox pmd-default-theme mt-3">
+                                                <label class="pmd-checkbox pmd-checkbox-ripple-effect">
+                                                    <input type="checkbox" value="">
+                                                    <span>HAPE</span>
+                                                </label>
+                                            </div>
 
-                                        <div class="pmd-card-title pt-0 pb-0 pr-0 align-self-center">
-                                            <ul>
-                                                <li class="top-sub pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
-                                                {{--<li class="top-sub pmd-card-subtitle-text blue body-text">4M-INDUSTRIAL</li>--}}
-                                                <li class="top-sub pmd-card-subtitle-text blue body-text bold black">$49.000</li>
-                                            </ul>
+                                            <!-- Simple checkbox with label, checked -->
+                                            <div class="checkbox pmd-default-theme mt-3">
+                                                <label class="pmd-checkbox pmd-checkbox-ripple-effect">
+                                                    <input type="checkbox" value="">
+                                                    <span>POOF</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-lg-12 mb-4">
+                                <div id="accordion2" class="accordion">
+                                    <div class="card  no-borders">
+                                        <div class="card-header pointer collapsed" data-toggle="collapse" href="#collapseTwo">
+                                            <a class="card-title mayus">
+                                                actividades
+                                            </a>
+                                        </div>
+                                        <div id="collapseTwo" class="card-body collapse pl-0 pr-0" data-parent="#accordion2" >
+                                           <!-- Simple checkbox with label, checked -->
+                                           <div class="checkbox pmd-default-theme mt-3">
+                                            <label class="pmd-checkbox pmd-checkbox-ripple-effect">
+                                                <input type="checkbox" value="">
+                                                <span>4M-Industrial</span>
+                                            </label>
                                         </div>
 
-                                    </a>
-                                </div>
-
-                                <div class="col-lg-12">
-
-                                    <a href="#" class="d-flex pt-3 pb-3 border-bottom-custom">
-                                        <img src="{{ asset('img/dinosaurio-adn-t-rex_8827_full.jpg') }}" class="top-image img-fluid">
-
-                                        <div class="pmd-card-title pt-0 pb-0 pr-0 align-self-center">
-                                            <ul>
-                                                <li class="top-sub pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
-                                                {{--<li class="top-sub pmd-card-subtitle-text blue body-text">4M-INDUSTRIAL</li>--}}
-                                                <li class="top-sub pmd-card-subtitle-text blue body-text bold black">$49.000</li>
-                                            </ul>
+                                        <!-- Simple checkbox with label, checked -->
+                                        <div class="checkbox pmd-default-theme mt-3">
+                                            <label class="pmd-checkbox pmd-checkbox-ripple-effect">
+                                                <input type="checkbox" value="">
+                                                <span>HAPE</span>
+                                            </label>
                                         </div>
 
-                                    </a>
-                                </div>
-
-                                <div class="col-lg-12">
-
-                                    <a href="#" class="d-flex pt-3 pb-3">
-                                        <img src="{{ asset('img/kit-de-geologia-para-excavar_7262_full.jpg') }}" class="top-image img-fluid">
-
-                                        <div class="pmd-card-title pt-0 pb-0 pr-0 align-self-center">
-                                            <ul>
-                                                <li class="top-sub pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
-                                                {{--<li class="top-sub pmd-card-subtitle-text blue body-text">4M-INDUSTRIAL</li>--}}
-                                                <li class="top-sub pmd-card-subtitle-text blue body-text bold black">$49.000</li>
-                                            </ul>
+                                        <!-- Simple checkbox with label, checked -->
+                                        <div class="checkbox pmd-default-theme mt-3">
+                                            <label class="pmd-checkbox pmd-checkbox-ripple-effect">
+                                                <input type="checkbox" value="">
+                                                <span>POOF</span>
+                                            </label>
                                         </div>
-
-                                    </a>
+                                    </div>
                                 </div>
+                            </div>
+                        </div>
 
-                            </li>
 
-                        </ul>
-                    </div>
+                        <div class="col-lg-12 mb-4">
+                            <div id="accordion3" class="accordion">
+                                <div class="card  no-borders">
+                                    <div class="card-header pointer collapsed" data-toggle="collapse" href="#collapseThree">
+                                        <a class="card-title mayus">
+                                            edades
+                                        </a>
+                                    </div>
+                                    <div id="collapseThree" class="card-body collapse pl-0 pr-0" data-parent="#accordion3" >
+                                       <!-- Simple checkbox with label, checked -->
+                                       <div class="checkbox pmd-default-theme mt-3">
+                                        <label class="pmd-checkbox pmd-checkbox-ripple-effect">
+                                            <input type="checkbox" value="">
+                                            <span>4M-Industrial</span>
+                                        </label>
+                                    </div>
 
-                    {{--
-                    <div class="sidebar_section filter_by_section">
-                        <div class="sidebar_title">Filter By</div>
-                        <div class="sidebar_subtitle">Price</div>
-                        <div class="filter_price">
-                            <div id="slider-range" class="slider_range"></div>
-                            <p>Range: </p>
-                            <p><input type="text" id="amount" class="amount" readonly style="border:0; font-weight:bold;"></p>
+                                    <!-- Simple checkbox with label, checked -->
+                                    <div class="checkbox pmd-default-theme mt-3">
+                                        <label class="pmd-checkbox pmd-checkbox-ripple-effect">
+                                            <input type="checkbox" value="">
+                                            <span>HAPE</span>
+                                        </label>
+                                    </div>
+
+                                    <!-- Simple checkbox with label, checked -->
+                                    <div class="checkbox pmd-default-theme mt-3">
+                                        <label class="pmd-checkbox pmd-checkbox-ripple-effect">
+                                            <input type="checkbox" value="">
+                                            <span>POOF</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="sidebar_section">
-                        <div class="sidebar_subtitle color_subtitle">Color</div>
-                        <ul class="colors_list">
-                            <li class="color"><a href="#" style="background: #b19c83;"></a></li>
-                            <li class="color"><a href="#" style="background: #000000;"></a></li>
-                            <li class="color"><a href="#" style="background: #999999;"></a></li>
-                            <li class="color"><a href="#" style="background: #0e8ce4;"></a></li>
-                            <li class="color"><a href="#" style="background: #df3b3b;"></a></li>
-                            <li class="color"><a href="#" style="background: #ffffff; border: solid 1px #e1e1e1;"></a></li>
-                        </ul>
+
+
+
+                    <div class="col-lg-12 mb-4">
+                        <div id="accordion4" class="accordion">
+                            <div class="card  no-borders">
+                                <div class="card-header pointer collapsed" data-toggle="collapse" href="#collapseFour">
+                                    <a class="card-title mayus">
+                                        precios
+                                    </a>
+                                </div>
+                                <div id="collapseFour" class="card-body collapse pl-0 pr-0" data-parent="#accordion4" >
+                                   <!-- Simple checkbox with label, checked -->
+                                   <div class="checkbox pmd-default-theme mt-3">
+                                    <label class="pmd-checkbox pmd-checkbox-ripple-effect">
+                                        <input type="checkbox" value="">
+                                        <span>4M-Industrial</span>
+                                    </label>
+                                </div>
+
+                                <!-- Simple checkbox with label, checked -->
+                                <div class="checkbox pmd-default-theme mt-3">
+                                    <label class="pmd-checkbox pmd-checkbox-ripple-effect">
+                                        <input type="checkbox" value="">
+                                        <span>HAPE</span>
+                                    </label>
+                                </div>
+
+                                <!-- Simple checkbox with label, checked -->
+                                <div class="checkbox pmd-default-theme mt-3">
+                                    <label class="pmd-checkbox pmd-checkbox-ripple-effect">
+                                        <input type="checkbox" value="">
+                                        <span>POOF</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="sidebar_section">
-                        <div class="sidebar_subtitle brands_subtitle">Brands</div>
-                        <ul class="brands_list">
-                            <li class="brand"><a href="#">Apple</a></li>
-                            <li class="brand"><a href="#">Beoplay</a></li>
-                            <li class="brand"><a href="#">Google</a></li>
-                            <li class="brand"><a href="#">Meizu</a></li>
-                            <li class="brand"><a href="#">OnePlus</a></li>
-                            <li class="brand"><a href="#">Samsung</a></li>
-                            <li class="brand"><a href="#">Sony</a></li>
-                            <li class="brand"><a href="#">Xiaomi</a></li>
-                        </ul>
-                    </div>
-                    --}}
                 </div>
 
-            </div>
+
+
+
+            </li>
+
+        </ul>
+    </div>
+
+</div>
+
+</div>
 
 
 
 
 
-            <div class="col-lg-10 ">
+<div class="col-lg-10 ">
 
-                <!-- Shop Content -->
+    <!-- Shop Content -->
 
 
 
-                <div class="shop_content ">
-                    <div class="store_title mayus mb-5">CIENCIA - <b>EXPERIMENTOS</b> </div>
+    <div class="shop_content ">
+        <div class="store_title mayus mb-5">CIENCIA - <b>EXPERIMENTOS</b> </div>
 
-                    <div class="product_grid">
-                        <div class="product_grid_border"></div>
+        <div class="product_grid">
+            <div class="product_grid_border"></div>
 
 {{--
                         <!-- Product Item -->
@@ -758,7 +805,7 @@
             </ul>
         </div>
 
- <!-- Product Item -->
+        <!-- Product Item -->
         <div class="product_item">
             <!--<div class="product_border"></div>-->
             <div class="product-image-content w-100">

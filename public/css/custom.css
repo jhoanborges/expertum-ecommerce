@@ -23,6 +23,7 @@
   --grayf:rgb(123,124 , 126);
   --pink:rgb(226,0 , 122);
   --purple:rgb(98,33,129);
+  --blue:rgb(0,118,189);
   }
 
   body {
@@ -354,3 +355,63 @@ width: 350px;
       height: 190px;
 
 }
+
+
+.accordion .card-header:after {
+    font-family: 'themify';  
+    content: "\e648";
+    float: right; 
+}
+.accordion .card-header.collapsed:after {
+    /* symbol for "collapsed" panels */
+    content: "\e649"; 
+}
+
+.card-header {
+  padding: 0;
+  background-color: transparent;
+      border-bottom: 1px solid var(--grayf);
+}
+
+.no-borders{
+  border:none;
+}
+/*
+.pmd-radio > span.pmd-radio-label:before {
+      top: -2px;
+    width: 25px;
+    height: 25px;
+    }
+.pmd-radio > span.pmd-radio-label:after {
+      margin-top: -8px;
+    top: 15px;
+    left: 8px;
+  }
+
+*/
+
+.pmd-checkbox [type="checkbox"]:not(:checked) + .pmd-checkbox-label:before, .pmd-checkbox [type="checkbox"]:checked + .pmd-checkbox-label:before {
+    top: -5px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border-color: var(--grayf);
+}
+
+.pmd-checkbox [type="checkbox"]:not(:checked) + .pmd-checkbox-label:after, .pmd-checkbox [type="checkbox"]:checked + .pmd-checkbox-label:after {
+    left: 9px;
+    top: 0px;
+}
+
+.pmd-checkbox [type="checkbox"]:checked + .pmd-checkbox-label:before {
+    background-color: var(--blue);
+    border-color: var(--blue);
+}
+
+.card-body {
+  padding: 0
+  }
+
+  .pointer{
+    cursor: pointer;
+  }

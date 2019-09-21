@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="{{asset('css/flaticon.css')}}" />
  <link href="{{asset('css/style.css')}}" rel="stylesheet">
   <link rel="stylesheet" href="{{asset('css/responsive.css')}}" />
-
+  <link rel="stylesheet" href="{{asset('css/checkbox.css')}}" />
 
   <link href="{{asset('css/captions-original.css')}}" rel="stylesheet">
 
@@ -68,6 +68,8 @@
 
 @yield('extra-js')
   {{--<script src="{{asset('js/theme.js')}}"></script>--}}
+<script src="{{asset('js/global.js')}}"></script>
+<script src="{{asset('js/checkbox.js')}}"></script>
 
 <script src="{{asset('js/shop_custom.js')}}"></script>
   <script >
