@@ -29,6 +29,7 @@
   <link href="{{asset('css/captions-original.css')}}" rel="stylesheet">
 
 @yield('extra-css')
+
 <link rel="stylesheet" type="text/css" href="{{asset('css/custom.css')}}">
 </head>
 

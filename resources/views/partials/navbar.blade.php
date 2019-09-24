@@ -128,6 +128,10 @@
                 </li>
                 --}}
 
+           <li class="nav-item {{Route::currentRouteNamed('product.index') ? 'active' : '' }}">
+                  <a class="nav-link mayus" href="{{ route('product.index') }}">Ofertas</a>
+                </li>
+{{--
                 <li class="nav-item submenu dropdown">
                   <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                   aria-expanded="false">Ofertas</a>
@@ -140,6 +144,7 @@
                     </li>
                   </ul>
                 </li>
+                --}}
                 <li class="nav-item dropdown">
                   <a class="nav-link" href="contact.html">MÁS VENDIDOS</a>
                 </li>
