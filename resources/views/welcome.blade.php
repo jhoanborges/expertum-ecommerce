@@ -74,6 +74,16 @@
 
 <script src="{{asset('js/shop_custom.js')}}"></script>
   <script >
+
+    (function(){
+
+  $("#cart").on("click", function() {
+    $(".shopping-cart").fadeToggle( "fast");
+  });
+
+})();
+
+
 $(document).ready(function() {
     $('[data-toggle=popover]').popover();
 });
