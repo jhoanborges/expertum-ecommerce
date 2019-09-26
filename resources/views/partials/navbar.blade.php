@@ -93,7 +93,7 @@
     </div>
 </div> <!--end shopping-cart-header -->
 <div class="button-cart-container">
-<a href="#" class="btn btn-primary checkout-button">
+<a href="{{ route('cart.index') }}" class="btn btn-primary checkout-button">
       <img src="{{ asset('img/cart-white.png') }}" class="img-fluid header-icon">
   Ver carrito</a>
 <a href="#" class="btn btn-danger checkout-button">

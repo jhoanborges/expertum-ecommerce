@@ -610,3 +610,48 @@ margin-top: 10px;
     background-color: var(--blue)
 
 }
+
+
+.table-bordered td, .table-bordered th {
+     border: 0px solid #dee2e6;
+}
+
+
+.table-responsive {
+    overflow-x: overlay;
+    }
+
+
+.big-title {
+    font-size: 20px;
+}
+
+
+.borders{
+  border-top: 1px solid var(--grayf);
+  border-bottom: 1px solid var(--grayf);
+
+}
+
+.table-striped tbody tr:nth-of-type(odd){
+background-color: white;
+
+}
+
+.table td, .table th{
+        vertical-align: middle;
+
+}
+
+
+.cart-icon-new{
+  width: 50px;
+}
+
+.transparent{
+    color: transparent;
+}
+
+.body-text{
+    font-size: 12px;
+}
