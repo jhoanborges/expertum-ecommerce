@@ -18,7 +18,8 @@
 
 :root {
   --black: #000;
-  --green: #25d366;
+  --green: rgb(0, 146, 46);
+  --lightgreen: rgb(151, 191, 13);
   --gray:rgb(217, 218, 219);
   --grayf:rgb(123,124 , 126);
   --pink:rgb(226,0 , 122);
@@ -30,7 +31,9 @@
     font-family: "Gotham","Open Sans", Arial, sans-serif;
 }
 
-
+.lightgreen{
+    color: var(--lightgreen)
+}
 
 .header_area .navbar .nav .nav-item .nav-link {
     font: 400 14px/80px "Gotham", sans-serif;
@@ -623,7 +626,7 @@ margin-top: 10px;
 
 
 .big-title {
-    font-size: 20px;
+    font-size: 18px;
 }
 
 
@@ -654,4 +657,48 @@ background-color: white;
 
 .body-text{
     font-size: 12px;
+}
+
+.table td, .table th {
+    padding: .25rem;
+}
+
+.table-responsive{
+  border-bottom: 1px solid var(--grayf);
+
+}
+
+
+.center{
+width: 150px;
+  margin: 40px auto;
+
+}
+
+
+
+.input-number{
+height: 25px;
+    border-left: 0px;
+    border-right: 0px;
+    border-radius: 0px;
+}
+
+
+.btn{
+    border-radius: 0px;
+}
+
+.border-bottom{
+  border-bottom: 1px solid var(--grayf) !important;
+
+}
+
+
+.form-control {
+    border-radius: 0px;
+}
+
+.title-text{
+    font-size: 16px
 }

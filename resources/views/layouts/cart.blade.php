@@ -14,11 +14,11 @@
 
       <div class="col-lg-12">
 
-        <div class="big-title mayus mb-2">carrito - <b>de compras</b> </div>
+        <div class="big-title mayus mb-2">carrito <b>de compras</b> </div>
 
         <div class="card-body">
-            <div class="table-responsive">
-              <table id="myTable" class="table table-striped table-bordered">
+            <div class="table-responsive pb-2">
+              <table id="myTable" class="table table-striped table-borderless mb-0 ">
                 <thead class="borders">
                   <tr class="text-center">
                     <th class="body-text mayus bold black"></th>
@@ -40,21 +40,34 @@
 
                       </td>
                       <td class="text-center" >
-                        <span class="d-inline-block">{{$product->name}}</span>
-                        <span class="d-inline-block">{{$product->options->brand}} </span>
+                        <p class="">{{$product->name}}</p>
+                        <p class="">{{$product->options->brand}} </p>
                     </td>
-                    <td class="text-center">{{$product->options->avaliable}}</td>
+                    {{--<td class="text-center">{{$product->options->avaliable}}</td>--}}
+                    <td class="text-center"><i class="fas fa-check fa-2x lightgreen"></i></td>
                     <td class="text-center bold black">$ {{$product->price}}</td>
                     <td class="text-center">{{$product->options->iva}}</td>
-                    <td class="text-center">{{$product->qty}}</td>
+                    <td class="text-center">
+{{--
+<div class="d-inline-flex">
+
+<i class="fas fa-minus quantity-left-minus btn btn-number" data-type="minus" data-field=""></i>
+
+<input type="text" id="quantity" name="quantity" class="form-control input-number" value="{{$product->qty}}" min="1" max="100">
+<i class="fas fa-plus quantity-right-plus btn btn-number"  data-type="plus" data-field=""></i>
+
+</div>
+--}}
+{{$product->qty}}
+                    </td>
                     <td class="text-center bold black">$ {{$product->price}}</td>
                     <td class="text-center">
 
                       <a href="#" class="icons">
                           <img src="{{ asset('img/corazon.png') }}" class="img-fluid cart-icon-new">
                       </a>
-</td>
-                    <td class="text-center">
+                  </td>
+                  <td class="text-center">
 
                       <a href="#" class="icons">
                           <img src="{{ asset('img/trash.png') }}" class="img-fluid cart-icon-new">
@@ -85,6 +98,7 @@
 <script src="{{url('js/loadingoverlay.min.js')}}"></script>
 
 <script src="{{url('js/jquery.dataTables.min.js')}}"></script>
+<script src="{{url('js/qty.js')}}"></script>
 
 
 
