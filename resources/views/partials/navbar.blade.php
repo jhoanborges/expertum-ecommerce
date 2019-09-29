@@ -85,14 +85,14 @@
 
 </ul>
 
-    <div class="shopping-cart-header ml-3 mr-3">
+    <div class="shopping-cart-header ml-3 mr-3 mb-3">
       {{--<i class="fa fa-shopping-cart cart-icon"></i><span class="badge">3</span>--}}
       <div class="shopping-cart-total mt-1">
         <span class="item-name bold black">Total</span>
         <span class="item-name bold black">$ 49.000</span>
     </div>
 </div> <!--end shopping-cart-header -->
-<div class="button-cart-container">
+<div class="button-cart-container mb-2">
 <a href="{{ route('cart.index') }}" class="btn btn-primary checkout-button">
       <img src="{{ asset('img/cart-white.png') }}" class="img-fluid header-icon">
   Ver carrito</a>
@@ -125,7 +125,7 @@ Checkout</a>
 
 
        <div class="col-lg-4">
-         <a class="logo_h top-brand" href="index.html">
+         <a class="logo_h top-brand" href="{{ route('home.index') }}">
           <img src="{{ asset('img/logo-materile.png') }}" width="250" alt="" class="img-fluid" />
       </a>
   </div>
@@ -140,7 +140,7 @@ Checkout</a>
         </label>
     </div>
 
-    <input type="text" name="search" id="search" class="form-control search" placeholder="">
+    <input type="text" name="search" id="search" class="form-control search" placeholder="" style="border-radius: 30px;">
     {{--}} <input type="text" name="search" id="search" class="form-control search ti-search" placeholder="Buscar &#xe610;">--}}
 
 </div>
