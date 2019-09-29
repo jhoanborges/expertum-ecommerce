@@ -19,6 +19,8 @@ Route::get('/store', 'StoreController@index')->name('store.index');
 Route::get('/product', 'ProductController@index')->name('product.index');
 Route::get('/cart', 'CartController@index')->name('cart.index');
 Route::post('/cart.get', 'CartController@get')->name('cart.get');
+Route::get('/contacto', 'ContactoController@index')->name('contacto.index');
+Route::get('/checkout', 'CheckoutController@index')->name('checkout.index');
 
 
 Auth::routes();

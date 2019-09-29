@@ -1,6 +1,9 @@
 @extends('welcome')
 @section('content')
 
+@section('extra-css')
+<link rel="stylesheet" type="text/css" href="{{asset('css/roundedcheckbox.css')}}">
+@endsection
 <!-- Home -->
 <div class="rev_slider_wrapper mt-important">
     <!-- the ID here will be used in the inline JavaScript below to initialize the slider -->

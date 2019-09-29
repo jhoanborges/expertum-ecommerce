@@ -27,6 +27,17 @@
   --blue:rgb(0,118,189);
   }
 
+      label.required:after {
+      content: "*";
+      margin-right: 2px;
+      color: red;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+
+
+
   body {
     font-family: "Gotham","Open Sans", Arial, sans-serif;
 }
@@ -404,23 +415,7 @@ width: 350px;
 
 */
 
-.pmd-checkbox [type="checkbox"]:not(:checked) + .pmd-checkbox-label:before, .pmd-checkbox [type="checkbox"]:checked + .pmd-checkbox-label:before {
-    top: -5px;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    border-color: var(--grayf);
-}
 
-.pmd-checkbox [type="checkbox"]:not(:checked) + .pmd-checkbox-label:after, .pmd-checkbox [type="checkbox"]:checked + .pmd-checkbox-label:after {
-    left: 9px;
-    top: 0px;
-}
-
-.pmd-checkbox [type="checkbox"]:checked + .pmd-checkbox-label:before {
-    background-color: var(--blue);
-    border-color: var(--blue);
-}
 
 .card-body {
   padding: 0
@@ -701,4 +696,54 @@ height: 25px;
 
 .title-text{
     font-size: 16px
+}
+
+
+.btn {
+  border-radius: 0px;
+}
+
+.centered-li{
+   display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.pmd-checkbox{
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.card {
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.card {
+  margin-top: 10px;
+  box-sizing: border-box;
+  border-radius: 2px;
+  background-clip: padding-box;
+}
+
+.card .card-content {
+  padding-top: 16px;   
+  border-radius: 0 0 2px 2px;
+  background-clip: padding-box;
+  box-sizing: border-box;
 }

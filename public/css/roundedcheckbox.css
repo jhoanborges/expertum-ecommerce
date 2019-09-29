@@ -1,0 +1,17 @@
+.pmd-checkbox [type="checkbox"]:not(:checked) + .pmd-checkbox-label:before, .pmd-checkbox [type="checkbox"]:checked + .pmd-checkbox-label:before {
+    top: -5px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border-color: var(--grayf);
+}
+
+.pmd-checkbox [type="checkbox"]:not(:checked) + .pmd-checkbox-label:after, .pmd-checkbox [type="checkbox"]:checked + .pmd-checkbox-label:after {
+    left: 9px;
+    top: 0px;
+}
+
+.pmd-checkbox [type="checkbox"]:checked + .pmd-checkbox-label:before {
+    background-color: var(--blue);
+    border-color: var(--blue);
+}

@@ -13,8 +13,8 @@
 			sliderLayout: 'fullwidth',
 			responsiveLevels: [1240, 1024, 778, 480],
         //gridwidth: [1240, 1024, 778, 480],
-        gridwidth: [1240, 1240, 1240, 1240],
-        gridheight: [500, 500, 500, 500],
+        gridwidth: [940, 940, 940, 940],
+        gridheight: [261, 261, 261, 261],
         navigation: {
         	arrows: {
         		enable: true,

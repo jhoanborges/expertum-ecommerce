@@ -96,7 +96,7 @@
 <a href="{{ route('cart.index') }}" class="btn btn-primary checkout-button">
       <img src="{{ asset('img/cart-white.png') }}" class="img-fluid header-icon">
   Ver carrito</a>
-<a href="#" class="btn btn-danger checkout-button">
+<a href="{{ route('checkout.index') }}" class="btn btn-danger checkout-button">
       <img src="{{ asset('img/cart-white.png') }}" class="img-fluid header-icon">
 Checkout</a>
 
@@ -229,9 +229,11 @@ aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle 
 
 
 
-              <li class="nav-item dropdown">
-                  <a class="nav-link" href="contact.html">CONTACTO</a>
-              </li>
+  <li class="nav-item {{Route::currentRouteNamed('contacto.index') ? 'active' : '' }}">
+          <a class="nav-link mayus" href="{{ route('contacto.index') }}">CONTACTO</a>
+      </li>
+
+
               <li class="nav-item dropdown">
                   <a class="nav-link" href="contact.html"></a>
               </li>
