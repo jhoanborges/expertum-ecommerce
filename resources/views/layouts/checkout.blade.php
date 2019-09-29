@@ -1,5 +1,11 @@
 @extends('welcome')
-
+@section('extra-css')
+<style >
+    .card {
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+</style>
+@endsection
 @section('content')
 
 <div class="container mb-3 border-bottom">
@@ -217,7 +223,7 @@
                   <img src="{{ asset('img/cart.png') }}" class="img-fluid" width="50">
               </div>
           </div>
-                <label class="required bold black text-right pb-2">Total $ 49.000</label>
+                <label class="bold black text-right pb-2">Total $ 49.000</label>
 
       </div>
 

@@ -4,7 +4,7 @@
 <div class="container text-center">
     <div class="row floating-footer-button">
         <div class="col-lg-12 ">
-        <button class=" btn btn-secondary">Suscríbete</button>
+        <button class="btn btn-secondary button-rounded">Suscríbete</button>
 
         </div>
 

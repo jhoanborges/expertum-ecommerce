@@ -293,7 +293,7 @@
 
                 <div class="pmd-card-title">
                     <ul>
-                        <li class="pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
+                        <li class="pmd-card-subtitle-text blue category-text">Alimentación</li>
                     </ul>
                 </div>
 
@@ -316,7 +316,7 @@
 
                 <div class="pmd-card-title">
                     <ul>
-                        <li class="pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
+                        <li class="pmd-card-subtitle-text blue category-text">Bebé 0 a 12 meses</li>
                     </ul>
                 </div>
 
@@ -339,7 +339,7 @@
 
                 <div class="pmd-card-title">
                     <ul>
-                        <li class="pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
+                        <li class="pmd-card-subtitle-text blue category-text">Ciencia STEAM</li>
                     </ul>
                 </div>
 
@@ -362,7 +362,7 @@
 
                 <div class="pmd-card-title">
                     <ul>
-                        <li class="pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
+                        <li class="pmd-card-subtitle-text blue category-text">Deportes y Scooters</li>
                     </ul>
                 </div>
 
@@ -389,7 +389,7 @@
 
                 <div class="pmd-card-title">
                     <ul>
-                        <li class="pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
+                        <li class="pmd-card-subtitle-text blue category-text">Excava Tiranosaurio</li>
                     </ul>
                 </div>
 
@@ -411,7 +411,7 @@
 
                 <div class="pmd-card-title">
                     <ul>
-                        <li class="pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
+                        <li class="pmd-card-subtitle-text blue category-text">Excava Tiranosaurio</li>
                     </ul>
                 </div>
 
@@ -433,7 +433,7 @@
 
                 <div class="pmd-card-title">
                     <ul>
-                        <li class="pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
+                        <li class="pmd-card-subtitle-text blue category-text">Excava Tiranosaurio</li>
                     </ul>
                 </div>
 
@@ -455,7 +455,7 @@
 
                 <div class="pmd-card-title">
                     <ul>
-                        <li class="pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
+                        <li class="pmd-card-subtitle-text blue category-text">Excava Tiranosaurio</li>
                     </ul>
                 </div>
 
@@ -478,7 +478,7 @@
 
                 <div class="pmd-card-title">
                     <ul>
-                        <li class="pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
+                        <li class="pmd-card-subtitle-text blue category-text">Excava Tiranosaurio</li>
                     </ul>
                 </div>
 
@@ -501,7 +501,7 @@
 
                 <div class="pmd-card-title">
                     <ul>
-                        <li class="pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
+                        <li class="pmd-card-subtitle-text blue category-text">Excava Tiranosaurio</li>
                     </ul>
                 </div>
 
@@ -524,7 +524,7 @@
 
                 <div class="pmd-card-title">
                     <ul>
-                        <li class="pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
+                        <li class="pmd-card-subtitle-text blue category-text">Excava Tiranosaurio</li>
                     </ul>
                 </div>
 
@@ -547,7 +547,7 @@
 
                 <div class="pmd-card-title">
                     <ul>
-                        <li class="pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
+                        <li class="pmd-card-subtitle-text blue category-text">Excava Tiranosaurio</li>
                     </ul>
                 </div>
 
@@ -570,7 +570,7 @@
 
                 <div class="pmd-card-title">
                     <ul>
-                        <li class="pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
+                        <li class="pmd-card-subtitle-text blue category-text">Excava Tiranosaurio</li>
                     </ul>
                 </div>
 
@@ -593,7 +593,7 @@
 
                 <div class="pmd-card-title">
                     <ul>
-                        <li class="pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
+                        <li class="pmd-card-subtitle-text blue category-text">Excava Tiranosaurio</li>
                     </ul>
                 </div>
 
@@ -616,7 +616,7 @@
 
                 <div class="pmd-card-title">
                     <ul>
-                        <li class="pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
+                        <li class="pmd-card-subtitle-text blue category-text">Excava Tiranosaurio</li>
                     </ul>
                 </div>
 
@@ -639,7 +639,7 @@
 
                 <div class="pmd-card-title">
                     <ul>
-                        <li class="pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
+                        <li class="pmd-card-subtitle-text blue category-text">Excava Tiranosaurio</li>
                     </ul>
                 </div>
 
@@ -663,7 +663,7 @@
 
                 <div class="pmd-card-title">
                     <ul>
-                        <li class="pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
+                        <li class="pmd-card-subtitle-text blue category-text">Excava Tiranosaurio</li>
                     </ul>
                 </div>
 
@@ -687,7 +687,7 @@
 
                 <div class="pmd-card-title">
                     <ul>
-                        <li class="pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
+                        <li class="pmd-card-subtitle-text blue category-text">Excava Tiranosaurio</li>
                     </ul>
                 </div>
 
@@ -711,7 +711,7 @@
 
                 <div class="pmd-card-title">
                     <ul>
-                        <li class="pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
+                        <li class="pmd-card-subtitle-text blue category-text">Excava Tiranosaurio</li>
                     </ul>
                 </div>
 
@@ -735,7 +735,7 @@
 
                 <div class="pmd-card-title">
                     <ul>
-                        <li class="pmd-card-subtitle-text blue body-text">Excava Tiranosaurio</li>
+                        <li class="pmd-card-subtitle-text blue category-text">Excava Tiranosaurio</li>
                     </ul>
                 </div>
 

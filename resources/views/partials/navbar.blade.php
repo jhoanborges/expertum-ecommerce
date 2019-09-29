@@ -140,7 +140,7 @@ Checkout</a>
         </label>
     </div>
 
-    <input type="text" name="search" id="search" class="form-control search" placeholder="" style="border-radius: 30px;">
+    <input type="text" name="search" id="search" class="form-control search button-rounded" placeholder="" >
     {{--}} <input type="text" name="search" id="search" class="form-control search ti-search" placeholder="Buscar &#xe610;">--}}
 
 </div>
