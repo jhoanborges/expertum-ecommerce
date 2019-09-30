@@ -1,34 +1,38 @@
-$(document).ready(function(){
-
-var quantitiy=0;
-   $('.quantity-right-plus').click(function(e){
-
+jQuery(document).ready(function(){
+    // This button will increment the value
+    $('.qtyplus').click(function(e){
         // Stop acting like a button
         e.preventDefault();
         // Get the field name
-        var quantity = parseInt($('#quantity').val());
-
+        fieldName = $(this).attr('field');
+        // Get its current value
+        var currentVal = parseInt($('input[name='+fieldName+']').val());
         // If is not undefined
-
-            $('#quantity').val(quantity + 1);
-
-
+        if (!isNaN(currentVal)) {
             // Increment
-
+            $('input[name='+fieldName+']').val(currentVal + 1);
+        } else {
+            // Otherwise put a 0 there
+            $('input[name='+fieldName+']').val(0);
+        }
     });
-
-     $('.quantity-left-minus').click(function(e){
+    // This button will decrement the value till 0
+    $(".qtyminus").click(function(e) {
         // Stop acting like a button
         e.preventDefault();
         // Get the field name
-        var quantity = parseInt($('#quantity').val());
-
-        // If is not undefined
-
-            // Increment
-            if(quantity>0){
-            $('#quantity').val(quantity - 1);
-            }
+        fieldName = $(this).attr('field');
+        // Get its current value
+        var currentVal = parseInt($('input[name='+fieldName+']').val());
+        // If it isn't undefined or its greater than 0
+        if (!isNaN(currentVal) && currentVal > 0) {
+            // Decrement one
+            $('input[name='+fieldName+']').val(currentVal - 1);
+        } else {
+            // Otherwise put a 0 there
+            $('input[name='+fieldName+']').val(0);
+        }
     });
-
 });
+
+

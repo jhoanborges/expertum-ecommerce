@@ -57,9 +57,16 @@
 <i class="fas fa-plus quantity-right-plus btn btn-number"  data-type="plus" data-field=""></i>
 
 </div>
---}}
-{{$product->qty}}
-                    </td>
+
+{{$product->qty}}--}}
+<div class="qty-box">
+  
+    <input type='button' value='-' class='qtyminus' field='quantity' />
+    <input type='text' name='quantity' value='0' class='qty' />
+    <input type='button' value='+' class='qtyplus' field='quantity' />
+</div>
+
+                        </td>
                     <td class="text-center bold black">$ {{$product->price}}</td>
                     <td class="text-center">
 
