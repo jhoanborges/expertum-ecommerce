@@ -1391,6 +1391,8 @@ textarea.input {
 	Product view
 \*----------------------------*/
 
+/*hide arrows*/
+/*
 #product-main-img .slick-prev {
   -webkit-transform: translateX(-15px);
   -ms-transform: translateX(-15px);
@@ -1419,7 +1421,7 @@ textarea.input {
   opacity: 1;
   visibility: visible;
 }
-
+*/
 #product-main-img .zoomImg {
   background-color: #FFF;
 }
@@ -1450,10 +1452,14 @@ textarea.input {
 }
 
 #product-imgs .slick-prev:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
   content: "\f106";
 }
 
 #product-imgs .slick-next:before {
+        font-family: "Font Awesome 5 Free";
+    font-weight: 900;
   content: "\f107";
 }
 
@@ -2068,7 +2074,8 @@ textarea.input {
 .slick-prev, .slick-next {
   width: 40px;
   height: 40px;
-  border: 1px solid #E4E7ED;
+ /* border: 1px solid #E4E7ED;*/
+ border: none;
   background-color: #FFF;
   border-radius: 50%;
   z-index: 22;
@@ -2077,16 +2084,21 @@ textarea.input {
 }
 
 .slick-prev:hover, .slick-prev:focus, .slick-next:hover, .slick-next:focus {
-  background-color: #D10024;
-  border-color: #D10024;
+  background-color: var(--blue);
+  border-color: var(--blue);
 }
 
 .slick-prev:before, .slick-next:before {
-  font-family: FontAwesome;
+        font-size: 2rem;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
   color: #2B2D42;
 }
 
 .slick-prev:before {
+        font-size: 2rem;
+      font-family: "Font Awesome 5 Free";
+  font-weight: 900;
   content: "\f104";
 }
 

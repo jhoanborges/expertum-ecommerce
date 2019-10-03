@@ -65,7 +65,7 @@
 
 	// Product Main img Slick
 	$('#product-main-img').slick({
-    infinite: true,
+    infinite: false,
     speed: 300,
     dots: false,
     arrows: true,
@@ -77,21 +77,17 @@
   $('#product-imgs').slick({
     slidesToShow: 3,
     slidesToScroll: 1,
-    arrows: true,
-    centerMode: true,
+    arrows: false,
+    infinite: false,
+
+    centerMode: false,
     focusOnSelect: true,
+    //useTransform:false,
 		centerPadding: 0,
-		vertical: true,
+		//vertical: false,
     asNavFor: '#product-main-img',
-		responsive: [{
-        breakpoint: 991,
-        settings: {
-					vertical: false,
-					arrows: false,
-					dots: true,
-        }
-      },
-    ]
+
+
   });
 
 	// Product img zoom
