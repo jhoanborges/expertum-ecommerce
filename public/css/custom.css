@@ -249,20 +249,14 @@
      .btn-secondary{
       background-color: var(--pink);
       border-color: var(--light-gray);
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
       border-radius: 15px;
       width: 100%;
       text-align: center;
-    }
-=======
-=======
->>>>>>> Stashed changes
  border-radius: 15px !important;
      width: 100%;
      text-align: center;
 }
->>>>>>> Stashed changes
+
 
 
     .floating-footer-button{
@@ -308,20 +302,14 @@ width: 350px;
 .grid-item { width: 25%; }
 
 .search{
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
   height: 30px;
   border-radius: 30px;
   font-style: normal;
   font-weight: 100;
-=======
-=======
->>>>>>> Stashed changes
         height: 30px;
   border-radius: 30px !important;
       font-style: normal;
     font-weight: 100;
->>>>>>> Stashed changes
 }
 
 
@@ -744,7 +732,6 @@ font-size: 10px;
       color: rgba(0,0,0,0.8);
 }
 
-<<<<<<< Updated upstream
 
 
 
@@ -767,7 +754,7 @@ font-size: 10px;
 }
 
 .card .card-content {
-  padding-top: 16px;   
+  padding-top: 16px;
   border-radius: 0 0 2px 2px;
   background-clip: padding-box;
   box-sizing: border-box;
@@ -852,9 +839,7 @@ outline: none;
 .slick-next {
     right: -10px;
 }
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
+
 
 #product-imgs .product-preview img{
     width: 120px !important;
@@ -892,4 +877,3 @@ outline: none;
 .slick-next {
     right: -10px;
 }
->>>>>>> Stashed changes
