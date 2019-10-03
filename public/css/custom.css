@@ -877,3 +877,7 @@ outline: none;
 .slick-next {
     right: -10px;
 }
+
+.product-preview{
+    cursor: pointer;
+}

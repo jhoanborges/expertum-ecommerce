@@ -137,7 +137,7 @@
 
                                 <h2 class="product-name">Excava Tiranosaurio Rex</h2>
                                 <h3 class="product-name mt-2 fs-16">4M-INDUSTRIAL</h3>
-                                <h3 class="mt-2 bold">$49.000</h3>
+                                <h3 class="mt-2 mb-3 bold">$49.000</h3>
                             </div>
 
 {{--}}
