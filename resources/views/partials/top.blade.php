@@ -5,7 +5,7 @@
 
                                 <div class="col-lg-12">
 
-                                    <a href="#" class="d-flex pt-3 pb-3 border-bottom-custom">
+                                    <a href="#" class="d-flex pt-2 pb-2 border-bottom-custom">
                                         <img src="{{ asset('img/dinosaurio-tyrannosaurus-rex-skeleton-4m.jpg') }}" class="top-image img-fluid">
 
                                         <div class="pmd-card-title pt-0 pb-0 pr-0 align-self-center">
@@ -21,7 +21,7 @@
 
                                 <div class="col-lg-12">
 
-                                    <a href="#" class="d-flex pt-3 pb-3 border-bottom-custom">
+                                    <a href="#" class="d-flex pt-2 pb-2 border-bottom-custom">
                                         <img src="{{ asset('img/dinosaurio-adn-t-rex_8827_full.jpg') }}" class="top-image img-fluid">
 
                                         <div class="pmd-card-title pt-0 pb-0 pr-0 align-self-center">
@@ -37,7 +37,7 @@
 
                                 <div class="col-lg-12">
 
-                                    <a href="#" class="d-flex pt-3 pb-3">
+                                    <a href="#" class="d-flex pt-2 pb-2">
                                         <img src="{{ asset('img/kit-de-geologia-para-excavar_7262_full.jpg') }}" class="top-image img-fluid">
 
                                         <div class="pmd-card-title pt-0 pb-0 pr-0 align-self-center">

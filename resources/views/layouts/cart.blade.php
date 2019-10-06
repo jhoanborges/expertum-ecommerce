@@ -14,7 +14,7 @@
 
       <div class="col-lg-12">
 
-        <div class="big-title mayus mb-2">carrito <b>de compras</b> </div>
+        <div class="big-title mayus mb-3 border-bottom-custom">carrito <b>de compras</b> </div>
 
         <div class="card-body">
             <div class="table-responsive pb-2">
@@ -48,17 +48,6 @@
                     <td class="text-center bold black">$ {{$product->price}}</td>
                     <td class="text-center">{{$product->options->iva}}</td>
                     <td class="text-center">
-{{--
-<div class="d-inline-flex">
-
-<i class="fas fa-minus quantity-left-minus btn btn-number" data-type="minus" data-field=""></i>
-
-<input type="text" id="quantity" name="quantity" class="form-control input-number" value="{{$product->qty}}" min="1" max="100">
-<i class="fas fa-plus quantity-right-plus btn btn-number"  data-type="plus" data-field=""></i>
-
-</div>
-
-{{$product->qty}}--}}
 <div class="qty-box">
   
     <input type='button' value='-' class='qtyminus' field='quantity' />
