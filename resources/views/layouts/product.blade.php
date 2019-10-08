@@ -1,78 +1,18 @@
 @extends('welcome')
-
-
 @section('extra-css')
-
 <!-- Slick -->
 <link type="text/css" rel="stylesheet" href="{{asset('css/slick.css')}}"/>
 <link type="text/css" rel="stylesheet" href="{{asset('css/slick-theme.css')}}"/>
-<!-- nouislider -->
 <link type="text/css" rel="stylesheet" href="{{asset('css/nouislider.min.css')}}"/>
-
 <link type="text/css" rel="stylesheet" href="{{asset('css/electro.css')}}"/>
 
 @endsection
-
 @section('content')
-
-
-<!-- Home -->
-<div class="rev_slider_wrapper mt-important">
-    <!-- the ID here will be used in the inline JavaScript below to initialize the slider -->
-    <div id="rev_slider_1" class="rev_slider fullwidthabanner" data-version="5.4.8" >
-        <ul id="slider-content">
-            <!-- MINIMUM SLIDE STRUCTURE -->
-
-            <li data-transition='boxfade'>
-
-                <img class="img-opacity" src="{{ asset('img/store-banner-toys-950.jpg') }}">
-                <!-- BEGIN TEXT LAYER -->
-                <div class="tp-caption tp-resizeme large_bold_white"
-
-                data-frames='[{"delay":0,"speed":300,"frame":"0","from":"y:top;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"Power3.easeInOut"}]'
-                data-x="center"
-                data-y="center"
-                data-hoffset="0"
-                data-voffset="0"
-                data-width="['auto']"
-                data-height="['auto']">
-                <div class="myclass text-center">
-                    <h1 class="mayus"></h1>
-                </div>
-
-            </div>
-        </li>
-
-        <li data-transition='boxfade'>
-
-            <img class="img-opacity" src="{{ asset('img/banner-lising.jpg') }}">
-            <!-- BEGIN TEXT LAYER -->
-            <div class="tp-caption tp-resizeme large_bold_white"
-
-            data-frames='[{"delay":0,"speed":300,"frame":"0","from":"y:top;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"Power3.easeInOut"}]'
-            data-x="center"
-            data-y="center"
-            data-hoffset="0"
-            data-voffset="0"
-            data-width="['auto']"
-            data-height="['auto']">
-            <div class="myclass text-center">
-                <h1 class="mayus"></h1>
-            </div>
-
-        </div>
-    </li>
-
-
-</ul>
-</div>
-</div>
-
 
 <!-- SECTION -->
 <div class="section">
     <!-- container -->
-    <div class="container">
+    <div class="container border-bottom-custom">
 
 
 
@@ -157,11 +97,11 @@
                         <span class="product-available">In Stock</span>
                     </div>   --}}
                     <div class="d-block mb-2 mt-1">
-                       <div class="row no-gutters">
-                           <div class="col-sm-6">
-                               Ref. 00-03221  
-                           </div>
-                           <div class="col-sm-6">
+                     <div class="row no-gutters">
+                         <div class="col-sm-6">
+                             Ref. 00-03221
+                         </div>
+                         <div class="col-sm-6">
                             <span class="float-right">Stock: 50</span>
                         </div>
                     </div>
@@ -173,7 +113,7 @@
 
 
                     <div class="d-block mb-4 mt-1">
-                       <div class="row no-gutters">
+                     <div class="row no-gutters">
                         <div class="col-lg-3">
                             <label>Cantidad</label>
                             <div class="d-inline-block">
@@ -234,23 +174,25 @@
 <!-- /row -->
 
 <!-- Product tab -->
-<div class="row no-gutters">
+
+    <div class="row no-gutters ">
 
 
-    <div class="col-md-12">
-        <div class="mayus mb-2 fs-16 mt-3 mb-3">ESPECIFICACIONEs</div>
+        <div class="col-md-12">
+            <div class="mayus mb-2 fs-16 mt-3 mb-3">ESPECIFICACIONEs</div>
 
-     <p>Edades                         8, 9, 10 y 11 años </p>
-     <p> Actividades                 Jugar, experimentar</p>
-     <p class="border-bottom-custom"></p>
-             <p>· Edad recomendada: 8 años en adelante.</p> 
-             <p>· Tamaño de la caja: 17 x 22 x 6 cms </p>
-             <p>· Leer ciudadosamente las instrucciones. Se requiere supervisión de un adulto. </p>
-             <p>· Este producto contiene partes pequeñas. </p>
-             <p>· Manténgase fuera del alcance de niños menores a la edad recomendada.</p>
-</div>
+            <p>Edades                         8, 9, 10 y 11 años </p>
+            <p> Actividades                 Jugar, experimentar</p>
+            <p class="border-bottom-custom"></p>
+            <p>· Edad recomendada: 8 años en adelante.</p>
+            <p>· Tamaño de la caja: 17 x 22 x 6 cms </p>
+            <p>· Leer ciudadosamente las instrucciones. Se requiere supervisión de un adulto. </p>
+            <p>· Este producto contiene partes pequeñas. </p>
+            <p>· Manténgase fuera del alcance de niños menores a la edad recomendada.</p>
+        </div>
 
     </div>
+
 </div>
 <!-- /product tab -->
 
@@ -275,7 +217,7 @@
 
 <script>
     $(document).ready(function() {
-       $( ".pmd-card" ).hover(
+     $( ".pmd-card" ).hover(
         function() {
             $(this).addClass('shadow').css('cursor', 'pointer');
         }, function() {

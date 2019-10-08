@@ -40,43 +40,43 @@
 
                       </td>
                       <td class="text-center" >
-                        <p class="">{{$product->name}}</p>
-                        <p class="">{{$product->options->brand}} </p>
+                        <p class="mb-0">{{$product->name}}</p>
+                        <p class="mb-0">{{$product->options->brand}} </p>
                     </td>
                     {{--<td class="text-center">{{$product->options->avaliable}}</td>--}}
                     <td class="text-center"><i class="fas fa-check fa-2x lightgreen"></i></td>
                     <td class="text-center bold black">$ {{$product->price}}</td>
                     <td class="text-center">{{$product->options->iva}}</td>
                     <td class="text-center">
-<div class="qty-box">
-  
-    <input type='button' value='-' class='qtyminus' field='quantity' />
-    <input type='text' name='quantity' value='0' class='qty' />
-    <input type='button' value='+' class='qtyplus' field='quantity' />
-</div>
+                        <div class="qty-box">
 
-                        </td>
+                            <input type='button' value='-' class='qtyminus' field='quantity' />
+                            <input type='text' name='quantity' value='0' class='qty' />
+                            <input type='button' value='+' class='qtyplus' field='quantity' />
+                        </div>
+
+                    </td>
                     <td class="text-center bold black">$ {{$product->price}}</td>
                     <td class="text-center">
 
                       <a href="#" class="icons">
-                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="2.5em" height="3em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1040 928"><path d="M288 66q73 0 180 106l46 45 45-46q15-16 31.5-30t32.5-26 31.5-21T684 78.5t27.5-9.5 24.5-3q89 0 157 68 69 69 69 166t-69 167q-5 4-359 387-5 5-11 6.5t-10 1.5q-12 0-21-8-324-360-359-395-8-8-15.5-17.5t-14-19-12-19.5-10-20.5T74 361t-5.5-22-3.5-23-1-23q0-98 69-167 32-31 70-45.5T288 66zm0-64q-59 0-109 19T88 81q-43 43-65.5 99T0 292.5 22.5 405 88 504q9 9 49.5 53.5t91 100.5 100 111 83.5 92l34 37q27 28 66.5 28t67.5-28q354-383 358-386 88-88 88-212T938 89q-44-44-93.5-65.5T736 2q-53 0-111.5 35T513 126Q387 2 288 2z" fill="black"/></svg>
-                      </a>
-                  </td>
-                  <td class="text-center">
+                       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="2.5em" height="3em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1040 928"><path d="M288 66q73 0 180 106l46 45 45-46q15-16 31.5-30t32.5-26 31.5-21T684 78.5t27.5-9.5 24.5-3q89 0 157 68 69 69 69 166t-69 167q-5 4-359 387-5 5-11 6.5t-10 1.5q-12 0-21-8-324-360-359-395-8-8-15.5-17.5t-14-19-12-19.5-10-20.5T74 361t-5.5-22-3.5-23-1-23q0-98 69-167 32-31 70-45.5T288 66zm0-64q-59 0-109 19T88 81q-43 43-65.5 99T0 292.5 22.5 405 88 504q9 9 49.5 53.5t91 100.5 100 111 83.5 92l34 37q27 28 66.5 28t67.5-28q354-383 358-386 88-88 88-212T938 89q-44-44-93.5-65.5T736 2q-53 0-111.5 35T513 126Q387 2 288 2z" fill="black"/></svg>
+                   </a>
+               </td>
+               <td class="text-center">
 
-                      <a href="#" class="icons">
-                          <img src="{{ asset('img/trash.png') }}" class="img-fluid cart-icon-new">
-                      </a>
-                  </td>
-              </tr>
+                  <a href="#" class="icons">
+                      <img src="{{ asset('img/trash.png') }}" class="img-fluid cart-icon-new">
+                  </a>
+              </td>
+          </tr>
 
-              @endforeach
+          @endforeach
 
-          </tbody>
+      </tbody>
 
-      </thead>
-  </table>
+  </thead>
+</table>
 </div>
 </div>
 

@@ -1,6 +1,6 @@
   <!--================Header Menu Area =================-->
   <header class="header_area">
-    <div class="top_menu h-100">
+    <div class="top_menu">
       <div class="container">
         <div class="row no-gutters">
           <div class="col-sm-6">
@@ -133,7 +133,7 @@
 
        <div class="col-lg-4">
          <a class="logo_h top-brand" href="{{ route('home.index') }}">
-          <img src="{{ asset('img/logo-materile.png') }}" width="250" alt="" class="img-fluid" />
+          <img src="{{ asset('img/logo-materile.png') }}" width="200" alt="" class="img-fluid" />
         </a>
       </div>
 

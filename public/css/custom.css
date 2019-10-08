@@ -351,6 +351,8 @@ width: 350px;
 
 
 .top_menu {
+  height: 0px;
+
   background: #fff;
 }
 
@@ -889,5 +891,10 @@ p{
 
 .gray-border-bottom{
   border-bottom: 1px solid var(--gray);
+
+}
+
+
+.top-logo{
 
 }

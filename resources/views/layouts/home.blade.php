@@ -764,12 +764,14 @@
 </div>
 
 <!--aca-->
+
+
+</div>
+</div>
+</div>
+
 @include('partials.newsletter')
 
-
-</div>
-</div>
-</div>
 </div>
 
 
