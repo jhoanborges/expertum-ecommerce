@@ -223,7 +223,7 @@
                   <img src="{{ asset('img/cart.png') }}" class="img-fluid" width="50">
               </div>
           </div>
-                <label class="bold black text-right pb-2">Total $ 49.000</label>
+                <label class="bold black text-right pb-2 pt-2">Total $ 49.000</label>
 
       </div>
 
