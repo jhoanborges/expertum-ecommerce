@@ -64,7 +64,14 @@
                 <!-- Shop Sidebar -->
                 <div class="shop_sidebar">
                     <div class="sidebar_section">
-                        <div class="footer_title mayus">CATEGORÍAS</div>
+                        <div class="row  no-gutters footer_title mayus">
+                            <div class="col-sm-6 no-gutters">
+                                <span>CATEGORÍAS</span>
+                            </div>
+                            <div class="col-sm-6 no-gutters text-right">
+                                <i class="ti-search pointer"></i>
+                            </div>
+                        </div>
                         <ul class="sidebar_categories">
 
                             <li><a href="#">Alimentación</a></li>
@@ -780,7 +787,7 @@
 @include('partials.js.slider')
 <script>
     $(document).ready(function() {
-     $( ".pmd-card" ).hover(
+       $( ".pmd-card" ).hover(
         function() {
             $(this).addClass('shadow').css('cursor', 'pointer');
         }, function() {

@@ -4,7 +4,8 @@
 <div class="container text-center">
     <div class="row floating-footer-button">
         <div class="col-lg-12 ">
-        <button class="btn btn-secondary button-rounded">Suscríbete</button>
+        <button class="btn btn-secondary button-rounded"><span class="white">Suscríbete</span>
+        </button>
 
         </div>
 
@@ -17,10 +18,12 @@
     <div class="container">
         <div class="row">
 
-            <div class="col-lg-3 footer_col mt-3">
+
+
+            <div class="col-lg-3 footer_col">
                 <div class="footer_column text-center centered">
                  <a class="logo_h " href="index.html">
-                  <img src="{{ asset('img/logo-materile.png') }}" alt="" class="img-fluid"  width="250" />
+                  <img src="{{ asset('img/logo-materile.png') }}" alt="" class="img-fluid logo-bar" />
               </a>
 
           </div>

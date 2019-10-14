@@ -337,7 +337,7 @@
         <!-- Product Item -->
         <div class="product_item">
             <!--<div class="product_border"></div>-->
-            <div class="product-image-content w-100">
+            <div class="product-image-content h-100">
 
                 <img class="img-fluid" src="{{ asset('img/dinosaurio-tyrannosaurus-rex-skeleton-4m.jpg') }}" alt="">
             </div>
@@ -363,7 +363,7 @@
 
         <div class="product_item">
             <!--<div class="product_border"></div>-->
-            <div class="product-image-content w-100">
+            <div class="product-image-content h-100">
 
                 <img class="img-fluid" src="{{ asset('img/dinosaurio-adn-t-rex_8827_full.jpg') }}" alt="">
             </div>
@@ -575,7 +575,7 @@
         <!-- Product Item -->
         <div class="product_item">
             <!--<div class="product_border"></div>-->
-            <div class="product-image-content w-100">
+            <div class="product-image-content h-100">
 
                 <img class="img-fluid" src="{{ asset('img/dinosaurio-tyrannosaurus-rex-skeleton-4m.jpg') }}" alt="">
             </div>
@@ -601,7 +601,7 @@
 
         <div class="product_item">
             <!--<div class="product_border"></div>-->
-            <div class="product-image-content w-100">
+            <div class="product-image-content h-100">
 
                 <img class="img-fluid" src="{{ asset('img/dinosaurio-adn-t-rex_8827_full.jpg') }}" alt="">
             </div>
@@ -811,7 +811,7 @@
         <!-- Product Item -->
         <div class="product_item">
             <!--<div class="product_border"></div>-->
-            <div class="product-image-content w-100">
+            <div class="product-image-content h-100">
 
                 <img class="img-fluid" src="{{ asset('img/dinosaurio-tyrannosaurus-rex-skeleton-4m.jpg') }}" alt="">
             </div>
@@ -837,7 +837,7 @@
 
         <div class="product_item">
             <!--<div class="product_border"></div>-->
-            <div class="product-image-content w-100">
+            <div class="product-image-content h-100">
 
                 <img class="img-fluid" src="{{ asset('img/dinosaurio-adn-t-rex_8827_full.jpg') }}" alt="">
             </div>

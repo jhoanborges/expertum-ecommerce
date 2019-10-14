@@ -133,11 +133,11 @@
 
        <div class="col-lg-4">
          <a class="logo_h top-brand" href="{{ route('home.index') }}">
-          <img src="{{ asset('img/logo-materile.png') }}" width="200" alt="" class="img-fluid" />
+          <img src="{{ asset('img/logo-materile.png') }}"  alt="" class="img-fluid logo-bar" />
         </a>
       </div>
 
-      <div class="col-lg-4 mx-auto">
+      <div class="col-lg-4 mx-auto search-bar">
         <div class="placeholder">
 
           <label for="search" class="grayf mb-0">BUSCAR
@@ -162,7 +162,7 @@
     <nav class="navbar navbar-expand-lg navbar-light w-100 ">
       <!-- Brand and toggle get grouped for better mobile display -->
       <a class="navbar-brand logo_h hidden" href="index.html">
-        <img src="{{ asset('img/logo-materile.png') }}" width="250" alt="" />
+        <img src="{{ asset('img/logo-materile.png') }}" alt="" class="img-fluid logo-bar" />
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
