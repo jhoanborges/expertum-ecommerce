@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Illuminate\Support\Facades\Password;
+use Alert;
+
 
 class ForgotPasswordController extends Controller
 {
@@ -29,4 +32,15 @@ class ForgotPasswordController extends Controller
     {
         $this->middleware('guest');
     }
+
+
+        protected function sendResetLinkResponse($response)
+    {
+
+        alert()->success('Email enviado','Estimado usuario, hemos enviado un link con las instrucciones para re-establecer su contraseña al correo electrónico.')->autoclose(20000);
+        return back()->withInput();
+        //->with('status', trans($response));
+    }
+
+
 }

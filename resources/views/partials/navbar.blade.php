@@ -94,13 +94,13 @@
               </div> <!--end shopping-cart-header -->
               <div class="button-cart-container mb-2">
                 <div class="mb-2 mr-2">
-                  <a href="{{ route('cart.index') }}" class="btn btn-primary checkout-button">
+                  <a href="" class="btn btn-primary checkout-button">
                     <img src="{{ asset('img/cart-white.png') }}" class="img-fluid header-icon">
                   Ver carrito</a>
                 </div>
 
                 <div class="mb-2 mr-2">
-                  <a href="{{ route('checkout.index') }}" class="btn btn-danger checkout-button">
+                  <a href="" class="btn btn-danger checkout-button">
                     <img src="{{ asset('img/cart-white.png') }}" class="img-fluid header-icon">
                   Checkout</a>
                 </div>
@@ -132,7 +132,7 @@
 
 
        <div class="col-lg-4">
-         <a class="logo_h top-brand" href="{{ route('home.index') }}">
+         <a class="logo_h top-brand" href="">
           <img src="{{ asset('img/logo-materile.png') }}"  alt="" class="img-fluid logo-bar" />
         </a>
       </div>
@@ -176,8 +176,8 @@
       <div class="row w-100 mr-0">
         <div class="col-lg-12 pr-0">
           <ul class="nav center-nav-bar">
-            <li class="nav-item {{Route::currentRouteNamed('home.index') ? 'active' : '' }}">
-              <a class="nav-link" href="{{ route('home.index') }}">Inicio</a>
+            <li class="nav-item {{Route::currentRouteNamed('home') ? 'active' : '' }}">
+              <a class="nav-link" href="{{ route('home') }}">Inicio</a>
             </li>
 
             <li class="nav-item {{Route::currentRouteNamed('store.index') ? 'active' : '' }}">
@@ -204,8 +204,8 @@
                 </li>
                 --}}
 
-                <li class="nav-item {{Route::currentRouteNamed('product.index') ? 'active' : '' }}">
-                  <a class="nav-link mayus" href="{{ route('product.index') }}">Ofertas</a>
+                <li class="nav-item ">
+                  <a class="nav-link mayus" href="">Ofertas</a>
                 </li>
 {{--
                 <li class="nav-item submenu dropdown">
@@ -236,8 +236,8 @@
 
 
 
-                <li class="nav-item {{Route::currentRouteNamed('contacto.index') ? 'active' : '' }}">
-                  <a class="nav-link mayus" href="{{ route('contacto.index') }}">CONTACTO</a>
+                <li class="nav-item ">
+                  <a class="nav-link mayus" href="">CONTACTO</a>
                 </li>
 
 

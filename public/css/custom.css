@@ -904,7 +904,7 @@ p{
 .logo-bar{
   width: 180px;
 }
-@media (max-width: 992px) { 
+@media (max-width: 992px) {
 .search-bar{
   margin-top: 25px
  }
@@ -917,7 +917,7 @@ p{
 }
 
 
-@media (max-width: 576px) { 
+@media (max-width: 576px) {
 .search-bar{
   margin-top: 0px
  }
@@ -928,4 +928,30 @@ p{
 }
 
 
+}
+
+
+.page_nav li a {
+    width: 100%
+    }
+
+.active {
+    background-color: #e5e5e5;
+    color: #808080;
+}
+
+.page_nav{
+    border: none
+}
+
+
+.page_nav li {
+        border-right: 0px;
+    border-bottom: solid 1px #e5e5e5;
+    border-top: solid 1px #e5e5e5;
+}
+
+
+.page_prev, .page_next {
+border-radius: 0px
 }
