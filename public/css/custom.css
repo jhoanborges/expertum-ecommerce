@@ -955,3 +955,8 @@ p{
 .page_prev, .page_next {
 border-radius: 0px
 }
+
+
+.no-decoration{
+   color : rgba(0, 0, 0, 0.54)
+}

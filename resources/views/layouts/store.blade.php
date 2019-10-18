@@ -246,25 +246,32 @@
 
 
     <div class="shop_content ">
-        <div class="store_title mayus mb-5">CIENCIA - <b>EXPERIMENTOS</b> </div>
+        <div class="store_title mayus mb-5">{{$categorias_nombre['nombrecategoria']}}</div>
 
         <div class="product_grid">
             <div class="product_grid_border"></div>
 
             @foreach( $productos as $key => $producto)
             <!-- Product Item -->
-            <div class="product_item">
+            <div class="product_item" >
                 <!--<div class="product_border"></div>-->
                 <div class="product-image-content h-100">
-
+                    <a href="{{route('product.show' , ['product'=>$producto['slug'] ])}}">
                     <img class="img-fluid" src="{{ image($producto->hasManyImagenes->first()->urlimagen) }}" alt="{{$producto['nombre_producto']}}">
+                </a>
                 </div>
                 <div class="product_content">
 
                     <div class="pmd-card-title">
                         <ul>
+                            <a href="{{route('product.show' , ['product'=>$producto['slug'] ])}}">
                             <li class="pmd-card-subtitle-text blue body-text">{{$producto['nombre_producto']}}</li>
-                            <li class="pmd-card-subtitle-text blue body-text">{{$producto->getMarcaProduct($producto->id)['nombre'] }}</li>
+                        </a>
+                            <li class="pmd-card-subtitle-text blue body-text">
+                                <a  href="{{route('store.search', ['search' => $producto->getMarcaProduct($producto->id)['nombre'] ])}}" class="no-decoration">
+                                {{$producto->getMarcaProduct($producto->id)['nombre'] }}
+                                </a>
+                            </li>
                             <div class="price-box">
                                 @if ($producto['id_moneda'] == 1 && $trmdeldia->isEmpty()  )
                                 <li class="pmd-card-subtitle-text blue body-text bold black">
