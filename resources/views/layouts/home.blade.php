@@ -600,7 +600,7 @@
                             <li class="product_mark product_new">new</li>
                         </ul>
                     </div>
---}}
+                    --}}
 
 
 
@@ -614,7 +614,13 @@
                 </div>
             </div>
 
-            <!--aca-->
+            <!--pagination-->
+            <div class="container">
+                <div class="row">
+                    {{$categorias2->appends(request()->input() )->links()}}
+                </div>
+            </div>
+
 
 
         </div>
@@ -631,7 +637,7 @@
 @include('partials.js.slider')
 <script>
     $(document).ready(function() {
-     $( ".pmd-card" ).hover(
+       $( ".pmd-card" ).hover(
         function() {
             $(this).addClass('shadow').css('cursor', 'pointer');
         }, function() {

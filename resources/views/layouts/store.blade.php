@@ -4,7 +4,7 @@
 @section('extra-css')
 <link rel="stylesheet" type="text/css" href="{{asset('css/roundedcheckbox.css')}}">
 @endsection
-<!-- Home -->
+{{--
 <div class="rev_slider_wrapper mt-important">
     <!-- the ID here will be used in the inline JavaScript below to initialize the slider -->
     <div id="rev_slider_1" class="rev_slider fullwidthabanner" data-version="5.4.8" >
@@ -31,30 +31,14 @@
             </div>
         </li>
 
-        <li data-transition='boxfade'>
-
-            <img class="img-opacity" src="{{ asset('img/banner-lising.jpg') }}">
-            <!-- BEGIN TEXT LAYER -->
-            <div class="tp-caption tp-resizeme large_bold_white"
-
-            data-frames='[{"delay":0,"speed":300,"frame":"0","from":"y:top;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"Power3.easeInOut"}]'
-            data-x="center"
-            data-y="center"
-            data-hoffset="0"
-            data-voffset="0"
-            data-width="['auto']"
-            data-height="['auto']">
-            <div class="myclass text-center">
-                <h1 class="mayus"></h1>
-            </div>
-
-        </div>
-    </li>
 
 
 </ul>
 </div>
 </div>
+--}}
+
+ @include('partials.slider')
 
 
 <!-- Shop -->
