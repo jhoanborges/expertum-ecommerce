@@ -2,7 +2,10 @@
 @section('content')
 
 @section('extra-css')
+<link rel="stylesheet" type="text/css" href="{{asset('css/nouislider.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('css/roundedcheckbox.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('css/checkbox.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('css/range-slider.css')}}">
 @endsection
 {{--
 <div class="rev_slider_wrapper mt-important">
@@ -38,7 +41,7 @@
 </div>
 --}}
 
- @include('partials.slider')
+@include('partials.slider')
 
 
 <!-- Shop -->
@@ -54,6 +57,8 @@
                         <ul class="brands_list mt-0">
                             <li class="row no-gutters h-100">
 
+
+
                                 <div class="col-lg-12 mb-4">
                                     <div id="accordion" class="accordion">
                                         <div class="card  no-borders">
@@ -64,112 +69,48 @@
                                             </div>
                                             <div id="collapseOne" class="card-body collapse pl-0 pr-0" data-parent="#accordion" >
                                              <!-- Simple checkbox with label, checked -->
+
+                                             @foreach($marcas as $mark)
+                                             @if($mark->cantidad > 0)
                                              <div class="checkbox pmd-default-theme mt-3">
                                                 <label class="pmd-checkbox pmd-checkbox-ripple-effect">
-                                                    <input type="checkbox" value="">
-                                                    <span>4M-Industrial</span>
+                                                    <input type="checkbox" value="{{$mark->id}}">
+                                                    <span>{{$mark->nombre}}</span>
                                                 </label>
+                                                <span class="badge badge-light">{{ $mark->cantidad }}</span>
                                             </div>
 
-                                            <!-- Simple checkbox with label, checked -->
-                                            <div class="checkbox pmd-default-theme mt-3">
-                                                <label class="pmd-checkbox pmd-checkbox-ripple-effect">
-                                                    <input type="checkbox" value="">
-                                                    <span>HAPE</span>
-                                                </label>
-                                            </div>
+                                            @endif
+                                            @endforeach
 
-                                            <!-- Simple checkbox with label, checked -->
-                                            <div class="checkbox pmd-default-theme mt-3">
-                                                <label class="pmd-checkbox pmd-checkbox-ripple-effect">
-                                                    <input type="checkbox" value="">
-                                                    <span>POOF</span>
-                                                </label>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
 
+                            @if (count($projects) > 0)
+                            @foreach ($projects as $key => $project)
+                            @include('partials.filtros', $project)
+                            @endforeach
 
-                            <div class="col-lg-12 mb-4">
-                                <div id="accordion2" class="accordion">
-                                    <div class="card  no-borders">
-                                        <div class="card-header pointer collapsed" data-toggle="collapse" href="#collapseTwo">
-                                            <a class="card-title mayus">
-                                                actividades
-                                            </a>
-                                        </div>
-                                        <div id="collapseTwo" class="card-body collapse pl-0 pr-0" data-parent="#accordion2" >
-                                         <!-- Simple checkbox with label, checked -->
-                                         <div class="checkbox pmd-default-theme mt-3">
-                                            <label class="pmd-checkbox pmd-checkbox-ripple-effect">
-                                                <input type="checkbox" value="">
-                                                <span>4M-Industrial</span>
-                                            </label>
-                                        </div>
+                            @endif
 
-                                        <!-- Simple checkbox with label, checked -->
-                                        <div class="checkbox pmd-default-theme mt-3">
-                                            <label class="pmd-checkbox pmd-checkbox-ripple-effect">
-                                                <input type="checkbox" value="">
-                                                <span>HAPE</span>
-                                            </label>
-                                        </div>
 
-                                        <!-- Simple checkbox with label, checked -->
-                                        <div class="checkbox pmd-default-theme mt-3">
-                                            <label class="pmd-checkbox pmd-checkbox-ripple-effect">
-                                                <input type="checkbox" value="">
-                                                <span>POOF</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @if( !empty($max) )
+                                <div class="col-lg-12">
+
+                                <div class="card-title mayus pb-2">Precio</div>
+                                <div id="pmd-slider-range-tooltip"  class="pmd-range-slider pmd-range-tooltip"></div>
+
+
                         </div>
 
 
-                        <div class="col-lg-12 mb-4">
-                            <div id="accordion3" class="accordion">
-                                <div class="card  no-borders">
-                                    <div class="card-header pointer collapsed" data-toggle="collapse" href="#collapseThree">
-                                        <a class="card-title mayus">
-                                            edades
-                                        </a>
-                                    </div>
-                                    <div id="collapseThree" class="card-body collapse pl-0 pr-0" data-parent="#accordion3" >
-                                     <!-- Simple checkbox with label, checked -->
-                                     <div class="checkbox pmd-default-theme mt-3">
-                                        <label class="pmd-checkbox pmd-checkbox-ripple-effect">
-                                            <input type="checkbox" value="">
-                                            <span>4M-Industrial</span>
-                                        </label>
-                                    </div>
 
-                                    <!-- Simple checkbox with label, checked -->
-                                    <div class="checkbox pmd-default-theme mt-3">
-                                        <label class="pmd-checkbox pmd-checkbox-ripple-effect">
-                                            <input type="checkbox" value="">
-                                            <span>HAPE</span>
-                                        </label>
-                                    </div>
+                        @endif
 
-                                    <!-- Simple checkbox with label, checked -->
-                                    <div class="checkbox pmd-default-theme mt-3">
-                                        <label class="pmd-checkbox pmd-checkbox-ripple-effect">
-                                            <input type="checkbox" value="">
-                                            <span>POOF</span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
+{{--}}
                     <div class="col-lg-12 mb-4">
                         <div id="accordion4" class="accordion">
                             <div class="card  no-borders">
@@ -206,7 +147,7 @@
                         </div>
                     </div>
                 </div>
-
+                --}}
 
 
 
@@ -241,19 +182,19 @@
                 <!--<div class="product_border"></div>-->
                 <div class="product-image-content h-100">
                     <a href="{{route('product.show' , ['product'=>$producto['slug'] ])}}">
-                    <img class="img-fluid" src="{{ image($producto->hasManyImagenes->first()->urlimagen) }}" alt="{{$producto['nombre_producto']}}">
-                </a>
+                        <img class="img-fluid" src="{{ image($producto->hasManyImagenes->first()->urlimagen) }}" alt="{{$producto['nombre_producto']}}">
+                    </a>
                 </div>
                 <div class="product_content">
 
                     <div class="pmd-card-title">
                         <ul>
                             <a href="{{route('product.show' , ['product'=>$producto['slug'] ])}}">
-                            <li class="pmd-card-subtitle-text blue body-text">{{$producto['nombre_producto']}}</li>
-                        </a>
+                                <li class="pmd-card-subtitle-text blue body-text">{{$producto['nombre_producto']}}</li>
+                            </a>
                             <li class="pmd-card-subtitle-text blue body-text">
                                 <a  href="{{route('store.search', ['search' => $producto->getMarcaProduct($producto->id)['nombre'] ])}}" class="no-decoration">
-                                {{$producto->getMarcaProduct($producto->id)['nombre'] }}
+                                    {{$producto->getMarcaProduct($producto->id)['nombre'] }}
                                 </a>
                             </li>
                             <div class="price-box">
@@ -862,7 +803,7 @@
     <!-- Shop Page Navigation -->
     <div class="container">
         <div class="row">
-    {{$productos->appends(request()->input() )->links()}}
+            {{$productos->appends(request()->input() )->links()}}
 {{--
             <div class="shop_page_nav d-flex text-center">
                 <div class="page_prev d-flex flex-column align-items-center justify-content-center"><i class="fas fa-chevron-left"></i></div>
@@ -889,12 +830,19 @@
 </div>
 @include('partials.newsletter')
 
+
 </div>
 
 
 
 @section('extra-js')
+
+ <script src="{{url('js/wNumb.js')}}"></script>
+ <script src="{{url('js/nouislider.js')}}"></script>
+
+
 @include('partials.js.slider')
+
 <script>
     $(document).ready(function() {
      $( ".pmd-card" ).hover(
@@ -907,6 +855,27 @@
 // document ready
 });
 </script>
+
+@if( !empty($max) )
+
+<script>
+
+    // multiple range slider with default tooltip open
+    var pmdSliderRangeTooltip = document.getElementById('pmd-slider-range-tooltip');
+    noUiSlider.create(pmdSliderRangeTooltip, {
+        start: [{{floor  (floatval($min) )}}, {{floor  (floatval($max) )}}],
+        connect: true,
+        tooltips: [ wNumb({ decimals: 0 }), wNumb({ decimals: 0 }) ],
+        range: {
+            'min': {{floor  (floatval($min) )}},
+            'max': {{floor  (floatval($max) )}}
+        }
+    });
+
+</script>
+@endif
+
+
 @endsection
 
 @endsection

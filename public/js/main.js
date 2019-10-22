@@ -97,7 +97,7 @@
 	}
 
 	/////////////////////////////////////////
-
+/*
 	// Input number
 	$('.input-number').each(function() {
 		var $this = $(this),
@@ -159,6 +159,6 @@
 			var value = values[handle];
 			handle ? priceInputMax.value = value : priceInputMin.value = value
 		});
-	}
+	}*/
 
 })(jQuery);

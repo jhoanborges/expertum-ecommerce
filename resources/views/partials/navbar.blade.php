@@ -175,7 +175,7 @@
     <div class="collapse navbar-collapse offset w-100" id="navbarSupportedContent">
       <div class="row w-100 mr-0">
         <div class="col-lg-12 pr-0">
-          <ul class="nav center-nav-bar">
+          <ul class="nav center-nav-bar p-4">
             <li class="nav-item {{Route::currentRouteNamed('home') ? 'active' : '' }}">
               <a class="nav-link" href="{{ route('home') }}">Inicio</a>
             </li>
