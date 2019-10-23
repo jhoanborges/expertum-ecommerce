@@ -1,10 +1,24 @@
 @extends('welcome')
+
+@section('extra-meta')
+<meta property="og:description" content="{{$producto->descripcion}}" />
+<meta property="og:image" content="{{$allImages->first()->urlimagen}}" />
+<meta property="og:url" content="{{\URL::current()}}" />
+<meta property="og:type" content="product" />
+<meta property="og:title" content="{{$producto->nombre_producto}}" />
+<meta property="og:image:alt" content="{{$producto->nombre_producto}}" />
+<meta property="fb:app_id" content="545837192560177" />
+
+@endsection
+
+
 @section('extra-css')
 <!-- Slick -->
 <link type="text/css" rel="stylesheet" href="{{asset('css/slick.css')}}"/>
 <link type="text/css" rel="stylesheet" href="{{asset('css/slick-theme.css')}}"/>
 <link type="text/css" rel="stylesheet" href="{{asset('css/nouislider.min.css')}}"/>
 <link type="text/css" rel="stylesheet" href="{{asset('css/electro.css')}}"/>
+<link rel="stylesheet" type="text/css" href="{{url('css/lightgallery/lightgallery.css')}}">
 
 @endsection
 @section('content')
@@ -25,60 +39,48 @@
                     <!-- Product main img -->
                     <div class="col-md-6">
                         <div id="product-main-img">
-                            <div class="product-preview">
-                                <img src="./img/product01.png" alt="">
+
+                            @foreach ($allImages as $allImage)
+                            <div class="product-preview thumbnail">
+                                <img src="{{url($allImage->urlimagen)}}" alt="{{url($allImage->urlimagen)}}">
                             </div>
 
-                            <div class="product-preview">
-                                <img src="./img/product03.png" alt="">
-                            </div>
-
-                            <div class="product-preview">
-                                <img src="./img/product06.png" alt="">
-                            </div>
-
-                            <div class="product-preview">
-                                <img src="./img/product08.png" alt="">
-                            </div>
+                            @endforeach
                         </div>
 
 
                         <!-- Product thumb imgs -->
                         <div class="col-md-12">
                             <div id="product-imgs">
-                                <div class="product-preview">
-                                    <img src="./img/product01.png" class="img-fluid" alt="">
-                                </div>
-                                <div class="product-preview">
-                                    <img src="./img/product03.png" class="img-fluid" alt="">
-                                </div>
-                                <div class="product-preview">
-                                    <img src="./img/product06.png" class="img-fluid" alt="">
-                                </div>
 
-                                <div class="product-preview">
-                                    <img src="./img/product08.png" class="img-fluid" alt="">
-                                </div>
+                             @foreach ($allImages as $allImage)
+                             <div class="product-preview ">
+                                <img src="{{url($allImage->urlimagen)}}" class="img-fluid" alt="{{url($allImage->urlimagen)}}">
                             </div>
+                            @endforeach
+
                         </div>
-                        <!-- /Product thumb imgs -->
-
-
                     </div>
-                    <!-- /Product main img -->
+                    <!-- /Product thumb imgs -->
+
+
+                </div>
+                <!-- /Product main img -->
 
 
 
 
-                    <!-- Product details -->
-                    <div class="col-md-6">
-                        <div class="product-details ">
-                            <div class="border-bottom-custom">
+                <!-- Product details -->
+                <div class="col-md-6">
+                    <div class="product-details ">
+                        <div class="border-bottom-custom">
 
-                                <h2 class="product-name">Excava Tiranosaurio Rex</h2>
-                                <h3 class="product-name mt-2 fs-16">4M-INDUSTRIAL</h3>
-                                <h3 class="mt-2 mb-3 bold">$49.000</h3>
-                            </div>
+                            <h2 class="product-name">{{$producto->nombre_producto}}</h2>
+                            <h3 class="product-name mt-2 fs-16">{{$producto->getMarcaProduct($producto->id)['nombre'] }}</h3>
+                            <h3 class="mt-2 mb-3 bold">
+                                {{'$'. number_format((float)  precioNew($producto->slug) , 0, ',', '.' )}}
+                            </h3>
+                        </div>
 
 {{--}}
                     <div>
@@ -97,23 +99,49 @@
                         <span class="product-available">In Stock</span>
                     </div>   --}}
                     <div class="d-block mb-2 mt-1">
-                     <div class="row no-gutters">
-                         <div class="col-sm-6">
-                             Ref. 00-03221
-                         </div>
-                         <div class="col-sm-6">
-                            <span class="float-right">Stock: 50</span>
+                       <div class="row no-gutters">
+                           <div class="col-sm-6">
+                               Ref. {{$producto->referencia}}
+                           </div>
+                           <div class="col-sm-6">
+                            <span class="float-right">Stock:
+                                @if($producto->cantidad_critica)
+                                @if(!$producto->cantidad==0)
+                                @if( $producto->cantidad_critica >= $producto->cantidad )
+                                Pocas unidades
+                                @else
+                                Disponible
+                                @endif
+                                @else
+                                No disponbile
+                                @endif
+                                @else
+                                @if($param->cantidad_critica)
+                                @if(!$producto->cantidad==0)
+                                @if( $param->cantidad_critica >= $producto->cantidad )
+                                Pocas unidades
+                                @else
+                                Disponible
+                                @endif
+                                @else
+                                No disponbile
+                                @endif
+                                @else
+                                Disponible
+                                @endif
+                                @endif
+                            </span>
                         </div>
                     </div>
                 </div>
 
                 <div class="border-bottom-custom">
 
-                    <p class="mt-3">Excava el esqueleto de un Tiranosaurio Rex como si fueras un palenontólogo en busca de fósiles. Contine 1 bloque de yeso con el esqueleto de un Tiranosaurio Rex de 19 cms cuando se arma, 1 herramiente para excavar, 1 pincel, 1 cartón con datos. Leer más</p>
+                    <p class="mt-3 expander">{{str_limit($producto->descripcion, 1500)}}</p>
 
 
                     <div class="d-block mb-4 mt-1">
-                     <div class="row no-gutters">
+                       <div class="row no-gutters">
                         <div class="col-lg-3">
                             <label>Cantidad</label>
                             <div class="d-inline-block">
@@ -142,23 +170,43 @@
 
             <ul class="footer_list d-inline-flex mt-2">
                 <li>
-                    <a href="" target="_blank">
+
+                    <a class="facebook-share-button" href="https://www.facebook.com/sharer/sharer.php?u={{ route('product.show', ['slug_' => $producto->slug]) }}" target="_blank">
                         <img src="{{ asset('img/fb.png') }}" class="img-fluid mr-1 img-footer" width="40">
                     </a>
+{{--
+                    <a href="" target="_blank">
+                        <img src="{{ asset('img/fb.png') }}" class="img-fluid mr-1 img-footer" width="40">
+                    </a>--}}
                 </li>
                 <li>
-                    <a href="" target="_blank">
+                    {{--<a href="" target="_blank">
                         <img src="{{ asset('img/ig.png') }}" class="img-fluid mr-1 img-footer" width="40">
-                    </a>
-                </li>
-                <li>
-                    <a href="" target="_blank">
-                        <img src="{{ asset('img/tw.png') }}" class="img-fluid mr-1 img-footer" width="40">
-                    </a>
-                </li>
-            </ul>
-        </div>
+                    </a>--}}
+
+
+                    <a class="twitter-share-button"
+
+                    href="https://twitter.com/intent/tweet?text={{$producto->nombre_producto}} {{ route('product.show', ['slug_' => $producto->slug]) }}"
+                    data-size="large"
+                    data-text="{{$producto->nombre_producto}}"
+                    data-url="{{ route('product.show', ['slug_' => $producto->slug]) }}"
+                    data-hashtags="{{$producto->referencia}},{{$producto->alias}},{{$param->nombre_tienda}}"
+                    data-via=""
+                    data-related="twitterapi,twitter" target="_blank">
+                    <img src="{{ asset('img/tw.png') }}" class="img-fluid mr-1 img-footer" width="40">
+                </a>
+
+            </li>
+            {{--<li>
+                <a href="" target="_blank">
+                    <img src="{{ asset('img/tw.png') }}" class="img-fluid mr-1 img-footer" width="40">
+                </a>
+            </li>
+            --}}
+        </ul>
     </div>
+</div>
 </div>
 
 </div>
@@ -175,23 +223,21 @@
 
 <!-- Product tab -->
 
-    <div class="row no-gutters ">
+<div class="row no-gutters ">
 
 
-        <div class="col-md-12">
-            <div class="mayus mb-2 fs-16 mt-3 mb-3">ESPECIFICACIONEs</div>
+    <div class="col-md-12">
+        <div class="mayus mb-2 fs-16 mt-3 mb-3">ESPECIFICACIONEs</div>
 
-            <p>Edades                         8, 9, 10 y 11 años </p>
-            <p> Actividades                 Jugar, experimentar</p>
-            <p class="border-bottom-custom"></p>
-            <p>· Edad recomendada: 8 años en adelante.</p>
-            <p>· Tamaño de la caja: 17 x 22 x 6 cms </p>
-            <p>· Leer ciudadosamente las instrucciones. Se requiere supervisión de un adulto. </p>
-            <p>· Este producto contiene partes pequeñas. </p>
-            <p>· Manténgase fuera del alcance de niños menores a la edad recomendada.</p>
-        </div>
+        @foreach($filters as $filter)
+        <p><strong>{{$filter['categoria6']}}</strong> {{$filter['categoria7']}}</p>
+        @endforeach
+        <p class="border-bottom-custom"></p>
+        <p >{!!$producto->descripcion_larga!!}</p>
 
     </div>
+
+</div>
 
 </div>
 <!-- /product tab -->
@@ -214,19 +260,68 @@
 <script src="{{asset('js/jquery.zoom.min.js')}}"></script>
 <script src="{{asset('js/main.js')}}"></script>
 <script src="{{url('js/qty.js')}}"></script>
+<script src="{{url('js/jquery.expander.min.js')}}"></script>
+<!-- lightgallery plugins -->
+<script src="{{url('js/lightgallery/lightgallery.min.js')}}"></script>
+<script src="{{url('js/jquery.mousewheel.min.js')}}"></script>
+<script src="{{url('js/lightgallery/lg-thumbnail.min.js')}}"></script>
+<script src="{{url('js/lightgallery/lg-fullscreen.min.js')}}"></script>
+
 
 <script>
-    $(document).ready(function() {
-     $( ".pmd-card" ).hover(
-        function() {
-            $(this).addClass('shadow').css('cursor', 'pointer');
-        }, function() {
-            $(this).removeClass('shadow');
-        }
-        );
-// document ready
+    $('.expander').expander({
+        slicePoint: 200,
+  //widow: 2,
+  expandEffect: 'show',
+  expandSpeed: 0,
+  collapseEffect: 'hide',
+  collapseSpeed: 0,
+  userCollapseText: 'Leer menos',
+  expandText:'Leer más',
+  moreLinkClass:'badge badge-pill badge-light',
+  lessLinkClass: "badge badge-pill badge-light",
+  //userCollapseText: '[^]'
 });
 </script>
+
+
+<script type="text/javascript">
+    var image_current = null;
+
+    $("#lightgallery").lightGallery({
+        selector: '.thumbnail',
+        cssEasing: 'cubic-bezier(0.680, -0.550, 0.265, 1.550)',
+        download: false,
+        speed: 500
+    });
+
+
+
+    $('.thumbnail').on('click', function(e) {
+
+        var allImages = {!! $allImages->toJson() !!};
+        var array= new Array();
+
+        $.each(allImages, function( key, value ) {
+            array.push({
+                src: value.urlimagen,
+                thumb:  value.urlimagen
+            });
+        });
+
+        $(this).lightGallery({
+            download: false,
+            dynamic: true,
+            dynamicEl: array,
+            index: $(this).index(),
+        })
+    });
+
+
+</script>
+
+
+
 @endsection
 
 @endsection

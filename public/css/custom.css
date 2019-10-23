@@ -965,3 +965,17 @@ border-radius: 0px
 .pmd-range-slider.noUi-target {
     margin: 40px 12px 6px;
 }
+
+.lg-backdrop.in {
+    opacity: 0.8 !important;
+}
+
+
+.product-preview:focus{
+    outline:none;
+}
+
+
+.top-text{
+    font-size: 12px;
+}
