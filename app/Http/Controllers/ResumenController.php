@@ -70,17 +70,17 @@ class ResumenController extends Controller
  public function store(Request $request)
  {
 
-  if (session()->get('ciudad')==null) {
+
+  /*if (session()->get('ciudad')==null) {
 
     return redirect()->back()->with([
       'error_code'=> 5,
       'id'=> $request->id,
     ]);
   }else{
-
+*/
     $cantidad = Productomodelo::
     where('slug', $request->id)->value('cantidad');
-
     $validator = Validator::make($request->all(), [
       'qty' => 'required|numeric|integer|between:1,'.$cantidad,
     ]);
@@ -140,7 +140,7 @@ class ResumenController extends Controller
   }
 
 
-}//else session
+//}//else session
 }
 
 

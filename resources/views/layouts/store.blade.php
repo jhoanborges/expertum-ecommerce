@@ -3,8 +3,9 @@
 
 @section('extra-css')
 <link rel="stylesheet" type="text/css" href="{{asset('css/nouislider.min.css')}}">
-<link rel="stylesheet" type="text/css" href="{{asset('css/roundedcheckbox.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('css/checkbox.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('css/roundedcheckbox.css')}}">
+
 <link rel="stylesheet" type="text/css" href="{{asset('css/range-slider.css')}}">
 @endsection
 {{--

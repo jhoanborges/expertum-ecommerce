@@ -71,12 +71,15 @@
  <script src="{{url('js/jquery.themepunch.tools.min.js')}}"></script>
  <script src="{{url('js/jquery.themepunch.plugins.min.js')}}"></script>
 
-@yield('extra-js')
   {{--<script src="{{asset('js/theme.js')}}"></script>--}}
 <script src="{{asset('js/global.js')}}"></script>
 <script src="{{asset('js/checkbox.js')}}"></script>
 
 <script src="{{asset('js/shop_custom.js')}}"></script>
+
+@include('sweetalert::alert')
+@yield('extra-js')
+
   <script >
 
     (function(){

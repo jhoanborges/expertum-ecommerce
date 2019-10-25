@@ -22,7 +22,9 @@
 
 @endsection
 @section('content')
-
+                      <form action="{{route('resumen.store')}}" method="POST" class="form-prevent">
+                            {{csrf_field()}}
+                            <input type="hidden" name="id" value="{{$producto->slug}}">
 <!-- SECTION -->
 <div class="section">
     <!-- container -->
@@ -53,8 +55,8 @@
                         <div class="col-md-12">
                             <div id="product-imgs">
 
-                             @foreach ($allImages as $allImage)
-                             <div class="product-preview ">
+                               @foreach ($allImages as $allImage)
+                               <div class="product-preview ">
                                 <img src="{{url($allImage->urlimagen)}}" class="img-fluid" alt="{{url($allImage->urlimagen)}}">
                             </div>
                             @endforeach
@@ -99,11 +101,11 @@
                         <span class="product-available">In Stock</span>
                     </div>   --}}
                     <div class="d-block mb-2 mt-1">
-                       <div class="row no-gutters">
-                           <div class="col-sm-6">
-                               Ref. {{$producto->referencia}}
-                           </div>
-                           <div class="col-sm-6">
+                     <div class="row no-gutters ">
+                         <div class="col-sm-6">
+                             Ref. {{$producto->referencia}}
+                         </div>
+                         <div class="col-sm-6">
                             <span class="float-right">Stock:
                                 @if($producto->cantidad_critica)
                                 @if(!$producto->cantidad==0)
@@ -136,44 +138,46 @@
                 </div>
 
                 <div class="border-bottom-custom">
-
                     <p class="mt-3 expander">{{str_limit($producto->descripcion, 1500)}}</p>
-
-
                     <div class="d-block mb-4 mt-1">
-                       <div class="row no-gutters">
+                     <div class="row no-gutters h-100">
                         <div class="col-lg-3">
                             <label>Cantidad</label>
                             <div class="d-inline-block">
                                 <div class="qty-box">
 
-                                    <input type='button' value='-' class='qtyminus' field='quantity' />
-                                    <input type='text' name='quantity' value='0' class='qty' />
-                                    <input type='button' value='+' class='qtyplus' field='quantity' />
+                                    <input type='button' value='-' class='qtyminus' field='qty' />
+                                    <input type='text' name='qty' value='1' class='qty' />
+                                    <input type='button' value='+' class='qtyplus' field='qty' />
 
 
                                 </div>
-                                <a href="#" class="icons ml-2" id="cart">
+                                {{--<a href="#" class="icons ml-2" id="cart">
                                     <img src="{{ asset('img/cart.png') }}" class="img-fluid header-icon">
                                 </a>
+                                --}}
                             </div>
                         </div>
 
 
-                    </div>
+                            <div class="col-lg-9 justify-content-end align-self-end">
+                              <button type="submit"  class="btn btn-primary checkout-button">
+                                <img src="{{ asset('img/cart-white.png') }}" class="img-fluid header-icon">
+                            Comprar</button>
+                        </div>
+
                 </div>
-
-
-
-
             </div>
+        </div>
 
-            <ul class="footer_list d-inline-flex mt-2">
-                <li>
 
-                    <a class="facebook-share-button" href="https://www.facebook.com/sharer/sharer.php?u={{ route('product.show', ['slug_' => $producto->slug]) }}" target="_blank">
-                        <img src="{{ asset('img/fb.png') }}" class="img-fluid mr-1 img-footer" width="40">
-                    </a>
+
+        <ul class="footer_list d-inline-flex mt-2">
+            <li>
+
+                <a class="facebook-share-button" href="https://www.facebook.com/sharer/sharer.php?u={{ route('product.show', ['slug_' => $producto->slug]) }}" target="_blank">
+                    <img src="{{ asset('img/fb.png') }}" class="img-fluid mr-1 img-footer" width="40">
+                </a>
 {{--
                     <a href="" target="_blank">
                         <img src="{{ asset('img/fb.png') }}" class="img-fluid mr-1 img-footer" width="40">
@@ -246,7 +250,8 @@
 
 </div>
 <!-- /container -->
-</div>
+</form>
+
 <!-- /SECTION -->
 
 

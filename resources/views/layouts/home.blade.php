@@ -1,5 +1,8 @@
 @extends('welcome')
 @section('content')
+@section('extra-css')
+@endsection
+
 
 <!-- Home -->
 <div class="rev_slider_wrapper mt-important">

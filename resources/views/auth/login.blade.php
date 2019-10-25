@@ -67,8 +67,8 @@
 
 
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">
-                <i class="fas fa-user mr-2"></i>Ingresar</button>
+            <a href="{{ route('register') }}" class="btn btn-primary">
+                <i class="fas fa-user mr-2"></i>Registrarme</a>
         </div>
 
 
