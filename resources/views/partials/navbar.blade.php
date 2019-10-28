@@ -65,7 +65,7 @@
                   <a href="{{route('product.show' , ['product'=>$product->id ])}}">
                     <img src="{{$product->options->imagen }}" class="img-fluid" alt="item1" />
                     <span class="item-name ">{{$product->nombre_producto}}</span>
-                    <span class="item-name ">{{$producto->getMarcaProduct($producto->id)['nombre'] }}</span>
+                    {{--<span class="item-name ">{{$producto->getMarcaProduct($producto->id)['nombre'] }}</span>--}}
                     <span class="item-name bold black">{{$product->qty}}x {{'$' .number_format((float)  precioNew($product->id) , 2, ',', '.'  ) }}</span>
                     <form action="{{route('resumen.destroy', $product->rowId)}}" method="POST" class="trash-form">
                       {{csrf_field()}}
