@@ -22,67 +22,70 @@
 
 @endsection
 @section('content')
-                      <form action="{{route('resumen.store')}}" method="POST" class="form-prevent">
-                            {{csrf_field()}}
-                            <input type="hidden" name="id" value="{{$producto->slug}}">
-<!-- SECTION -->
-<div class="section">
-    <!-- container -->
-    <div class="container border-bottom-custom">
+<form action="{{route('resumen.store')}}" method="POST" class="form-prevent">
+    {{csrf_field()}}
+    <input type="hidden" name="id" value="{{$producto->slug}}">
+    <!-- SECTION -->
+    <div class="section">
+        <!-- container -->
+        <div class="container border-bottom-custom">
 
 
 
-        <!-- row -->
-        <div class="row border-bottom-custom">
-            <div class="col-sm-10 mb-5">
-                <div class="store_title mayus mb-2">CIENCIA - <b>EXPERIMENTOS</b> </div>
-                <div class="row">
+            <!-- row -->
+            <div class="row border-bottom-custom">
+                <div class="col-sm-10 mb-5">
 
-                    <!-- Product main img -->
-                    <div class="col-md-6">
-                        <div id="product-main-img">
+                    {{ Breadcrumbs::render() }}
 
-                            @foreach ($allImages as $allImage)
-                            <div class="product-preview thumbnail">
-                                <img src="{{url($allImage->urlimagen)}}" alt="{{url($allImage->urlimagen)}}">
+                    <!--<div class="store_title mayus mb-2">CIENCIA - <b>EXPERIMENTOS</b> </div>-->
+                    <div class="row">
+
+                        <!-- Product main img -->
+                        <div class="col-md-6">
+                            <div id="product-main-img">
+
+                                @foreach ($allImages as $allImage)
+                                <div class="product-preview thumbnail">
+                                    <img src="{{url($allImage->urlimagen)}}" alt="{{url($allImage->urlimagen)}}">
+                                </div>
+
+                                @endforeach
                             </div>
 
-                            @endforeach
-                        </div>
 
+                            <!-- Product thumb imgs -->
+                            <div class="col-md-12">
+                                <div id="product-imgs">
 
-                        <!-- Product thumb imgs -->
-                        <div class="col-md-12">
-                            <div id="product-imgs">
+                                 @foreach ($allImages as $allImage)
+                                 <div class="product-preview ">
+                                    <img src="{{url($allImage->urlimagen)}}" class="img-fluid" alt="{{url($allImage->urlimagen)}}">
+                                </div>
+                                @endforeach
 
-                               @foreach ($allImages as $allImage)
-                               <div class="product-preview ">
-                                <img src="{{url($allImage->urlimagen)}}" class="img-fluid" alt="{{url($allImage->urlimagen)}}">
                             </div>
-                            @endforeach
-
                         </div>
+                        <!-- /Product thumb imgs -->
+
+
                     </div>
-                    <!-- /Product thumb imgs -->
-
-
-                </div>
-                <!-- /Product main img -->
+                    <!-- /Product main img -->
 
 
 
 
-                <!-- Product details -->
-                <div class="col-md-6">
-                    <div class="product-details ">
-                        <div class="border-bottom-custom">
+                    <!-- Product details -->
+                    <div class="col-md-6">
+                        <div class="product-details ">
+                            <div class="border-bottom-custom">
 
-                            <h2 class="product-name">{{$producto->nombre_producto}}</h2>
-                            <h3 class="product-name mt-2 fs-16">{{$producto->getMarcaProduct($producto->id)['nombre'] }}</h3>
-                            <h3 class="mt-2 mb-3 bold">
-                                {{'$'. number_format((float)  precioNew($producto->slug) , 0, ',', '.' )}}
-                            </h3>
-                        </div>
+                                <h2 class="product-name">{{$producto->nombre_producto}}</h2>
+                                <h3 class="product-name mt-2 fs-16">{{$producto->getMarcaProduct($producto->id)['nombre'] }}</h3>
+                                <h3 class="mt-2 mb-3 bold">
+                                    {{'$'. number_format((float)  precioNew($producto->slug) , 0, ',', '.' )}}
+                                </h3>
+                            </div>
 
 {{--}}
                     <div>
@@ -101,11 +104,11 @@
                         <span class="product-available">In Stock</span>
                     </div>   --}}
                     <div class="d-block mb-2 mt-1">
-                     <div class="row no-gutters ">
-                         <div class="col-sm-6">
-                             Ref. {{$producto->referencia}}
-                         </div>
-                         <div class="col-sm-6">
+                       <div class="row no-gutters ">
+                           <div class="col-sm-6">
+                               Ref. {{$producto->referencia}}
+                           </div>
+                           <div class="col-sm-6">
                             <span class="float-right">Stock:
                                 @if($producto->cantidad_critica)
                                 @if(!$producto->cantidad==0)
@@ -140,7 +143,7 @@
                 <div class="border-bottom-custom">
                     <p class="mt-3 expander">{{str_limit($producto->descripcion, 1500)}}</p>
                     <div class="d-block mb-4 mt-1">
-                     <div class="row no-gutters h-100">
+                       <div class="row no-gutters h-100">
                         <div class="col-lg-3">
                             <label>Cantidad</label>
                             <div class="d-inline-block">
@@ -160,11 +163,11 @@
                         </div>
 
 
-                            <div class="col-lg-9 justify-content-end align-self-end">
-                              <button type="submit"  class="btn btn-primary checkout-button">
-                                <img src="{{ asset('img/cart-white.png') }}" class="img-fluid header-icon">
-                            Comprar</button>
-                        </div>
+                        <div class="col-lg-9 justify-content-end align-self-end">
+                          <button type="submit"  class="btn btn-primary checkout-button">
+                            <img src="{{ asset('img/cart-white.png') }}" class="img-fluid header-icon">
+                        Comprar</button>
+                    </div>
 
                 </div>
             </div>
@@ -325,7 +328,18 @@
 
 </script>
 
-
+@if(!empty(Session::get('error_code')) && Session::get('error_code') == 5)
+<script>
+    $(function() {
+        var id= '{{Session::get('id')}}';
+        if (!id) {
+            var id=null;
+        }
+        $('#modalCiudadesSelector').modal('show');
+        $('#modalCiudadesSelector').find('.modal-body #id').val(id)
+    });
+</script>
+@endif
 
 @endsection
 

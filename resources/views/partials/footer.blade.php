@@ -113,7 +113,7 @@
 <div class="row text-center mt-3">
     <div class="col-lg-12">
         <div class="footer_column">
-            <div class="body-text mayus">© materile 2019</div>
+            <div class="body-text mayus light-gray">© materile 2019</div>
         </div>
     </div>
 </div>
@@ -121,7 +121,7 @@
 <div class="row text-center">
     <div class="col-lg-12">
         <div class="footer_column">
-            <div class="body-text mayus">
+            <div class="body-text mayus ">
                 <a href="https://expertum.com.co/" target="_blank" class="light-gray">
             Plataforma E-Commerce desarrollada por EXPERTUM - Tecnología & Negocios
             </a>

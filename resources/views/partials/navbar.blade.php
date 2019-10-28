@@ -58,49 +58,46 @@
 
             <div class="shopping-cart">
 
-
+              @if( Cart::instance('default')->content()->count() > 0)
               <ul class="shopping-cart-items">
+                @foreach (Cart::instance('default')->content() as $product)
                 <li class="clearfix d-block">
-                  <img src="{{ asset('img/dinosaurio-tyrannosaurus-rex-skeleton-4m.jpg') }}" class="img-fluid" alt="item1" />
-                  <span class="item-name ">Sony DSC-RX100M III</span>
-                  <span class="item-name ">4M Industrial</span>
-                  <span class="item-name bold black">1x 49.0000</span>
+                  <a href="{{route('product.show' , ['product'=>$product->id ])}}">
+                    <img src="{{$product->options->imagen }}" class="img-fluid" alt="item1" />
+                    <span class="item-name ">{{$product->nombre_producto}}</span>
+                    <span class="item-name ">{{$producto->getMarcaProduct($producto->id)['nombre'] }}</span>
+                    <span class="item-name bold black">{{$product->qty}}x {{'$' .number_format((float)  precioNew($product->id) , 2, ',', '.'  ) }}</span>
+                    <form action="{{route('resumen.destroy', $product->rowId)}}" method="POST" class="trash-form">
+                      {{csrf_field()}}
+                      {{method_field('DELETE')}}
+                      <button type="submit" class="btn-transparent cart-icon-trash">
+                        <img src="{{ asset('img/trash.png') }}" class="img-fluid ">
+
+                      </button>
+                    </form>
+                  </a>
                 </li>
-
-                <li class="clearfix d-block">
-                  <img src="{{ asset('img/dinosaurio-tyrannosaurus-rex-skeleton-4m.jpg') }}" class="img-fluid" alt="item1" />
-                  <span class="item-name ">Sony DSC-RX100M III</span>
-                  <span class="item-name ">4M Industrial</span>
-                  <span class="item-name bold black">1x 49.0000</span>
-                </li>
-
-                <li class="clearfix d-block">
-                  <img src="{{ asset('img/dinosaurio-tyrannosaurus-rex-skeleton-4m.jpg') }}" class="img-fluid" alt="item1" />
-                  <span class="item-name ">Sony DSC-RX100M III</span>
-                  <span class="item-name ">4M Industrial</span>
-                  <span class="item-name bold black">1x 49.0000</span>
-                </li>
-
-
-
+                @endforeach
               </ul>
-<div class="gray-border-bottom mb-2"></div>
+              @endif
+
+              <div class="gray-border-bottom mb-2"></div>
               <div class="shopping-cart-header ml-3 mr-3 mb-3">
                 {{--<i class="fa fa-shopping-cart cart-icon"></i><span class="badge">3</span>--}}
                 <div class="shopping-cart-total mt-1">
                   <span class="item-name bold black">Total</span>
-                  <span class="item-name bold black">$ 49.000</span>
+                  <span class="item-name bold black">{{'$' .number_format((float) $total , 2, ',', '.'  ) }}</span>
                 </div>
               </div> <!--end shopping-cart-header -->
               <div class="button-cart-container mb-2">
                 <div class="mb-2 mr-2">
-                  <a href="" class="btn btn-primary checkout-button">
+                  <a href="{{route('resumen')}}" class="btn btn-primary checkout-button">
                     <img src="{{ asset('img/cart-white.png') }}" class="img-fluid header-icon">
                   Ver carrito</a>
                 </div>
 
                 <div class="mb-2 mr-2">
-                  <a href="" class="btn btn-danger checkout-button">
+                  <a href="{{route('checkout')}}" class="btn btn-danger checkout-button">
                     <img src="{{ asset('img/cart-white.png') }}" class="img-fluid header-icon">
                   Checkout</a>
                 </div>

@@ -100,7 +100,7 @@ class ResumenController extends Controller
 
        if ($request->qty <= $cartItem->qty){
         toast('Este producto ya existe en el carrito','info','top-right')
-        ->showConfirmButton()
+        //->showConfirmButton()
         ->autoClose(20000);
 
         return redirect()->back()->with('test', 'test');
@@ -121,7 +121,8 @@ class ResumenController extends Controller
       $producto= Productomodelo::with('hasManyImagenes')->
       where('slug',$request->id)->first();
 
-      $cartItem = Cart::add($producto->slug ,$producto->nombre_producto , $request->qty , $producto->precioventa_iva , [
+      $cartItem = Cart::add($producto->slug ,$producto->nombre_producto , $request->qty , $producto->precioventa_iva,
+      0, [
        'iva' => $producto->iva,
        'imagen' =>  $producto->hasManyImagenes->first()->urlimagen ,
      ])->associate('App\Imgproductomodelo');

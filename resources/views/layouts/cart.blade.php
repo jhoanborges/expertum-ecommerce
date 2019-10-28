@@ -60,74 +60,74 @@
                     <td class="text-center">
 
                       <a href="#" class="icons">
-                      <img src="{{ asset('img/heart.png') }}" class="img-fluid cart-icon-new">
-                     </a>
-                   </td>
-                   <td class="text-center">
+                        <img src="{{ asset('img/heart.png') }}" class="img-fluid cart-icon-new">
+                      </a>
+                    </td>
+                    <td class="text-center">
 
-                    <a href="#" class="icons">
-                      <img src="{{ asset('img/trash.png') }}" class="img-fluid cart-icon-new">
-                    </a>
-                  </td>
-                </tr>
+                      <a href="#" class="icons">
+                        <img src="{{ asset('img/trash.png') }}" class="img-fluid cart-icon-new">
+                      </a>
+                    </td>
+                  </tr>
 
-                @endforeach
+                  @endforeach
 
-              </tbody>
+                </tbody>
 
-            </thead>
-          </table>
+              </thead>
+            </table>
 
 
+          </div>
         </div>
+
       </div>
 
-    </div>
-
-    <div class="container text-right borders">
+      <div class="container text-right borders">
 
 
-      <div class="row justify-content-end pt-2 pb-2">
+        <div class="row justify-content-end pt-2 pb-2">
+          <div class="col-6 col-sm-2">
+            Sub Total
+          </div>
+          <div class="col-6 col-sm-2">
+           <span class="ml-5">$25.000 </span>
+         </div>
+       </div>
+
+
+       <div class="row justify-content-end pt-2 pb-2">
         <div class="col-6 col-sm-2">
-          Sub Total
+          IVA
         </div>
         <div class="col-6 col-sm-2">
-         <span class="ml-5">$25.000 </span>
+         <span class="ml-5">$1.000 </span>
+
        </div>
      </div>
 
 
+
      <div class="row justify-content-end pt-2 pb-2">
       <div class="col-6 col-sm-2">
-        IVA
+        <span class="bold">Total</span>
       </div>
       <div class="col-6 col-sm-2">
-       <span class="ml-5">$1.000 </span>
+       <span class="ml-5 bold">$26.000 </span>
 
      </div>
    </div>
 
-
-
-   <div class="row justify-content-end pt-2 pb-2">
-    <div class="col-6 col-sm-2">
-      <span class="bold">Total</span>
-    </div>
-    <div class="col-6 col-sm-2">
-     <span class="ml-5 bold">$26.000 </span>
-
-   </div>
  </div>
 
-</div>
-
-    <div class="container">
+ <div class="container">
 
    <div class="row justify-content-end pt-4 pb-2">
-                  <a href="{{ route('checkout.index') }}" class="btn btn-danger checkout-button">
-                    <img src="{{ asset('img/cart-white.png') }}" class="img-fluid header-icon">
-                  Checkout</a>
-</div>
+    <a href="{{ route('checkout.index') }}" class="btn btn-danger checkout-button">
+      <img src="{{ asset('img/cart-white.png') }}" class="img-fluid header-icon">
+    Checkout</a>
+  </div>
 </div>
 
 </div>
