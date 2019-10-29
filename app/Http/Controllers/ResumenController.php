@@ -71,14 +71,14 @@ class ResumenController extends Controller
  {
 
 
-  /*if (session()->get('ciudad')==null) {
+if (session()->get('ciudad')==null) {
 
     return redirect()->back()->with([
       'error_code'=> 5,
       'id'=> $request->id,
     ]);
   }else{
-*/
+
     $cantidad = Productomodelo::
     where('slug', $request->id)->value('cantidad');
     $validator = Validator::make($request->all(), [
@@ -141,7 +141,7 @@ class ResumenController extends Controller
   }
 
 
-//}//else session
+}//else session
 }
 
 

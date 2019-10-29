@@ -331,7 +331,9 @@
 @if(!empty(Session::get('error_code')) && Session::get('error_code') == 5)
 <script>
     $(function() {
+
         var id= '{{Session::get('id')}}';
+        console.log(id)
         if (!id) {
             var id=null;
         }

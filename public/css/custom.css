@@ -14,7 +14,9 @@
     src: url('../fonts/Gotham-Bold.otf');
   }
 
-
+a{
+    cursor: pointer;
+}
 
   :root {
     --black: #333;
@@ -978,7 +980,7 @@ border-radius: 0px
   padding: 0;
       font-size: 20px;
       text-transform: uppercase;
-  background-color: transparent; 
+  background-color: transparent;
 }
 .breadcrumb-item+.breadcrumb-item::before {
     content: "-";
@@ -993,6 +995,23 @@ border-radius: 0px
   width: 100%;
   border-right: none
 }
+
+select {
+    display: inline;
+    border: 0;
+    width: 100%;
+    /* margin-left: 10px; */
+    /* outline: none; */
+    /* -webkit-appearance: none; */
+    -moz-appearance: none;
+    border: 1px solid #808080;
+    color: #808080;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+
+    height: 35px;
+}
+
 
 
 .btn-transparent{
@@ -1010,3 +1029,10 @@ border-radius: 0px
   position: relative;
     bottom: 20px;
 }
+
+.custom-close{
+    position: absolute;
+    right: 10px;
+    z-index: 99999;
+}
+

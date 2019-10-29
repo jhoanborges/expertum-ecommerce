@@ -13,7 +13,7 @@
 
   <link rel="shortcut icon" href="{{ asset('img/logo-materile.png') }}" />
   <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.css')}}">
-  <link href="{{asset('plugins/fontawesome-free-5.0.1/css/fontawesome-all.css')}}" rel="stylesheet" type="text/css">
+  <link href="{{asset('css/fontawesome-all.min.css')}}" rel="stylesheet" type="text/css">
   <link rel="stylesheet" type="text/css" href="{{asset('plugins/OwlCarousel2-2.2.1/owl.carousel.css')}}">
   <link rel="stylesheet" type="text/css" href="{{asset('plugins/OwlCarousel2-2.2.1/owl.theme.default.css')}}">
   <link rel="stylesheet" type="text/css" href="{{asset('plugins/OwlCarousel2-2.2.1/animate.css')}}">
@@ -50,6 +50,8 @@
     @include('partials.navbar')
     @yield('content')
     @include('partials.footer')
+                @include('partials.modalCiudadesSelector')
+
   </div>
 
   <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
@@ -98,6 +100,7 @@
    });
  </script>
 
+  @include('partials.js.city_selector')
 
 </body>
 

@@ -43,7 +43,8 @@
               <img src="{{ asset('img/corazon.png') }}" class="img-fluid header-icon">
             </a>
 
-            <a href="#" class="icons">
+            <a  data-toggle="modal" data-target="#modalCiudadesSelector"
+            class="icons">
               <img src="{{ asset('img/location.png') }}" class="img-fluid header-icon">
             </a>
 

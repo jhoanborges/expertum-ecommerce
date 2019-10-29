@@ -721,7 +721,7 @@ section
 {
 	color: #0e8ce4;
 }
-select
+/*select
 {
 	display: inline;
 	border: 0;
@@ -735,6 +735,7 @@ select
 	-webkit-transition: all .4s ease-in-out;
 	transition: all .4s ease-in-out;
 }
+*/
 select:hover
 {
 	cursor: pointer;
