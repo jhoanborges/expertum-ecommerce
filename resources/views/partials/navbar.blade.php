@@ -49,7 +49,9 @@
             </a>
 
             <a href="#" class="icons" id="cart">
-              <img src="{{ asset('img/cart.png') }}" class="img-fluid header-icon"><span class="counter">3</span>
+              <img src="{{ asset('img/cart.png') }}" class="img-fluid header-icon"><span class="counter">{{
+                Cart::instance('default')->content()->count() >0 ? Cart::instance('default')->content()->count() : null
+              }}</span>
             </a>
 
 
@@ -65,7 +67,7 @@
                 <li class="clearfix d-block">
                   <a href="{{route('product.show' , ['product'=>$product->id ])}}">
                     <img src="{{$product->options->imagen }}" class="img-fluid" alt="item1" />
-                    <span class="item-name ">{{$product->nombre_producto}}</span>
+                    <span class="item-name top-text">{{$product->name}}</span>
                     {{--<span class="item-name ">{{$producto->getMarcaProduct($producto->id)['nombre'] }}</span>--}}
                     <span class="item-name bold black">{{$product->qty}}x {{'$' .number_format((float)  precioNew($product->id) , 2, ',', '.'  ) }}</span>
                     <form action="{{route('resumen.destroy', $product->rowId)}}" method="POST" class="trash-form">
@@ -81,6 +83,8 @@
                 @endforeach
               </ul>
               @endif
+
+              @if( Cart::instance('default')->content()->count() > 0)
 
               <div class="gray-border-bottom mb-2"></div>
               <div class="shopping-cart-header ml-3 mr-3 mb-3">
@@ -102,10 +106,10 @@
                     <img src="{{ asset('img/cart-white.png') }}" class="img-fluid header-icon">
                   Checkout</a>
                 </div>
-
-
-
               </div>
+@endif
+
+
             </div> <!--end shopping-cart -->
 
 

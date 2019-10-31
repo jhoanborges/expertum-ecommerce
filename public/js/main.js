@@ -1,6 +1,8 @@
 (function($) {
 	"use strict"
 
+  $('[data-toggle="tooltip"]').tooltip()
+
 	// Mobile Nav toggle
 	$('.menu-toggle > a').on('click', function (e) {
 		e.preventDefault();

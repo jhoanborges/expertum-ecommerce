@@ -52,7 +52,7 @@ class ResumenController extends Controller
 
 //   $categorias=Categorian1modelo::all();
    $cat2=1;
-   return view('layouts.resumen')->with([
+   return view('layouts.cart')->with([
      'totaliva' => $total_iva,
      //'total' => $total,
      'sub' => $subtotal,

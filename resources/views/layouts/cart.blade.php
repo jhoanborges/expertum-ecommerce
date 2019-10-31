@@ -8,6 +8,7 @@
 
 @section('content')
 
+ @if(Cart::content()->count()>0)
 <section class="tables">
   <div class="container">
     <div class="row">
@@ -30,109 +31,148 @@
                   <th class="body-text mayus bold black">total</th>
                   <th class="body-text mayus bold transparent">edit</th>
                   <th class="body-text mayus bold transparent">edit</th>
-                </tr>
+              </tr>
 
-                <tbody>
-                  @foreach(Cart::instance('shopping')->content() as $product)
+              <tbody>
+                  @foreach(Cart::instance('default')->content() as $product)
                   <tr>
                     <td class="text-center">
-                      <img width="180" class="" src="{{ asset('img/dinosaurio-tyrannosaurus-rex-skeleton-4m.jpg') }}" alt="">
+                        <a href="{{route('product.show' , ['product'=>$product->id ])}}">
+                      <img width="180" class="" src="{{$product->options->imagen }}" alt="">
+                      </a>
 
-                    </td>
-                    <td class="text-center" >
+                  </td>
+                  <td class="text-center" >
+                        <a href="{{route('product.show' , ['product'=>$product->id ])}}">
+
                       <p class="mb-0">{{$product->name}}</p>
+                  </a>
                       <p class="mb-0">{{$product->options->brand}} </p>
-                    </td>
-                    {{--<td class="text-center">{{$product->options->avaliable}}</td>--}}
-                    <td class="text-center"><i class="fas fa-check fa-2x lightgreen"></i></td>
-                    <td class="text-center bold black">$ {{$product->price}}</td>
-                    <td class="text-center">{{$product->options->iva}}</td>
-                    <td class="text-center">
+                  </td>
+                  {{--<td class="text-center">{{$product->options->avaliable}}</td>--}}
+                  <td class="text-center"><i class="fas fa-check fa-2x lightgreen"></i></td>
+                  <td class="text-center bold black">$ {{$product->price}}</td>
+                  <td class="text-center"> {{$product->options->iva.''.'%'  }}</td>
+                  <td class="text-center">
                       <div class="qty-box">
 
                         <input type='button' value='-' class='qtyminus' field='quantity' />
-                        <input type='text' name='quantity' value='0' class='qty' />
+                        <input type='text' name='quantity' value='{{$product->qty}}' class='qty' />
                         <input type='button' value='+' class='qtyplus' field='quantity' />
-                      </div>
+                    </div>
 
-                    </td>
-                    <td class="text-center bold black">$ {{$product->price}}</td>
-                    <td class="text-center">
+                </td>
+                <td class="text-center bold black">$ {{'$' .number_format((float)  precioNew($product->id) , 2, ',', '.'  ) }}</td>
+                <td class="text-center">
 
-                      <a href="#" class="icons">
+                  <form action="{{route('favoritos.swichtf', $product->rowId)}}" method="POST" class="">
+                      {{csrf_field()}}
+
+                      <button type="submit"class="icons btn-transparent" data-toggle="tooltip" data-placement="top" title="Agregar a favoritos">
                         <img src="{{ asset('img/heart.png') }}" class="img-fluid cart-icon-new">
-                      </a>
-                    </td>
-                    <td class="text-center">
-
-                      <a href="#" class="icons">
-                        <img src="{{ asset('img/trash.png') }}" class="img-fluid cart-icon-new">
-                      </a>
-                    </td>
-                  </tr>
-
-                  @endforeach
-
-                </tbody>
-
-              </thead>
-            </table>
+                    </button>
+                </form>
 
 
-          </div>
-        </div>
+            </td>
+            <td class="text-center">
+{{--}}
+              <a href="#" class="icons">
+                <img src="{{ asset('img/trash.png') }}" class="img-fluid cart-icon-new">
+            </a>
+            --}}
+            <form action="{{route('resumen.destroy', $product->rowId)}}" method="POST" class="">
+              {{csrf_field()}}
+              {{method_field('DELETE')}}
 
-      </div>
+              <button type="submit"class="icons btn-transparent">
+                <img src="{{ asset('img/trash.png') }}" class="img-fluid cart-icon-new">
+            </button>
 
-      <div class="container text-right borders">
+        </form>
 
+    </td>
+</tr>
 
-        <div class="row justify-content-end pt-2 pb-2">
-          <div class="col-6 col-sm-2">
-            Sub Total
-          </div>
-          <div class="col-6 col-sm-2">
-           <span class="ml-5">$25.000 </span>
-         </div>
-       </div>
+@endforeach
 
+</tbody>
 
-       <div class="row justify-content-end pt-2 pb-2">
-        <div class="col-6 col-sm-2">
-          IVA
-        </div>
-        <div class="col-6 col-sm-2">
-         <span class="ml-5">$1.000 </span>
-
-       </div>
-     </div>
-
+</thead>
+</table>
 
 
-     <div class="row justify-content-end pt-2 pb-2">
+</div>
+</div>
+
+
+</div>
+
+<div class="container text-right borders">
+
+
+    <div class="row justify-content-end pt-2 pb-2">
       <div class="col-6 col-sm-2">
-        <span class="bold">Total</span>
-      </div>
-      <div class="col-6 col-sm-2">
-       <span class="ml-5 bold">$26.000 </span>
-
-     </div>
+        Sub Total
+    </div>
+    <div class="col-6 col-sm-2">
+       <span class="ml-5">${{number_format((float) $sub, 2, '.', ','  )}}</span>
    </div>
+</div>
+
+
+<div class="row justify-content-end pt-2 pb-2">
+    <div class="col-6 col-sm-2">
+      IVA
+  </div>
+  <div class="col-6 col-sm-2">
+     <span class="ml-5">${{number_format((float) $totaliva, 2, '.', ','  )}}</span>
 
  </div>
+</div>
 
- <div class="container">
+
+
+<div class="row justify-content-end pt-2 pb-2">
+  <div class="col-6 col-sm-2">
+    <span class="bold">Total</span>
+</div>
+<div class="col-6 col-sm-2">
+   <span class="ml-5 bold">${{number_format((float) $total, 2, '.', ','  )}}</span>
+
+</div>
+</div>
+
+</div>
+
+<div class="container">
 
    <div class="row justify-content-end pt-4 pb-2">
-    <a href="{{ route('checkout.index') }}" class="btn btn-danger checkout-button">
+    <a href="{{ route('checkout') }}" class="btn btn-danger checkout-button">
       <img src="{{ asset('img/cart-white.png') }}" class="img-fluid header-icon">
-    Checkout</a>
-  </div>
+  Checkout</a>
+</div>
 </div>
 
 </div>
 </div>
 </section>
+
+@else
+<section class="p-5">
+  <div class="container p-5">
+    <div class="row text-center">
+      <div class="col-lg-12">
+
+
+        <div class="big-title mayus mb-3 ">carrito <b>de compras vacío</b> </div>
+    </div>
+</div>
+</div>
+</section>
+@endif
+
+
 
 <!--aca-->
 @include('partials.newsletter')

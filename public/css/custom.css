@@ -1015,6 +1015,7 @@ select {
 
 
 .btn-transparent{
+    cursor: pointer;
   background-color: transparent;
     border: none
 }
