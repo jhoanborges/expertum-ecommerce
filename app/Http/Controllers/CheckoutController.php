@@ -187,7 +187,7 @@ class CheckoutController extends Controller
 			//$reference= (string) Str::uuid();
 
 			##############################################################
-			# TRANSPORATDOR PREDETERMINADO 
+			# TRANSPORATDOR PREDETERMINADO
 			# ESTE ES EL MISMO transportadoresController->(flete_value)
 			##############################################################
 			$trans = Transportadores::where("estado", 1)->first();
@@ -210,11 +210,12 @@ class CheckoutController extends Controller
 			$nombres='';
 			$total_iva=0;
 			$base_iva = 0;
-			
+
+///aca cvolver a conectar con saferbo y calcular ciudad y estado
+///
 			//$total_saferbo=0;
 			//$total_saferbo = $request->flete;
 			$total_saferbo = $request->vlrflete;
-
 
 			//creacion de factura y detalle factura
 			$factura = Factura::create([
@@ -231,7 +232,7 @@ class CheckoutController extends Controller
 
 			foreach (Cart::instance('default')->content() as $i => $producto){
 
-				$product = Productomodelo::where('slug' , $producto->id)->first(); 
+				$product = Productomodelo::where('slug' , $producto->id)->first();
 				//$extra1[]= $product->id;
 				$nombres = $nombres.$product->nombre_producto;
 
@@ -296,15 +297,12 @@ class CheckoutController extends Controller
 			//ShoppingCart::deleteCartRecord(Auth::id(), 'default');
 			//Cart::store(Auth::id())
 
-
-
 			$factura_update = Factura::where('id', $factura->id)->update([
 				'id_transportador' => $trans->id,
 				'flete' => $total_saferbo,
 				'total_productos' => $subtotal,
 				'total' => $totalizacion,
 			]);
-
 
 
 			switch ($pasarelaPago) {
@@ -338,7 +336,7 @@ class CheckoutController extends Controller
 					}
 
 					break;
-				
+
 				case 2:
 
 					if ($mercadopago) {

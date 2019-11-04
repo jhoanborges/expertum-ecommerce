@@ -1037,3 +1037,7 @@ select {
     z-index: 99999;
 }
 
+
+.form-control {
+    color: #333;
+}
