@@ -141,15 +141,15 @@
 
       <div class="col-lg-4 mx-auto search-bar">
         <div class="placeholder">
-
-          <label for="search" class="grayf mb-0">BUSCAR
+{{--
+          <label for="search" class="grayf mb-0">BUSCAR...
             <i class="ti-search search-icon">        </i>
             <span class="barra">|</span>
-
           </label>
+          --}}
         </div>
 
-        <input type="text" name="search" id="search" class="form-control search button-rounded" placeholder="" >
+        <input type="text" name="search" id="search" class="form-control search button-rounded" placeholder="Buscar..." >
         {{--}} <input type="text" name="search" id="search" class="form-control search ti-search" placeholder="Buscar &#xe610;">--}}
 
       </div>

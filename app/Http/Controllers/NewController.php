@@ -59,72 +59,72 @@ class NewController extends Controller{
                 }
 
         */
-        $now=Carbon::now()->format('Y-m-d');
-        $index=1;
-        $grid=0;
+                $now=Carbon::now()->format('Y-m-d');
+                $index=1;
+                $grid=0;
 
-        if (request()->search ){
+                if (request()->search ){
 
-            $searchData = request()->search ;
+                    $searchData = request()->search ;
 
-            $productos=Productomodelo::
-            has('hasOneCategoria1')->
-            filter( request()->all())
-            ->search($searchData, null, true, true)
-            ->paginateFilter(request()->mostrar);
+                    $productos=Productomodelo::
+                    has('hasOneCategoria1')->
+                    filter( request()->all())
+                    ->search($searchData, null, true, true)
+                    ->paginateFilter(request()->mostrar);
 
-            $productos2=Productomodelo::
-            has('hasOneCategoria1')->
-            filter( request()->all() )
-            ->search($searchData, null, true, true)
-            ->get();
+                    $productos2=Productomodelo::
+                    has('hasOneCategoria1')->
+                    filter( request()->all() )
+                    ->search($searchData, null, true, true)
+                    ->get();
 
 
 
             //   Session::put('id_categoria_principal', $id);
 
 
-            $categorias= DB::table('categoria_n2')
-            ->where('id_categorian1', $id)
-            ->orderBy('nombrecategoria' ,  'asc')
-            ->get();
-
-            $categories=Categorian1modelo::
-            orderBy('nombrecategoria', 'ASC')
-            ->first();
-
-        }else{
-
-            $id_categoria_principal = session()->get('id_categoria_principal');
-            switch ($cat2) {
-
-                case 1:
-                    //utilizo laravel eloquent when en vez de if else busca la documentacion
-
-                    $query = Productomodelo::
-                    where('estado', true)
-                    ->where('id_categorian1', '=', $id)
-                    ->filter( request()->all() );
-
-
-                    Session::put('id_categoria_principal', $id);
-
-                    $categorias= Categorian2modelo::
-                    where('id_categorian1', $id)
+                    $categorias= DB::table('categoria_n2')
+                    ->where('id_categorian1', $id)
                     ->orderBy('nombrecategoria' ,  'asc')
                     ->get();
-
-
-                    $categorias_nombre= Categorian1modelo::
-                    where('slug', '=', $id)
-                    ->first();
 
                     $categories=Categorian1modelo::
-                    where('slug', $id)->
-                    first();
+                    orderBy('nombrecategoria', 'ASC')
+                    ->first();
+
+                }else{
+
+                    $id_categoria_principal = session()->get('id_categoria_principal');
+                    switch ($cat2) {
+
+                        case 1:
+                    //utilizo laravel eloquent when en vez de if else busca la documentacion
+
+                        $query = Productomodelo::
+                        where('estado', true)
+                        ->where('id_categorian1', '=', $id)
+                        ->filter( request()->all() );
 
 
-                    $marcas = DB::table('productos')
+                        Session::put('id_categoria_principal', $id);
+
+                        $categorias= Categorian2modelo::
+                        where('id_categorian1', $id)
+                        ->orderBy('nombrecategoria' ,  'asc')
+                        ->get();
+
+
+                        $categorias_nombre= Categorian1modelo::
+                        where('slug', '=', $id)
+                        ->first();
+
+                        $categories=Categorian1modelo::
+                        where('slug', $id)->
+                        first();
+
+
+                        $marcas = DB::table('productos')
                         ->join('marcas', 'productos.id_marca', '=', 'marcas.id')
                         ->select('marcas.id', 'marcas.nombre', 'marcas.img',  DB::raw('COUNT(cantidad) as cantidad'))
                         ->where('id_categorian1', '=', $id)
@@ -134,37 +134,37 @@ class NewController extends Controller{
                         ->get();
 
 
-                    $ids2= Productomodelo::
+                        $ids2= Productomodelo::
                         where('estado', true)
                         ->where('id_categorian1', '=', $id)
                         ->pluck('id');
 
-                    break;
+                        break;
 
-                case 2:
+                        case 2:
 
-                    $query = Productomodelo::
-                    where('estado', true)
-                    ->where('id_categorian2', '=', $id)
-                    ->filter( request()->all() );
+                        $query = Productomodelo::
+                        where('estado', true)
+                        ->where('id_categorian2', '=', $id)
+                        ->filter( request()->all() );
 
 
-                    Session::put('id_categoria_principal', $id);
+                        Session::put('id_categoria_principal', $id);
 
-                    $categorias=Categorian3modelo::
-                    where('id_categorian2', $id)
-                    ->orderBy('nombrecategoria' ,  'asc')
-                    ->get();
+                        $categorias=Categorian3modelo::
+                        where('id_categorian2', $id)
+                        ->orderBy('nombrecategoria' ,  'asc')
+                        ->get();
 
-                    $categorias_nombre= Categorian2modelo::
-                    where('slug', '=', $id)
-                    ->first();
+                        $categorias_nombre= Categorian2modelo::
+                        where('slug', '=', $id)
+                        ->first();
 
-                    $categories=Categorian2modelo::
-                    where('slug', $id)->
-                    first();
+                        $categories=Categorian2modelo::
+                        where('slug', $id)->
+                        first();
 
-                    $marcas = DB::table('productos')
+                        $marcas = DB::table('productos')
                         ->join('marcas', 'productos.id_marca', '=', 'marcas.id')
                         ->select('marcas.id', 'marcas.nombre', 'marcas.img',  DB::raw('COUNT(cantidad) as cantidad'))
                         ->where('id_categorian2', '=', $id)
@@ -174,36 +174,36 @@ class NewController extends Controller{
                         ->get();
 
 
-                    $ids2= Productomodelo::
+                        $ids2= Productomodelo::
                         where('estado', true)
                         ->where('id_categorian2', '=', $id)
                         ->pluck('id');
 
-                    break;
+                        break;
 
-                case 3:
+                        case 3:
 
-                    $query = Productomodelo::
-                    where('estado', true)
-                    ->where('id_categorian3', '=', $id)
-                    ->filter( request()->all() );
+                        $query = Productomodelo::
+                        where('estado', true)
+                        ->where('id_categorian3', '=', $id)
+                        ->filter( request()->all() );
 
-                    Session::put('id_categoria_principal', $id);
+                        Session::put('id_categoria_principal', $id);
 
-                    $categorias=Categorian4modelo::
-                    where('id_categorian3', $id)
-                    ->orderBy('nombrecategoria' ,  'asc')
-                    ->get();
+                        $categorias=Categorian4modelo::
+                        where('id_categorian3', $id)
+                        ->orderBy('nombrecategoria' ,  'asc')
+                        ->get();
 
-                    $categorias_nombre= Categorian3modelo::
-                    where('slug', '=', $id)
-                    ->first();
+                        $categorias_nombre= Categorian3modelo::
+                        where('slug', '=', $id)
+                        ->first();
 
-                    $categories=Categorian3modelo::
-                    where('slug', $id)->
-                    first();
+                        $categories=Categorian3modelo::
+                        where('slug', $id)->
+                        first();
 
-                    $marcas = DB::table('productos')
+                        $marcas = DB::table('productos')
                         ->join('marcas', 'productos.id_marca', '=', 'marcas.id')
                         ->select('marcas.id', 'marcas.nombre', 'marcas.img',  DB::raw('COUNT(cantidad) as cantidad'))
                         ->where('id_categorian3', '=', $id)
@@ -213,37 +213,37 @@ class NewController extends Controller{
                         ->get();
 
 
-                    $ids2= Productomodelo::
+                        $ids2= Productomodelo::
                         where('estado', true)
                         ->where('id_categorian3', '=', $id)
                         ->pluck('id');
 
 
-                    break;
+                        break;
 
-                case 4:
+                        case 4:
 
-                    $query = Productomodelo::
-                    where('estado', true)
-                    ->where('id_categorian4', '=', $id)
-                    ->filter( request()->all() );
+                        $query = Productomodelo::
+                        where('estado', true)
+                        ->where('id_categorian4', '=', $id)
+                        ->filter( request()->all() );
 
-                    Session::put('id_categoria_principal', $id);
+                        Session::put('id_categoria_principal', $id);
 
-                    $categorias= Categorian5modelo::
-                    where('id_categorian4', $id)
-                    ->orderBy('nombrecategoria' ,  'asc')
-                    ->get();
+                        $categorias= Categorian5modelo::
+                        where('id_categorian4', $id)
+                        ->orderBy('nombrecategoria' ,  'asc')
+                        ->get();
 
-                    $categorias_nombre= Categorian4modelo::
-                    where('slug', '=', $id)
-                    ->first();
+                        $categorias_nombre= Categorian4modelo::
+                        where('slug', '=', $id)
+                        ->first();
 
-                    $categories=Categorian4modelo::
-                    where('slug', $id)->
-                    first();
+                        $categories=Categorian4modelo::
+                        where('slug', $id)->
+                        first();
 
-                    $marcas = DB::table('productos')
+                        $marcas = DB::table('productos')
                         ->join('marcas', 'productos.id_marca', '=', 'marcas.id')
                         ->select('marcas.id', 'marcas.nombre', 'marcas.img',  DB::raw('COUNT(cantidad) as cantidad'))
                         ->where('id_categorian4', '=', $id)
@@ -253,31 +253,31 @@ class NewController extends Controller{
                         ->get();
 
 
-                    $ids2= Productomodelo::
+                        $ids2= Productomodelo::
                         where('estado', true)
                         ->where('id_categorian4', '=', $id)
                         ->pluck('id');
 
-                    break;
+                        break;
 
-                case 5:
-                    $query = Productomodelo::where('estado', true)
-                    ->where('id_categorian5', '=', $id)
-                    ->filter( request()->all() );
+                        case 5:
+                        $query = Productomodelo::where('estado', true)
+                        ->where('id_categorian5', '=', $id)
+                        ->filter( request()->all() );
 
-                    Session::put('id_categoria_principal', $id);
+                        Session::put('id_categoria_principal', $id);
 
-                    $categorias_nombre= Categorian5modelo::
-                    where('slug', '=', $id)
-                    ->first();
+                        $categorias_nombre= Categorian5modelo::
+                        where('slug', '=', $id)
+                        ->first();
 
-                    $categorias= array();
+                        $categorias= array();
 
-                    $categories=Categorian5modelo::
-                    where('slug', $id)->
-                    first();
+                        $categories=Categorian5modelo::
+                        where('slug', $id)->
+                        first();
 
-                    $marcas = DB::table('productos')
+                        $marcas = DB::table('productos')
                         ->join('marcas', 'productos.id_marca', '=', 'marcas.id')
                         ->select('marcas.id', 'marcas.nombre', 'marcas.img',  DB::raw('COUNT(cantidad) as cantidad'))
                         ->where('id_categorian5', '=', $id)
@@ -287,29 +287,29 @@ class NewController extends Controller{
                         ->get();
 
 
-                    $ids2= Productomodelo::
+                        $ids2= Productomodelo::
                         where('estado', true)
                         ->where('id_categorian5', '=', $id)
                         ->pluck('id');
 
-                    break;
+                        break;
 
-                case 'search':
+                        case 'search':
 
-                    $query = Productomodelo::
-                    where('estado', true)
+                        $query = Productomodelo::
+                        where('estado', true)
                     //->where('id_marca', request()->marcas)
-                    ->filter( request()->all() );
+                        ->filter( request()->all() );
 
-                    break;
-            }
+                        break;
+                    }
 
-            $query->when($parametros->store_show== true, function ($q) {
-                return $q;
-            });
-            $query->when($parametros->store_show== false, function ($q) {
-                return $q->where('cantidad','>', 0);
-            });
+                    $query->when($parametros->store_show== true, function ($q) {
+                        return $q;
+                    });
+                    $query->when($parametros->store_show== false, function ($q) {
+                        return $q->where('cantidad','>', 0);
+                    });
 
         }//end search
 
@@ -341,7 +341,7 @@ class NewController extends Controller{
             }
         }
 
-    
+
 
         Session::put('main', 0);
 
@@ -365,47 +365,47 @@ class NewController extends Controller{
 
         if($categories->id_categorian2){
 
-           $productos_principal=Productomodelo::
-           where('estado', true)->
-           with('hasManyImagenes')
-           ->where('id_categorian3', '=', $categories->slug)
+         $productos_principal=Productomodelo::
+         where('estado', true)->
+         with('hasManyImagenes')
+         ->where('id_categorian3', '=', $categories->slug)
 
-           ->get();
+         ->get();
 
-        } 
+     } 
 
-        if($categories->id_categorian3){
+     if($categories->id_categorian3){
 
-           $productos_principal=Productomodelo::
-           where('estado', true)->
-           with('hasManyImagenes')
-           ->where('id_categorian4', '=', $categories->slug)
+         $productos_principal=Productomodelo::
+         where('estado', true)->
+         with('hasManyImagenes')
+         ->where('id_categorian4', '=', $categories->slug)
 
-           ->get();
+         ->get();
 
-        }     
+     }     
 
-        if($categories->id_categorian4){
+     if($categories->id_categorian4){
 
-           $productos_principal=Productomodelo::
-           where('estado', true)->
-           with('hasManyImagenes')
-           ->where('id_categorian5', '=', $categories->slug)
+         $productos_principal=Productomodelo::
+         where('estado', true)->
+         with('hasManyImagenes')
+         ->where('id_categorian5', '=', $categories->slug)
 
-           ->get();
+         ->get();
 
-        }    
+     }    
 
 
-        if(empty($productos_principal)){
+     if(empty($productos_principal)){
         /*
            $productos_principal=Productomodelo::
            where('estado', true);
         */
-        }
+       }
         //$id_producto = $productos_principal->pluck('id');
 
-        $ids=$query->pluck('id');
+       $ids=$query->pluck('id');
 
         /*
         $marcas=Marcas::
@@ -443,91 +443,97 @@ class NewController extends Controller{
 
 
 
+   $checked=[];
+
+        if (request()->marcas!=null) {
+           $checked = explode (",", $request->marcas);
+       }
+
+        $filtros=[];
+
+        if (request()->filtros!=null) {
+           $filtros = explode (",", $request->filtros);
+       }
+       
 
 
-        $array_ = explode(',', $request->marcas);
-        $checked = $array_;
+       if (request()->range) {
+        $prices = explode(',', request()->range);
+        $min= $prices[0];
+        $max= $prices[1];
+    }else{
 
-        $filtros = explode (",", $request->filtros);
-
-
-        if (request()->range) {
-            $prices = explode(',', request()->range);
-            $min= $prices[0];
-            $max= $prices[1];
-        }else{
-
-             $precios =[];
-             foreach ($query->cursor() as $product) {
-                $precios[] = precioNew($product->slug);
-             }
+       $precios =[];
+       foreach ($query->cursor() as $product) {
+        $precios[] = precioNew($product->slug);
+    }
 
 
-            if (count($precios)<1) {
+    if (count($precios)<1) {
 
-                $product=Productomodelo::
-                where('estado', true)
-                ->where('cantidad','>',0)
-                ->get();
+        $product=Productomodelo::
+        where('estado', true)
+        ->where('cantidad','>',0)
+        ->get();
 
-                $new_p =[];
-                foreach ($product as $product_price) {
-                   $new_p[] = precioNew($product_price->slug);
-                }
+        $new_p =[];
+        foreach ($product as $product_price) {
+         $new_p[] = precioNew($product_price->slug);
+     }
 
-               if(empty($new_p) ){
-                    $min=min([0]);
-                    $max= max([0]);
-                }else{
-                    $min=min($new_p);
-                    $max= max($new_p);
-                }
+     if(empty($new_p) ){
+        $min=min([0]);
+        $max= max([0]);
+    }else{
+        $min=min($new_p);
+        $max= max($new_p);
+    }
 
-            }else{
+}else{
 
-                $min= min($precios) ;
-                $max= max($precios) ;
-            }
-        }
-
-
-
-
-
-
-
-        $build=[];
-        $filtrar_por=[];
-
-
-        if(request()->marcas){
-            $m = explode (",", $request->marcas);
-
-            $filtrar_por_marcas=Marcas::whereIn('id', $m)->get();
-        }
-
-        $filtrar_por_marcas=[];
-        if(request()->marcas){
-            $m = explode (",", $request->marcas);
-            $filtrar_por_marcas=Marcas::whereIn('id', $m)->get();
-        }
-        $filtrar_por_fitlers=[];
-        if(request()->filtros){
-            $f = explode (",", $request->filtros);
-            $filtrar_por_fitlers=Categoria7::whereIn('id', $f )->get();
-        }
+    $min= min($precios) ;
+    $max= max($precios) ;
+}
+}
 
 
 
-        if (!isset($categorias_nombre)) {
-            $categorias_nombre = collect(
-                [
-                    'nombrecategoria' =>'Resultados de la búsqueda',
-                ]);
-        }
 
-        $search_key=request()->search ;
-        $cat_search=null;
+
+
+
+$build=[];
+$filtrar_por=[];
+
+
+if(request()->marcas){
+    $m = explode (",", $request->marcas);
+
+    $filtrar_por_marcas=Marcas::whereIn('id', $m)->get();
+}
+
+$filtrar_por_marcas=[];
+if(request()->marcas){
+    $m = explode (",", $request->marcas);
+    $filtrar_por_marcas=Marcas::whereIn('id', $m)->get();
+}
+$filtrar_por_fitlers=[];
+if(request()->filtros){
+    $f = explode (",", $request->filtros);
+    $filtrar_por_fitlers=Categoria7::whereIn('id', $f )->get();
+}
+
+
+
+if (!isset($categorias_nombre)) {
+    $categorias_nombre = collect(
+        [
+            'nombrecategoria' =>'Resultados de la búsqueda',
+        ]);
+}
+
+$search_key=request()->search ;
+$cat_search=null;
         //dd($cat_search);
 
 
@@ -535,86 +541,85 @@ class NewController extends Controller{
         //los productos asignados a esa marca que tengan categoria1 HasOneCategory1
 
 
-        $sliders=collect([]);
-        if ($oldcat2==1) {
-            $slider= SlidersCategoria1::where('category_id', $categorias_nombre->id)->get();
-            $slider_ids=[];
-            foreach ($slider as $sl) {
-                $slider_ids[]=$sl->slider_id;
-            }
-            $sliders=Slider::whereIn('id', $slider_ids )->get();
-        }
+$sliders=collect([]);
+if ($oldcat2==1) {
+    $slider= SlidersCategoria1::where('category_id', $categorias_nombre->id)->get();
+    $slider_ids=[];
+    foreach ($slider as $sl) {
+        $slider_ids[]=$sl->slider_id;
+    }
+    $sliders=Slider::whereIn('id', $slider_ids )->get();
+}
 
 
-        if ($oldcat2==2) {
+if ($oldcat2==2) {
 
-            $slider= SlidersCategoria2::where('category_id', $categorias_nombre->id)->get();
-            $slider_ids=[];
-            foreach ($slider as $sl) {
-                $slider_ids[]=$sl->slider_id;
-            }
-            $sliders=Slider::whereIn('id', $slider_ids )->get();
+    $slider= SlidersCategoria2::where('category_id', $categorias_nombre->id)->get();
+    $slider_ids=[];
+    foreach ($slider as $sl) {
+        $slider_ids[]=$sl->slider_id;
+    }
+    $sliders=Slider::whereIn('id', $slider_ids )->get();
 
-        }
+}
 
-        if ($oldcat2==3) {
-            $slider= SlidersCategoria3::where('category_id', $categorias_nombre->id)->get();
-            $slider_ids=[];
-            foreach ($slider as $sl) {
-                $slider_ids[]=$sl->slider_id;
-            }
-            $sliders=Slider::whereIn('id', $slider_ids )->get();
-        }
+if ($oldcat2==3) {
+    $slider= SlidersCategoria3::where('category_id', $categorias_nombre->id)->get();
+    $slider_ids=[];
+    foreach ($slider as $sl) {
+        $slider_ids[]=$sl->slider_id;
+    }
+    $sliders=Slider::whereIn('id', $slider_ids )->get();
+}
 
-        if ($oldcat2==4) {
-            $slider= SlidersCategoria4::where('category_id', $categorias_nombre->id)->get();
-            $slider_ids=[];
-            foreach ($slider as $sl) {
-                $slider_ids[]=$sl->slider_id;
-            }
-            $sliders=Slider::whereIn('id', $slider_ids )->get();
-        }
+if ($oldcat2==4) {
+    $slider= SlidersCategoria4::where('category_id', $categorias_nombre->id)->get();
+    $slider_ids=[];
+    foreach ($slider as $sl) {
+        $slider_ids[]=$sl->slider_id;
+    }
+    $sliders=Slider::whereIn('id', $slider_ids )->get();
+}
 
 
-        if ($oldcat2==5) {
-            $slider= SlidersCategoria5::where('category_id', $categorias_nombre->id)->get();
-            $slider_ids=[];
-            foreach ($slider as $sl) {
-                $slider_ids[]=$sl->slider_id;
-            }
-            $sliders=Slider::whereIn('id', $slider_ids )->get();
-        }
+if ($oldcat2==5) {
+    $slider= SlidersCategoria5::where('category_id', $categorias_nombre->id)->get();
+    $slider_ids=[];
+    foreach ($slider as $sl) {
+        $slider_ids[]=$sl->slider_id;
+    }
+    $sliders=Slider::whereIn('id', $slider_ids )->get();
+}
 
         //dd("pp");
 
-        //dd($posts);
-        return view('layouts.store')->with([
-            'sliders'=> $sliders,
-            'ids2'=> $ids2,
-            'categorias'=> $categorias,
-            'selected'=> $selected,
-            'productos'=> $query->paginateFilter($pagination),
-            'productos2'=> $query->cursor(),
-            'trmdeldia'=> $trmdeldia,
-            'cat2'=> $cat2,
-            'categorias_nombre'=> $categorias_nombre,
-            'index'=> $index,
-            'grid'=> $grid,
-            'idd'=> $id,
-            'oldcat2'=> $oldcat2,
-            'categoriasList'=> $categoriasList,
-            'projects'=> $posts,
-            'filtros'=> $filtros,
-            'marks'=> $request->marcas,
-            'ids'=> $ids,
-            'marcas'=> $marcas,
-            'checked'=> $checked,
-            'min'=> $min,
-            'max'=> $max,
-            'filtrar_por_fitlers'=> $filtrar_por_fitlers,
-            'filtrar_por_marcas'=> $filtrar_por_marcas,
-            'search_key' => $search_key,
-            'cat_search' => $cat_search,
-        ]);
-    }
+return view('layouts.store')->with([
+    'sliders'=> $sliders,
+    'ids2'=> $ids2,
+    'categorias'=> $categorias,
+    'selected'=> $selected,
+    'productos'=> $query->paginateFilter($pagination),
+    'productos2'=> $query->cursor(),
+    'trmdeldia'=> $trmdeldia,
+    'cat2'=> $cat2,
+    'categorias_nombre'=> $categorias_nombre,
+    'index'=> $index,
+    'grid'=> $grid,
+    'idd'=> $id,
+    'oldcat2'=> $oldcat2,
+    'categoriasList'=> $categoriasList,
+    'projects'=> $posts,
+    'filtros'=> $filtros,
+    'marks'=> $request->marcas,
+    'ids'=> $ids,
+    'marcas'=> $marcas,
+    'checked'=> $checked,
+    'min'=> $min,
+    'max'=> $max,
+    'filtrar_por_fitlers'=> $filtrar_por_fitlers,
+    'filtrar_por_marcas'=> $filtrar_por_marcas,
+    'search_key' => $search_key,
+    'cat_search' => $cat_search,
+]);
+}
 }
