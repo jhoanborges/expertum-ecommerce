@@ -49,6 +49,7 @@
             </a>
 
             <a href="#" class="icons" id="cart">
+              {{--<div class="circle"></div>--}}
               <img src="{{ asset('img/cart.png') }}" class="img-fluid header-icon"><span class="counter">{{
                 Cart::instance('default')->content()->count() >0 ? Cart::instance('default')->content()->count() : null
               }}</span>
@@ -85,6 +86,9 @@
               @endif
 
               @if( Cart::instance('default')->content()->count() > 0)
+
+
+
 
               <div class="gray-border-bottom mb-2"></div>
               <div class="shopping-cart-header ml-3 mr-3 mb-3">
