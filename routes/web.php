@@ -132,5 +132,10 @@ Route::post('direccion.select', 'DireccionesController@select')->name('direccion
 Route::get('/micuenta', 'MyAccountController@index')->name('my_account');
 Route::post('password.change', 'MyAccountController@password_change')->name('password.change');
 
+/*
+Route::get("/checkout/landing/test", function(){
+   return View::make("layouts.checkout_landing");
+});
 
+*/
 });

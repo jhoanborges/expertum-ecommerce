@@ -38,6 +38,10 @@ use App\DetalleFactura;
 
 use App\Http\Controllers\TransportadoresController;
 
+//esta funcion imagino la hizo el ing neida la copiare para reutilizarla
+use App\Http\Controllers\Includes\Flete_Saferbo;
+
+
 class CheckoutController extends Controller
 {
 
@@ -215,51 +219,56 @@ class CheckoutController extends Controller
 ///
 			//$total_saferbo=0;
 			//$total_saferbo = $request->flete;
-			$total_saferbo = $request->vlrflete;
+            //
+			//$total_saferbo = $request->vlrflete;
+
+            $servicio = new Flete_Saferbo();
+            $total_saferbo = $servicio->flete($request,$trans->id);
+
 
 			//creacion de factura y detalle factura
-			$factura = Factura::create([
-				'name' => $request->entregar,
-				'email' => $request->email,
-				'telefono' => $request->telefono,
-				'tipo_identificacion' => isset(  $request->tipo_identificacion  ) ? $request->tipo_identificacion : 2,
-				'numeroidentificacion' => $request->numero,
-				'direccion' => $request->direccion,
-				'observacion' => $request->observaciones,
-				'id_ciudad' =>$request->city,
-			]);
+            $factura = Factura::create([
+                'name' => $request->entregar,
+                'email' => $request->email,
+                'telefono' => $request->telefono,
+                'tipo_identificacion' => isset(  $request->tipo_identificacion  ) ? $request->tipo_identificacion : 2,
+                'numeroidentificacion' => $request->numero,
+                'direccion' => $request->direccion,
+                'observacion' => $request->observaciones,
+                'id_ciudad' =>$request->city,
+            ]);
 
 
-			foreach (Cart::instance('default')->content() as $i => $producto){
+            foreach (Cart::instance('default')->content() as $i => $producto){
 
-				$product = Productomodelo::where('slug' , $producto->id)->first();
+                $product = Productomodelo::where('slug' , $producto->id)->first();
 				//$extra1[]= $product->id;
-				$nombres = $nombres.$product->nombre_producto;
+                $nombres = $nombres.$product->nombre_producto;
 
 				//$total_productos = $total_productos + precioNew($product->slug) ;
 				//$total_iva       = $total_iva + totaliva($product->slug) ;
 
-				$valor_producto = precioNew($product->slug)*$producto->qty;
-				$precio_base    = round(($valor_producto  /  ($producto->options->iva/100 +1)), 2);
-				if ($producto->options->iva != 0){
-					$base_iva = $base_iva + $precio_base;
-				}
-				$subtotal       = $subtotal + $valor_producto ;
-				$total_iva      = round($total_iva + ($valor_producto - $precio_base ), 2);
+                $valor_producto = precioNew($product->slug)*$producto->qty;
+                $precio_base    = round(($valor_producto  /  ($producto->options->iva/100 +1)), 2);
+                if ($producto->options->iva != 0){
+                   $base_iva = $base_iva + $precio_base;
+               }
+               $subtotal       = $subtotal + $valor_producto ;
+               $total_iva      = round($total_iva + ($valor_producto - $precio_base ), 2);
 				//$total_iva    = $total_iva + totaliva($product->slug) ;
 
-				$detalle_factura = DetalleFactura::create([
-					'id_factura' =>$factura->id,
-					'id_producto' =>$product->id,
-					'id_provedor' => $product->id_provedor,
-					'referencia' => $product->referencia,
-					'name' => $product->nombre_producto,
-					'descuento' => isset(    $product->hasManyPromociones->first()->tipo_promocion  ) ?  $product->hasManyPromociones->first()->tipo_promocion : null,
-					'valor' =>isset(    $product->hasManyPromociones->first()->valor  ) ?  $product->hasManyPromociones->first()->valor : null,
-					'iva' =>$product->iva,
-					'total' =>precioNew($product->slug),
-					'cantidad' =>$producto->qty,
-				]);
+               $detalle_factura = DetalleFactura::create([
+                   'id_factura' =>$factura->id,
+                   'id_producto' =>$product->id,
+                   'id_provedor' => $product->id_provedor,
+                   'referencia' => $product->referencia,
+                   'name' => $product->nombre_producto,
+                   'descuento' => isset(    $product->hasManyPromociones->first()->tipo_promocion  ) ?  $product->hasManyPromociones->first()->tipo_promocion : null,
+                   'valor' =>isset(    $product->hasManyPromociones->first()->valor  ) ?  $product->hasManyPromociones->first()->valor : null,
+                   'iva' =>$product->iva,
+                   'total' =>precioNew($product->slug),
+                   'cantidad' =>$producto->qty,
+               ]);
 
 			}//end foreach
 
@@ -309,123 +318,129 @@ class CheckoutController extends Controller
 
 				case 1:
 
-					if ($pasarela) {
-						$apiKey =  $pasarela->apikey;
-						$merchantId = $pasarela->merchantid;
-						$accountId = $pasarela->accountid;
-						$signature = $apiKey . "~" . $merchantId . "~" . $factura->id . "~" . $totalizacion . "~" . $moneda_name;
-						$firma = md5($signature);
+             if ($pasarela) {
+              $apiKey =  $pasarela->apikey;
+              $merchantId = $pasarela->merchantid;
+              $accountId = $pasarela->accountid;
+
+                  //test payu
+              $merchantId = "508029";
+              $apiKey =  "4Vj8eK4rloUd272L48hsrarnUA";
+              $accountId = "512321";
 
 
-						return view('layouts.landing_checkout_payu')->with([
-							'firma' => $firma,
-							'merchantId' => $merchantId,
-							'accountId' => $accountId,
-							'descripcionproducto' => $newname,
-							'reference' => $factura->id,
-							'base_iva' => $base_iva,
-							'iva'=> $total_iva,
-							'moneda_name'=>$moneda_name,
-							'fullname'=> $request->entregar,
-							'direccion'=> $request->direccion,
-							'totalizacion'=> $totalizacion,
-							'request' => $request->all(),
-						]);
+              $signature = $apiKey . "~" . $merchantId . "~" . $factura->id . "~" . $totalizacion . "~" . $moneda_name;
+              $firma = md5($signature);
+
+              return view('layouts.checkout_landing')->with([
+               'firma' => $firma,
+               'merchantId' => $merchantId,
+               'accountId' => $accountId,
+               'descripcionproducto' => $newname,
+               'reference' => $factura->id,
+               'base_iva' => $base_iva,
+               'iva'=> $total_iva,
+               'moneda_name'=>$moneda_name,
+               'fullname'=> $request->entregar,
+               'direccion'=> $request->direccion,
+               'totalizacion'=> $totalizacion,
+               'request' => $request->all(),
+           ]);
 
 
-					}
+          }
 
-					break;
+          break;
 
-				case 2:
+          case 2:
 
-					if ($mercadopago) {
-						$mp = new MP ($mercadopago->client_id, $mercadopago->client_secret);
-						$url= 'http://'.$_SERVER['HTTP_HOST'].'/notifications_mp/';
+          if ($mercadopago) {
+              $mp = new MP ($mercadopago->client_id, $mercadopago->client_secret);
+              $url= 'http://'.$_SERVER['HTTP_HOST'].'/notifications_mp/';
 
-						$preference_data = array (
-							"items" => array (
-								array (
+              $preference_data = array (
+               "items" => array (
+                array (
 							//"id"=> "item-ID-1234",
-									"title" => $newname,
-									"picture_url"=> $prodc->urlimagen,
+                 "title" => $newname,
+                 "picture_url"=> $prodc->urlimagen,
 							//"description"=> "Item description",
-									"quantity" => 1,
+                 "quantity" => 1,
 						"currency_id" => $moneda_name, // Available currencies at: https://api.mercadopago.com/currencies
 						"unit_price" => intval($totalizacion)
 					)
-							),
+            ),
 
-							"payer" => array (
-								array (
-									"name"=> Auth::user()->name,
-									"surname"=> Auth::user()->apellidos,
-									"email"=> Auth::user()->email,
-								)
-							),
+               "payer" => array (
+                array (
+                 "name"=> Auth::user()->name,
+                 "surname"=> Auth::user()->apellidos,
+                 "email"=> Auth::user()->email,
+             )
+            ),
 
-							"back_urls" => array (
-								"success"=> "https://www.expertum.co",
-								"failure"=> "http://www.expertum.co",
-								"pending"=> "http://www.expertum.co"
-							),
+               "back_urls" => array (
+                "success"=> "https://www.expertum.co",
+                "failure"=> "http://www.expertum.co",
+                "pending"=> "http://www.expertum.co"
+            ),
 
-							"notification_url"=> "http://aministracion.expertum.com.co/admin/public/notifications_mp",
-							"external_reference"=> $detallesfactura->id_factura,
+               "notification_url"=> "http://aministracion.expertum.com.co/admin/public/notifications_mp",
+               "external_reference"=> $detallesfactura->id_factura,
 
-						);
-						$preference = $mp->create_preference($preference_data);
-
-
-
-						return view('layouts.landing_checkout')->with([
-							'firma' => $firma,
-							'merchantId' => $merchantId,
-							'accountId' => $accountId,
-							'descripcionproducto' => $newname,
-							'reference' => $factura->id,
-							'iva'=> $total_iva,
-							'moneda_name'=>$moneda_name,
-							'fullname'=> $request->entregar,
-							'direccion'=> $request->direccion,
-							'totalizacion'=> $totalizacion,
-
-							'pasarelaPago'=> $pasarelaPago,
-							'preference' => $preference,
-							'epayco' => $epayco,
-							'request' => $request->all(),
-						]);
+           );
+              $preference = $mp->create_preference($preference_data);
 
 
 
-					}
-					break;
+              return view('layouts.landing_checkout')->with([
+               'firma' => $firma,
+               'merchantId' => $merchantId,
+               'accountId' => $accountId,
+               'descripcionproducto' => $newname,
+               'reference' => $factura->id,
+               'iva'=> $total_iva,
+               'moneda_name'=>$moneda_name,
+               'fullname'=> $request->entregar,
+               'direccion'=> $request->direccion,
+               'totalizacion'=> $totalizacion,
 
-				default:
+               'pasarelaPago'=> $pasarelaPago,
+               'preference' => $preference,
+               'epayco' => $epayco,
+               'request' => $request->all(),
+           ]);
 
-					dd('no existe pasarela de pago predeterminada');
-					return view('layouts.landing_checkout')->with([
-						'firma' => $firma,
-						'merchantId' => $merchantId,
-						'accountId' => $accountId,
-						'descripcionproducto' => $newname,
-						'reference' => $factura->id,
-						'iva'=> $total_iva,
-						'moneda_name'=>$moneda_name,
-						'fullname'=> $request->entregar,
-						'direccion'=> $request->direccion,
-						'totalizacion'=> $totalizacion,
 
-						'pasarelaPago'=> $pasarelaPago,
-						'preference' => $preference,
-						'epayco' => $epayco,
-						'request' => $request->all(),
-					]);
 
-					break;
-			}
+          }
+          break;
 
-		}
+          default:
+
+          dd('no existe pasarela de pago predeterminada');
+          return view('layouts.landing_checkout')->with([
+              'firma' => $firma,
+              'merchantId' => $merchantId,
+              'accountId' => $accountId,
+              'descripcionproducto' => $newname,
+              'reference' => $factura->id,
+              'iva'=> $total_iva,
+              'moneda_name'=>$moneda_name,
+              'fullname'=> $request->entregar,
+              'direccion'=> $request->direccion,
+              'totalizacion'=> $totalizacion,
+
+              'pasarelaPago'=> $pasarelaPago,
+              'preference' => $preference,
+              'epayco' => $epayco,
+              'request' => $request->all(),
+          ]);
+
+          break;
+      }
+
+  }
 	}//endf function
 
 

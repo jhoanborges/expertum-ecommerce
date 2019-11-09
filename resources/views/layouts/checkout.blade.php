@@ -105,8 +105,8 @@
         </div>
         --}}
         <div class="form-group">
-            <label class="required bold black">Datos adicionales</label>
-            <input id="observaciones" type="text" class="form-control @error('observaciones') is-invalid @enderror" name="observaciones" value="{{ old('observaciones') }}" required autofocus maxlength="191">
+            <label class="bold black">Datos adicionales</label>
+            <input id="observaciones" type="text" class="form-control @error('observaciones') is-invalid @enderror" name="observaciones" value="{{ old('observaciones') }}" autofocus maxlength="191">
 
             @error('observaciones')
             <span class="invalid-feedback" role="alert">

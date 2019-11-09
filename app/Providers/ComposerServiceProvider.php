@@ -19,29 +19,29 @@ https://stackoverflow.com/questions/35314031/laravel-how-to-access-session-value
     public function boot()
     {
 
-        view()->composer('*', function ($view) 
+        view()->composer('*', function ($view)
         {
 
             $total=0;
             foreach (Cart::instance('default')->content() as $productos) {
                 $total = $total + precioNew($productos->id)*$productos->qty;
             }
-            $view->with('total', $total );    
+            $view->with('total', $total );
 
-
+/*
 $action = app('request')->route();
 if (!$action==null) {
          $action = $action->getAction();
         $controller = class_basename($action['controller']);
         list($controller, $action) = explode('@', $controller);
-           $view->with('controllerName', $controller );   
+           $view->with('controllerName', $controller );
 }else{
-           $view->with('controllerName', 'no hay controlador' );  
+           $view->with('controllerName', 'no hay controlador' );
 }
+*/
 
-  
 
-        });  
+        });
 
         view()->composer(
             [

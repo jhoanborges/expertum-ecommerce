@@ -5,6 +5,16 @@ use App\Productomodelo;
 use  Carbon\Carbon as Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart as Cart;
 
+
+use App\Transportadores;
+use App\ShoppingCart;
+use App\Estados;
+use App\Ciudades;
+use App\Proveedores_Trans;
+use App\User;
+
+
+
 function formatPrice($price) {
     $data = number_format((float)$price, 2, '.', ',');
     return $data;
@@ -602,6 +612,29 @@ if (count($producto->hasManyPromociones) ) {
 
 return $precio;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//saferbo helper
+
+
+
 
 
 

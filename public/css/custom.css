@@ -1041,3 +1041,9 @@ select {
 .form-control {
     color: #333;
 }
+
+
+.bg-gray{
+  background-color: var(--gray)
+
+}
