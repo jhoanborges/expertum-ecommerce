@@ -71,6 +71,10 @@ a{
     color: var(--grayf)
   }
 
+.btn-gray{
+    background-color: var(--grayf) !important;
+    border-color: var(--grayf) !important;
+}
   .green{
     color: var(--green)
   }
@@ -886,7 +890,7 @@ p{
  }
 
 .logo-bar{
-  width: 180px;
+  width: 235px;
 }
 @media (max-width: 992px) {
 .search-bar{
@@ -894,7 +898,7 @@ p{
  }
 
  .logo-bar{
-  width: 160px;
+  width: 180px;
 }
 
 
@@ -908,7 +912,7 @@ p{
 
 
  .logo-bar{
-  width: 140px;
+  width: 150px;
 }
 
 
@@ -920,7 +924,7 @@ p{
     }
 
 .active {
-    background-color: #e5e5e5;
+   /* background-color: #e5e5e5;*/
     color: #808080;
 }
 
@@ -1100,3 +1104,13 @@ select {
   75% {transform:scale(1.75); opacity:0.4;}
   100% {transform:scale(2); opacity:0;}
 }
+
+
+.price-form{
+    padding: .350rem .50rem;
+    font-size: 0.7rem;
+}
+
+.btn {
+    font-size: 0.9rem;
+  }

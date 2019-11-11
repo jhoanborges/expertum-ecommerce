@@ -4,6 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\User;
+use Illuminate\Database\Eloquent\Builder;
+
+
 class Identificacion extends Model
 {
     protected $table = 'tipoidentificacion';
@@ -11,6 +14,16 @@ class Identificacion extends Model
     protected $guarded= ['id'];
     	protected $fillable = [];
 	public $timestamps = false;
+
+//order by default
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('order', function (Builder $builder) {
+            $builder->orderBy('nombre', 'asc');
+        });
+    }
 
 
 }

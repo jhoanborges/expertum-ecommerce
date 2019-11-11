@@ -55,9 +55,6 @@
               }}</span>
             </a>
 
-
-
-
             {{--<li><a href="#" id="cart"><i class="fa fa-shopping-cart"></i> Cart <span class="badge">3</span></a></li>--}}
 
             <div class="shopping-cart">
@@ -70,7 +67,7 @@
                     <img src="{{$product->options->imagen }}" class="img-fluid" alt="item1" />
                     <span class="item-name top-text">{{$product->name}}</span>
                     {{--<span class="item-name ">{{$producto->getMarcaProduct($producto->id)['nombre'] }}</span>--}}
-                    <span class="item-name bold black">{{$product->qty}}x {{'$' .number_format((float)  precioNew($product->id) , 2, ',', '.'  ) }}</span>
+                    <span class="item-name bold black">{{$product->qty}}x {{'$' .formatPrice(precioNew($product->id) ) }}</span>
                     <form action="{{route('resumen.destroy', $product->rowId)}}" method="POST" class="trash-form">
                       {{csrf_field()}}
                       {{method_field('DELETE')}}
@@ -95,7 +92,7 @@
                 {{--<i class="fa fa-shopping-cart cart-icon"></i><span class="badge">3</span>--}}
                 <div class="shopping-cart-total mt-1">
                   <span class="item-name bold black">Total</span>
-                  <span class="item-name bold black">{{'$' .number_format((float) $total , 2, ',', '.'  ) }}</span>
+                  <span class="item-name bold black">{{'$' .formatPrice($total) }}</span>
                 </div>
               </div> <!--end shopping-cart-header -->
               <div class="button-cart-container mb-2">
@@ -186,30 +183,9 @@
               <a class="nav-link" href="{{ route('home') }}">Inicio</a>
             </li>
 
-            <li class="nav-item {{Route::currentRouteNamed('store.index') ? 'active' : '' }}">
-              <a class="nav-link mayus" href="{{ route('store.index') }}">categorías</a>
+            <li class="nav-item {{Route::currentRouteNamed('home') ? 'active' : '' }}">
+              <a class="nav-link mayus" href="{{ route('home') }}">categorías</a>
             </li>
-{{--}}
-                <li class="nav-item submenu dropdown">
-                  <a href="{{ route('store.index') }}" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                  aria-expanded="false">Shop</a>
-                  <ul class="dropdown-menu">
-                    <li class="nav-item">
-                      <a class="nav-link" href="category.html">Shop Category</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="single-product.html">Product Details</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="checkout.html">Product Checkout</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="cart.html">Shopping Cart</a>
-                    </li>
-                  </ul>
-                </li>
-                --}}
-
                 <li class="nav-item ">
                   <a class="nav-link mayus" href="">Ofertas</a>
                 </li>

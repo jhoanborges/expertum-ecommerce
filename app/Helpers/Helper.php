@@ -16,7 +16,9 @@ use App\User;
 
 
 function formatPrice($price) {
-    $data = number_format((float)$price, 2, '.', ',');
+    //$data = number_format((float)$price, 2, '.', ',');
+  //sin coma sin decimales
+    $data = number_format((float)$price, 0, '', '.');
     return $data;
 }
 

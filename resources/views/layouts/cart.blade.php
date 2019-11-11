@@ -51,7 +51,7 @@
                   </td>
                   {{--<td class="text-center">{{$product->options->avaliable}}</td>--}}
                   <td class="text-center"><i class="fas fa-check fa-2x lightgreen"></i></td>
-                  <td class="text-center bold black">$ {{$product->price}}</td>
+                  <td class="text-center bold black">$ {{formatPrice($product->price)}}</td>
                   <td class="text-center"> {{$product->options->iva.''.'%'  }}</td>
                   <td class="text-center">
                       <div class="qty-box">
@@ -62,7 +62,7 @@
                     </div>
 
                 </td>
-                <td class="text-center bold black">$ {{'$' .number_format((float)  precioNew($product->id) , 2, ',', '.'  ) }}</td>
+                <td class="text-center bold black">$ {{formatPrice(precioNew($product->id)) }}</td>
                 <td class="text-center">
 
                   <form action="{{route('favoritos.swichtf', $product->rowId)}}" method="POST" class="">
@@ -116,7 +116,7 @@
         Sub Total
     </div>
     <div class="col-6 col-sm-2">
-       <span class="ml-5">${{number_format((float) $sub, 2, '.', ','  )}}</span>
+       <span class="ml-5">${{formatPrice($sub)}}</span>
    </div>
 </div>
 
@@ -126,7 +126,7 @@
       IVA
   </div>
   <div class="col-6 col-sm-2">
-     <span class="ml-5">${{number_format((float) $totaliva, 2, '.', ','  )}}</span>
+     <span class="ml-5">${{formatPrice($totaliva)}}</span>
 
  </div>
 </div>
@@ -138,7 +138,7 @@
     <span class="bold">Total</span>
 </div>
 <div class="col-6 col-sm-2">
-   <span class="ml-5 bold">${{number_format((float) $total, 2, '.', ','  )}}</span>
+   <span class="ml-5 bold">${{formatPrice($total)}}</span>
 
 </div>
 </div>

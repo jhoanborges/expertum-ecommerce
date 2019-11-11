@@ -23,7 +23,7 @@
 
 
             <div class="form-group">
-                <label class="required bold black">Razón Social</label>
+                <label class="required bold black">Nombre(s) y Apellido(s) / Razón Social</label>
                 <input id="razon" type="text" class="form-control @error('razon') is-invalid @enderror" name="razon" value="{{ old('razon') }}" required autocomplete="razon" autofocus>
 
                 @error('razon')
@@ -299,12 +299,10 @@
                     beforeSend: function() {
                     },
                     success:function(res){
-                        var  flete = new Intl.NumberFormat('en-EN', { minimumFractionDigits:2,maximumFractionDigits:2,useGrouping:true }).format(res)
-                        $("#flete").html(flete);
-                        var sum= ( parseFloat('{{$total}}') + parseFloat(res) );
-                        $("#total_summary").html(
-                            new Intl.NumberFormat('en-EN', { minimumFractionDigits:2,maximumFractionDigits:2,useGrouping:true }).format(sum)
-                            )
+                        $("#flete").html(res);
+                        var sum= ( parseFloat('{{formatPrice($total)}}') + parseFloat(res) );
+                        console.log(sum)
+                        $("#total_summary").html(sum)
                     }
                 });
             }

@@ -26,9 +26,9 @@
     {{csrf_field()}}
     <input type="hidden" name="id" value="{{$producto->slug}}">
     <!-- SECTION -->
-    <div class="section">
+    <div class="section mt-1">
         <!-- container -->
-        <div class="container border-bottom-custom">
+        <div class="container">
 
 
 
@@ -39,7 +39,7 @@
                     {{ Breadcrumbs::render() }}
 
                     <!--<div class="store_title mayus mb-2">CIENCIA - <b>EXPERIMENTOS</b> </div>-->
-                    <div class="row">
+                    <div class="row mt-4">
 
                         <!-- Product main img -->
                         <div class="col-md-6">
@@ -58,8 +58,8 @@
                             <div class="col-md-12">
                                 <div id="product-imgs">
 
-                                 @foreach ($allImages as $allImage)
-                                 <div class="product-preview ">
+                                   @foreach ($allImages as $allImage)
+                                   <div class="product-preview ">
                                     <img src="{{url($allImage->urlimagen)}}" class="img-fluid" alt="{{url($allImage->urlimagen)}}">
                                 </div>
                                 @endforeach
@@ -87,74 +87,58 @@
                                 </h3>
                             </div>
 
-{{--}}
-                    <div>
-                        <div class="product-rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-o"></i>
-                        </div>
-                        <a class="review-link" href="#">10 Review(s) | Add your review</a>
-                    </div>
-
-                    <div>
-                        <h3 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h3>
-                        <span class="product-available">In Stock</span>
-                    </div>   --}}
-                    <div class="d-block mb-2 mt-1">
-                       <div class="row no-gutters ">
-                           <div class="col-sm-6">
-                               Ref. {{$producto->referencia}}
-                           </div>
-                           <div class="col-sm-6">
-                            <span class="float-right">Stock:
-                                @if($producto->cantidad_critica)
-                                @if(!$producto->cantidad==0)
-                                @if( $producto->cantidad_critica >= $producto->cantidad )
-                                Pocas unidades
-                                @else
-                                Disponible
-                                @endif
-                                @else
-                                No disponbile
-                                @endif
-                                @else
-                                @if($param->cantidad_critica)
-                                @if(!$producto->cantidad==0)
-                                @if( $param->cantidad_critica >= $producto->cantidad )
-                                Pocas unidades
-                                @else
-                                Disponible
-                                @endif
-                                @else
-                                No disponbile
-                                @endif
-                                @else
-                                Disponible
-                                @endif
-                                @endif
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="border-bottom-custom">
-                    <p class="mt-3 expander">{{str_limit($producto->descripcion, 1500)}}</p>
-                    <div class="d-block mb-4 mt-1">
-                       <div class="row no-gutters h-100">
-                        <div class="col-lg-3">
-                            <label>Cantidad</label>
-                            <div class="d-inline-block">
-                                <div class="qty-box">
-
-                                    <input type='button' value='-' class='qtyminus' field='qty' />
-                                    <input type='text' name='qty' value='1' class='qty' />
-                                    <input type='button' value='+' class='qtyplus' field='qty' />
-
-
+                            <div class="d-block mb-2 mt-1">
+                             <div class="row no-gutters ">
+                                 <div class="col-sm-6">
+                                     Ref. {{$producto->referencia}}
+                                 </div>
+                                 <div class="col-sm-6">
+                                    <span class="float-right">Stock:
+                                        @if($producto->cantidad_critica)
+                                        @if(!$producto->cantidad==0)
+                                        @if( $producto->cantidad_critica >= $producto->cantidad )
+                                        Pocas unidades
+                                        @else
+                                        Disponible
+                                        @endif
+                                        @else
+                                        No disponbile
+                                        @endif
+                                        @else
+                                        @if($param->cantidad_critica)
+                                        @if(!$producto->cantidad==0)
+                                        @if( $param->cantidad_critica >= $producto->cantidad )
+                                        Pocas unidades
+                                        @else
+                                        Disponible
+                                        @endif
+                                        @else
+                                        No disponbile
+                                        @endif
+                                        @else
+                                        Disponible
+                                        @endif
+                                        @endif
+                                    </span>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="border-bottom-custom">
+                            <p class="mt-3 expander">{{str_limit($producto->descripcion, 1500)}}</p>
+                            <div class="d-block mb-4 mt-1">
+                             <div class="row no-gutters h-100">
+                                <div class="col-lg-3">
+                                    <label>Cantidad</label>
+                                    <div class="d-inline-block">
+                                        <div class="qty-box">
+
+                                            <input type='button' value='-' class='qtyminus' field='qty' />
+                                            <input type='text' name='qty' value='1' class='qty' />
+                                            <input type='button' value='+' class='qtyplus' field='qty' />
+
+
+                                        </div>
                                 {{--<a href="#" class="icons ml-2" id="cart">
                                     <img src="{{ asset('img/cart.png') }}" class="img-fluid header-icon">
                                 </a>
@@ -220,17 +204,19 @@
 
 
 <!-- /Product details -->
-<div class="col-xl-2">
+<div class="col-xl-2 mb-3 pl-0 pr-0">
     @include('partials.top')
 </div>
 
 
 </div>
+
+
 <!-- /row -->
 
 <!-- Product tab -->
 
-<div class="row no-gutters ">
+<div class="row border-bottom-custom">
 
 
     <div class="col-md-12">
@@ -239,10 +225,14 @@
         @foreach($filters as $filter)
         <p><strong>{{$filter['categoria6']}}</strong> {{$filter['categoria7']}}</p>
         @endforeach
-        <p class="border-bottom-custom"></p>
-        <p >{!!$producto->descripcion_larga!!}</p>
-
     </div>
+</div>
+<div class="row border-bottom-custom mt-2">
+    <div class="col-md-12">
+
+        <p >{!!$producto->descripcion_larga!!}</p>
+    </div>
+</div>
 
 </div>
 

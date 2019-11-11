@@ -5,6 +5,7 @@ Route::get('/landing', function () {
     return view('layouts.landing_checkout');
 });
 */
+Route::get('/verify-user/{code}', 'RegisterController@activateUser')->name('activate.user');
 
 Route::get('payu', 'PayuController@index')->name('payu');
 
@@ -138,4 +139,5 @@ Route::get("/checkout/landing/test", function(){
 });
 
 */
+
 });

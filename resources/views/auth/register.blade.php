@@ -4,7 +4,7 @@
 <div class="container mb-3 border-bottom">
     <div class="row">
       <div class="col-lg-12">
-        <div class="big-title mayus mb-4 store_title ">SUSCRIBIRME</div>
+        <div class="big-title mayus mb-4 store_title ">Registrarme</div>
     </div>
 </div>
 
@@ -14,14 +14,8 @@
     <div class="row">
         <div class="col-md-6">
 
-
-            <p class="bold black mb-2 title-text">Formulario de suscipción</p>
-            <p>Si deseas recibir nuestro boletín de noticias,
-                promociones, ofertas, nuevos productos y
-                disponibilidad de productos, por favor
-                diligencia el siguiente formulario.
-            Gracias. </p>
-
+            <p class="bold black mb-2 title-text">Formulario de registro</p>
+            <p>Completa tus datos personales</p>
 
             <div class="form-group">
               @if (Route::has('login'))
@@ -30,7 +24,6 @@
             </a>
             @endif
         </div>
-
 
     </div>
 

@@ -190,7 +190,7 @@ if ($user) {
         ->withInput();
     }else{
 
-        try {
+       // try {
 
             $user = User::create([
                'name' => strtoupper($request->name),
@@ -199,10 +199,9 @@ if ($user) {
                'username' => $request->email,
                'password' => bcrypt($request->password),    
                'activation_code' => str_random(30).time(),
-             //'codigo_confirmacion' => $data['codigo_confirmacion']    
            ]);
 
-
+/*
             if ($user) {
                 try{
 
@@ -214,7 +213,7 @@ if ($user) {
             ]);
                          }catch(\Exception $e){}
            }
-/*
+
            $direccion_user = Direcciones::create([
             'id_pais' => strtoupper($request->nombre_pais),
             'id_departamento' => strtoupper($request->state),
@@ -232,11 +231,10 @@ if ($user) {
            $user->notify(new UserRegisteredSuccessfully($user));
            alert()->success('¡Enhorabuena!','Tu cuenta ha sido creada exitosamente. Hemos enviado un correo electrónico a ' .$request->email.'');
            return redirect()->route('home');    
-       } catch (\Exception $exception) {
-           // logger()->error($exception);
+       /*} catch (\Exception $exception) {
         toast('No se ha podido crear el usuario','error','top-right');
         return redirect()->back()->withInput();
-    }
+    }*/
 
     
 }
@@ -254,22 +252,24 @@ if ($user) {
 public function activateUser(string $activationCode)
 {
     try {
-        $user = app(User::class)->where('activation_code', $activationCode)->first();
+        $user = User::where('activation_code', $activationCode)->first();
         if (!$user) {
-            return view('layouts.messages.activation_code');
+        toast('Este usuario no existe','info','top-right');
+
+           return redirect()->route('home');    
         }
 
         $user->status= 1;
         $user->activation_code = null;
         $user->save();
         $user->notify(new UserSuccessfullyVerified($user));
-        alert()->success('¡Enhorabuena!','Tu cuenta ha sido activada exitosamente.');
+        toast('Tu cuenta ha sido activada exitosamente','success','top-right');
         auth()->login($user);
-    } catch (\Exception $exception) {
-        //logger()->error($exception);
 
- return view('layouts.messages.activation_code');
+    } catch (\Exception $exception) {
+        toast('No hemos podido activar tu usuario','error','top-right');
     }
+
     return redirect()->to('/home');
 }
 

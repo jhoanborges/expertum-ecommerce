@@ -52,24 +52,10 @@ class ResetPasswordController extends Controller
     protected function resetPassword($user, $password)
     {
         $user->password = Hash::make($password);
-
         $user->setRememberToken(Str::random(60));
-
         $user->save();
-
         event(new PasswordReset($user));
-        Toastr::info('Inicie sesión con sus credenciales de acceso', 'Información', 
-           [
-            "timeOut" => "20000",
-            "closeButton" => true,
-        ]
-    );
-        Toastr::success('Su contraseña ha sido reestablecida exitosamente', 'Éxito', 
-           [
-            "timeOut" => "20000",
-            "closeButton" => true,
-        ]
-    );
+        toast('Su contraseña ha sido reestablecida exitosamente','success','top-right');
        // $this->guard()->login($user);
     }
 
