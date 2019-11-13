@@ -67,7 +67,7 @@
 
         <div class="form-group">
             <label class="required bold black">Departamento</label>
-            <select   required="required"  class="select2estado2" name="state" id="state" >
+            <select   required="required"  class="form-control state" name="state" id="state" >
                 <option disabled selected value="">Seleccione una opción</option>
                 @foreach($departamentos as $dep)
                 <option value="{{$dep->id}}">{{$dep->region}}</option>
@@ -83,7 +83,7 @@
 
         <div class="form-group">
             <label class="required bold black">Ciudad</label>
-            <select class="select2city2 form-control" name="city" id="city" style="width: 100%" required="required">
+            <select class="select2city2 form-control city" name="city" id="city" style="width: 100%" required="required">
             </select>
             @error('city')
             <span class="invalid-feedback" role="alert">
@@ -271,7 +271,38 @@
 @include('partials.newsletter')
 
 @section('extra-js')
+
 <script>
+     $(function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type:'post',
+            url: "{{ route('sql_session') }}",
+            dataType : 'json',
+            success:function(res){
+                if (res) {
+
+                    $('.state').val(res.departamento.id).trigger('change')
+                    setTimeout(function(){
+                    $('.city').val(res.ciudad.id).trigger('change')
+                     }, 500);
+                }
+            },
+            error: function() {
+
+            }
+        })
+    })
+
+</script>
+
+
+<script>
+
 
     $(function () {
 

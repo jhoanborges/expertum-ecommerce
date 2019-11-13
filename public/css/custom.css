@@ -97,7 +97,7 @@ a{
   }
 
   .shop {
-    padding-top: 40px;
+    padding-top: 20px;
   }
   .product_item {
    padding-top: 0px;
@@ -360,7 +360,7 @@ width: 350px;
 
 
 .top_menu {
-  height: 0px;
+/*  height: 0px;*/
 
   background: #fff;
 }
@@ -906,11 +906,10 @@ p{
 
 
 @media (max-width: 576px) {
-.search-bar{
+/*.search-bar{
   margin-top: 0px
  }
-
-
+*/
  .logo-bar{
   width: 150px;
 }
@@ -1114,3 +1113,48 @@ select {
 .btn {
     font-size: 0.9rem;
   }
+
+  .shop_page_nav li.active{
+     background-color: #e5e5e5;
+  }
+
+.title-height{
+height: 2.8rem;
+}
+
+
+.one-row {
+   line-height: 1.5em;
+    height: 3em;
+    overflow: hidden;
+    /*white-space: nowrap;*/
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+
+@media (max-width:480px){
+.top_menu .right_side li a {
+    font-size: 11px;
+}
+.card-title{
+    font-size: 12px;
+
+}
+    .body-text {
+    font-size: 12px;
+}
+.store_title {
+    font-size: 14px;
+
+}
+.footer_title {
+    font-size: 14px;
+}
+
+}
+
+
+.dropdown-menu {
+    min-width: auto;
+}

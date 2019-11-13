@@ -8,7 +8,7 @@
 	============================================================================================ */
 }
 @media (max-width:1300px){
-	
+
 }
 @media (max-width:1199px){
 	/* Main Menu Area css
@@ -195,7 +195,7 @@
     }
 	/* End Blog page Area css
 	============================================================================================ */
-	
+
 	/* Contact Page Area css
 	============================================================================================ */
 	.contact_info{
@@ -242,7 +242,7 @@
 		width: 100%;
 	}
 	.cupon_area input {
-		margin-left: 0px; 
+		margin-left: 0px;
 	}
 	.cupon_area .tp_btn {
 		margin-left: 0px;
@@ -324,7 +324,7 @@
 		width: 100%;
 		float: none;
 		margin-bottom: 10px;
-	
+
 	}
 	.product_top_bar .left_dorp .show {
 		display: block;
@@ -345,12 +345,12 @@
 */
 }
 @media (max-width:600px){
-	
+
 }
 @media (max-width:575px){
-	.top_menu {
+	/*.top_menu {
 		display: none;
-	}
+	}*/
 	.header_area + section, .header_area + row, .header_area + div {
 		margin-top: 0px;
 	}
@@ -399,7 +399,7 @@
 	}
 	/* End Elements Area css
 	============================================================================================ */
-	
+
 	/* Blog Page Area css
 	============================================================================================ */
 	.blog_details h2 {
@@ -424,7 +424,7 @@
 	}
 	.gallery_f_inner{
 		max-width: 340px;
-		margin: 0px auto -30px; 
+		margin: 0px auto -30px;
 	}
 	.h_form_inner h4 {
 		padding-top: 70px;
@@ -467,7 +467,7 @@
 	.product_image_area {
 		padding-top: 70px;
 	}
-	
+
 }
 
 @media (max-width:480px){
@@ -478,7 +478,7 @@
 	}
 	/* End Main Menu Area css
 	============================================================================================ */
-	
+
 	/* Home Banner Area css
 	============================================================================================ */
 	.banner_content .white_btn {
@@ -495,7 +495,7 @@
 	.comments-area .thumb {
 		margin-right: 10px;
 	}
-	
+
 	/* End Blog Page Area css
 	============================================================================================ */
 	.home_banner_area {

@@ -57,7 +57,9 @@
                       <div class="qty-box">
 
                         <input type='button' value='-' class='qtyminus' field='quantity' />
-                        <input type='text' name='quantity' value='{{$product->qty}}' class='qty' />
+                        <input type='text' name='quantity' value='{{$product->qty}}' class='qty'
+                        data-id="{{$product->rowId}}"/>
+
                         <input type='button' value='+' class='qtyplus' field='quantity' />
                     </div>
 
@@ -182,6 +184,9 @@
 
 <script src="{{url('js/jquery.dataTables.min.js')}}"></script>
 <script src="{{url('js/qty.js')}}"></script>
+
+
+
 
 
 

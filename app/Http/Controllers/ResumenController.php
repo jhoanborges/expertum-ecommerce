@@ -93,6 +93,8 @@ if (session()->get('ciudad')==null) {
       return redirect()->back();
     }
 
+
+
     $duplicates = Cart::search(function ($cartItem, $rowId) use ($request) {
             //return $cartItem->id === $request->id;
 
