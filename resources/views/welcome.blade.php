@@ -54,6 +54,8 @@
 
   </div>
 
+  <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+
   <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
   <script src="{{asset('styles/bootstrap4/popper.js')}}"></script>
   <script src="{{asset('js/bootstrap.min.js')}}"></script>

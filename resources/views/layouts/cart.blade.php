@@ -7,7 +7,11 @@
 @endsection
 
 @section('content')
-
+{{--
+     <div id="cart-component"
+                data-cart="{{ json_encode($data)}}"
+                ></div>
+--}}
  @if(Cart::content()->count()>0)
 <section class="tables">
   <div class="container">

@@ -16,3 +16,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::get('/price/{slug}', 'HelperControllerController@price');
+Route::post('/cartupdate/', 'ResumenController@update');

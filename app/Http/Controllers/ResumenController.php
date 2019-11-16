@@ -52,6 +52,25 @@ class ResumenController extends Controller
 
 //   $categorias=Categorian1modelo::all();
    $cat2=1;
+
+  $data=[];
+foreach ( Cart::instance('default')->content() as $product) {
+   $data[]=[
+    'id'=>$product->id,
+    'qty'=>$product->qty,
+    'price'=>formatPrice($product->price),
+    'name'=>$product->name,
+    'image'=>$product->options->imagen,
+    'iva'=>$product->options->iva,
+    'rowId'=>$product->rowId,
+    'taxRate'=>$product->taxRate,
+    'total'=>formatPrice(precioNew($product->id)),
+
+];
+
+}
+
+
    return view('layouts.cart')->with([
      'totaliva' => $total_iva,
      //'total' => $total,
@@ -60,6 +79,7 @@ class ResumenController extends Controller
      //'categorias' => $categorias,
      'qty_cont' => $qty_cont,
      'producto' => $producto,
+     'data' => $data,
         //   'cantidad' => $cantidad,
 
    ]);
