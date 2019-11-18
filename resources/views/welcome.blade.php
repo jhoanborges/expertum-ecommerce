@@ -29,6 +29,7 @@
   <link href="{{asset('css/style.css')}}" rel="stylesheet">
   <link rel="stylesheet" href="{{asset('css/responsive.css')}}" />
   <link rel="stylesheet" href="{{asset('css/checkbox.css')}}" />
+  <link rel="stylesheet" href="{{asset('css/toastr.css')}}" />
 
   <link href="{{asset('css/captions-original.css')}}" rel="stylesheet">
 
@@ -77,6 +78,7 @@
   {{--<script src="{{asset('js/theme.js')}}"></script>--}}
   <script src="{{asset('js/global.js')}}"></script>
   <script src="{{asset('js/checkbox.js')}}"></script>
+  <script src="{{asset('js/toastr.min.js')}}"></script>
 
   <script src="{{asset('js/shop_custom.js')}}"></script>
 
@@ -103,7 +105,7 @@
  </script>
 
   @include('partials.js.city_selector')
-
+@toastr_render
 </body>
 
 </html>

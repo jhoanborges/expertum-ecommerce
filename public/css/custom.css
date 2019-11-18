@@ -1158,3 +1158,14 @@ height: 2.8rem;
 .dropdown-menu {
     min-width: auto;
 }
+
+#toast-container>div {
+    opacity: 1;
+}
+
+.toast-info{
+    background-color: var(--blue)
+  }
+  .toast-success{
+    background-color: var(--green)
+  }

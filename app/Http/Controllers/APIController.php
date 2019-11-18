@@ -81,6 +81,25 @@ class APIController extends Controller
 
 	public function select_city(Request $request){
 
+    $validator = Validator::make($request->all(), [
+      'state' => 'required|integer',
+      'city' => 'required|integer',
+      'qty' => 'required|integer|min:1',
+      'id' => 'required|string|max:191',
+    ]);
+
+
+
+    if ($validator->fails()) {
+      return response()
+      ->json([
+        'success' => false,
+        'message' => 'Han ocurrido errores en la creación del cliente',
+        'errors' =>   $validator->messages()
+      ],500);
+    }
+
+
 		Session::put('departamento', $request->state);
 		Session::put('ciudad', $request->city);
 	//	
@@ -124,7 +143,9 @@ class APIController extends Controller
 			$producto= Productomodelo::with('hasManyImagenes')->
 			where('slug',$request->id)->first();
 
-			$cartItem = Cart::add($producto->slug ,$producto->nombre_producto , $request->qty , $producto->precioventa_iva , [
+			$cartItem = Cart::add($producto->slug ,$producto->nombre_producto , $request->qty , 
+				$producto->precioventa_iva ,
+				0, [
 				'iva' => $producto->iva,
 				'imagen' =>  $producto->hasManyImagenes->first()->urlimagen ,
 			])->associate('App\Imgproductomodelo');

@@ -18,7 +18,8 @@
         "nicolaslopezj/searchable": "1.*",
         "realrashid/sweet-alert": "^2.0",
         "tucker-eric/eloquentfilter": "1.4.3",
-        "yajra/laravel-datatables-oracle": "~9.0"
+        "yajra/laravel-datatables-oracle": "~9.0",
+        "yoeunes/toastr": "^1.2"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

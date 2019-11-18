@@ -22,7 +22,8 @@ class TransportadoresController extends Controller
         switch ($trans->id){
             case 1: //Saferbo. No se puede cambiar este código en la base de datos
                 $servicio = new Flete_Saferbo();
-                return formatPrice($servicio->flete($request,$trans->id));
+                return $servicio->flete($request,$trans->id) ;
+                //return formatPrice($servicio->flete($request,$trans->id));
 
                 break;
 

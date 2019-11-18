@@ -53,45 +53,45 @@ class ResumenController extends Controller
 //   $categorias=Categorian1modelo::all();
    $cat2=1;
 
-  $data=[];
-foreach ( Cart::instance('default')->content() as $product) {
-   $data[]=[
-    'id'=>$product->id,
-    'qty'=>$product->qty,
-    'price'=>formatPrice($product->price),
-    'name'=>$product->name,
-    'image'=>$product->options->imagen,
-    'iva'=>$product->options->iva,
-    'rowId'=>$product->rowId,
-    'taxRate'=>$product->taxRate,
-    'total'=>formatPrice(precioNew($product->id)),
+   $data=[];
+   foreach ( Cart::instance('default')->content() as $product) {
+     $data[]=[
+      'id'=>$product->id,
+      'qty'=>$product->qty,
+      'price'=>formatPrice($product->price),
+      'name'=>$product->name,
+      'image'=>$product->options->imagen,
+      'iva'=>$product->options->iva,
+      'rowId'=>$product->rowId,
+      'taxRate'=>$product->taxRate,
+      'total'=>formatPrice(precioNew($product->id)),
 
-];
+    ];
 
+  }
+
+
+  return view('layouts.cart')->with([
+   'totaliva' => $total_iva,
+     //'total' => $total,
+   'sub' => $subtotal,
+   'cat2' => $cat2,
+     //'categorias' => $categorias,
+   'qty_cont' => $qty_cont,
+   'producto' => $producto,
+   'data' => $data,
+        //   'cantidad' => $cantidad,
+
+ ]);
 }
 
 
-   return view('layouts.cart')->with([
-     'totaliva' => $total_iva,
-     //'total' => $total,
-     'sub' => $subtotal,
-     'cat2' => $cat2,
-     //'categorias' => $categorias,
-     'qty_cont' => $qty_cont,
-     'producto' => $producto,
-     'data' => $data,
-        //   'cantidad' => $cantidad,
 
-   ]);
- }
+public function store(Request $request)
+{
 
 
-
- public function store(Request $request)
- {
-
-
-if (session()->get('ciudad')==null) {
+  if (session()->get('ciudad')==null) {
 
     return redirect()->back()->with([
       'error_code'=> 5,
@@ -121,9 +121,10 @@ if (session()->get('ciudad')==null) {
       if ($cartItem->id == $request->id) {
 
        if ($request->qty <= $cartItem->qty){
-        toast('Este producto ya existe en el carrito','info','top-right')
+        toastr()->info('Este producto ya existe en el carrito'); // and this one
+        //toast('Este producto ya existe en el carrito','info','top-right')
         //->showConfirmButton()
-        ->autoClose(20000);
+        //->autoClose(20000);
 
         return redirect()->back()->with('test', 'test');
       }
@@ -131,7 +132,7 @@ if (session()->get('ciudad')==null) {
       if ($request->qty > $cartItem->qty){
 
              Cart::update($rowId, $request->qty); // Will update the quantity
-             toast('Cantidad actualizada','success','top-right');
+             toastr()->success('Cantidad actualizada'); 
              return redirect()->route('resumen');
            }
          }
@@ -144,23 +145,23 @@ if (session()->get('ciudad')==null) {
       where('slug',$request->id)->first();
 
       $cartItem = Cart::add($producto->slug ,$producto->nombre_producto , $request->qty , $producto->precioventa_iva,
-      0, [
-       'iva' => $producto->iva,
-       'imagen' =>  $producto->hasManyImagenes->first()->urlimagen ,
-     ])->associate('App\Imgproductomodelo');
+        0, [
+         'iva' => $producto->iva,
+         'imagen' =>  $producto->hasManyImagenes->first()->urlimagen ,
+       ])->associate('App\Imgproductomodelo');
 
       if ($request->type=='checkout') {
-       toast('Producto añadito al carrito','success','top-right');
-       return redirect()->route('resumen');
+        toastr()->success('Producto añadito al carrito'); 
+        return redirect()->route('resumen');
 
-     }else{
-      toast('Producto añadito al carrito','success','top-right');
+      }else{
+        toastr()->success('Producto añadito al carrito'); 
+        return redirect()->back();
+      }
+
+    }else{
       return redirect()->back();
     }
-
-  }else{
-    return redirect()->back();
-  }
 
 
 }//else session
@@ -177,37 +178,39 @@ public function destroy($id)
   ShoppingCart::deleteCartRecord($id_2, 'default');
   Cart::store($id_2);
 }
-toast('Producto eliminado del carrito de compras','success','top-right');
+toastr()->info('Producto eliminado del carrito de compras'); 
 return back();
 }
 
 public function update(Request $request, $id)
 {
-try{
+  try{
 
 
-  foreach (Cart::instance('default')->content() as $product) {
-    if ($id == $product->rowId) {
-      $id_producto=$product->id;
+    foreach (Cart::instance('default')->content() as $product) {
+      if ($id == $product->rowId) {
+        $id_producto=$product->id;
+      }
     }
+
+    $producto= Productomodelo::where('slug',$id_producto)->first();
+    $validator= Validator::make($request->all(),[
+
+      'cantidad'=>'required|numeric|between:1,'.$producto->cantidad,
+    ]);
+
+    if ($validator->fails()) {
+      return response()->json([
+        'error'=>'La cantidad ingresada supera el inventario existente'
+      ], 404);
+    }
+
+    Cart::update($id, $request->cantidad);
+    return response()->json(['success'=>'Cantidad actualizada']);
+
+  }catch(\Exception $e){
+    return response()->json(['error'=>'Error inesperado'], 404);
   }
-
-  $producto= Productomodelo::where('slug',$id_producto)->first();
-  $validator= Validator::make($request->all(),[
-
-    'cantidad'=>'required|numeric|between:1,'.$producto->cantidad,
-  ]);
-
-  if ($validator->fails()) {
-    return response()->json(['error'=>'La cantidad ingresada supera el inventario existente'], 404);
-  }
-
-  Cart::update($id, $request->cantidad);
-  return response()->json(['success'=>'Cantidad actualizada']);
-
-}catch(\Exception $e){
-return response()->json(['error'=>'Error inesperado'], 404);
-}
 
 
 

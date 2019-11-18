@@ -229,15 +229,15 @@
         <div class="form-group mt-4 mb-4 d-flex justify-content-center">
             <button type="submit" class="btn btn-danger checkout-button">
             Continuar</button>
-       </div>
+        </div>
 
 
 
 
-   </div>
+    </div>
 
 
-   <div class="col-md-2">
+    <div class="col-md-2">
 
       <div class="card p-2">
         <div class="card-content">
@@ -252,7 +252,7 @@
 
 
     <label class="bold black text-right pb-2 ">Total $
-        <span  type="text" name="total_summary" id="total_summary">{{formatPrice($total)}}</span>
+        <span  type="text" name="total_summary" id="total_summary">{{formatPrice(intval($total) )}}</span>
     </label>
 
 </div>
@@ -273,30 +273,30 @@
 @section('extra-js')
 
 <script>
-     $(function () {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            type:'post',
-            url: "{{ route('sql_session') }}",
-            dataType : 'json',
-            success:function(res){
-                if (res) {
+   $(function () {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type:'post',
+        url: "{{ route('sql_session') }}",
+        dataType : 'json',
+        success:function(res){
+            if (res) {
 
-                    $('.state').val(res.departamento.id).trigger('change')
-                    setTimeout(function(){
+                $('.state').val(res.departamento.id).trigger('change')
+                setTimeout(function(){
                     $('.city').val(res.ciudad.id).trigger('change')
-                     }, 500);
-                }
-            },
-            error: function() {
-
+                }, 500);
             }
-        })
+        },
+        error: function() {
+
+        }
     })
+})
 
 </script>
 
@@ -330,10 +330,9 @@
                     beforeSend: function() {
                     },
                     success:function(res){
-                        $("#flete").html(res);
-                        var sum= ( parseFloat('{{formatPrice($total)}}') + parseFloat(res) );
-                        console.log(sum)
-                        $("#total_summary").html(sum)
+                        $("#flete").html(parseInt(res).toLocaleString('de-DE',{ minimumFractionDigits: 0 }) )
+                        var sum= parseInt('{{$total}}') + parseInt(res)
+                        $("#total_summary").html(parseInt(sum).toLocaleString('de-DE',{ minimumFractionDigits: 0 }))
                     }
                 });
             }
