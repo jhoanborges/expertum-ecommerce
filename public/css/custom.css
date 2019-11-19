@@ -1173,5 +1173,11 @@ select {
 ::selection
 {
   background-color: var(--lightgreen)
+}
 
+
+.qty::-webkit-inner-spin-button, 
+.qty::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
 }

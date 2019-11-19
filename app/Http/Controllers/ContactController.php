@@ -31,7 +31,7 @@ class ContactController extends Controller
 		$id=null;
 
 
-		return view('layouts.about_us')->with([
+		return view('layouts.contacto')->with([
 			'categorias'=> $categorias,
 			'cat2'=> $cat2,
 			'id'=> $id,

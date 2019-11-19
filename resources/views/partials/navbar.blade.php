@@ -17,9 +17,6 @@
             </a>
         </li>
     </ul>
-
-    {{--<p>email: info@eiser.com</p>--}}
-
 </div>
 <div class="col-sm-6">
 
@@ -29,7 +26,7 @@
      <p class="mb-0 mr-2">
 
       <i class="fab fa-whatsapp green" style="font-size: 1.4em;"></i>
-      <a  href="https://wa.me/573168301653?text=Hola,%20estoy%20interesad@%20en%20sus%20productos.%20Me%20gustaría%20obtener%20más%20información.%20Mensaje%20enviado%20desde%20Materile%20Ecommerce." target="_blank" class="black book ml-1 none-text body-text">316 830 1653</a>
+      <a  href="https://wa.me/57{{$param->numerocontacto}}?text=Hola,%20estoy%20interesad@%20en%20sus%20productos.%20Me%20gustaría%20obtener%20más%20información.%20Mensaje%20enviado%20desde%20Materile%20Ecommerce." target="_blank" class="black book ml-1 none-text body-text">{{$param->numerocontacto}}</a>
   </p>
 
 
@@ -48,28 +45,19 @@
 
     </ul>
 </li>
-{{--}}
-  <a href="{{ route('login') }}" class="icons">
-      <img src="{{ asset('img/account.png') }}" class="img-fluid header-icon">
-  </a>
-  --}}
   <a href="#" class="icons">
       <img src="{{ asset('img/corazon.png') }}" class="img-fluid header-icon">
   </a>
-
   <a  data-toggle="modal" data-target="#modalCiudadesSelector"
   class="icons">
   <img src="{{ asset('img/location.png') }}" class="img-fluid header-icon">
 </a>
 
 <a href="#" class="icons" id="cart">
-  {{--<div class="circle"></div>--}}
   <img src="{{ asset('img/cart.png') }}" class="img-fluid header-icon"><span class="counter">{{
     Cart::instance('default')->content()->count() >0 ? Cart::instance('default')->content()->count() : null
 }}</span>
 </a>
-
-{{--<li><a href="#" id="cart"><i class="fa fa-shopping-cart"></i> Cart <span class="badge">3</span></a></li>--}}
 
 <div class="shopping-cart">
 

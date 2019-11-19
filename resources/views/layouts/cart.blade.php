@@ -57,38 +57,37 @@
                                     {{--<td class="text-center">{{$product->options->avaliable}}</td>--}}
                                     <td class="text-center"><i class="fas fa-check fa-2x lightgreen"></i></td>
                                     <td class="text-center bold black">$ 
-{{formatPrice( intval( precioNew($product->id)*$product->qty) /($product->options->iva/100+1) )}}
-</td>
-                                      <td class="text-center"> {{$product->options->iva.''.'%' }}</td>
-                                      <td class="text-center">
-                                        <div class="qty-box">
+                                      {{formatPrice( intval( precioNew($product->id)*$product->qty) /($product->options->iva/100+1) )}}
+                                    </td>
+                                    <td class="text-center"> {{$product->options->iva.''.'%' }}</td>
+                                    <td class="text-center">
+                                      <div class="qty-box">
 
-                                          <input type='button' value='-' class='qtyminus' field='quantity'
-                                          data-id="{{$product->rowId}}" />
-                                          <input type='text' name='quantity' id="{{$product->rowId}}" value='{{$product->qty}}' class='qty'
-                                          data-id="{{$product->rowId}}"/>
+                                        <input type='button' value='-' class='qtyminus' field='quantity'
+                                        data-id="{{$product->rowId}}" />
+                                        <input type='number' onkeyup="this.value=this.value.replace(/[^1-9]/g,'');" name='quantity' id="{{$product->rowId}}" value='{{$product->qty}}' class='qty' data-id="{{$product->rowId}}"/>
 
-                                          <input type='button' value='+' class='qtyplus' field='quantity' 
-                                          data-id="{{$product->rowId}}"/>
-                                        </div>
+                                        <input type='button' value='+' class='qtyplus' field='quantity' 
+                                        data-id="{{$product->rowId}}"/>
+                                      </div>
 
-                                      </td>
-                                      <td class="text-center bold black">$ 
-{{formatPrice( intval( (precioNew($product->id)*$product->qty) ) )}}
-</td>
-                                      <td class="text-center">
+                                    </td>
+                                    <td class="text-center bold black">$ 
+                                      {{formatPrice( intval( (precioNew($product->id)*$product->qty) ) )}}
+                                    </td>
+                                    <td class="text-center">
 
-                                        <form action="{{route('favoritos.swichtf', $product->rowId)}}" method="POST" class="">
-                                          {{csrf_field()}}
+                                      <form action="{{route('favoritos.swichtf', $product->rowId)}}" method="POST" class="">
+                                        {{csrf_field()}}
 
-                                          <button type="submit"class="icons btn-transparent" data-toggle="tooltip" data-placement="top" title="Agregar a favoritos">
-                                            <img src="{{ asset('img/heart.png') }}" class="img-fluid cart-icon-new">
-                                          </button>
-                                        </form>
+                                        <button type="submit"class="icons btn-transparent" data-toggle="tooltip" data-placement="top" title="Agregar a favoritos">
+                                          <img src="{{ asset('img/heart.png') }}" class="img-fluid cart-icon-new">
+                                        </button>
+                                      </form>
 
 
-                                      </td>
-                                      <td class="text-center">
+                                    </td>
+                                    <td class="text-center">
 {{--}}
               <a href="#" class="icons">
                 <img src="{{ asset('img/trash.png') }}" class="img-fluid cart-icon-new">
@@ -284,6 +283,38 @@
         });
       })
     })
+
+    const qtyclassname = document.querySelectorAll('.qty')
+    Array.from(qtyclassname).forEach(function(element) {
+      element.addEventListener('keyup', function(){
+        const id= element.getAttribute('data-id')
+        var current_value= $(".qty").val()
+
+
+        $(".qty").LoadingOverlay("show", {
+          image       : "",
+          fontawesomeColor: '#008acd',
+          fontawesome : "fas fa-spinner fa-spin",
+          backgroundClass         : "transparent"
+        });
+
+
+        axios.patch(`resumen/${id}`, {
+          cantidad: parseInt(current_value)
+        })
+        .then(function (response) {
+          $(".qty").LoadingOverlay("hide");
+          window.location.href='{{route('resumen')}}'
+        })
+        .catch(function (error) {
+          console.log(error.response.data.error)
+          $(".qty").LoadingOverlay("hide");
+          toastr["info"](error.response.data.error)
+          $(".qty").val(current_value)
+        });
+      })
+    })
+
 
 
   })();

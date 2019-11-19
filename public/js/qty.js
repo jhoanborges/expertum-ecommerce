@@ -2,6 +2,7 @@ jQuery(document).ready(function(){
     $('.qtyplus').click(function(e){
         e.preventDefault();
         id = $(this).attr('data-id');
+
         var currentVal = parseInt($('#'+id).val());
         if (!isNaN(currentVal)) {
             // Increment

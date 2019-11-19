@@ -99,28 +99,26 @@ public function store(Request $request)
     ]);
   }else{
 
+
     $cantidad = Productomodelo::
     where('slug', $request->id)->value('cantidad');
+
     $validator = Validator::make($request->all(), [
       'qty' => 'required|numeric|integer|between:1,'.$cantidad,
     ]);
-
     if ($validator->fails()) {
-
-      alert()->info('Estimado usuario', 'La cantidad supera el inventario existente.')
-      ->showCloseButton()
-      ->autoClose(20000);
-      return redirect()->back();
-    }
+        toastr()->info('La cantidad supera el inventario existente.'); // and this one
+        return redirect()->back();
+      }
 
 
 
-    $duplicates = Cart::search(function ($cartItem, $rowId) use ($request) {
+      $duplicates = Cart::search(function ($cartItem, $rowId) use ($request) {
             //return $cartItem->id === $request->id;
 
-      if ($cartItem->id == $request->id) {
+        if ($cartItem->id == $request->id) {
 
-       if ($request->qty <= $cartItem->qty){
+         if ($request->qty <= $cartItem->qty){
         toastr()->info('Este producto ya existe en el carrito'); // and this one
         //toast('Este producto ya existe en el carrito','info','top-right')
         //->showConfirmButton()
@@ -139,29 +137,29 @@ public function store(Request $request)
        });
 
 
-    if ($duplicates->isEmpty()) {
+      if ($duplicates->isEmpty()) {
 
-      $producto= Productomodelo::with('hasManyImagenes')->
-      where('slug',$request->id)->first();
+        $producto= Productomodelo::with('hasManyImagenes')->
+        where('slug',$request->id)->first();
 
-      $cartItem = Cart::add($producto->slug ,$producto->nombre_producto , $request->qty , $producto->precioventa_iva,
-        0, [
-         'iva' => $producto->iva,
-         'imagen' =>  $producto->hasManyImagenes->first()->urlimagen ,
-       ])->associate('App\Imgproductomodelo');
+        $cartItem = Cart::add($producto->slug ,$producto->nombre_producto , $request->qty , $producto->precioventa_iva,
+          0, [
+           'iva' => $producto->iva,
+           'imagen' =>  $producto->hasManyImagenes->first()->urlimagen ,
+         ])->associate('App\Imgproductomodelo');
 
-      if ($request->type=='checkout') {
-        toastr()->success('Producto añadito al carrito'); 
-        return redirect()->route('resumen');
+        if ($request->type=='checkout') {
+          toastr()->success('Producto añadito al carrito'); 
+          return redirect()->route('resumen');
+
+        }else{
+          toastr()->success('Producto añadito al carrito'); 
+          return redirect()->back();
+        }
 
       }else{
-        toastr()->success('Producto añadito al carrito'); 
         return redirect()->back();
       }
-
-    }else{
-      return redirect()->back();
-    }
 
 
 }//else session

@@ -5,6 +5,17 @@ Route::get('/landing', function () {
     return view('layouts.landing_checkout');
 });
 */
+
+
+Route::get("/privacidad", function(){
+   return View::make("layouts.privacy");
+})->name('privacy');
+
+Route::get("/retracto", function(){
+   return View::make("layouts.retracto");
+})->name('retracto');
+
+
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/verify-user/{code}', 'RegisterController@activateUser')->name('activate.user');
 

@@ -58,8 +58,8 @@
                             <div class="col-md-12">
                                 <div id="product-imgs">
 
-                                   @foreach ($allImages as $allImage)
-                                   <div class="product-preview ">
+                                 @foreach ($allImages as $allImage)
+                                 <div class="product-preview ">
                                     <img src="{{url($allImage->urlimagen)}}" class="img-fluid" alt="{{url($allImage->urlimagen)}}">
                                 </div>
                                 @endforeach
@@ -88,11 +88,11 @@
                             </div>
 
                             <div class="d-block mb-2 mt-1">
-                             <div class="row no-gutters ">
-                                 <div class="col-sm-6">
-                                     Ref. {{$producto->referencia}}
-                                 </div>
-                                 <div class="col-sm-6">
+                               <div class="row no-gutters ">
+                                   <div class="col-sm-6">
+                                       Ref. {{$producto->referencia}}
+                                   </div>
+                                   <div class="col-sm-6">
                                     <span class="float-right">Stock:
                                         @if($producto->cantidad_critica)
                                         @if(!$producto->cantidad==0)
@@ -127,18 +127,30 @@
                         <div class="border-bottom-custom">
                             <p class="mt-3 expander">{{str_limit($producto->descripcion, 1500)}}</p>
                             <div class="d-block mb-4 mt-1">
-                             <div class="row no-gutters h-100">
+                               <div class="row no-gutters h-100">
                                 <div class="col-lg-3">
                                     <label>Cantidad</label>
                                     <div class="d-inline-block">
-                                        <div class="qty-box">
 
-                                            <input type='button' value='-' class='qtyminus' field='qty' />
-                                            <input type='text' name='qty' value='1' class='qty' />
-                                            <input type='button' value='+' class='qtyplus' field='qty' />
+                                      <div class="qty-box">
+
+                                        <input type='button' value='-' class='qtyminus' field='quantity'
+                                        data-id="{{$producto->id}}" />
+                                        <input type='number' onkeyup="this.value=this.value.replace(/[^1-9]/g,'');" name='qty' id="{{$producto->id}}" value="1" class='qty' data-id="{{$producto->id}}"/>
+
+                                        <input type='button' value='+' class='qtyplus' field='quantity' 
+                                        data-id="{{$producto->id}}"/>
+                                    </div>
 
 
-                                        </div>
+
+{{--}}
+                                    <div class="qty-box">
+                                        <input type='button' value='-' class='qtyminus' field='qty' />
+                                        <input type='text' name='qty' value='1' class='qty' />
+                                        <input type='button' value='+' class='qtyplus' field='qty' />
+                                    </div>
+                                    --}}
                                 {{--<a href="#" class="icons ml-2" id="cart">
                                     <img src="{{ asset('img/cart.png') }}" class="img-fluid header-icon">
                                 </a>
