@@ -136,9 +136,10 @@
 
                                         <input type='button' value='-' class='qtyminus' field='quantity'
                                         data-id="{{$producto->id}}" />
-                                        <input type='number' onkeyup="this.value=this.value.replace(/[^1-9]/g,'');" name='qty' id="{{$producto->id}}" value="1" class='qty' data-id="{{$producto->id}}"/>
+                                        <input type='number' onkeyup="this.value=this.value.replace(/[^1-9]/g,'');" name='qty' id="{{$producto->id}}"
+                                        value="{{isset($qty) ? $qty : 1}}" class='qty' data-id="{{$producto->id}}"/>
 
-                                        <input type='button' value='+' class='qtyplus' field='quantity' 
+                                        <input type='button' value='+' class='qtyplus' field='quantity'
                                         data-id="{{$producto->id}}"/>
                                     </div>
 
@@ -335,7 +336,10 @@
     $(function() {
 
         var id= '{{Session::get('id')}}';
-        console.log(id)
+        var qty= '{{Session::get('qty')}}';
+        console.log(qty)
+         $('.qty').val(qty);
+
         if (!id) {
             var id=null;
         }

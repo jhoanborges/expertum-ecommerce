@@ -96,6 +96,7 @@ public function store(Request $request)
     return redirect()->back()->with([
       'error_code'=> 5,
       'id'=> $request->id,
+      'qty'=> $request->qty,
     ]);
   }else{
 
@@ -130,7 +131,7 @@ public function store(Request $request)
       if ($request->qty > $cartItem->qty){
 
              Cart::update($rowId, $request->qty); // Will update the quantity
-             toastr()->success('Cantidad actualizada'); 
+             toastr()->success('Cantidad actualizada');
              return redirect()->route('resumen');
            }
          }
@@ -149,11 +150,11 @@ public function store(Request $request)
          ])->associate('App\Imgproductomodelo');
 
         if ($request->type=='checkout') {
-          toastr()->success('Producto añadito al carrito'); 
+          toastr()->success('Producto añadito al carrito');
           return redirect()->route('resumen');
 
         }else{
-          toastr()->success('Producto añadito al carrito'); 
+          toastr()->success('Producto añadito al carrito');
           return redirect()->back();
         }
 
@@ -176,7 +177,7 @@ public function destroy($id)
   ShoppingCart::deleteCartRecord($id_2, 'default');
   Cart::store($id_2);
 }
-toastr()->info('Producto eliminado del carrito de compras'); 
+toastr()->info('Producto eliminado del carrito de compras');
 return back();
 }
 

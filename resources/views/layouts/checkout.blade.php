@@ -56,7 +56,8 @@
 
         <div class="form-group">
             <label class="required bold black">Número</label>
-            <input id="numero" type="text" class="form-control @error('numero') is-invalid @enderror" name="numero" value="{{old('numero', Auth::user()->numeroidentificacion ) }}" required autocomplete="numero" autofocus>
+            <input id="numero" type="text" class="form-control @error('numero') is-invalid @enderror" name="numero" value="{{old('numero', Auth::user()->numeroidentificacion ) }}" required autocomplete="numero" autofocus
+             onkeypress="return isNumberKey(event)">
 
             @error('numero')
             <span class="invalid-feedback" role="alert">
@@ -194,7 +195,8 @@
         --}}
         <div class="form-group">
             <label class="required bold black">Teléfono</label>
-            <input id="telefono" type="text" class="form-control @error('telefono') is-invalid @enderror" name="telefono" value="{{ old('name') }}" required  autofocus>
+            <input id="telefono" type="text"  class="form-control @error('telefono') is-invalid @enderror" name="telefono" value="{{ old('name') }}" required  autofocus
+            onkeypress="return isNumberKey(event)">
 
             @error('telefono')
             <span class="invalid-feedback" role="alert">
@@ -303,13 +305,22 @@
 
 <script>
 
+      function isNumberKey(evt)
+      {
+         var charCode = (evt.which) ? evt.which : event.keyCode
+         if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+         return true;
+      }
+
 
     $(function () {
 
-        $('.select2city2').on('select2:select change', function (e) {
+        $('.city').on('select2:select change', function (e) {
             $("#flete").val('');
-            var departamento =  $('.select2estado2').val();
-            var ciudad = $('.select2city2').val();
+            var departamento =  $('.state').val();
+            var ciudad = $('.city').val();
             e.preventDefault()
             $.ajaxSetup({
                 headers: {

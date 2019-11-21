@@ -85,8 +85,7 @@
   @include('sweetalert::alert')
   @yield('extra-js')
 
-  <script >
-
+  <script>
     (function(){
 
       $("#cart").on("click", function() {

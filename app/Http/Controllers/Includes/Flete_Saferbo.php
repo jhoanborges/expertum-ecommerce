@@ -1,6 +1,6 @@
-<?php  
-	
-namespace App\Http\Controllers\Includes;	
+<?php
+
+namespace App\Http\Controllers\Includes;
 
 use Illuminate\Http\Request;
 use App\Transportadores;
@@ -35,7 +35,6 @@ use Carbon\Carbon as Carbon;
 
         $cadena= $dep.'-'.$ciu.'-'.$code;
 
-
         //$saf = Transportadores::first();
         $saf = Transportadores::where("id", $id)->first();
 
@@ -58,7 +57,7 @@ use Carbon\Carbon as Carbon;
 
         foreach (Cart::instance('default')->content() as $i => $producto){
 
-            $product = Productomodelo::where('slug' , $producto->id)->first(); 
+            $product = Productomodelo::where('slug' , $producto->id)->first();
 
             $total_productos = $total_productos + precioNew($product->slug) ;
             //$total_iva= $total_iva + totaliva($product->slug) ;  //Esto no se usa y fuera de eso no multiplica por la TRM como la función (precioNew())
@@ -103,7 +102,7 @@ use Carbon\Carbon as Carbon;
 
                     //esta variable valor flete es un array que al final del foreach determina cual es el producto en el carrito con mayor precio para agregar ese precio al total de flete es decir, si un producto del proveedor x tiene un porcentaje del 10, este valor deberia sumarse, pero solo sumarse una vez, y esa unica vez sera el mayor de todos lo que tengan ese valor aplicado en proveedores_trans.
                     }else{
-                    //el valor de proveedores trans solo se contatenara si el proveedor es distinto. No se concatenara el valor proveedor si este valor ya fue aregado al precio final si un producto de nexys en proveedores trans el flete vale 1000 y existe otro producto del mismo proveedor se deberia ignorar debido a que el flete valdria lo mismo por proveedor. solo se ignora no se va a sumar el flete por segunda vez 
+                    //el valor de proveedores trans solo se contatenara si el proveedor es distinto. No se concatenara el valor proveedor si este valor ya fue aregado al precio final si un producto de nexys en proveedores trans el flete vale 1000 y existe otro producto del mismo proveedor se deberia ignorar debido a que el flete valdria lo mismo por proveedor. solo se ignora no se va a sumar el flete por segunda vez
                         if (!in_array( $proveedores_trans->id_proveedor, $ids)  ) {
                             $ids[]= $proveedores_trans->id_proveedor;
                             $valor_flete_tipo_descuento=(float) $proveedores_trans->flete;
@@ -117,7 +116,7 @@ use Carbon\Carbon as Carbon;
 
 
         ### Esto era para PROVEEDORES_TRANS pero ya no sirve para nada ###
-        /*         
+        /*
         $total_proveedores_trans= $valor_flete_tipo_porcentaje+ $valor_flete_tipo_descuento;
         if (!$total_proveedores_trans ==0) {
             $totales[]=$total_proveedores_trans;
@@ -142,7 +141,7 @@ use Carbon\Carbon as Carbon;
             $dskilos=floatval($total_peso);
             //$dsvalordec=$product->valordeclarado;
             $dsvalordec=round($total_vr_declarado);
-            
+
             // estas variables son fijas
             $idtarifaxtrayecto=2;
             $ds_largo=null;
@@ -152,8 +151,8 @@ use Carbon\Carbon as Carbon;
             $ds_contraentrega=0;
             $tipoacceso=1;
             $tipodatos=2;
-            
-            //$codigo=$saf->code; // ESTE YA NO LO USO 
+
+            //$codigo=$saf->code; // ESTE YA NO LO USO
             $codigo=$saf->codigo;
             //tipo de negociacion 1=credito
             $idnegociacion=$saf->negociacion;//
@@ -174,7 +173,7 @@ use Carbon\Carbon as Carbon;
             curl_setopt($c, CURLOPT_POST, true);
             curl_setopt($c, CURLOPT_POSTFIELDS, $destino);
             curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
-            $var = curl_exec($c); 
+            $var = curl_exec($c);
 
             if (curl_error($c)) {
                 $error_msg = curl_error($c);

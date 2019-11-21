@@ -10,7 +10,7 @@
                    <div class="col-sm-3">
                     <img width="80" class="img-fluid" src="{{ asset('img/facil.png') }}">
                         <div>
-                        <p>Fácil</p>
+                        <p>Confianza</p>
                     </div>
                 </div>
                    <div class="col-sm-3">
@@ -22,7 +22,7 @@
                    <div class="col-sm-3">
                     <img width="80" class="img-fluid" src="{{ asset('img/entrega.png') }}">
                          <div>
-                        <p>Entrega</p>
+                        <p>Cumplimiento</p>
                     </div>
                 </div>
             </div>

@@ -98,9 +98,18 @@
         data = new FormData();
         data.append('state', state);
         data.append('city', city);
+
+        if (qty ) {
+        console.log(qty)
         data.append('qty', qty);
+        }
+        if(id){
         data.append('id', id);
+        console.log(id)
+        }
+
         e.preventDefault();
+
         $.ajax({
             url: "{{ route('select_city') }}",
             data: data,
@@ -113,11 +122,14 @@
                 $('#modalCiudadesSelector').modal('hide');
                     //window.location.reload();
                     toastr["success"]("Ciudad seleccionada")
-                    toastr["success"]("Producto añadito al carrito")
-
-                    setTimeout(function(){ 
+                    //
+console.log(!response.selected_from_home)
+if (!response.selected_from_home) {
+toastr["success"]("Producto añadito al carrito")
+                    setTimeout(function(){
                         window.location.reload();
                     }, 2000);
+}
 
                 },
                 error: function(response) {
