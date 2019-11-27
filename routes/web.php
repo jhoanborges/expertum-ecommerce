@@ -108,6 +108,12 @@ Route::get('/store-list', 'StoreController@index2')->name('store.list');
 //Route::get('/store/{url}', 'StoreController@categoria_get')->name('categoria.get');
 Route::get('/store', 'StoreController@index')->name('store.index');
 
+
+Route::get('novedades', 'StoreController@novedades')->name('novedades.index');
+Route::get('ofertas', 'StoreController@ofertas')->name('ofertas.index');
+
+
+
 Route::get('/{cat2}/{id}/', 'NewController@index')->name('categoria.get');
 
 Route::get('/filtros/{id}/', 'FiltrosController@show')->name('filtros.get');

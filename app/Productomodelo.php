@@ -75,6 +75,14 @@ $query =  Marcas::whereHas('belongsToManyProducts', function ($query) use ($id2)
     return $query;
   }
 
+  public function hasPromotion()
+  {
+    return $this->hasMany('App\Promociones', 'id', 'id_promocion');
+
+  }
+
+
+
 
   public function hasManyPromociones()
   {

@@ -166,33 +166,26 @@
 
   <li class="pmd-card-subtitle-text blue body-text bold black">
    {{'$'. number_format((float) precioNew($producto['slug']) , 0, ',', '.' )}}
-</li>
-
-
 
 @if(count($producto->hasManyPromociones))
 @if (
   ($producto->hasManyPromociones->first()->date_start <= date("Y-m-d")
     &&
     $producto->hasManyPromociones->first()->date_end >= date("Y-m-d"))
-  &&
-  ($producto->hasManyPromociones->first()->hour_start <= date("h:i:s")
-    &&
-    $producto->hasManyPromociones->first()->hour_end >= date("h:i:s"))
+
     )
-    <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price">
-      {{'$'. number_format((float)  old_price($producto['slug']) , 0, ',', '.' )}}
-  </span>
-</p>
-@elseif ($producto['promocion']=='1' )
-<p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price">
-    {{'$'. number_format((float)  old_price($producto['slug']) , 0, ',', '.' )}}
+<span class="tachado font-weight-light">{{'$'. number_format((float)  old_price($producto['slug']) , 0, ',', '.' )}}
 </span>
-</p>
+
+
+@elseif ($producto['promocion']=='1' )
+sda
+<span class="tachado font-weight-light">{{'$'. number_format((float)  old_price($producto['slug']) , 0, ',', '.' )}}
+</span>
 @endif
 @endif
 
-
+</li>
 
 
 @endif

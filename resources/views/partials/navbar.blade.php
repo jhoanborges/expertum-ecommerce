@@ -190,8 +190,8 @@ aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle 
       <li class="nav-item {{Route::currentRouteNamed('home') ? 'active' : '' }}">
           <a class="nav-link mayus" href="{{ route('home') }}">categorías</a>
       </li>
-      <li class="nav-item ">
-          <a class="nav-link mayus" href="">Ofertas</a>
+      <li class="nav-item {{Route::currentRouteNamed('ofertas.index') ? 'active' : '' }}">
+          <a class="nav-link mayus" href="{{ route('ofertas.index') }}">Ofertas</a>
       </li>
 {{--
                 <li class="nav-item submenu dropdown">
@@ -211,19 +211,19 @@ aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle 
                   <a class="nav-link" href="contact.html">MÁS VENDIDOS</a>
               </li>
 
-              <li class="nav-item dropdown">
-                  <a class="nav-link" href="contact.html">NOVEDADES</a>
+              <li class="nav-item {{Route::currentRouteNamed('novedades.index') ? 'active' : '' }}">
+                  <a class="nav-link" href="{{ route('novedades.index') }}">NOVEDADES</a>
               </li>
 
 
-              <li class="nav-item dropdown">
-                  <a class="nav-link" href="contact.html">TIENDAS</a>
+              <li class="nav-item {{Route::currentRouteNamed('about_us') ? 'active' : '' }}">
+                  <a class="nav-link" href="{{ asset('about_us') }}">TIENDAS</a>
               </li>
 
 
 
-              <li class="nav-item ">
-                  <a class="nav-link mayus" href="">CONTACTO</a>
+              <li class="nav-item {{Route::currentRouteNamed('about_us') ? 'active' : '' }}">
+                  <a class="nav-link mayus" href="{{ asset('about_us') }}">CONTACTO</a>
               </li>
 
 

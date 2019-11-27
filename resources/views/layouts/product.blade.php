@@ -43,8 +43,18 @@
 
                         <!-- Product main img -->
                         <div class="col-md-6">
-                            <div id="product-main-img">
 
+                                                       @if($producto->hasManyPromociones->count() )
+                                @if ( ($producto->hasManyPromociones->first()->date_start <= date("Y-m-d") && $producto->hasManyPromociones->first()->date_end >= date("Y-m-d")) && ($producto->hasManyPromociones->first()->hour_start <= date("h:i:s") && $producto->hasManyPromociones->first()->hour_end >= date("h:i:s"))  )
+                                <div class="icon-sale-label">
+                                    <img width="60" src="{{$producto->hasManyPromociones->first()->imagen}}" alt="{{$producto->hasManyPromociones->first()->name}}"
+                                    data-toggle="tooltip" data-placement="right" title="{{$producto->hasManyPromociones->first()->name}}">
+                                </div>
+                                @endif
+                                @endif
+
+
+                            <div id="product-main-img">
                                 @foreach ($allImages as $allImage)
                                 <div class="product-preview thumbnail">
                                     <img src="{{url($allImage->urlimagen)}}" alt="{{url($allImage->urlimagen)}}">
@@ -55,7 +65,7 @@
 
 
                             <!-- Product thumb imgs -->
-                            <div class="col-md-12">
+                            <div class="col-md-12 mt-1">
                                 <div id="product-imgs">
 
                                  @foreach ($allImages as $allImage)
@@ -82,9 +92,15 @@
 
                                 <h2 class="product-name">{{$producto->nombre_producto}}</h2>
                                 <h3 class="product-name mt-2 fs-16">{{$producto->getMarcaProduct($producto->id)['nombre'] }}</h3>
-                                <h3 class="mt-2 mb-3 bold">
-                                    {{'$'. number_format((float)  precioNew($producto->slug) , 0, ',', '.' )}}
-                                </h3>
+                                <div class="d-flex">
+
+                                    <h3 class="bold">
+                                        {{'$'. number_format((float)  precioNew($producto->slug) , 0, ',', '.' )}}
+                                    </h3>
+                                    <h4 class="tachado font-weight-light mt-1 ml-1">{{'$'. number_format((float)  old_price($producto['slug']) , 0, ',', '.' )}}
+                                    </h4>
+                                </div>
+
                             </div>
 
                             <div class="d-block mb-2 mt-1">
@@ -338,7 +354,7 @@
         var id= '{{Session::get('id')}}';
         var qty= '{{Session::get('qty')}}';
         console.log(qty)
-         $('.qty').val(qty);
+        $('.qty').val(qty);
 
         if (!id) {
             var id=null;

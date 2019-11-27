@@ -1176,8 +1176,40 @@ select {
 }
 
 
-.qty::-webkit-inner-spin-button, 
-.qty::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+.qty::-webkit-inner-spin-button,
+.qty::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+.footer-text-color{
+    color: rgba(0,0,0,0.4)
+}
+
+
+.social-icon {
+    height: 28px;
+    width: 28px;
+    line-height: 28px;
+    border-radius: 100%;
+    background-color: var(--grayf);
+    display: inline-block;
+    color: #fff;
+    font-size: 17px;
+    text-align: center;
+    transition: all 0.25s;
+}
+
+
+.tachado {
+    text-decoration: line-through;
+}
+
+
+.icon-sale-label{
+    z-index: 99999;
+    position: absolute;
+        right: 10px;
+        top: 10px;
 }
