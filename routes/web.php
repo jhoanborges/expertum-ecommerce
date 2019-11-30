@@ -6,6 +6,7 @@ Route::get('/landing', function () {
 });
 */
 
+Route::post('sendemail', 'ContactController@send')->name('send.index');
 
 Route::get("/privacidad", function(){
    return View::make("layouts.privacy");

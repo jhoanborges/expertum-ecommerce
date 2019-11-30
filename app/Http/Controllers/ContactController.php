@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Categorian1modelo;
-
+use Validator;
+use Notification;
+use App\Notifications\SendEmailToAdmin;
+use App\Parametromodelo;
 
 class ContactController extends Controller
 {
@@ -24,7 +27,7 @@ class ContactController extends Controller
 	}
 
 
-		public function about_us()
+	public function about_us()
 	{
 		$categorias=Categorian1modelo::orderBy('nombrecategoria' ,   'asc')->get();
 		$cat2=1;
@@ -39,7 +42,7 @@ class ContactController extends Controller
 
 	}
 
-			public function faq()
+	public function faq()
 	{
 		$categorias=Categorian1modelo::orderBy('nombrecategoria' ,   'asc')->get();
 		$cat2=1;
@@ -54,7 +57,7 @@ class ContactController extends Controller
 
 	}
 
-				public function sitemap()
+	public function sitemap()
 	{
 		$categorias=Categorian1modelo::orderBy('nombrecategoria' ,   'asc')->get();
 		$cat2=1;
@@ -68,5 +71,66 @@ class ContactController extends Controller
 		]);
 
 	}
+
+
+
+
+
+
+	public function send(Request $request){
+
+		$rules = [
+			'my_name'   => 'honeypot',
+			'my_time'   => 'required|honeytime:5',
+            //'recaptcha' => 'required|recaptcha',
+			'name' => 'required|string|max:191',
+			'email' => 'required|email|max:191',
+			'message' => 'required|string|max:2000',
+			'subject' => 'required|string|max:191',
+		];
+
+		$messages = [];
+
+		$validator = Validator::make($request->all(), $rules, $messages);
+
+
+		if ($validator->fails()) {
+			return response()
+			->json([
+				'success' => false,
+				'message' => 'Han ocurrido errores en la creación del cliente',
+				'errors' =>  $validator->messages()
+			],404);
+		}
+
+
+		$parametros=  Parametromodelo::first();
+
+		if (!$parametros) {
+			return response()
+			->json([
+				'success' => false,
+				'errors' => ['error'=> 'Ha ocurrido un error inesperado al enviar el email.'],
+				'message' => 'Ha ocurrido un error inesperado.',
+			],404);
+		}
+
+		try{
+			Notification::route('mail', $parametros->correo)->notify(new SendEmailToAdmin($request->all()) );
+		}catch(\Exception $e){
+			return response()
+			->json([
+				'success' => false,
+				'errors' => ['error'=> 'Ha ocurrido un error inesperado al enviar el email.'],
+				'message' => 'Ha ocurrido un error inesperado.',
+			],404);
+		}
+
+		return response()
+		->json([
+			'success' => true,
+			'message' => 'Email enviado satisfactoriamente']);
+	}
+
 
 }

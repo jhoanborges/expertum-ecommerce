@@ -105,6 +105,7 @@
 
   @include('partials.js.city_selector')
 @toastr_render
+
 </body>
 
 </html>

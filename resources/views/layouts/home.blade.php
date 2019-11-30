@@ -66,20 +66,30 @@
 
                 <!-- Shop Sidebar -->
                 <div class="shop_sidebar">
-                    <div class="sidebar_section">
+                    <div class="sidebar_section" id="sidebar_section">
                         <div class="row  no-gutters footer_title mayus">
-                            <div class="col-sm-6 no-gutters">
+                            <div class="col-sm-12 no-gutters">
                                 <span>CATEGORÍAS</span>
+                                <a class="float-right"  onclick="activate(); return false;">
+                                    <i class="ti-search pointer"></i>
+                                    
+                                </a>
+
+
                             </div>
+                            {{--}}
                             <div class="col-sm-6 no-gutters text-right">
                                 <i class="ti-search pointer"></i>
                             </div>
+                            --}}
                         </div>
+                        <input id="myInput" placeholder="Buscar" class="mt-2 search form-control fuzzy-search no-show" />
+
                         @if ( $categorias->count() > 0 )
-                        <ul class="sidebar_categories">
+                        <ul class="sidebar_categories list">
                           @foreach ($categorias as $category)
                           <li>
-                            <a href="{{route('categoria.get', ['cat' => $cat2   , 'categoria' => $category->slug]) }} ">{{$category->nombrecategoria}}</a>
+                            <a class="category-name" href="{{route('categoria.get', ['cat' => $cat2   , 'categoria' => $category->slug]) }} ">{{$category->nombrecategoria}}</a>
                         </li>
 
                         @endforeach
@@ -637,6 +647,9 @@
 
 
 @section('extra-js')
+
+<script src="{{asset('js/list.min.js')}}"></script>
+
 @include('partials.js.slider')
 <script>
     $(document).ready(function() {
@@ -649,6 +662,24 @@
         );
 // document ready
 });
+</script>
+
+
+<script>
+
+
+ function activate() {
+    $( "#myInput" ).fadeToggle( "fast", function() {});
+    $('#myInput').focus();
+}
+
+
+var options = {
+  valueNames: [ 'category-name' ]
+};
+
+var userList = new List('sidebar_section', options);
+
 </script>
 @endsection
 

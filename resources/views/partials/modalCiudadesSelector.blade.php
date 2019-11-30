@@ -1,4 +1,4 @@
-<div id="modalCiudadesSelector" class="modal" tabindex="-1" role="dialog">
+<div id="modalCiudadesSelector" class="modal" tabindex="-1" role="dialog" >
   <div class="modal-dialog  modal-dialog-centered" role="document">
     <div class="modal-content">
       <button type="button" class="close custom-close" data-dismiss="modal" aria-label="Close">

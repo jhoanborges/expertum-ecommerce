@@ -1213,3 +1213,8 @@ select {
         right: 10px;
         top: 10px;
 }
+
+
+.no-show{
+  display: none;
+}
