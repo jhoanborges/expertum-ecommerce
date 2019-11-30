@@ -16,7 +16,7 @@ use Session;
 use App\Trm;
 use App\Slider;
 use App\Productomodelo;
-
+use Illuminate\Support\Facades\Validator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,7 +29,8 @@ class AppServiceProvider extends ServiceProvider
     {
 
 
-
+    Validator::extend('recaptcha', 'App\\Validators\\ReCaptcha@validate');
+    
       Schema::defaultStringLength(191);
       View::composer('errors::404', function ($view) {
           //  $categorias=Categorian1modelo::orderBy('nombrecategoria' ,   'asc')->get();

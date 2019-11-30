@@ -82,7 +82,7 @@ class ContactController extends Controller
 		$rules = [
 			'my_name'   => 'honeypot',
 			'my_time'   => 'required|honeytime:5',
-            //'recaptcha' => 'required|recaptcha',
+            'recaptcha' => 'required|recaptcha',
 			'name' => 'required|string|max:191',
 			'email' => 'required|email|max:191',
 			'message' => 'required|string|max:2000',

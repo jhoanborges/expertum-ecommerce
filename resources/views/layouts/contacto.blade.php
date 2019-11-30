@@ -109,6 +109,14 @@
     </div>
 
 
+@if(env('GOOGLE_RECAPTCHA_KEY'))
+     <div class="g-recaptcha"
+          data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}">
+     </div>
+@endif
+
+
+
     <div class="form-group">
         <button type="submit" class="btn btn-primary w-25">
         Enviar</button>
@@ -149,7 +157,7 @@
           }
 
           $("#form").on("submit", function(e){
-/*
+
             var recaptcha = document.forms["form"]["g-recaptcha-response"].value;
             if (recaptcha == "") {
               toastr.clear()
@@ -167,7 +175,7 @@
               });
               return false;
             }
-            */
+            
 
             $.ajaxSetup({
               headers: {
@@ -187,7 +195,8 @@
 
 
             var  formData = new FormData();
-            //formData.append( 'recaptcha', recaptcha);
+            
+            formData.append( 'recaptcha', recaptcha);
 
             formData.append( 'my_name', my_name);
             formData.append( 'my_time', my_time);
