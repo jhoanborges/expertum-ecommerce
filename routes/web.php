@@ -106,7 +106,6 @@ Route::get('/store-list', 'StoreController@index2')->name('store.list');
 
 
 
-//Route::get('/store/{url}', 'StoreController@categoria_get')->name('categoria.get');
 Route::get('/store', 'StoreController@index')->name('store.index');
 
 
@@ -159,4 +158,9 @@ Route::get("/checkout/landing/test", function(){
 
 */
 
+});
+
+
+Route::get('/debug-sentry', function () {
+    throw new Exception('My first Sentry error!');
 });

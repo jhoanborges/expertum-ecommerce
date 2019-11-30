@@ -25,10 +25,13 @@
               <li class="row no-gutters h-100">
 
 
-
+@if(count($marcas))
                 <div class="col-lg-12 mb-4">
                   <div id="accordion" class="accordion">
+
+
                     <div class="card  no-borders">
+
                       <div class="card-header pointer collapsed" data-toggle="collapse" href="#collapseOne">
                         <a class="card-title mayus">
                           Marcas
@@ -38,7 +41,8 @@
                    <!-- Simple checkbox with label, checked -->
 
                    @foreach($marcas as $mark)
-                   @if($mark->cantidad > 0)
+
+
                    <div class="checkbox pmd-default-theme mt-3">
                     <label class="pmd-checkbox pmd-checkbox-ripple-effect">
                       <input type="checkbox" value="{{$mark->id}}" class="brands"
@@ -53,15 +57,15 @@
                   <span class="badge badge-light">{{ $mark->cantidad }}</span>
               </div>
 
-              @endif
               @endforeach
 
           </div>
       </div>
+
   </div>
 </div>
 
-
+@endif
 @if (count($projects) > 0)
 @foreach ($projects as $key => $project)
 @include('partials.filtros', $project)
@@ -297,6 +301,7 @@ sda
         var parseResult = new DOMParser().parseFromString(url, "text/html");
         var parsedUrl = parseResult.documentElement.textContent;
         url = parsedUrl.replace('%3Amarcas', valor);
+
         window.location.href = url
     });
 

@@ -117,7 +117,7 @@
 
 
 
-    <div class="form-group">
+    <div class="form-group mt-3">
         <button type="submit" class="btn btn-primary w-25">
         Enviar</button>
     </div>
@@ -214,10 +214,10 @@
               contentType: false,
               beforeSend:function() {
 
-                $('.contact-section').LoadingOverlay("show", {
+                $('.super_container').LoadingOverlay("show", {
                   image       : "",
                   fontawesome : "fas fa-spinner fa-spin",
-                  fontawesomeColor: "#d50000"
+                  fontawesomeColor: "#00922E"
                 });
 
               },
@@ -227,14 +227,14 @@
                 toastr.clear()
 
 
-                $('.contact-section').LoadingOverlay("hide")
+                $('.super_container').LoadingOverlay("hide")
                 $("#form").trigger("reset");
                 toastr["success"](response.message)
               },
 
               error:function (xhr, ajaxOptions, thrownError){
                 clear_messages();
-                $('.contact-section').LoadingOverlay("hide")
+                $('.super_container').LoadingOverlay("hide")
 
 
                 toastr.clear()
