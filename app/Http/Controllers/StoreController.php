@@ -600,14 +600,297 @@ public function categoria_get($id)
 
 
 
-
 public function novedades(Request $request){
 
     $pagination=24;
     $parametros=Parametromodelo::first();
 
-    $query = Productomodelo::has('hasOneCategory1')
-    ->where('estado', true)
+    $query = Productomodelo::
+    where('estado', true)
+    ->where('novedad', true);
+
+    $ids=array();
+
+    foreach ($query->get() as $key) {
+        $ids[]=$key->id;
+    }
+
+    $posts = Categoria6::
+    whereHas('product', function ($productos) use ($ids) {
+       $productos->whereIn('product_id', $ids);
+   })->get();
+
+
+
+    $marcas=Marcas::
+    whereHas('belongsToManyProducts', function ($query) use ($ids) {
+       $query->whereIn('product_id', $ids);
+   })
+    ->orderBy('nombre', 'ASC')
+    ->get();
+
+
+    $selected="";
+    $mostrar="12";
+
+    $categorias=Categorian1modelo::all();
+    $now=Carbon::now()->format('Y-m-d');
+    $trmdeldia =DB:: table('trm')->select('valor_trm')->where('fecha' , $now)->orderBy('id', 'DESC')->get();
+    $oldcat2=null;
+    $cat2=1;
+    $id=null;
+
+    $cont_mark= $marcas->count();
+
+    $categorias_nombre =null;
+    $filtrar_por_marcas=[];
+    $filtrar_por_fitlers=[];
+
+
+    if (request()->range) {
+        $prices = explode(',', request()->range);
+        $min= $prices[0];
+        $max= $prices[1];
+    }else{
+
+     $precios =[];
+     foreach ($query->get() as $product) {
+        $precios[] = precioNew($product->slug);
+    }
+    if (count($precios)<1) {
+
+        $product=Productomodelo::all();
+        $new_p =[];
+        foreach ($product as $product_price) {
+           $new_p[] = precioNew($product_price->slug);
+       }
+
+
+       if(empty($new_p) ){
+        $min=min([0]);
+        $max= max([0]);
+    }else{
+        $min=min($new_p);
+        $max= max($new_p);
+    }
+
+
+}else{
+ $min= min($precios) ;
+ $max= max($precios) ;
+
+}
+
+}
+
+
+
+$idd=$request->categoria;
+$oldcat2='search';
+
+
+if (!empty ($query->get()) ) {
+  $search_like=Productomodelo::
+  has('hasOneCategory1')->
+  where('estado', true)->take(6)
+  ->paginateFilter($pagination);
+}
+
+$checked=[];
+if ($request->marcas) {
+  $array_ = explode(',', $request->marcas);
+  $checked = $array_;
+}
+
+
+return view('layouts.offers')->with([
+    'productos'=> $query->paginateFilter($pagination),
+    'productos2'=> $query->get(),
+    'marcas'=> $marcas,
+    'selected'=> $selected,
+    'pagination'=> $pagination,
+    'mostrar'=> $mostrar,
+    'cat2'=> $cat2,
+    'id'=> $id,
+    'oldcat2'=> $oldcat2,
+    'trmdeldia'=> $trmdeldia,
+    'categorias'=> $categorias,
+    'categorias_nombre'=> $categorias_nombre,
+    'filtrar_por_marcas'=> $filtrar_por_marcas,
+    'filtrar_por_fitlers'=> $filtrar_por_fitlers,
+    'cont_mark'=> $cont_mark,
+    'projects'=> $posts,
+    'ids'=> $ids,
+    'ids2'=> $ids,
+    'min'=> $min,
+    'max'=> $max,
+    'cat_search' => $request->categoria,
+    'idd'=> $idd,
+    'checked'=> $checked,
+    'search_like'=> $search_like,
+]);
+
+}
+
+
+  public function novedades_filter(Request $request){
+
+
+
+    $pagination=24;
+    $parametros=Parametromodelo::first();
+
+
+    $query = Productomodelo::
+    where('estado', true)
+    ->where('novedad', true)
+    -> filter( request()->all());
+
+
+
+    $ids=array();
+
+    foreach ($query->get() as $key) {
+        $ids[]=$key->id;
+    }
+
+    $posts = Categoria6::
+    whereHas('product', function ($productos) use ($ids) {
+       $productos->whereIn('product_id', $ids);
+   })->get();
+
+
+
+    $marcas=Marcas::
+    whereHas('belongsToManyProducts', function ($query) use ($ids) {
+       $query->whereIn('product_id', $ids);
+   })
+    ->orderBy('nombre', 'ASC')
+    ->get();
+
+
+
+
+    $selected="";
+    $mostrar="12";
+
+    $categorias=Categorian1modelo::all();
+    $now=Carbon::now()->format('Y-m-d');
+    $trmdeldia =DB:: table('trm')->select('valor_trm')->where('fecha' , $now)->orderBy('id', 'DESC')->get();
+    $oldcat2=null;
+    $cat2=1;
+    $id=null;
+
+    $cont_mark= $marcas->count();
+
+    $categorias_nombre =null;
+    $filtrar_por_marcas=[];
+    $filtrar_por_fitlers=[];
+
+
+    if (request()->range) {
+        $prices = explode(',', request()->range);
+        $min= $prices[0];
+        $max= $prices[1];
+    }else{
+
+     $precios =[];
+     foreach ($query->get() as $product) {
+        $precios[] = precioNew($product->slug);
+    }
+    if (count($precios)<1) {
+
+        $product=Productomodelo::all();
+        $new_p =[];
+        foreach ($product as $product_price) {
+           $new_p[] = precioNew($product_price->slug);
+       }
+
+
+       if(empty($new_p) ){
+        $min=min([0]);
+        $max= max([0]);
+    }else{
+        $min=min($new_p);
+        $max= max($new_p);
+    }
+
+
+}else{
+ $min= min($precios) ;
+ $max= max($precios) ;
+
+}
+
+}
+
+
+
+$idd=$request->categoria;
+$oldcat2='search';
+
+
+if (!empty ($query->get()) ) {
+  $search_like=Productomodelo::
+  has('hasOneCategory1')->
+  where('estado', true)->take(6)
+  ->paginateFilter($pagination);
+}
+
+$checked=[];
+if ($request->marcas) {
+  $array_ = explode(',', $request->marcas);
+  $checked = $array_;
+}
+
+
+return view('layouts.offers')->with([
+    'productos'=> $query->paginateFilter($pagination),
+    'productos2'=> $query->get(),
+    'marcas'=> $marcas,
+    'selected'=> $selected,
+    'pagination'=> $pagination,
+    'mostrar'=> $mostrar,
+    'cat2'=> $cat2,
+    'id'=> $id,
+    'oldcat2'=> $oldcat2,
+    'trmdeldia'=> $trmdeldia,
+    'categorias'=> $categorias,
+    'categorias_nombre'=> $categorias_nombre,
+    'filtrar_por_marcas'=> $filtrar_por_marcas,
+    'filtrar_por_fitlers'=> $filtrar_por_fitlers,
+    'cont_mark'=> $cont_mark,
+    'projects'=> $posts,
+    'ids'=> $ids,
+    'ids2'=> $ids,
+    'min'=> $min,
+    'max'=> $max,
+    'cat_search' => $request->categoria,
+    'idd'=> $idd,
+    'checked'=> $checked,
+    'search_like'=> $search_like,
+]);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+public function masvendidos(Request $request){
+
+    $pagination=24;
+    $parametros=Parametromodelo::first();
+
+    $query = Productomodelo::
+    where('estado', true)
     ->where('destacado', true);
 
     $ids=array();
@@ -704,7 +987,153 @@ if ($request->marcas) {
 }
 
 
-return view('layouts.store')->with([
+return view('layouts.offers')->with([
+    'productos'=> $query->paginateFilter($pagination),
+    'productos2'=> $query->get(),
+    'marcas'=> $marcas,
+    'selected'=> $selected,
+    'pagination'=> $pagination,
+    'mostrar'=> $mostrar,
+    'cat2'=> $cat2,
+    'id'=> $id,
+    'oldcat2'=> $oldcat2,
+    'trmdeldia'=> $trmdeldia,
+    'categorias'=> $categorias,
+    'categorias_nombre'=> $categorias_nombre,
+    'filtrar_por_marcas'=> $filtrar_por_marcas,
+    'filtrar_por_fitlers'=> $filtrar_por_fitlers,
+    'cont_mark'=> $cont_mark,
+    'projects'=> $posts,
+    'ids'=> $ids,
+    'ids2'=> $ids,
+    'min'=> $min,
+    'max'=> $max,
+    'cat_search' => $request->categoria,
+    'idd'=> $idd,
+    'checked'=> $checked,
+    'search_like'=> $search_like,
+]);
+
+}
+
+
+
+
+
+
+
+  public function masvendidos_filter(Request $request){
+
+
+
+    $pagination=24;
+    $parametros=Parametromodelo::first();
+
+
+    $query = Productomodelo::
+    where('estado', true)
+    ->where('destacado', true)
+    -> filter( request()->all());
+
+
+
+    $ids=array();
+
+    foreach ($query->get() as $key) {
+        $ids[]=$key->id;
+    }
+
+    $posts = Categoria6::
+    whereHas('product', function ($productos) use ($ids) {
+       $productos->whereIn('product_id', $ids);
+   })->get();
+
+
+
+    $marcas=Marcas::
+    whereHas('belongsToManyProducts', function ($query) use ($ids) {
+       $query->whereIn('product_id', $ids);
+   })
+    ->orderBy('nombre', 'ASC')
+    ->get();
+
+
+
+
+    $selected="";
+    $mostrar="12";
+
+    $categorias=Categorian1modelo::all();
+    $now=Carbon::now()->format('Y-m-d');
+    $trmdeldia =DB:: table('trm')->select('valor_trm')->where('fecha' , $now)->orderBy('id', 'DESC')->get();
+    $oldcat2=null;
+    $cat2=1;
+    $id=null;
+
+    $cont_mark= $marcas->count();
+
+    $categorias_nombre =null;
+    $filtrar_por_marcas=[];
+    $filtrar_por_fitlers=[];
+
+
+    if (request()->range) {
+        $prices = explode(',', request()->range);
+        $min= $prices[0];
+        $max= $prices[1];
+    }else{
+
+     $precios =[];
+     foreach ($query->get() as $product) {
+        $precios[] = precioNew($product->slug);
+    }
+    if (count($precios)<1) {
+
+        $product=Productomodelo::all();
+        $new_p =[];
+        foreach ($product as $product_price) {
+           $new_p[] = precioNew($product_price->slug);
+       }
+
+
+       if(empty($new_p) ){
+        $min=min([0]);
+        $max= max([0]);
+    }else{
+        $min=min($new_p);
+        $max= max($new_p);
+    }
+
+
+}else{
+ $min= min($precios) ;
+ $max= max($precios) ;
+
+}
+
+}
+
+
+
+$idd=$request->categoria;
+$oldcat2='search';
+
+
+if (!empty ($query->get()) ) {
+  $search_like=Productomodelo::
+  has('hasOneCategory1')->
+  where('estado', true)->take(6)
+  ->paginateFilter($pagination);
+}
+
+$checked=[];
+if ($request->marcas) {
+  $array_ = explode(',', $request->marcas);
+  $checked = $array_;
+}
+
+
+return view('layouts.offers')->with([
     'productos'=> $query->paginateFilter($pagination),
     'productos2'=> $query->get(),
     'marcas'=> $marcas,
@@ -741,6 +1170,19 @@ return view('layouts.store')->with([
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 public function ofertas(Request $request){
 
     $pagination=24;
@@ -748,7 +1190,7 @@ public function ofertas(Request $request){
 
     $query = Productomodelo::
     has('hasManyPromociones')
-    ->orWhere('estado', true)
+    ->where('estado', true)
     ->where('promocion', true);
 
     $ids=array();
@@ -845,7 +1287,7 @@ if ($request->marcas) {
 }
 
 
-return view('layouts.store')->with([
+return view('layouts.offers')->with([
     'productos'=> $query->paginateFilter($pagination),
     'productos2'=> $query->get(),
     'marcas'=> $marcas,
@@ -881,6 +1323,149 @@ return view('layouts.store')->with([
 
 
 
+
+  public function ofertas_filter(Request $request){
+
+
+
+    $pagination=24;
+    $parametros=Parametromodelo::first();
+
+
+    $query = Productomodelo::
+    has('hasManyPromociones')
+    ->where('estado', true)
+    ->where('promocion', true)
+    -> filter( request()->all());
+    //->orWhere('estado', true)
+    //->where('promocion', true);
+
+
+
+    $ids=array();
+
+    foreach ($query->get() as $key) {
+        $ids[]=$key->id;
+    }
+
+    $posts = Categoria6::
+    whereHas('product', function ($productos) use ($ids) {
+       $productos->whereIn('product_id', $ids);
+   })->get();
+
+
+
+    $marcas=Marcas::
+    whereHas('belongsToManyProducts', function ($query) use ($ids) {
+       $query->whereIn('product_id', $ids);
+   })
+    ->orderBy('nombre', 'ASC')
+    ->get();
+
+
+
+
+    $selected="";
+    $mostrar="12";
+
+    $categorias=Categorian1modelo::all();
+    $now=Carbon::now()->format('Y-m-d');
+    $trmdeldia =DB:: table('trm')->select('valor_trm')->where('fecha' , $now)->orderBy('id', 'DESC')->get();
+    $oldcat2=null;
+    $cat2=1;
+    $id=null;
+
+    $cont_mark= $marcas->count();
+
+    $categorias_nombre =null;
+    $filtrar_por_marcas=[];
+    $filtrar_por_fitlers=[];
+
+
+    if (request()->range) {
+        $prices = explode(',', request()->range);
+        $min= $prices[0];
+        $max= $prices[1];
+    }else{
+
+     $precios =[];
+     foreach ($query->get() as $product) {
+        $precios[] = precioNew($product->slug);
+    }
+    if (count($precios)<1) {
+
+        $product=Productomodelo::all();
+        $new_p =[];
+        foreach ($product as $product_price) {
+           $new_p[] = precioNew($product_price->slug);
+       }
+
+
+       if(empty($new_p) ){
+        $min=min([0]);
+        $max= max([0]);
+    }else{
+        $min=min($new_p);
+        $max= max($new_p);
+    }
+
+
+}else{
+ $min= min($precios) ;
+ $max= max($precios) ;
+
+}
+
+}
+
+
+
+$idd=$request->categoria;
+$oldcat2='search';
+
+
+if (!empty ($query->get()) ) {
+  $search_like=Productomodelo::
+  has('hasOneCategory1')->
+  where('estado', true)->take(6)
+  ->paginateFilter($pagination);
+}
+
+$checked=[];
+if ($request->marcas) {
+  $array_ = explode(',', $request->marcas);
+  $checked = $array_;
+}
+
+
+return view('layouts.offers')->with([
+    'productos'=> $query->paginateFilter($pagination),
+    'productos2'=> $query->get(),
+    'marcas'=> $marcas,
+    'selected'=> $selected,
+    'pagination'=> $pagination,
+    'mostrar'=> $mostrar,
+    'cat2'=> $cat2,
+    'id'=> $id,
+    'oldcat2'=> $oldcat2,
+    'trmdeldia'=> $trmdeldia,
+    'categorias'=> $categorias,
+    'categorias_nombre'=> $categorias_nombre,
+    'filtrar_por_marcas'=> $filtrar_por_marcas,
+    'filtrar_por_fitlers'=> $filtrar_por_fitlers,
+    'cont_mark'=> $cont_mark,
+    'projects'=> $posts,
+    'ids'=> $ids,
+    'ids2'=> $ids,
+    'min'=> $min,
+    'max'=> $max,
+    'cat_search' => $request->categoria,
+    'idd'=> $idd,
+    'checked'=> $checked,
+    'search_like'=> $search_like,
+]);
+
+}
 
 
 

@@ -1124,10 +1124,10 @@ select {
 
 
 .one-row {
+  white-space: nowrap;
  line-height: 1.5em;
- height: 3em;
+ height: 1.5em;
  overflow: hidden;
- /*white-space: nowrap;*/
  text-overflow: ellipsis;
  width: 100%;
 }
@@ -1217,4 +1217,15 @@ select {
 
 .no-show{
   display: none;
+}
+
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance:textfield;
 }

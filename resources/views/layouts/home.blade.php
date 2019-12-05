@@ -3,8 +3,10 @@
 @section('extra-css')
 @endsection
 
+@include('partials.slider')
 
 <!-- Home -->
+{{---
 <div class="rev_slider_wrapper mt-important">
     <!-- the ID here will be used in the inline JavaScript below to initialize the slider -->
     <div id="rev_slider_1" class="rev_slider fullwidthabanner" data-version="5.4.8" >
@@ -56,7 +58,7 @@
 </div>
 </div>
 
-
+--}}
 <!-- Shop -->
 
 <div class="shop">

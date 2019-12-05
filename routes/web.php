@@ -110,13 +110,23 @@ Route::get('/store', 'StoreController@index')->name('store.index');
 
 
 Route::get('novedades', 'StoreController@novedades')->name('novedades.index');
+Route::get('/novedades/filter', 'StoreController@novedades_filter')->name('novedades.filter');
+
 Route::get('ofertas', 'StoreController@ofertas')->name('ofertas.index');
+Route::get('/ofertas/filter', 'StoreController@ofertas_filter')->name('ofertas.filter');
+
+Route::get('masvendidos', 'StoreController@masvendidos')->name('masvendidos.index');
+Route::get('/masvendidos/filter', 'StoreController@masvendidos_filter')->name('masvendidos.filter');
 
 
 
 Route::get('/{cat2}/{id}/', 'NewController@index')->name('categoria.get');
 
 Route::get('/filtros/{id}/', 'FiltrosController@show')->name('filtros.get');
+
+
+
+
 
 
 

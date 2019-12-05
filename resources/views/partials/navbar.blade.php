@@ -207,8 +207,8 @@ aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle 
                   </ul>
                 </li>
                 --}}
-                <li class="nav-item {{Route::currentRouteNamed('novedades.index') ? 'active' : '' }}">
-                  <a class="nav-link" href="{{ route('novedades.index') }}">MÁS VENDIDOS</a>
+                <li class="nav-item {{Route::currentRouteNamed('masvendidos.index') ? 'active' : '' }}">
+                  <a class="nav-link" href="{{ route('masvendidos.index') }}">MÁS VENDIDOS</a>
               </li>
 
               <li class="nav-item {{Route::currentRouteNamed('novedades.index') ? 'active' : '' }}">

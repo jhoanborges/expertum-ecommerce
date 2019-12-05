@@ -68,7 +68,6 @@ class CheckoutController extends Controller
 
 
 	public function index(){
-
 		if (Cart::content()->count() <= 0 ) {
 			toast('El carrito de compras esta vacío','warning','top-right');
 			return redirect()->back();
