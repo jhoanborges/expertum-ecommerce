@@ -42,8 +42,6 @@ class DireccionesController extends Controller
     }
 
 
-
-
     public function select(Request $request)
     {
         $data= Direcciones::where('id', $request->id)->first();
