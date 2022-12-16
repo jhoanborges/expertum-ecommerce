@@ -7,6 +7,8 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use App\Parametromodelo;
+Use App\Categorian1modelo;
+use App\RedesSociales;
 
 class UserSuccessfullyVerified extends Notification
 {
@@ -44,13 +46,24 @@ class UserSuccessfullyVerified extends Notification
     {
         $parametros= Parametromodelo::first();
         $user = $this->user;
+
+
+        $categories=Categorian1modelo::take(5)->get();
+        $redes=RedesSociales::take(5)->get();
+        $contact_url=env('APP_URL').'contacto';
+        $contact_email=env('CONTACT_EMAIL');
+
         return (new MailMessage)
-        //sacar esta variable del env
-            ->from('no-reply@materilejuguetes.com')
-            ->subject('Bienvenido a'.$parametros->nombre_tienda )
-            ->greeting(sprintf('Hola %s', $user->name))
-            ->line('Has confirmado con exito tu cuenta. Ya puede iniciar sesión con tu cuenta.')
-            ->action('Iniciar sesión', route('login'));
+        ->from(env('MAIL_FROM_ADDRESS'))
+        ->subject('Has confirmado tu correo en '.$parametros->nombre_tienda )
+        ->markdown('emails.UserVerified',[
+            'user'=>$user->name,
+            'categories'=>$categories,
+            'redes'=>$redes,
+            'contact_url'=>$contact_url,
+            'contact_email'=>$contact_email,
+        ]);
+
     }
 
     /**

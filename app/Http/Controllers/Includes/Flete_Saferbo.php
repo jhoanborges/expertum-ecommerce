@@ -58,19 +58,23 @@ use Carbon\Carbon as Carbon;
         foreach (Cart::instance('default')->content() as $i => $producto){
 
             $product = Productomodelo::where('slug' , $producto->id)->first();
+            //convertir de gramos a kg
+            $peso = gramsToKilograms($product->peso);
 
             $total_productos = $total_productos + precioNew($product->slug) ;
             //$total_iva= $total_iva + totaliva($product->slug) ;  //Esto no se usa y fuera de eso no multiplica por la TRM como la función (precioNew())
 
             $pesovolumen = ($product->largo * $product->ancho * $product->alto) / $saf->factor;
 
-            if ($product->peso > $pesovolumen ) {
-                $pesovolumen= $product->peso;
+
+
+            if ($peso > $pesovolumen ) {
+                $pesovolumen= $peso;
             }else{
                 $pesovolumen=$pesovolumen;
             }
 
-            $total_peso   = $total_peso   + ($product->peso * $producto->qty);
+            $total_peso   = $total_peso   + ($peso * $producto->qty);
             $peso_volumen = $peso_volumen + ($pesovolumen   * $producto->qty);
 
             ### si id_moneda = 2  --> Es pesos colombianos ###
@@ -129,7 +133,7 @@ use Carbon\Carbon as Carbon;
             $totales[]=$product_valor_flete;
         }
 
-        //si total es igual a ero verifica que el producto tenga las medidas ancho largo alto
+        //si total es igual a cero verifica que el producto tenga las medidas ancho largo alto
         //se retorna el total de proveedores trans
         if (! $peso_volumen == 0) {
 
@@ -156,8 +160,16 @@ use Carbon\Carbon as Carbon;
             $codigo=$saf->codigo;
             //tipo de negociacion 1=credito
             $idnegociacion=$saf->negociacion;//
-            //tipo de envio 3=mensjeria   1=paqueteo
-            $idtipoenvio=1; // Valor Fijo
+            
+            //tipo de envio 3=mensajeria   1=paqueteo
+            if ($peso_volumen > 5){
+                $dsunidad=1;
+                $idtipoenvio=1; // Paqueteo
+            }
+            else{
+                $idtipoenvio=3; //Mensajeria   
+            }
+
             $idtipoliquidacion=$saf->liquidacion; //Valor fijo
             $url="https://app.saferbo.com/webservices/ws.generar.guias.php";
             // estas variables se validan  en caso de estar vacias
@@ -173,25 +185,36 @@ use Carbon\Carbon as Carbon;
             curl_setopt($c, CURLOPT_POST, true);
             curl_setopt($c, CURLOPT_POSTFIELDS, $destino);
             curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
-            $var = curl_exec($c);
+    
+
+            $httpcode = curl_getinfo($c, CURLINFO_HTTP_CODE);
+            $var =  curl_exec($c);
 
             if (curl_error($c)) {
                 $error_msg = curl_error($c);
             }
+
+            try{
+
+
             $array = explode('|', $var);
             $total_saferbo=(float)$array[3];
-            //return response()->json($array[3]);
-            if (!$total_saferbo ==0) {
+
+                if (!$total_saferbo ==0) {
                 $totales[]=$total_saferbo;
             }
+
+            }catch(\Exception $e){
+                return 'error';
+            }
+
+            //return response()->json($array[3]);
+       
 
         } // END IF
 
         $flete =  min($totales);
-
-
-
-
+        $flete = ($flete * env('IVA_FLETE'));
 
         /*
         if (!$total_proveedores_trans == 0 && !empty($total_proveedores_trans) ){
@@ -204,7 +227,7 @@ use Carbon\Carbon as Carbon;
         }
         */
 
-        return round($flete);
+        return ceil($flete);
         //return response()->json(  round($flete) );
 
  	}

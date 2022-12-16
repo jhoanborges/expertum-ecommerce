@@ -212,7 +212,7 @@ section
 .super_container
 {
 	width: 100%;
-	overflow: hidden;
+	overflow: inherit;
 }
 .prlx_parent
 {

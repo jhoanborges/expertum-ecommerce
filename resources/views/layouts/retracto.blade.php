@@ -14,18 +14,18 @@
 
       <p>De acuerdo con El Estatuto del Consumidor, Ley 1480 de 2011, Artículo 47, se determina el derecho de retracto que tiene el comprador de un bien o servicio, en determinados casos o instancias especiales. <br><br>
 
-        Por consiguiente, cuando las ventas son efectuadas a través de nuestro canal de comercio electrónico, EXPERTUM.STORE, considerado este un método a distancia o no tradicional, el consumidor tiene derecho a solicitar, en un término de cinco (5) días siguientes a la compra, la devolución de la totalidad del dinero pagado con la consecuente devolución del producto adquirido.<br><br>
+        Por consiguiente, cuando las ventas son efectuadas a través de nuestro canal de comercio electrónico, {{$param->nombre_tienda}}, considerado este un método a distancia o no tradicional, el consumidor tiene derecho a solicitar, en un término de cinco (5) días siguientes a la compra, la devolución de la totalidad del dinero pagado con la consecuente devolución del producto adquirido.<br><br>
 
         Para ejercer el derecho de retracto, el consumidor deberá:<br>
         • Devolver el producto por los mismos medios y en las mismas condiciones en que lo recibió, sin indicaciones de uso o novedades no reportadas durante la entrega. Esto incluye accesorios, empaques originales, manuales y etiquetas.<br>
         • Asumir los costos de transporte y los demás que conlleve la devolución del bien.<br>
-        • Presentar la factura de compra, original, en la que se demuestre que el producto fue comprado a través de EXPERTUM.STORE.<br><br>
+        • Presentar la factura de compra, original, en la que se demuestre que el producto fue comprado a través de {{$param->nombre_tienda}}<br><br>
 
-        EXPERTUM SAS ha dispuesto de los siguientes canales para ejercer el Derecho de Retracto:<br>
-        • Dirección de domicilio, ubicada en la Cra. 26 No. 65 – 54, Oficina 401, Barrio 7 de Agosto, en Bogotá, D.C.<br>
-        • Dirección de correo electrónico, info@expertum.co<br>
-        • Línea telefónica de servicio al cliente, 300 6967118<br>
-        • Formulario de contacto a través de nuestro sitio web, <a href="contact.html" target="_blank">https://www.expertum.co</a><br><br>
+        {{$param->razon_social}} ha dispuesto de los siguientes canales para ejercer el Derecho de Retracto:<br>
+        • Dirección de domicilio, ubicada en {{$param->direccion}} {{$ciudad}}, {{$pais}}<br>
+        • Dirección de correo electrónico, {{$param->correo}}<br>
+        • Línea telefónica de servicio al cliente, {{$param->telefono}}<br>
+        • Formulario de contacto a través de nuestro sitio web, <a href="{{ route('about_us') }}" target="_blank"> Clic Aquí</a><br><br>
 
         La devolución del dinero al consumidor se hará dentro de los treinta (30) días calendario desde el momento en que ejerció el derecho, a través del mismo medio utilizado para la compra. Si la compra fue pagada contraentrega, el dinero será devuelto a través de consignación y/o transferencia en la cuenta bancaria indicada y autorizada por el cliente.<br><br>
 

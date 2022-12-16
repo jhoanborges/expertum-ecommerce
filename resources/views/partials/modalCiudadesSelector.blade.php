@@ -15,11 +15,11 @@
                <div class="row mb-3">
 
                 <div class="col-sm-12">
-                    <h5 class="modal-title">Te enviamos a las siguientes ciudades</h5>
+                    <h5 class="modal-title">Enviamos pedidos a estas ciudades</h5>
 
-                    <label class="required body-text">Seleccione la ciudad</label>
+                    <label class="required body-text">Seleccionar la ciudad de destino</label>
                     <select name="state" id="state" class="input-text select2departamento" required>
-                        <option value="">Seleccione una opción</option>
+                        <option value="">Seleccionar de la lista</option>
                         @foreach($departamentos as $dep)
                         <option value="{{$dep->id}}">{{$dep->region}}</option>
                         @endforeach

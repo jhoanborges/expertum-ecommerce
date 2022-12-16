@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
-
-
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -46,6 +44,13 @@ class ResetPasswordController extends Controller
         $this->middleware('guest');
     }
 
+    public function showResetForm(Request $request, $token = null)
+    {
+        return view('auth.passwords.reset')->with([
+            'token' => $token, 
+            'email' => decrypt($request->email)
+        ]);
+    }
 
 
     //ok hare un override para que no loguee redireccione al login con un mensaje lindo :)

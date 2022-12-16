@@ -12,6 +12,9 @@ class Categorian3modelo extends Model
     protected $fillable = [];
 	public $timestamps = false;
 
+	public function productos(){	
+		return $this->hasMany('App\Productomodelo', 'id_categorian3', 'slug');
+	}
 
 	public function hasProducts($ids)
 {

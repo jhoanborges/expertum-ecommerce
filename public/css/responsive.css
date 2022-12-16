@@ -85,6 +85,8 @@
         cursor: pointer;
         margin-top: 27px;
         margin-bottom: 23px;
+		position: absolute;
+		right: 10px;
     }
 	.header_area .navbar {
 		background: #fff;
@@ -138,6 +140,7 @@
     .header_area .navbar .nav .nav-item .nav-link{
         line-height: 40px;
         margin-right: 0px;
+        margin-bottom: 10px;
         display: block;
 		border-bottom: 1px solid #ededed33;
 		border-radius: 0px;

@@ -169,7 +169,8 @@ Breadcrumbs::register('product.show', function($breadcrumbs, $id)
 
   $product=Productomodelo::where('slug', $id)->first();   
 
-//  $breadcrumbs->parent('store.index');
+  $breadcrumbs->parent('store.index');
+  
   $breadcrumbs->push(  ucfirst($product->hasOneCategory1->nombrecategoria),  route('categoria.get', [1, $product->hasOneCategory1->slug])  );
   if ($product->id_categorian2) {
   $breadcrumbs->push(  ucfirst($product->hasOneCategory2->nombrecategoria),  route('categoria.get', [2, $product->hasOneCategory2->slug])  );

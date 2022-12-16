@@ -38,7 +38,8 @@ class ForgotPasswordController extends Controller
     {
 
         alert()->success('Email enviado','Estimado usuario, hemos enviado un link con las instrucciones para re-establecer su contraseña al correo electrónico.')->autoclose(20000);
-        return back()->withInput();
+        return redirect()->route('login');
+        //return back();
         //->with('status', trans($response));
     }
 

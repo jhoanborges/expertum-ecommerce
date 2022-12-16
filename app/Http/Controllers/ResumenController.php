@@ -12,9 +12,105 @@ use DB;
 use Session;
 use App\Categorian1modelo;
 use Alert;
+use App\Product;
 
 class ResumenController extends Controller
 {
+
+  
+  public function deleteItemFromCart(Request $request)
+{
+$id = $request->id;
+
+ Cart::remove($id);
+/*
+ if (Auth::check()) {
+  $id_2 = Auth::id();
+  ShoppingCart::deleteCartRecord($id, 'default');
+  Cart::store($id_2);
+}*/
+
+return response()->json([
+  'success'=>false,
+  'message' =>'Producto eliminado del carrito de compras.'
+],200);
+}
+
+
+
+  public function updateCartQuantity(Request $request){
+
+    //inventario del producto existente
+    $product = Productomodelo::where('slug', $request->product_id)->first();
+    if(!$product){
+      return response()->json([
+        'success'=>false,
+        'message' =>'Este producto no existe o se ha borrado del inventario.'
+      ],404);
+    }
+
+
+    $validator = Validator::make($request->all(), [
+      'id' => 'required',
+      'qty' => 'required|numeric|integer|between:1,'.($product->cantidad),
+    ]);
+    if ($validator->fails()) {
+      return response()->json([
+        'success'=>false,
+        'message' =>'La cantidad supera el inventario existente.'
+      ],404);
+      }//if fails validator
+
+      Cart::update($request->id, $request->qty);
+
+      return response()->json([
+        'success'=>false,
+        'message' =>'Cantidad actualizada.'
+      ],200);
+  }
+
+    public function getCartProducts(){
+
+      $total_iva=0;
+      $subtotal=0;
+      $qty_cont=0;
+      
+    $products = [];
+    foreach( Cart::instance('default')->content() as $product){
+    $price = precioNew($product->id);
+
+      $products[] =[
+        'id'=>$product->id,
+        'qty'=>$product->qty,
+        'price'=> $price,
+        'name'=>$product->name,
+        'image'=>$product->options->imagen,
+        'brand'=>$product->options->brand,
+        'iva'=>$product->options->iva,
+        'iva'=>$product->options->iva,
+        'rowId'=>$product->rowId,
+        'taxRate'=>$product->taxRate,
+        'total'=> $price * $product->qty 
+      ];
+
+
+  
+        $valor_producto = $price*$product->qty;
+        $precio_base    = ($valor_producto  /  ($product->options->iva/100 +1));
+        $subtotal       = $subtotal + $precio_base;
+        $total_iva      = $total_iva + ($valor_producto - $precio_base );
+
+    }
+
+    $total= $total_iva + $subtotal;
+
+    return response()->json( [
+      'products'=>$products,
+      'total_iva'=>$total_iva,
+      'subtotal'=>$subtotal,
+      'total'=>$total,
+      ] , 200);
+  }
 	public function index(){
 
 
@@ -28,6 +124,7 @@ class ResumenController extends Controller
 		$total_iva=0;
 		$subtotal=0;
 		$qty_cont=0;
+    
 		foreach (Cart::content() as $i => $product){
 
       $valor_producto = precioNew($product->id)*$product->qty;
@@ -55,21 +152,21 @@ class ResumenController extends Controller
 
    $data=[];
    foreach ( Cart::instance('default')->content() as $product) {
+
+    $price = precioNew($product->id);
      $data[]=[
       'id'=>$product->id,
       'qty'=>$product->qty,
-      'price'=>formatPrice($product->price),
+      'price'=> $price,
       'name'=>$product->name,
       'image'=>$product->options->imagen,
       'iva'=>$product->options->iva,
       'rowId'=>$product->rowId,
       'taxRate'=>$product->taxRate,
-      'total'=>formatPrice(precioNew($product->id)),
-
+      'total'=> $price * $product->qty 
     ];
 
   }
-
 
   return view('layouts.cart')->with([
    'totaliva' => $total_iva,
@@ -113,7 +210,6 @@ public function store(Request $request)
       }
 
 
-
       $duplicates = Cart::search(function ($cartItem, $rowId) use ($request) {
             //return $cartItem->id === $request->id;
 
@@ -141,13 +237,33 @@ public function store(Request $request)
       if ($duplicates->isEmpty()) {
 
         $producto= Productomodelo::with('hasManyImagenes')->
-        where('slug',$request->id)->first();
+        with('promocion')
+        ->where('slug',$request->id)->first();
 
-        $cartItem = Cart::add($producto->slug ,$producto->nombre_producto , $request->qty , $producto->precioventa_iva,
-          0, [
-           'iva' => $producto->iva,
-           'imagen' =>  $producto->hasManyImagenes->first()->urlimagen ,
-         ])->associate('App\Imgproductomodelo');
+        $precio_final = $producto->precioventa_iva;
+        if($producto->promocion()->exists()){
+          $precio_final =  old_price($producto['slug']);
+        }
+
+//dd($producto->hasManyImagenes->first());
+
+        if ($producto->hasManyImagenes->first()){
+          $cartItem = Cart::add($producto->slug ,$producto->nombre_producto , $request->qty ,$precio_final ,
+            0, [
+             'precioventa_iva' => $producto->precioventa_iva,
+             'iva' => $producto->iva,
+             'imagen' =>  $producto->hasManyImagenes->first()->urlimagen ,
+             'promocion' =>  $producto->promocion()->first() ,
+            ])->associate('App\Imgproductomodelo');
+        }else{
+            $cartItem = Cart::add($producto->slug ,$producto->nombre_producto , $request->qty , $precio_final,
+            0, [
+             'precioventa_iva' => $producto->precioventa_iva,
+             'iva' => $producto->iva,
+             'imagen' =>  image('') ,
+             'promocion' =>  $producto->promocion()->first() ,
+            ])->associate('App\Imgproductomodelo');
+        }
 
         if ($request->type=='checkout') {
           toastr()->success('Producto añadito al carrito');
@@ -180,6 +296,10 @@ public function destroy($id)
 toastr()->info('Producto eliminado del carrito de compras');
 return back();
 }
+
+
+
+
 
 public function update(Request $request, $id)
 {
@@ -215,6 +335,7 @@ public function update(Request $request, $id)
 
 
 }
+
 
 
 }

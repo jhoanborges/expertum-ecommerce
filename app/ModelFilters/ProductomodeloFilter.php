@@ -29,9 +29,19 @@ class ProductomodeloFilter extends ModelFilter
 
   public function sort($sort)
   {
-
-//dd( request()->all() );
+  /*  
+    $products=array();
+    foreach($this->get()->toArray() as $index => $product){
+      $real_price = precioNew($product['slug']);
+      $product['precioventa_iva'] = $real_price;
+      $products[] = $product;
+    }
+    
+    $collection =collect($products);
+dd( $collection->sortBy('precioventa_iva') );
+*/
     if ( $sort=='menor_mayor' ) {
+//return $collection->sortBy('precioventa_iva') ;
 
       return $this->orderBy('precioventa_iva', 'asc');
     }

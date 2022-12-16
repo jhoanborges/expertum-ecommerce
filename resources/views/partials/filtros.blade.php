@@ -1,3 +1,4 @@
+{{--@if($project->show_on_sidebar == true)--}}
 <div class="col-lg-12 mb-4">
     <div id="accordion{{$key}}" class="accordion">
         <div class="card  no-borders">
@@ -6,9 +7,8 @@
                     {{removeCaps($project['nombrecategoria']) }}
                 </a>
             </div>
-            <div id="collapseFilters{{$key}}" class="card-body collapse pl-0 pr-0 {{!empty($filtros)  ? 'show':null}}" data-parent="#accordion{{$key}}" >
+            <div id="collapseFilters{{$key}}" class="card-body collapse pl-0 pr-0 {{!empty($filtros)  ? 'show':null}} scrollable mCustomScrollbar" data-parent="#accordion{{$key}}" >
                 @foreach($project->categories($ids2) as $category)
-
                 <div class="checkbox pmd-default-theme mt-3">
                     <label class="pmd-checkbox pmd-checkbox-ripple-effect">
                         <input type="checkbox" value="{{$category->id}}" class="filters"

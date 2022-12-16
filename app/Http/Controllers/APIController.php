@@ -154,12 +154,20 @@ class APIController extends Controller
          $producto= Productomodelo::with('hasManyImagenes')->
          where('slug',$request->id)->first();
 
-         $cartItem = Cart::add($producto->slug ,$producto->nombre_producto , $request->qty ,
-            $producto->precioventa_iva ,
+          if ($producto->hasManyImagenes->first()){
+            $cartItem = Cart::add($producto->slug ,$producto->nombre_producto , $request->qty ,
+              $producto->precioventa_iva ,
+              0, [
+                  'iva' => $producto->iva,
+                  'imagen' =>  $producto->hasManyImagenes->first()->urlimagen ,
+              ])->associate('App\Imgproductomodelo');
+          }else{
+            $cartItem = Cart::add($producto->slug ,$producto->nombre_producto , $request->qty , $producto->precioventa_iva,
             0, [
-                'iva' => $producto->iva,
-                'imagen' =>  $producto->hasManyImagenes->first()->urlimagen ,
+             'iva' => $producto->iva,
+             'imagen' =>  image('') ,
             ])->associate('App\Imgproductomodelo');
+          }
 
          if ($request->type=='checkout') {
           	//toast('Producto añadito al carrito','success','top-right');

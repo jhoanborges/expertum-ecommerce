@@ -11,7 +11,7 @@
 
    @foreach ($sliders as $slide)
   
-                  <li data-transition="boxfade" data-link="{{$slide->link}}" data-target="_blank" data-slideindex="back">
+                  <li data-transition="boxfade" data-link="{{$slide->link}}" data-target="" data-slideindex="back">
  
                         <img src="{{$slide->url}}" alt="{{$slide->url}}" class="rev-slidebg">
 
@@ -22,7 +22,7 @@
                           data-speed="500"
                           data-start="1200"
                           data-easing="Circ.easeInOut"
-                          style=" font-size:70px; font-weight:800; color:#fe0100;">{{$slide->name}}<span style=" color:#000;"></span> 
+                          style=" font-size:70px; font-weight:800; color:#ffffff;">{{$slide->name}}<span style=" color:#000;"></span> 
 
           </div>
 
@@ -43,7 +43,7 @@
                           data-endelementdelay="0.1"
                           data-endspeed="1000"
                           data-endeasing="Power4.easeIn"
-                          style="z-index: 3; max-width: auto; max-height: auto; white-space: nowrap; color:#34bcec; font-size:18px; font-weight:500;">{{$slide->descripcion}} </div>
+                          style="z-index: 3; max-width: auto; max-height: auto; white-space: nowrap; color:#ffffff; font-size:18px; font-weight:500;">{{$slide->descripcion}} </div>
             
             <!-- LAYER NR. 4 -->
              @if(!empty($slide->button))

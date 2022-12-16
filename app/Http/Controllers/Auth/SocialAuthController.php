@@ -49,33 +49,33 @@ class SocialAuthController extends Controller
         if ($user = User::where('email', $social_user->user['email'])->first() ) { 
             return $this->authAndRedirect($user); // Login y redirecci贸n
         } else {  
-  try {
+          try {
               //  $date = Carbon::createFromFormat('d/m/Y', $social_user->user['birthday'])->format('Y-m-d');
 
                          // En caso de que no exista creamos un nuevo usuario con sus datos.
-                $user = User::create([
-                    'name' => $social_user->user['first_name'],
-                    'apellidos' => $social_user->user['last_name'],
-                    'email' => $social_user->user['email'],
-                    'username' => $social_user->user['email'],
-                    'avatar' => $social_user->avatar,
+            $user = User::create([
+                'name' => $social_user->user['first_name'],
+                'apellidos' => $social_user->user['last_name'],
+                'email' => $social_user->user['email'],
+                'username' => $social_user->user['email'],
+                'avatar' => $social_user->avatar,
                 //    'fecha' => $date,
-                ]);
+            ]);
 
-try{
+            try{
                 if ($user) {
-                   $newsletter = NewsLetter::create([
+                 $newsletter = NewsLetter::create([
                     'id_user' => $user->id,
                     'active' => true,
                     'email' => $user->email,
                 ]);
-               }
+             }
 
-   } catch (\Exception $exception) {}
-   
-               if ($user) {
-                $user->notify(new UserSuccessfullyVerified($user));
-            }
+         } catch (\Exception $exception) {}
+         
+         if ($user) {
+            $user->notify(new UserSuccessfullyVerified($user));
+        }
 
             return $this->authAndRedirect($user); // Login y redirecci贸n
             

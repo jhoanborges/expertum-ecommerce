@@ -18,6 +18,26 @@ class Promociones extends Model
    protected $guarded = ['id'];
 
 
+        protected $casts = [
+        'date_start' => 'date:d-m-Y',
+        'date_end' => 'date:d-m-Y',
+        'start' => 'date:d-m-Y',
+        'date' => 'date:d-m-Y',
+    ];
+
+
+
+   /**
+     * Scope a query to only include the last n days records
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeWhereDateBetween($query,$fieldName,$fromDate,$todate)
+    {
+        return $query->whereDate($fieldName,'>=',$fromDate)->whereDate($fieldName,'<=',$todate);
+    }
+
 
    public function sluggable()
    {
@@ -33,6 +53,16 @@ class Promociones extends Model
 
 
 
+public function productos()
+{
+  return $this->hasMany('App\Productomodelo' , 'promocion_id' , 'id' )
+  //->with('promocion')
+  //->has('promocion')
+  ;
+}
+
+
+
 
 public function belongsToManyMarcas()
 {
@@ -43,7 +73,7 @@ public function belongsToManyMarcas()
 
 public function belongsToManyCategorias()
 {
-  return $this->belongsToMany('App\Categoria1' , 'promocion_categorias', 'promocion_id' , 'categoria1_id');
+  return $this->belongsToMany('App\Categorian1modelo' , 'promocion_categorias', 'promocion_id' , 'categoria1_id');
 }
 
 

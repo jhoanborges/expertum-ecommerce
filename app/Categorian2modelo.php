@@ -17,6 +17,11 @@ class Categorian2modelo extends Model
 /*Quizas te preguntes porque y porque no ser铆a mejor relacionar todo desde cero y quizas te lo preguntes siempre.*/
 /*Al igual que aca esta en todas las categorias. Excepto la categoria 1 donde  se leen los productos directamente*/
 
+	public function productos(){	
+		return $this->hasMany('App\Productomodelo', 'id_categorian2', 'slug');
+	}
+
+
 	public function hasProducts($ids)
 {
 

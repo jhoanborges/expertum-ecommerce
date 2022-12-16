@@ -10,23 +10,27 @@ class Categorian5modelo extends Model
 	protected $fillable = [];
 	public $timestamps = false;
 
+	public function productos(){	
+		return $this->hasMany('App\Productomodelo', 'id_categorian5', 'slug');
+	}
+
 	public function hasProducts($ids)
 	{
 		$categories=[];
 		foreach ($ids as $cats) {
 			$categories[] = $cats->slug;
 		}
-$parametros=Parametromodelo::first();
-$query = Productomodelo::whereIn('id_categorian5',$categories)->where('estado', true);
-$query->when($parametros->store_show== true, function ($q) {
-    return $q;
-});
-$query->when($parametros->store_show== false, function ($q) {
-    return $q->where('cantidad','>', 0);
-});
-$productos = $query->get();
+		$parametros=Parametromodelo::first();
+		$query = Productomodelo::whereIn('id_categorian5',$categories)->where('estado', true);
+		$query->when($parametros->store_show== true, function ($q) {
+			return $q;
+		});
+		$query->when($parametros->store_show== false, function ($q) {
+			return $q->where('cantidad','>', 0);
+		});
+		$productos = $query->get();
 
-$category=[];
+		$category=[];
 		foreach ($productos as $cats) {
 			$category[] =($cats->id_categorian5);
 		}

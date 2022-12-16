@@ -3,7 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Builder;
+use App\Parametromodelo;
 
 class Categorian1modelo extends Model
 {
@@ -13,10 +14,30 @@ class Categorian1modelo extends Model
 	protected $fillable = [];
 	public $timestamps = false;
 
+	    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('nombrecategoria', function (Builder $builder) {
+            $builder->orderBy('nombrecategoria', 'ASC');
+        });
+    }
+
 
 	public function productos(){	
-		//this->categoria1 -> tiene mcuhos ->poductos
+		$parametros = Parametromodelo::first();
+
+		if($parametros->store_show ==true){
 		return $this->hasMany('App\Productomodelo', 'id_categorian1', 'slug');
+		}else{
+		return $this->hasMany('App\Productomodelo', 'id_categorian1', 'slug')->where('cantidad','>', 0);
+		}
+		//this->categoria1 -> tiene mcuhos ->poductos
 	}
 
 

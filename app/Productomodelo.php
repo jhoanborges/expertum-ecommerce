@@ -9,7 +9,7 @@ use EloquentFilter\Filterable;
 use Nicolaslopezj\Searchable\SearchableTrait;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
-
+use Illuminate\Database\Eloquent\Builder;
 
 class Productomodelo extends Model
 {
@@ -21,6 +21,7 @@ class Productomodelo extends Model
  protected $table = 'productos';
  protected $fillable = [];
  public $timestamps = false;
+
 
  protected $searchable = [
   'columns' => [
@@ -47,6 +48,16 @@ class Productomodelo extends Model
  ],
 ];
 
+protected static function boot()
+{
+  parent::boot();
+
+  static::addGlobalScope('estado', function (Builder $builder) {
+    $builder->where('estado', true);
+    $builder->orderBy('nombre_producto' , 'ASC');
+
+  });
+}
 
 public function sluggable()
 {
@@ -58,6 +69,19 @@ public function sluggable()
     ]
   ];
 }
+
+public function promotionIsNotExpired($product){
+  dd($product);
+}
+
+/*
+public function setPrecioVentaIvaAttribute($value)
+{
+  //$product = $this->where('slug', $value)->first();
+
+    $this->attributes['precioventa_iva'] = precioNew($value);
+}
+*/
 /*
     public function searchableAs()
     {
@@ -75,6 +99,8 @@ public function sluggable()
 
       return $query;
     }
+
+
 
     public function hasPromotion()
     {
@@ -183,6 +209,12 @@ public function sluggable()
       ->join('products_categories', 'products_categories.productomodelo_id', '=', 'productos.id')
       ->whereIn('products_categories.category_id', $categoryIds);
     }
+    
+ public function promocion()
+  {
+    return $this->hasOne('App\Promociones', 'id', 'promocion_id');
+  }
+
 
 
   }

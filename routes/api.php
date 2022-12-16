@@ -18,5 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::get('/price/{slug}', 'HelperControllerController@price');
+//Route::get('/price/{slug}', 'HelperControllerController@price');
 Route::post('/cartupdate/', 'ResumenController@update');

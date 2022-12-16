@@ -18,7 +18,7 @@ class PayuController extends Controller
     public function index()
     {
         $this->clear();
-        return view('layouts.payu')->with([
+        return view('layouts.shoppingResponse')->with([
             'marcas'=> "",
         ]);
         //return view('partials.main_index');
@@ -27,7 +27,7 @@ class PayuController extends Controller
 
     public function clear() {
         Cart::instance('default')->destroy();
-        toast('Carrito de compras limpiado','success','top-right');
+        //toast('Carrito de compras limpiado','success','top-right');
         return redirect()->route('welcome');
     }
 

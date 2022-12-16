@@ -10,11 +10,11 @@
 				disable_onmobile: 'on'
 			},
 			/* options are 'auto', 'fullwidth' or 'fullscreen' */
-			sliderLayout: 'fullwidth',
-			responsiveLevels: [1240, 1024, 778, 480],
+			//sliderLayout: 'fullscreen',
+			//responsiveLevels: [1240, 1024, 778, 480],
         //gridwidth: [1240, 1024, 778, 480],
-        gridwidth: [1920, 1920, 1920, 1920],
-        gridheight: [400, 400, 400, 400],
+        //gridwidth: [1920, 1920, 1920, 1920],
+        //gridheight: [400, 400, 400, 400],
         navigation: {
         	arrows: {
         		enable: true,

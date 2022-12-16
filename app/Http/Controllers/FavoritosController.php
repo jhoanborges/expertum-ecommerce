@@ -13,26 +13,26 @@ use App\Productomodelo;
 
 class FavoritosController extends Controller
 {
-    public function index()
-    {
+  public function index()
+  {
 
    //   $email = Auth::user()->email;
          // ShoppingCart::deleteFavoriteCartRecord($email, 'favoritos');
       //   Cart::instance('favoritos')->restore($email);
 
 
-$productos= Cart::instance('favoritos')->content() ;
-$ids=[];
-foreach ($productos as $cart) {
-$ids[]=$cart->id;
+    $productos= Cart::instance('favoritos')->content() ;
+    $ids=[];
+    foreach ($productos as $cart) {
+      $ids[]=$cart->id;
 
-}
+    }
 
-$producto= Productomodelo::   
-with('hasManyImagenes')->
+    $producto= Productomodelo::   
+    with('hasManyImagenes')->
 //join('imgproductos', 'productos.id', 'imgproductos.id_producto')->
 //whereIn('imgproductos.id',$ids)->get();
-whereIn('slug',$ids)->get();
+    whereIn('slug',$ids)->get();
 
 
     //dd(Cart::instance('favoritos')->content() );
@@ -56,50 +56,102 @@ $cat2=1;
 */
 
 
-   $email = Auth::user()->email;
-    ShoppingCart::deleteFavoriteCartRecord($email, 'favoritos');
-   Cart::instance('favoritos')->store($email);
+         $email = Auth::user()->email;
+         ShoppingCart::deleteFavoriteCartRecord($email, 'favoritos');
+         Cart::instance('favoritos')->store($email);
 
          //dd($producto);
-        return view('layouts.favoritos')->with([
+         return view('layouts.favoritos')->with([
       //    'categorias' =>$categorias,
        //   'cat2' =>$cat2,
           'producto' =>$producto,
         ]);
-    }
+       }
+
+
+       public function addProductToFavorite($id){
+
+        if( !Auth::user() ){
+          return response()->json([
+            'success'=>false,
+            'message' =>'Debes crear una cuenta para agregar este producto a favoritos.'
+          ],401);
+        }
+
+        $user = Auth::user()->email;
+         
+        ShoppingCart::deleteFavoriteCartRecord($user, 'favoritos');
+        Cart::instance('favoritos')->store($user);
+
+            //dd( Cart::instance('favoritos')->content() );
+        $duplicates = Cart::instance('favoritos')->search(function ($cartItem, $rowId) use ($id) {
+          return $cartItem->id === intval($id);
+        });
+
+        if ($duplicates->isNotEmpty()) {
+          return response()->json([
+            'success'=>false,
+            'message' =>'Este producto ya existe en tus favoritos.'
+          ],404);
+        }
+    
+
+        $producto= Productomodelo::
+        where('slug', $id)
+        ->first();
+
+        Cart::instance('favoritos')->add($producto->slug ,$producto->nombre_producto , 1 , $producto->precioventa_iva);
+
+        return response()->json([
+          'success'=>true,
+          'message' =>'Producto añadido a favoritos.'
+        ],200);
+
+       }
+
+
+
+
+
+
+
+
+
+
+
 
 
     //public function store($id, $referencia, Request $request)
-        public function store($id, $referencia, Request $request)
-    {
+       public function store($id, $referencia, Request $request)
+       {
 
-            $user = Auth::user()->email;
-            ShoppingCart::deleteFavoriteCartRecord($user, 'favoritos');
-            Cart::instance('favoritos')->store($user);
+        $user = Auth::user()->email;
+        ShoppingCart::deleteFavoriteCartRecord($user, 'favoritos');
+        Cart::instance('favoritos')->store($user);
 
             //dd( Cart::instance('favoritos')->content() );
         $duplicates = Cart::instance('favoritos')->search(function ($cartItem, $rowId) use ($request) {
 
-            return $cartItem->id === intval($request->id);
+          return $cartItem->id === intval($request->id);
         });
 
         if ($duplicates->isNotEmpty()) {
-            toast('Este producto ya existe en tus favoritos','warning','top-right');
-            return redirect()->back();
+          toastr()->info('Este producto ya existe en tus favoritos');
+          return redirect()->back();
         }
         
 
 //dd ( Cart::instance('favoritos')->content() );
 
-$producto= Productomodelo::
-where('slug', $request->id)
+        $producto= Productomodelo::
+        where('slug', $request->id)
 //join('imgproductos', 'productos.id', 'imgproductos.id_producto')
 //->where('imgproductos.id',$id)
-->first();
+        ->first();
 
 //dd($producto);
 
-Cart::instance('favoritos')->add($producto->slug ,$producto->nombre_producto , 1 , $producto->precioventa_iva);
+        Cart::instance('favoritos')->add($producto->slug ,$producto->nombre_producto , 1 , $producto->precioventa_iva);
 
 
 
@@ -135,40 +187,39 @@ if ($request) {
 }
 */
 
-        alert()->success('Éxito', 'Producto añadito a tus favoritos');
+        toastr()->success('Producto añadito a tus favoritos'); // and this one
+
         return redirect()->route('favoritos');
         //return back()->with('alert', 'Producto añadito a tu lista de deseos.');
-    }
+      }
 
 
-    public function destroy(Request $request)
-    {
+      public function destroy(Request $request)
+      {
 
 
-foreach ( Cart::instance('favoritos') ->content()  as $favorito) {
-  if ($favorito->id == $request->id) {
- $id=  $favorito->rowId;
-  }
-}
+        foreach ( Cart::instance('favoritos') ->content()  as $favorito) {
+          if ($favorito->id == $request->id) {
+           $id=  $favorito->rowId;
+         }
+       }
 
 
-            Cart::instance('favoritos')->remove($id);
-            
-            $user = Auth::user()->email;
-            ShoppingCart::deleteFavoriteCartRecord($user, 'favoritos');
-            Cart::instance('favoritos')->store($user);
+       Cart::instance('favoritos')->remove($id);
+       
+       $user = Auth::user()->email;
+       ShoppingCart::deleteFavoriteCartRecord($user, 'favoritos');
+       Cart::instance('favoritos')->store($user);
 
-        
-
-
-        toast('Producto eliminado de tus favoritos','success','top-right');
+       
+        toastr()->success('Producto eliminado de tus favoritos'); // and this one
         return redirect()->back();
-    }
+      }
 
 
-    public function swichtToCheckout($id)
-    {
- 
+      public function swichtToCheckout($id)
+      {
+       
 /*
 $now=Carbon::now()->format('Y-m-d');
 $trmdeldia =DB:: table('trm')->select('valor_trm')->where('fecha' , $now)->orderBy('id', 'DESC')->get();
@@ -181,37 +232,38 @@ if($producto->options->id_moneda == 1 && $trmdeldia->isEmpty() ){
 }else{
 */
 
-$productos= Cart::instance('favoritos')->content() ;
 
-foreach ($productos as $cart) {
+  $productos= Cart::instance('favoritos')->content() ;
 
-  if ($cart->id == $id) {
-    $rowId=$cart->rowId;
+  foreach ($productos as $cart) {
+
+    if ($cart->id == $id) {
+      $rowId=$cart->rowId;
+    }
   }
-}
 
 
 
 
-        $request=Cart::instance('favoritos')->get($rowId);
+  $request=Cart::instance('favoritos')->get($rowId);
 
-        $duplicates = Cart::instance('default')->search(function ($cartItem, $rowId) use ($id) {
-            return $cartItem->id === $id;
-        });
-        if ($duplicates->isNotEmpty()) {
-           toast('Este producto ya existe en tu carrito de compras','info','top-right');
-           return redirect()->route('favoritos');
-       }
+  $duplicates = Cart::instance('default')->search(function ($cartItem, $rowId) use ($id) {
+    return $cartItem->id === $id;
+  });
+  if ($duplicates->isNotEmpty()) {
+    toastr()->info('Este producto ya existe en tu carrito de compras');
+    return redirect()->route('favoritos');
+  }
 
 
 
-$producto= Productomodelo::with('hasManyImagenes')->
-where('slug',$request->id)->first();
+  $producto= Productomodelo::with('hasManyImagenes')->
+  where('slug',$request->id)->first();
 
-            $cartItem = Cart::add($producto->slug ,$producto->nombre_producto , $request->qty , $producto->precioventa_iva , [
-              'iva' => $producto->iva,
-                    'imagen' =>  $producto->hasManyImagenes->first()->urlimagen ,
-            ])->associate('App\Imgproductomodelo');
+  $cartItem = Cart::add($producto->slug ,$producto->nombre_producto , $request->qty , $producto->precioventa_iva , 0 ,[
+    'iva' => $producto->iva,
+    'imagen' =>  $producto->hasManyImagenes->first()->urlimagen ,
+  ])->associate('App\Imgproductomodelo');
 
 
 
@@ -232,14 +284,14 @@ where('slug',$request->id)->first();
 
 
 
-  Cart::instance('favoritos')->remove($rowId);
+    Cart::instance('favoritos')->remove($rowId);
+        toastr()->success('Producto movido al carrito de compras'); // and this one
 
-       toast('Producto movido al carrito de compras','success','top-right');
-       return redirect()->route('favoritos');
- 
+        return redirect()->route('favoritos');
+        
  //  }
-   
-   }
+        
+      }
 
 
 
@@ -247,34 +299,34 @@ where('slug',$request->id)->first();
 
 
 
-   public function swichtToFavorite($id)
-   {
+      public function swichtToFavorite($id)
+      {
 
 
 
-    $request=Cart::instance('default')->get($id);
+        $request=Cart::instance('default')->get($id);
 
- Cart::instance('default')->remove($id);
+        Cart::instance('default')->remove($id);
 //verificar si el producto ya existe en el carrito
-    $duplicates = Cart::instance('favoritos')->search(function ($cartItem, $rowId) use ($id) {
+        $duplicates = Cart::instance('favoritos')->search(function ($cartItem, $rowId) use ($id) {
 
-        return $cartItem->id === $id;
-    });
+          return $cartItem->id === $id;
+        });
 
- 
+        
 
 
-    if ($duplicates->isNotEmpty()) {
-       toast('Este producto ya existe en tus favoritos','info','top-right');
-       return redirect()->route('resumen');
-   }
+        if ($duplicates->isNotEmpty()) {
+          toastr()->info('Este producto ya existe en tu carrito de compras');
+          return redirect()->route('resumen');
+        }
 
 //dd($request);
-   $producto= Productomodelo::with('hasManyImagenes')->
-where('slug',$request->id)->first();
+        $producto= Productomodelo::with('hasManyImagenes')->
+        where('slug',$request->id)->first();
 
-Cart::instance('favoritos')->add($request->id ,$request->name , 1 , $producto->precioventa_iva);
-    
+        Cart::instance('favoritos')->add($request->id ,$request->name , 1 , $producto->precioventa_iva);
+        
 /*
    Cart::instance('favoritos')->add($request->id ,$request->name , 1 , $request->price , [
     'id_producto' => $request->id,
@@ -289,9 +341,8 @@ Cart::instance('favoritos')->add($request->id ,$request->name , 1 , $producto->p
            'imagen' => $request->options->imagen,
 ])->associate('App\Imgproductomodelo');
 */
- 
-   toast('Producto agregado a favoritos','success','top-right');
-   return redirect()->route('resumen');
+toastr()->success('Producto agregado a favoritos');
+return redirect()->route('resumen');
 
 
 }

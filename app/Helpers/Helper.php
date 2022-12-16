@@ -11,31 +11,44 @@ use App\ShoppingCart;
 use App\Estados;
 use App\Ciudades;
 use App\Proveedores_Trans;
+use App\Parametromodelo;
 use App\User;
+
+function getParams() {
+    //$data = number_format((float)$price, 2, '.', ',');
+  //sin coma sin decimales
+  return Parametromodelo::find(1);
+}
 
 
 
 function formatPrice($price) {
     //$data = number_format((float)$price, 2, '.', ',');
   //sin coma sin decimales
-    $data = number_format((float)$price, 0, '', '.');
-    return $data;
+  $data = number_format((float)$price, 0, '.', ',');
+  return $data;
 }
 
+function gramsToKilograms($weight) {
+  //en el doc de cambios el ing coloco que los gramos sean enteros asi que se convierte a int
+  $grams= intval($weight);
+  $kilograms = $grams /  1000;
+  return $kilograms;
+}
 
 
 
 //por especificaciones del servidor otra vez, file_get_contents no esta disponivble aca un workaround
 function url_get_contents ($Url) {
-    if (!function_exists('curl_init')){
-        die('CURL is not installed!');
-    }
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $Url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    $output = curl_exec($ch);
-    curl_close($ch);
-    return $output;
+  if (!function_exists('curl_init')){
+    die('CURL is not installed!');
+  }
+  $ch = curl_init();
+  curl_setopt($ch, CURLOPT_URL, $Url);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+  $output = curl_exec($ch);
+  curl_close($ch);
+  return $output;
 }
 
 
@@ -45,7 +58,7 @@ function totaliva($slug) {
   $product_iva=$product->iva/100;
 
   if ($product_iva <= 0) {
-     return 0;
+   return 0;
  }
 
  $iva=$product->precioventa_iva * $product_iva;
@@ -86,8 +99,8 @@ function image($path)
 
   if( empty($path) ){
 
-    return asset('images/no_products_found.jpg');
-}else{
+    return asset('images/no_products_found.png');
+  }else{
 
     try{
      $header =  url_get_contents($path);
@@ -95,26 +108,26 @@ function image($path)
 
      if (isset($header)) {
       return $path;
-  }
-}catch(\Exception $e){
-  return asset('images/no_products_found.jpg');
+    }
+  }catch(\Exception $e){
+    return asset('images/no_products_found.png');
     }//endtry catch
 
 
   //  return $path->urlimagen;
-}
+  }
     //return $path && file_exists($path) ? asset($path) : asset('images/no_products_found.jpg');
 }
 
 function imagePromo($path)
 {
   if( empty($path) ){
-    return asset('images/no_products_found.jpg');
-}else{
+    return asset('images/no_products_found.png');
+  }else{
 
 
     return $path;
-}
+  }
     //return $path && file_exists($path) ? asset($path) : asset('images/no_products_found.jpg');
 }
 
@@ -127,16 +140,16 @@ function imageVerify($path)
 
   if( empty($path) ){
     return asset('images/350x65.png');
-}else{
+  }else{
     try{
      $header =  url_get_contents($path);
      // $header = file_get_contents($path);
      if (isset($header)) {
       return $path;
+    }
+  }catch(\Exception $e){
+    return asset('images/350x65.png');
   }
-}catch(\Exception $e){
-  return asset('images/350x65.png');
-}
 }
 }
 
@@ -203,52 +216,52 @@ function unitario($id){
 
   if ($moneda == 1){
     $precioventa_iva = $precioventa_iva*$trmdeldia;
-}
+  }
 
 
 
-if ($promocion == '1'){
+  if ($promocion == '1'){
 
- $fechapromocion_inicial = DB::table('productos')
- ->where('id', $producto_id)
- ->select('fechapromocion_inicial')
- ->value('fechapromocion_inicial');
+   $fechapromocion_inicial = DB::table('productos')
+   ->where('id', $producto_id)
+   ->select('fechapromocion_inicial')
+   ->value('fechapromocion_inicial');
 
- $fechapromocion_final = DB::table('productos')
- ->where('id', $producto_id)
- ->select('fechapromocion_final')
- ->value('fechapromocion_final');
+   $fechapromocion_final = DB::table('productos')
+   ->where('id', $producto_id)
+   ->select('fechapromocion_final')
+   ->value('fechapromocion_final');
 
- $id_tipodepromocion = DB::table('productos')
- ->where('id', $producto_id)
- ->select('id_tipodepromocion')
- ->value('id_tipodepromocion');
-
-
+   $id_tipodepromocion = DB::table('productos')
+   ->where('id', $producto_id)
+   ->select('id_tipodepromocion')
+   ->value('id_tipodepromocion');
 
 
- if (  $fechapromocion_inicial <= $now &&  $fechapromocion_final   >= $now ) {
+
+
+   if (  $fechapromocion_inicial <= $now &&  $fechapromocion_final   >= $now ) {
 //si el tipo de promocion 1 es porcentaje sino es dinero
 
-   $valor_promocion = DB::table('productos')
-   ->where('id', $producto_id)
-   ->select('valor_promocion')
-   ->value('valor_promocion');
+     $valor_promocion = DB::table('productos')
+     ->where('id', $producto_id)
+     ->select('valor_promocion')
+     ->value('valor_promocion');
 
-   if ($id_tipodepromocion == '1'){
+     if ($id_tipodepromocion == '1'){
       $descuento  = (($precioventa_iva * $valor_promocion) / 100);
       $total=  $precioventa_iva-$descuento;
       return $total;
 
-  }else{
+    }else{
 
       $total  = $precioventa_iva - $valor_promocion;
       return $total;
     }//endelse
                   $valorbruto = ($precioventa_iva * $trm); // Valor tachado en la plantilla
                   $valorneto  = ($valorbruto - $descuento); // valor no tachado en negrita
-              }else{
-               return $precioventa_iva;
+                }else{
+                 return $precioventa_iva;
  } //endif fecha promocion
 
 }else{
@@ -256,11 +269,11 @@ if ($promocion == '1'){
               } //si el producto no esta en promocion se muestra el precio normal
 
               return $precioventa_iva;
-          }
+            }
 
 
 
-          function verificar_si_producto_carrito_existe(){
+            function verificar_si_producto_carrito_existe(){
 
               foreach (Cart::instance('default')->content() as $product) {
 
@@ -280,101 +293,101 @@ if ($promocion == '1'){
 
 
                 if (!$busqueda->isEmpty() ) {
-                   update_price();
+                 update_price();
 
                }else{
                 toast('Estimado usuario. Algunos productos no se encuentran en existencia y fueron eliminados.','info','top-right');
                 Cart::instance('default')->remove($product->rowId);
+              }
+
             }
 
+          }
+
+
+          function update_price(){
+
+            foreach (Cart::content() as $product) {
+
+              $precioventa_iva = DB::table('productos')
+              ->join('imgproductos', 'productos.id', 'imgproductos.id_producto')
+              ->where('imgproductos.id', $product->id)->select('precioventa_iva')->value('precioventa_iva');
+
+              Cart::update($product->rowId, [
+                'price' => $precioventa_iva,
+              ]);
+
+            }
+          }
+
+
+          function verificar_si_producto_favoritos_existe(){
+
+            foreach (Cart::instance('favoritos')->content() as $product) {
+
+              $producto = DB::table('productos')
+              ->join('imgproductos', 'productos.id', 'imgproductos.id_producto')
+              ->where('imgproductos.id', $product->id)->get();
+
+              $id_provedor= $product->options->id_provedor;
+              $referencia= $product->options->referencia;
+
+              $busqueda=DB::table('productos')
+              ->join('imgproductos', 'productos.id', 'imgproductos.id_producto')
+              ->where('productos.id_provedor', $id_provedor)
+              ->where('productos.referencia', $referencia)
+              ->get();
+
+
+              if (!$busqueda->isEmpty() ) {
+
+               update_price();
+
+             }else{
+              toast('Estimado usuario. Algunos productos no se encuentran en existencia y fueron eliminados.','info','top-right');
+              Cart::instance('favoritos')->remove($product->rowId);
+            }
+
+
+          }
         }
 
-    }
 
+        function setActiveCategory($categoria, $output = 'active')
+        {
+          return request()->categoria == $categoria ? $output : '';
+        }
 
-    function update_price(){
-
-        foreach (Cart::content() as $product) {
-
-          $precioventa_iva = DB::table('productos')
-          ->join('imgproductos', 'productos.id', 'imgproductos.id_producto')
-          ->where('imgproductos.id', $product->id)->select('precioventa_iva')->value('precioventa_iva');
-
-          Cart::update($product->rowId, [
-            'price' => $precioventa_iva,
-        ]);
-
-      }
-  }
-
-
-  function verificar_si_producto_favoritos_existe(){
-
-    foreach (Cart::instance('favoritos')->content() as $product) {
-
-      $producto = DB::table('productos')
-      ->join('imgproductos', 'productos.id', 'imgproductos.id_producto')
-      ->where('imgproductos.id', $product->id)->get();
-
-      $id_provedor= $product->options->id_provedor;
-      $referencia= $product->options->referencia;
-
-      $busqueda=DB::table('productos')
-      ->join('imgproductos', 'productos.id', 'imgproductos.id_producto')
-      ->where('productos.id_provedor', $id_provedor)
-      ->where('productos.referencia', $referencia)
-      ->get();
-
-
-      if (!$busqueda->isEmpty() ) {
-
-         update_price();
-
-     }else{
-      toast('Estimado usuario. Algunos productos no se encuentran en existencia y fueron eliminados.','info','top-right');
-      Cart::instance('favoritos')->remove($product->rowId);
-  }
-
-
-}
-}
-
-
-function setActiveCategory($categoria, $output = 'active')
-{
-  return request()->categoria == $categoria ? $output : '';
-}
-
-function getTrm($producto)
-{
-  return request()->producto == $categoria ? $output : '';
-}
+        function getTrm($producto)
+        {
+          return request()->producto == $categoria ? $output : '';
+        }
 
 
 
-function renderNode($node) {
+        function renderNode($node) {
 
-  $html = '<ul>';
+          $html = '<ul>';
 
-  if( $node->isLeaf() ) {
-    $html .= "<li>". "<a href='{{url('test')}}'> " . $node->name ."</a>" ."</li>";
-} else {
-    $html .= "<li>". $node->name;
+          if( $node->isLeaf() ) {
+            $html .= "<li>". "<a href='{{url('test')}}'> " . $node->name ."</a>" ."</li>";
+          } else {
+            $html .= "<li>". $node->name;
 
-    $html .= "<ul>";
+            $html .= "<ul>";
 
-    foreach($node->children as $child)
-      $html .= renderNode($child);
+            foreach($node->children as $child)
+              $html .= renderNode($child);
 
-  $html .= "</ul>";
+            $html .= "</ul>";
 
-  $html .="</li>";
-}
+            $html .="</li>";
+          }
 
-$html .= "</ul>";
+          $html .= "</ul>";
 
-return $html;
-}
+          return $html;
+        }
 
 
 
@@ -388,129 +401,76 @@ return $html;
 
 
 
-function precioNew($slug) {
+        function precioNew($slug) {
 
-  $producto=Productomodelo::
-  with('hasManyPromociones')->
-  where('slug', $slug)->first();
+          $producto=Productomodelo::
+          //with('hasManyPromociones')->
+          with('promocion')->
+          where('slug', $slug)->first();
 
-  if (!$producto) {
-    return 0;
-}
+          if (!$producto) {
+            return 0;
+          }
 
-$now = Carbon::now()->format('Y-m-d');
-$trmdeldia =DB:: table('trm')->select('valor_trm')->where('fecha' , $now)->orderBy('id', 'DESC')->value('valor_trm');
-$trm=null;
-
-
+          $now = Carbon::now()->format('Y-m-d');
+          $trmdeldia =DB:: table('trm')->select('valor_trm')->where('fecha' , $now)->orderBy('id', 'DESC')->value('valor_trm');
+/*
 
 
           //$utilidad= $producto->porcentaje_utilidad/100 * $producto->preciocosto_iva;
-$utilidad= $producto->porcentaje_utilidad/100 * $producto->preciocosto;
+          $utilidad= $producto->porcentaje_utilidad/100 * $producto->preciocosto;
 
-if( $producto->iva ==0){
-    $iva=1;
-}else{
-    $iva=$producto->iva/100+1;
-}
+          if( $producto->iva ==0){
+            $iva=1;
+          }else{
+            $iva=$producto->iva/100+1;
+          }
 
-
-$precio_costo=  (float)$producto->preciocosto;
-$precio_costo_iva= $precio_costo*$iva;
-$precio_costo_utilidad=$producto->preciocosto+$utilidad;
-$precio= $precio_costo_utilidad * $iva ;
-
-
-
-if ($producto->id_moneda == 1){
-    $precio = round ($precio*$trmdeldia);
-}else{
-    $precio=round($precio);
-}
+          $precio_costo=  (float)$producto->preciocosto;
+          $precio_costo_iva= $precio_costo*$iva;
+          $precio_costo_utilidad=$producto->preciocosto+$utilidad;
+          $precio= $precio_costo_utilidad * $iva ;
+*/
 
 
-if (count($producto->hasManyPromociones) ) {
+          $precio = $producto->precioventa_iva;
 
-    if (
-      ($producto->hasManyPromociones->first()->date_start <= $now  &&  $producto->hasManyPromociones->first()->date_end >= $now)
+          if ($producto->id_moneda == 1){
+            $precio = round ($precio*$trmdeldia);
+          }else{
+            $precio=round($precio);
+          }
 
-      &&
-      ($producto->hasManyPromociones->first()->hour_start <= date("h:i:s")
-        &&
-        $producto->hasManyPromociones->first()->hour_end >= date("h:i:s"))
-  ) {
+          
+          if($producto->promocion()->exists() ){
+            $promocion = $producto->promocion()->first();
+            $start = Carbon::parse($promocion->start);
+            $end = Carbon::parse($promocion->end);
+            
+            $check = Carbon::now()->between($start, $end);
 
-       if ($producto->hasManyPromociones->first()->tipo_promocion == 1){
-          $descuento  = (($precio * $producto->hasManyPromociones->first()->valor) / 100);
-          $total=  $precio-$descuento;
-
-          return round($total);
-      }else{
-
-          $total  = $precio - $producto->hasManyPromociones->first()->valor;
-
-          return round($total);
-    }//endelse
-
-                  $valorbruto = ($precio * $trm); // Valor tachado en la plantilla
-                  $valorneto  = ($valorbruto - $descuento); // valor no tachado en negrita
+            if($check){
+              //tiene promo aplicarla
+                  
+              if ($promocion->id_tipodepromocion == 0){
+                $descuento  = (($precio * $promocion->valor) / 100);
+                $total=  $precio-$descuento;
               }else{
+                $total  = $precio - $promocion->valor;
+              }//endelse
+              return round($total);
 
-                  if ($producto->id_tipodepromocion == '1'){
-                    $descuento  = (($precio * $producto->valor_promocion) / 100);
-                    $total=  $precio-$descuento;
-
-                    return round($total);
-
-
-                }else{
-
-                    $total  = $precio - $producto->valor_promocion;
-                    return round($total);
-    }//endelse
+            }else{
+          
 
 
- } //endif fecha promocion
+            }
 
+          }
+//sino hay promo
+return round($precio);
+          
 
-}else{
-
-  if ($producto->promocion == 1){
-
-    if (  $producto->fechapromocion_inicial <= $now &&  $producto->fechapromocion_final   >= $now ) {
-
-      if ($producto->id_tipodepromocion == 1){
-
-
-        $descuento  = (($precio * $producto->valor_promocion) / 100);
-        $total=  $precio-$descuento;
-        return round($total);
-
-    }else{
-
-        $total  = $precio - $producto->valor_promocion;
-        return round($total);
-    }//endelse
-                  $valorbruto = ($precio * $trm); // Valor tachado en la plantilla
-                  $valorneto  = ($valorbruto - $descuento); // valor no tachado en negrita
-              }else{
-
-                  if ($producto->id_tipodepromocion == '1'){
-                    $descuento  = (($precio * $producto->valor_promocion) / 100);
-                    $total=  $precio-$descuento;
-                    return round($total);
-
-                }else{
-
-                    $total  = $precio - $producto->valor_promocion;
-                    return round($total);
-    }//endelse
-
-
- } //endif fecha promocion
-
-}//si el producto no esta en promocion se muestra el precio normal
-}//else hasmanyprmociones
 
 
 
@@ -524,95 +484,72 @@ return round($precio);
 function old_price($slug){
 
 
-  $producto=Productomodelo::where('slug', $slug)->first();
+  $producto=Productomodelo::
+  with('promocion')
+  ->where('slug', $slug)->first();
   if (!$producto) {
     return 0;
-}
+  }
 
-$now = Carbon::now()->format('Y-m-d');
-$trmdeldia =DB:: table('trm')->select('valor_trm')->where('fecha' , $now)->orderBy('id', 'DESC')->value('valor_trm');
-
-
-$trm=null;
+  $now = Carbon::now()->format('Y-m-d');
+  $trmdeldia =DB:: table('trm')->select('valor_trm')->where('fecha' , $now)->orderBy('id', 'DESC')->value('valor_trm');
 
 
-$utilidad= $producto->porcentaje_utilidad/100 * $producto->preciocosto_iva;
-if( $producto->iva ==0){
+  $trm=null;
+
+
+  $utilidad= $producto->porcentaje_utilidad/100 * $producto->preciocosto_iva;
+  if( $producto->iva ==0){
     $iva=1;
-}else{
+  }else{
     $iva=$producto->iva/100+1;
-}
+  }
 
 
-$precio_costo=  (float)$producto->preciocosto;
-$precio_costo_iva= $precio_costo*$iva;
-$precio_costo_utilidad=$producto->preciocosto+$utilidad;
-$precio= $precio_costo_utilidad * $iva ;
+  $precio_costo=  (float)$producto->preciocosto;
+  $precio_costo_iva= $precio_costo*$iva;
+  $precio_costo_utilidad=$producto->preciocosto+$utilidad;
+  $precio= $precio_costo_utilidad * $iva ;
 
 
-if ($producto->id_moneda == 1){
+  if ($producto->id_moneda == 1){
     $precio = round ($precio*$trmdeldia);
-}else{
+  }else{
     $precio=round($precio);
-}
+  }
+
+  $date = Carbon::now();
 
 
-if (count($producto->hasManyPromociones) ) {
+  if ( $producto->promocion_id != null ) {
+    $promocion = $producto->promocion()->first() ;
+    try{
+      //si algo falla aca olvidalo.. continua
+      $start = Carbon::parse($promocion->start);
+      $end = Carbon::parse($promocion->end);
 
-    if (
-      ($producto->hasManyPromociones->first()->date_start <= $now  &&  $producto->hasManyPromociones->first()->date_end >= $now)
-      &&
-      ($producto->hasManyPromociones->first()->hour_start <= date("h:i:s")
-        &&
-        $producto->hasManyPromociones->first()->hour_end >= date("h:i:s"))
+      $check = Carbon::now()->between($start, $end);
+      if($check == true){
 
-  ) {
+        if($promocion->tipo_promocion == 1 ){
+          //procentaje % de precio
+          $precio = $precio - ($precio * ($promocion->valor /100) ) ;
+        }else{
+          $precio = $precio - $promocion->valor;
+        }
+      }
 
-       if ($producto->hasManyPromociones->first()->tipo_promocion == 1){
-          $total  = $precio;
-          return round($total);
-      }else{
-
-          $total  = $precio;
-
-          return round($total);
-    }//endelse
-
-}else{
-    return $precio.'promocion terminada';
- } //endif fecha promocion
+    }catch(\Exception $e ){
+      //continue;
+    }
 
 
-}else{
-
-  if ($producto->promocion == 1){
+  }
 
 
-    if ( $producto->fechapromocion_inicial <= $now &&  $producto->fechapromocion_final   >= $now ) {
-//si el tipo de promocion 1 es porcentaje sino es dinero
+  return $precio;
 
 
-
-      if ($producto->id_tipodepromocion == 1){
-        $descuento  = (($precio * $producto->valor_promocion) / 100);
-        $total=  $precio-$descuento;
-        return $precio;
-
-    }else{
-
-        $total  = $precio - $producto->valor_promocion;
-        return $precio;
-    }//endelse
-
-}else{
- return $precio;
- } //endif fecha promocion
-
-}
-
-} //si el producto no esta en promocion se muestra el precio normal
-
-return $precio;
 }
 
 

@@ -8,11 +8,16 @@ use Validator;
 use Notification;
 use App\Notifications\SendEmailToAdmin;
 use App\Parametromodelo;
+use App\Productomodelo;
+use App\Traits\SEOTrait;
 
 class ContactController extends Controller
 {
+	use SEOTrait;
+
 	public function index()
 	{
+
 		$categorias=Categorian1modelo::orderBy('nombrecategoria' ,   'asc')->get();
 		$cat2=1;
 		$id=null;
@@ -33,11 +38,20 @@ class ContactController extends Controller
 		$cat2=1;
 		$id=null;
 
-
+		$this->setSEOManager();
+		$ids2= Productomodelo::
+		where('estado', true)
+		->with('hasManyImagenes')
+		->where('productos.cantidad', '!=', 0)
+		//->where('id_categorian1', '=', $id)
+		->pluck('id');
+		
+		
 		return view('layouts.contacto')->with([
 			'categorias'=> $categorias,
 			'cat2'=> $cat2,
 			'id'=> $id,
+			'ids2'=> $ids2,
 		]);
 
 	}

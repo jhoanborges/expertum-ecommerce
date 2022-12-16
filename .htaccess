@@ -9,12 +9,22 @@ php_value post_max_size 512M
 php_value upload_max_filesize 256M
 
     RewriteEngine On
+ 
+   #Forzar HTTPS
+    
+   RewriteCond %{HTTPS} off 
+    
+   RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+   
+    
 
     RewriteCond %{REQUEST_FILENAME} -d [OR]
     RewriteCond %{REQUEST_FILENAME} -f
     RewriteRule ^ ^$1 [N]
 
     RewriteCond %{REQUEST_URI} (\.\w+$) [NC]
+    
+    #Ocultar public - Es necesario que index.php este en el mismo nivel de este archivo .htaccess
     RewriteRule ^(.*)$ public/$1 
 
     RewriteCond %{REQUEST_FILENAME} !-d

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use DB;
+use App\Parametromodelo;
 use App\Clientemodelo;
 use App\Facturamodelo;
+
 use App\Detallefacturamodelo;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -35,6 +37,9 @@ use Illuminate\Support\Str;
 use App\Identificacion;
 use App\Factura;
 use App\DetalleFactura;
+use App\Traits\CrediBancoTrait;
+use App\Traits\FacturasTrait;
+use Illuminate\Support\Facades\Redirect;
 
 use App\Http\Controllers\TransportadoresController;
 
@@ -44,6 +49,8 @@ use App\Http\Controllers\Includes\Flete_Saferbo;
 
 class CheckoutController extends Controller
 {
+	use CrediBancoTrait;
+	use FacturasTrait;
 
 	public function getModifiedNameAttribute($value)
 	{
@@ -69,8 +76,9 @@ class CheckoutController extends Controller
 
 	public function index(){
 		if (Cart::content()->count() <= 0 ) {
-			toast('El carrito de compras esta vacío','warning','top-right');
-			return redirect()->back();
+
+			toast('El carrito de compras está vacío','warning','top-right');
+			return redirect()->route('resumen');
 		}else{
 
 			$this->storeCart();
@@ -129,6 +137,18 @@ class CheckoutController extends Controller
 		->get();
 
 
+		$depfacturacion = DB::table('region')->select('region')
+		->where('id', '=', Auth::user()->id_region)
+		->first();
+
+		$ciufacturacion = DB::table('city')->select('city')
+		->where('id', '=', Auth::user()->id_city)
+		->first();
+
+
+		$transportistas = Transportadores::all();
+		$parametros = Parametromodelo::first();
+
 		if (Auth::user()->tipo==1) {
 			return view('layouts.checkout')->with([
 				'totaliva' => $cont,
@@ -140,6 +160,12 @@ class CheckoutController extends Controller
 				'categorias' => $categorias,
 				'direcciones' => $direcciones,
 				'button' => $button,
+				'dirfacturacion' => Auth::user()->direccion,
+				'telfacturacion' => Auth::user()->telefono,
+				'depfacturacion' => $depfacturacion->region ?? null,
+				'ciufacturacion' => $ciufacturacion->city ?? null,
+				'transportistas' => $transportistas,
+				'parametros' => $parametros,
 			]);
 
 		}else{
@@ -154,6 +180,9 @@ class CheckoutController extends Controller
 				'categorias' => $categorias,
 				'direcciones' => $direcciones,
 				'button' => $button,
+				'transportistas' => $transportistas,
+				'parametros' => $parametros,
+
 			]);
 		}
 
@@ -172,9 +201,8 @@ class CheckoutController extends Controller
 
 
 	public function store(Request $request){
-
-		if (Cart::content()->count() <= 0 ) {
-			toast('El carrito de compras esta vacío','warning','top-right');
+		if ( Cart::content()->count() <= 0 ) {
+			toast('El carrito de compras está vacío','warning','top-right');
 			return redirect()->back();
 		}else{
 
@@ -208,68 +236,76 @@ class CheckoutController extends Controller
 			$valor_flete_tipo_descuento=0;
 			$total_proveedores_trans=0;
 
+			//como el "cargo" no es un valor required en  el frontend
+			//como adicional añado una validacion en el backend
+
+			if( !$request->has('cargos') || $request->cargos == '' || $request->cargos == null){
+				toast('Debes seleccionar un método de envío','warning','top-right');
+				return redirect()->back()->withInput();
+			}
+
 			//esta variable tomara todos los precios de los productos
-			$subtotal=0;
-			$nombres='';
-			$total_iva=0;
-			$base_iva = 0;
 
-///aca cvolver a conectar con saferbo y calcular ciudad y estado
-///
-			//$total_saferbo=0;
-			//$total_saferbo = $request->flete;
-            //
-			//$total_saferbo = $request->vlrflete;
+					//cargo de cliente sinose selecciona el cargo
+		$cargo  = $request->cargos ?? 'cargo_cliente';
+		$total_saferbo=0;
+	
 
-            $servicio = new Flete_Saferbo();
-            $total_saferbo = $servicio->flete($request,$trans->id);
+        if($cargo === 'cargo_cliente'){
+			//si es cargo al cliente, no se calcula el valor del flete
+			$observaciones = 'El comprado ha seleccionado Envío a cargo del cliente. Transportista: ';
+					
 
+			$transportista = Transportadores::
+			where('nombretrasportador', 'like', '%'. $request->transportista.'%')->first();
 
-			//creacion de factura y detalle factura
-            $factura = Factura::create([
-                'name' => $request->entregar,
-                'email' => $request->email,
-                'telefono' => $request->telefono,
-                'tipo_identificacion' => isset(  $request->tipo_identificacion  ) ? $request->tipo_identificacion : 2,
-                'numeroidentificacion' => $request->numero,
-                'direccion' => $request->direccion,
-                'observacion' => $request->observaciones,
-                'id_ciudad' =>$request->city,
-            ]);
+			if($transportista){
+				///el nombre se parece al transportista
+				$observaciones = $observaciones . ' '.$transportista->nombretrasportador;
+			}else{
+				$observaciones = $observaciones . ' '.$request->transportista;
+			}
+			
+			$observaciones = $observaciones .'. Observaciones: ' . $request->observaciones;
 
+            
+        }else if($cargo === 'recoger_tienda'){
+            //flete igual a cero
+			$observaciones = 'El comprado ha seleccionado Recoger en tienda. Observaciones: ' . $request->observaciones;
 
-            foreach (Cart::instance('default')->content() as $i => $producto){
+        }else if($cargo === 'cargo_tienda'){
+			//si es cargo a tienda, se calcula el valor del flete, esta es la primera opcion
 
-                $product = Productomodelo::where('slug' , $producto->id)->first();
-				//$extra1[]= $product->id;
-                $nombres = $nombres.$product->nombre_producto;
+			$servicio = new Flete_Saferbo();
+			$total_saferbo = $servicio->flete($request,$trans->id);
+		
+			if($total_saferbo == 'error'){
+				toast('No se ha podido conectar con el servidor de envíos, por favor, intente nuevamente','warning','top-right');
+			return redirect()->back()->withInput();
+			}
 
-				//$total_productos = $total_productos + precioNew($product->slug) ;
-				//$total_iva       = $total_iva + totaliva($product->slug) ;
+			$observaciones = 'El comprado ha seleccionado Envío a cargo de la tienda. Observaciones: ' . $request->observaciones;
 
-                $valor_producto = precioNew($product->slug)*$producto->qty;
-                $precio_base    = round(($valor_producto  /  ($producto->options->iva/100 +1)), 2);
-                if ($producto->options->iva != 0){
-                   $base_iva = $base_iva + $precio_base;
-               }
-               $subtotal       = $subtotal + $valor_producto ;
-               $total_iva      = round($total_iva + ($valor_producto - $precio_base ), 2);
-				//$total_iva    = $total_iva + totaliva($product->slug) ;
+        }else{
+			toast('Debe seleccionar un método de envío','warning','top-right');
+			return redirect()->back();
+        }
 
-               $detalle_factura = DetalleFactura::create([
-                   'id_factura' =>$factura->id,
-                   'id_producto' =>$product->id,
-                   'id_provedor' => $product->id_provedor,
-                   'referencia' => $product->referencia,
-                   'name' => $product->nombre_producto,
-                   'descuento' => isset(    $product->hasManyPromociones->first()->tipo_promocion  ) ?  $product->hasManyPromociones->first()->tipo_promocion : null,
-                   'valor' =>isset(    $product->hasManyPromociones->first()->valor  ) ?  $product->hasManyPromociones->first()->valor : null,
-                   'iva' =>$product->iva,
-                   'total' =>precioNew($product->slug),
-                   'cantidad' =>$producto->qty,
-               ]);
+			/*
+			if( ($total_saferbo <= 0) || ($total_saferbo == null) ){
+				toast('Error al obtener el valor del flete. Contacte al administrador.','error','top-right');
+				return redirect()->back();
+			}
+			*/
 
-			}//end foreach
+			//creacion de la factura y detalle de factura
+			$transaction_bill_details = $this->createFacturaYDetalle($request, $total_saferbo, $observaciones);
+
+			$nombres = $transaction_bill_details['nombres'];
+			$base_iva = $transaction_bill_details['base_iva'];
+			$subtotal = $transaction_bill_details['subtotal'];
+			$total_iva = $transaction_bill_details['total_iva'];
+			$factura = $transaction_bill_details['factura'];
 
 			$totalizacion = $subtotal + $total_saferbo;
 
@@ -278,20 +314,8 @@ class CheckoutController extends Controller
 			$moneda_name=strtoupper($moneda->name);
 
 			$pasarela = Pasarelas::where('predeterminado', true)->first();
-			$mercadopago= MercadoPago::where('predeterminado', true)->first();
-			$epayco= ePayco::where('predeterminado', true)->first();
-
-
-			//aca agregar un switch case
-			if ($pasarela) {
-				$pasarelaPago=1;
-			}else if($mercadopago){
-				$pasarelaPago=2;
-			}else if ($epayco) {
-				$pasarelaPago=3;
-			}
-
-
+			//$mercadopago= MercadoPago::where('predeterminado', true)->first();
+			//$epayco= ePayco::where('predeterminado', true)->first();
 
 			$apiKey = null;
 			$merchantId = null;
@@ -301,10 +325,139 @@ class CheckoutController extends Controller
 			$preference=null;
 
 
-			//Cart::destroy();
-			//ShoppingCart::deleteCartRecord(Auth::id(), 'default');
-			//Cart::store(Auth::id())
+			$pasarelaPago=$pasarela->type;
 
+			if($pasarelaPago == 'payu'){
+
+				$apiKey =  $pasarela->apikey;
+				$merchantId = $pasarela->merchantid;
+				$accountId = $pasarela->accountid;
+				$endpoint_url ="https://checkout.payulatam.com/ppp-web-gateway-payu/";
+				
+				if(env('APP_ENV') == 'local'){
+				//TEST PAYU
+					$merchantId = "508029";
+					$apiKey =  "4Vj8eK4rloUd272L48hsrarnUA";
+					$accountId = "512321";
+					$endpoint_url ="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/";
+					//END TEST PAYU
+				}
+
+				$signature = $apiKey . "~" . $merchantId . "~" . $factura->id . "~" . $totalizacion . "~" . $moneda_name;
+				$firma = md5($signature);
+
+				return view('layouts.checkout_landing')->with([
+					'endpoint_url'=>$endpoint_url,
+					'type'=>$pasarelaPago,
+					'firma' => $firma,
+					'merchantId' => $merchantId,
+					'accountId' => $accountId,
+					'descripcionproducto' => $newname,
+					'reference' => $factura->id,
+					'base_iva' => $base_iva,
+					'iva'=> $total_iva,
+					'moneda_name'=>$moneda_name,
+					'fullname'=> $request->entregar,
+					'direccion'=> $request->direccion,
+					'totalizacion'=> $totalizacion,
+					'request' => $request->all(),
+					'test'=> env('APP_ENV') == 'local'  ? 1 : 0 ,
+					'return_url'=>$pasarela->endpoint,
+					'callback_url'=>$pasarela->return_url,
+					]);
+
+
+			}else if($pasarelaPago == 'credibanco'){	
+				$transaction = $this->createOrderCrediBanco($totalizacion, $factura->id);
+				return Redirect::to($transaction['formUrl']);
+
+			}else  if($pasarelaPago == 'epayco'){
+
+				$products_names = '';
+				foreach (Cart::content() as $product) {
+					$products_names = $products_names . ' '. $product->name;
+				}
+
+				return view('layouts.checkout_landing')->with([
+					'type'=>$pasarelaPago,
+					'products_names'=>$products_names,
+					'key'=>$pasarela->apikey,
+					'response'=>$pasarela->response,
+					'test'=> env('APP_ENV') == 'local'  ? 'true' : 'false' , //$pasarela->modo_prueba,
+					'confirmation'=>$pasarela->confirmation,
+					'p_key'=>$pasarela->username, //p_key as username in database
+					'client_id'=>$pasarela->client_id,
+					'private_key'=>$pasarela->password, //private_key as password in database
+					'request' => $request->all(),
+					'base_iva' => $base_iva,
+					'iva'=> $total_iva,
+					'moneda_name'=>$moneda_name,
+					'totalizacion'=> $totalizacion,
+					'reference' => $factura->id,
+				]);
+
+
+			}else  if($pasarela->type == 'mercadopago'){
+
+				$mp = new MP ($pasarela->client_id, $pasarela->client_secret);
+					$url= 'http://'.$_SERVER['HTTP_HOST'].'/notifications_mp/';
+
+					$preference_data = array (
+						"items" => array (
+							array (
+							//"id"=> "item-ID-1234",
+								"title" => $newname,
+								"picture_url"=> $prodc->urlimagen,
+							//"description"=> "Item description",
+								"quantity" => 1,
+						"currency_id" => $moneda_name, // Available currencies at: https://api.mercadopago.com/currencies
+						"unit_price" => intval($totalizacion)
+					)
+						),
+
+						"payer" => array (
+							array (
+								"name"=> Auth::user()->name,
+								"surname"=> Auth::user()->apellidos,
+								"email"=> Auth::user()->email,
+							)
+						),
+
+						"back_urls" => array (
+							"success"=> "https://www.expertum.co",
+							"failure"=> "http://www.expertum.co",
+							"pending"=> "http://www.expertum.co"
+						),
+
+						"notification_url"=> "http://aministracion.expertum.com.co/admin/public/notifications_mp",
+						"external_reference"=> $detallesfactura->id_factura,
+
+					);
+					$preference = $mp->create_preference($preference_data);
+
+					return view('layouts.checkout_landing')->with([
+						'type'=>$pasarelaPago,
+						'firma' => $firma,
+						'merchantId' => $merchantId,
+						'accountId' => $accountId,
+						'descripcionproducto' => $newname,
+						'reference' => $factura->id,
+						'iva'=> $total_iva,
+						'moneda_name'=>$moneda_name,
+						'fullname'=> $request->entregar,
+						'direccion'=> $request->direccion,
+						'totalizacion'=> $totalizacion,
+						'pasarelaPago'=> $pasarelaPago,
+						'preference' => $preference,
+						'request' => $request->all(),
+					]);
+
+			}else{
+				toast('No hay métodos de pago disponible. Contacta al administrador','error','top-right');
+				return redirect()->back();
+			}
+
+	
 			$factura_update = Factura::where('id', $factura->id)->update([
 				'id_transportador' => $trans->id,
 				'flete' => $total_saferbo,
@@ -313,133 +466,15 @@ class CheckoutController extends Controller
 			]);
 
 
-			switch ($pasarelaPago) {
+		}
 
-				case 1:
+					//destruir el carrito de compras
+		if(env('APP_ENV') != 'local'){
+			Cart::destroy();
+			Cart::instance('default')->destroy();
+			ShoppingCart::deleteCartRecord(Auth::id(), 'default');
+		}
 
-             if ($pasarela) {
-              $apiKey =  $pasarela->apikey;
-              $merchantId = $pasarela->merchantid;
-              $accountId = $pasarela->accountid;
-
-                  //test payu
-              $merchantId = "508029";
-              $apiKey =  "4Vj8eK4rloUd272L48hsrarnUA";
-              $accountId = "512321";
-
-
-              $signature = $apiKey . "~" . $merchantId . "~" . $factura->id . "~" . $totalizacion . "~" . $moneda_name;
-              $firma = md5($signature);
-
-              return view('layouts.checkout_landing')->with([
-               'firma' => $firma,
-               'merchantId' => $merchantId,
-               'accountId' => $accountId,
-               'descripcionproducto' => $newname,
-               'reference' => $factura->id,
-               'base_iva' => $base_iva,
-               'iva'=> $total_iva,
-               'moneda_name'=>$moneda_name,
-               'fullname'=> $request->entregar,
-               'direccion'=> $request->direccion,
-               'totalizacion'=> $totalizacion,
-               'request' => $request->all(),
-           ]);
-
-
-          }
-
-          break;
-
-          case 2:
-
-          if ($mercadopago) {
-              $mp = new MP ($mercadopago->client_id, $mercadopago->client_secret);
-              $url= 'http://'.$_SERVER['HTTP_HOST'].'/notifications_mp/';
-
-              $preference_data = array (
-               "items" => array (
-                array (
-							//"id"=> "item-ID-1234",
-                 "title" => $newname,
-                 "picture_url"=> $prodc->urlimagen,
-							//"description"=> "Item description",
-                 "quantity" => 1,
-						"currency_id" => $moneda_name, // Available currencies at: https://api.mercadopago.com/currencies
-						"unit_price" => intval($totalizacion)
-					)
-            ),
-
-               "payer" => array (
-                array (
-                 "name"=> Auth::user()->name,
-                 "surname"=> Auth::user()->apellidos,
-                 "email"=> Auth::user()->email,
-             )
-            ),
-
-               "back_urls" => array (
-                "success"=> "https://www.expertum.co",
-                "failure"=> "http://www.expertum.co",
-                "pending"=> "http://www.expertum.co"
-            ),
-
-               "notification_url"=> "http://aministracion.expertum.com.co/admin/public/notifications_mp",
-               "external_reference"=> $detallesfactura->id_factura,
-
-           );
-              $preference = $mp->create_preference($preference_data);
-
-
-
-              return view('layouts.landing_checkout')->with([
-               'firma' => $firma,
-               'merchantId' => $merchantId,
-               'accountId' => $accountId,
-               'descripcionproducto' => $newname,
-               'reference' => $factura->id,
-               'iva'=> $total_iva,
-               'moneda_name'=>$moneda_name,
-               'fullname'=> $request->entregar,
-               'direccion'=> $request->direccion,
-               'totalizacion'=> $totalizacion,
-
-               'pasarelaPago'=> $pasarelaPago,
-               'preference' => $preference,
-               'epayco' => $epayco,
-               'request' => $request->all(),
-           ]);
-
-
-
-          }
-          break;
-
-          default:
-
-          dd('no existe pasarela de pago predeterminada');
-          return view('layouts.landing_checkout')->with([
-              'firma' => $firma,
-              'merchantId' => $merchantId,
-              'accountId' => $accountId,
-              'descripcionproducto' => $newname,
-              'reference' => $factura->id,
-              'iva'=> $total_iva,
-              'moneda_name'=>$moneda_name,
-              'fullname'=> $request->entregar,
-              'direccion'=> $request->direccion,
-              'totalizacion'=> $totalizacion,
-
-              'pasarelaPago'=> $pasarelaPago,
-              'preference' => $preference,
-              'epayco' => $epayco,
-              'request' => $request->all(),
-          ]);
-
-          break;
-      }
-
-  }
 	}//endf function
 
 
@@ -455,6 +490,43 @@ class CheckoutController extends Controller
 		$cadena = strtoupper($cadena);
 		return $cadena;
 	}
+
+	public function getCart()
+	{
+		$data = Cart::instance('default')->content()->toArray();
+		$objects = [];
+		foreach($data as $cart){
+	
+			$objects [] = $cart;
+		}
+		return response()->json($objects);
+	}
+
+
+		public function removeProductFromCart(Request $request)
+	{
+		Cart::remove($request->id);
+
+		if (Auth::check()) {
+		 $id_2 = Auth::id();
+		 ShoppingCart::deleteCartRecord($id_2, 'default');
+		 Cart::store($id_2);
+	   }
+
+		return response()->json(true , 200);
+	}
+
+
+			public function getCheckoutSettingsForStore(Request $request){
+		 $data = Parametromodelo::first();
+
+		return response()->json( $data , 200);
+	}
+
+
+
+
+	
 
 
 }

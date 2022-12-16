@@ -5,7 +5,7 @@
 <div class="container mb-3 border-bottom">
   <div class="row">
     <div class="col-lg-12">
-      <div class="big-title mayus mb-4 store_title "><b>CONTÁCTANOS</b> </div>
+      <div class="big-title mayus mb-4 store_title "><b>CONTACTANOS:</b> </div>
     </div>
   </div>
 
@@ -57,25 +57,25 @@
 
               </ul>   
             </div>
-
+            {{--
             <div class="form-group">
-              <p class="bold black mb-0 mt-4 title-text">Horario de atención</p>
+              <p class="bold black mb-0 mt-4 title-text">Atención telefónica</p>
 
               <ul>
                 <li class="mb-2 centered-li">
                   <i class="far fa-clock light-gray mr-1" style="font-size: 1.4em;"></i>
 
                   <a href="#" class="black">
-                  8:00 am a 6:00pm · Lunes · Viernes</a>
+                  ·</a>
                 </li>
                 <li class="mb-2 centered-li">
                   <i class="far fa-clock light-gray mr-1" style="font-size: 1.4em;"></i>
                   <a href="#" class="black">
-                  10:00am a 4:00pm · Domingo : Festivos </a>
+                  ·</a>
                 </li>
               </ul>   
             </div>
-
+            --}}
 
           </div>
 
@@ -87,7 +87,7 @@
 
 
             <div class="form-group mt-2">
-              <label class="required bold black">Nombre y Apellido</label>
+              <label class="required bold black title-text">Nombre(s) y Apellido(s)</label>
 
               <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
@@ -99,7 +99,7 @@
             </div>
 
             <div class="form-group">
-              <label class="required bold black">Correo electrónico</label>
+              <label class="required bold black title-text">Correo electrónico</label>
 
               <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
@@ -111,7 +111,7 @@
             </div>
 
             <div class="form-group">
-              <label class="required bold black">Mensaje:</label>
+              <label class="required bold black title-text">Mensaje:</label>
               <textarea rows="4" id="message" class="form-control @error('message') is-invalid @enderror" name="message" required></textarea>
               @error('password')
               <span class="invalid-feedback" role="alert">
@@ -119,6 +119,18 @@
               </span>
               @enderror
             </div>
+
+
+
+
+                <div class="form-group">
+                  <div class="checkbox pmd-default-theme">
+                    <label class="pmd-checkbox pmd-checkbox-ripple-effect">
+                      <span class="ml-1"><a href="/privacidad" target="_blank"><strong>CLIC AQUÍ</strong> para consultar nuestra política de protección de datos personales</a></span>
+                    </label>
+                  </div>
+                </div>
+
 
 
             @if(env('GOOGLE_RECAPTCHA_KEY'))
@@ -130,8 +142,7 @@
 
 
           <div class="form-group mt-3">
-            <button type="submit" class="btn btn-primary w-25">
-            Enviar</button>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-user mr-2"></i>Aceptar Política y Enviar Mensaje</button>
           </div>
 
 
@@ -146,9 +157,6 @@
   </div>
 
   @include('partials.newsletter')
-
-
-
 
   @section('extra-js')
 

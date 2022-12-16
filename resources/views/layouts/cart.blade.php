@@ -6,13 +6,16 @@
 
 @endsection
 
-@section('content')
-{{--
-     <div id="cart-component"
-                data-cart="{{ json_encode($data)}}"
-                ></div>
-                --}}
 
+@section('content')
+
+<div id="cart-summary-component"
+data-heart="{{ asset('img/heart.png') }}"
+data-trash="{{ asset('img/trash.png') }}"
+data-cart="{{ asset('img/cart-white.png') }}"
+></div>
+{{--
+  <>
                 @if(Cart::content()->count()>0)
                 <section class="tables">
                   <div class="container">
@@ -54,10 +57,9 @@
                                       </a>
                                       <p class="mb-0">{{$product->options->brand}} </p>
                                     </td>
-                                    {{--<td class="text-center">{{$product->options->avaliable}}</td>--}}
                                     <td class="text-center"><i class="fas fa-check fa-2x lightgreen"></i></td>
                                     <td class="text-center bold black">$ 
-                                      {{formatPrice( intval( precioNew($product->id)*$product->qty) /($product->options->iva/100+1) )}}
+                                      {{formatPrice( intval( precioNew($product->id)) /($product->options->iva/100+1) )}}
                                     </td>
                                     <td class="text-center"> {{$product->options->iva.''.'%' }}</td>
                                     <td class="text-center">
@@ -88,11 +90,6 @@
 
                                     </td>
                                     <td class="text-center">
-{{--}}
-              <a href="#" class="icons">
-                <img src="{{ asset('img/trash.png') }}" class="img-fluid cart-icon-new">
-            </a>
-            --}}
             <form action="{{route('resumen.destroy', $product->rowId)}}" method="POST" class="">
               {{csrf_field()}}
               {{method_field('DELETE')}}
@@ -160,9 +157,14 @@
 <div class="container">
 
  <div class="row justify-content-end pt-4 pb-2">
+
+  <a href="{{route('home')}}" class="btn btn-primary checkout-button continue-button mr-3">
+  Seguir comprando</a>
+
+
   <a href="{{ route('checkout') }}" class="btn btn-danger checkout-button">
     <img src="{{ asset('img/cart-white.png') }}" class="img-fluid header-icon">
-  Checkout</a>
+  Ir a Pagar $ </a>
 </div>
 </div>
 
@@ -181,8 +183,8 @@
   </div>
 </section>
 @endif
-
-
+</>
+--}}
 
 <!--aca-->
 @include('partials.newsletter')

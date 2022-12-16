@@ -27,41 +27,33 @@ class LoginController extends Controller
 
 
 
+    public function attemptLogin($request) {
 
 
-
-
-public function attemptLogin($request) {
-
-
-    if ( Auth::attempt( ['email' => $request->email, 'password' => $request->password, 'status' => 1], $request->remember )  || 
-        Auth::attempt( ['username' => $request->email, 'password' => $request->password, 'status' => 1], $request->remember ) ) {
+        if ( Auth::attempt( ['email' => $request->email, 'password' => $request->password, 'status' => 1], $request->remember )  || 
+            Auth::attempt( ['username' => $request->email, 'password' => $request->password, 'status' => 1], $request->remember ) ) {
             // Authentication passed...
-        return true;
+            return true;
       //return redirect()->intended( '/' );
     }else{
-    $existe = User::where("email", $request->email)->first();
-    $existe2 = User::where("username", $request->email)->first();
-    $status = User::select('status')->where('email', $request->email )->value('status');
+        $existe = User::where("email", $request->email)->first();
+        $existe2 = User::where("username", $request->email)->first();
+        $status = User::select('status')->where('email', $request->email )->value('status');
 
         if($existe!= null || $existe2!= null ) {
 
             if ($status==0) {
-           toast('¡Estimado usuario! Debe confirmar su dirección de correo electrónico','info','top-right');
+               toast('¡Estimado usuario! Debe confirmar su dirección de correo electrónico','info','top-right');
                 # code...
-            }else{
-        toast('¡Estimado usuario! Existe un error en sus credenciales de acceso. Verifique e intente de nuevo','warning','top-right');
-            }
-        //  return 0;
-        }else{
-            toast('Error! Este usuario no existe','error','top-right');
-            //return 0;
+           }else{
+            toast('¡Estimado usuario! Existe un error en sus credenciales de acceso. Verifique e intente de nuevo','warning','top-right');
         }
-
-
-    }    
-
-
+        //  return 0;
+    }else{
+        toast('Error! Este usuario no existe','error','top-right');
+            //return 0;
+    }
+}    
 
 }
 
