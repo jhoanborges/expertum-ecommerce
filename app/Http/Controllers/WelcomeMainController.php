@@ -204,7 +204,7 @@ if (request()->categoria) {
         $categories=Categorian1modelo::
         where('slug', $id)->
         first();
-  */      
+  */
 
 
 
@@ -268,6 +268,8 @@ if (request()->categoria) {
             }
     //si alguna de estas condiciones se cumple, entonces no se muestra la columna izquierda
         }
+
+
 
         return view('layouts.home')->with([
             'show_pane'=> $show_pane,

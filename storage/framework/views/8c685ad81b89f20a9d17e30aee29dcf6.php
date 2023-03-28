@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('content'); ?>
 
 <?php $__env->startSection('extra-css'); ?>
@@ -453,4 +454,4 @@
 
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('welcome', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\developerweb\ecommerce.developerweb.dev\resources\views/layouts/store.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('welcome', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\expertum-ecommerce\resources\views/layouts/store.blade.php ENDPATH**/ ?>

@@ -44,6 +44,14 @@ class AppServiceProvider extends ServiceProvider
         'id' => $id,
       ]);
     });
+
+  /*
+    $cat2 = 1;
+    $id = null;
+    View::share('cat2', $cat2);
+    View::share('id', $id);
+*/
+
     /**
         View::composer(
             'index', 'App\Http\ViewComposers\IndexComposer'

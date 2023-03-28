@@ -148,4 +148,4 @@
     });
   });
 </script>
-<?php /**PATH C:\xampp\htdocs\developerweb\ecommerce.developerweb.dev\resources\views/partials/js/city_selector.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\laragon\www\expertum-ecommerce\resources\views/partials/js/city_selector.blade.php ENDPATH**/ ?>

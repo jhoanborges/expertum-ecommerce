@@ -76,7 +76,7 @@
 <script src="<?php echo e(asset(mix('js/all.js'), true)); ?>"></script>
 <?php endif; ?>
 
-<?php echo app('Tightenco\Ziggy\BladeRouteGenerator')->generate(); ?>
+@routes
 
 
   <script type="text/javascript" src="<?php echo e(asset('js/app.js')); ?>"></script>
@@ -143,7 +143,7 @@
 
 
   <?php echo $__env->make('partials.js.city_selector', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-<?php echo app('toastr')->render(); ?>
+@toastr_render
 <div id="myDiv"></div>
 
 <a href="<?php echo e(route('about_us')); ?>" class="float d-flex justify-content-center btn-top-home">
@@ -182,4 +182,4 @@
 </body>
 
 </html>
-<?php /**PATH C:\xampp\htdocs\developerweb\ecommerce.developerweb.dev\resources\views/welcome.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\laragon\www\expertum-ecommerce\resources\views/welcome.blade.php ENDPATH**/ ?>

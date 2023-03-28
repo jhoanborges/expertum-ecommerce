@@ -39,8 +39,13 @@ class Promociones extends Model
     }
 
 
-   public function sluggable()
-   {
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable(): array
+    {
     return [
         'imagen' => [
                 //'source' => 'nombre_producto',

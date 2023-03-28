@@ -8,23 +8,30 @@ use App\Categorian4modelo;
 use App\Categorian5modelo;
 
 
+// Note: Laravel will automatically resolve `Breadcrumbs::` without
+// this import. This is nice for IDE syntax and refactoring.
+use Diglactic\Breadcrumbs\Breadcrumbs;
+
+// This import is also not required, and you could replace `BreadcrumbTrail $trail`
+//  with `$trail`. This is nice for IDE type checking and completion.
+use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 
 
 
 // Home
-Breadcrumbs::register('welcome', function($breadcrumbs)
+Breadcrumbs::for('welcome', function(BreadcrumbTrail $breadcrumbs)
 {
   if  (  session()->get('main')==1 ){
  $breadcrumbs->push('Inicio', route('welcome'));
 }else{
   $breadcrumbs->push('Inicio', route('welcome'));
 }
-  
+
 });
 
 
 //login
-Breadcrumbs::register('password.reset', function($breadcrumbs) {
+Breadcrumbs::for('password.reset', function($breadcrumbs) {
   $breadcrumbs->parent('welcome');
   //$breadcrumbs->push('CATEGORIAS', route('store.index'));
   $breadcrumbs->push('Iniciar sesión', route('login'));
@@ -34,7 +41,7 @@ Breadcrumbs::register('password.reset', function($breadcrumbs) {
 
 
 //login
-Breadcrumbs::register('login', function($breadcrumbs) {
+Breadcrumbs::for('login', function($breadcrumbs) {
   $breadcrumbs->parent('welcome');
   $breadcrumbs->push('Iniciar sesión', route('login'));
 });
@@ -43,7 +50,7 @@ Breadcrumbs::register('login', function($breadcrumbs) {
 
 
 // Home > store
-Breadcrumbs::register('store.index', function($breadcrumbs) {
+Breadcrumbs::for('store.index', function($breadcrumbs) {
 
   $breadcrumbs->parent('welcome');
   //$breadcrumbs->push('CATEGORIAS', route('store.index'));
@@ -51,7 +58,7 @@ Breadcrumbs::register('store.index', function($breadcrumbs) {
 });
 
 
-Breadcrumbs::register('store.search', function($breadcrumbs) {
+Breadcrumbs::for('store.search', function($breadcrumbs) {
 
   $breadcrumbs->parent('welcome');
   //$breadcrumbs->push('CATEGORIAS', route('store.index'));
@@ -62,7 +69,7 @@ Breadcrumbs::register('store.search', function($breadcrumbs) {
 
 
 
-Breadcrumbs::register('categoria.get', function($breadcrumbs, $cat, $id) {
+Breadcrumbs::for('categoria.get', function($breadcrumbs, $cat, $id) {
 
     $breadcrumbs->parent('store.index');
 
@@ -85,7 +92,7 @@ Breadcrumbs::register('categoria.get', function($breadcrumbs, $cat, $id) {
     }
 
         if ($cat==3) {
-   
+
       $id_categorian2= Categorian3modelo::select('id_categorian2')->where('slug', $id)->value('id_categorian2');
 
       $actual= Categorian3modelo::where('slug', $id)->first();
@@ -93,9 +100,9 @@ Breadcrumbs::register('categoria.get', function($breadcrumbs, $cat, $id) {
       $category= Categorian2modelo::where('slug', $id_categorian2)->first();
 
       $id_categorian1= Categorian1modelo::where('slug', $category->id_categorian1)->first();
-   
+
       $category1= Categorian1modelo::where('slug', $id_categorian1)->first();
-    
+
      $breadcrumbs->push(ucfirst($id_categorian1->nombrecategoria), route('categoria.get', [$cat-2, $id_categorian1->slug])  );
        $breadcrumbs->push(ucfirst($category->nombrecategoria), route('categoria.get', [$cat-1, $id_categorian2])  );
 
@@ -103,21 +110,21 @@ Breadcrumbs::register('categoria.get', function($breadcrumbs, $cat, $id) {
     }
 /*
      if ($cat==3) {
-   
+
       $id_categorian2= Categorian3modelo::select('id_categorian2')->where('slug', $id)->value('id_categorian2');
 
       $actual= Categorian3modelo::where('slug', $id)->first();
       $category= Categorian2modelo::where('slug', $id_categorian2)->first();
 
       $id_categorian1= Categorian1modelo::where('slug', $category->id_categorian1)->first();
- 
+
       $category1= Categorian1modelo::where('slug', $id_categorian1)->first();
      // $breadcrumbs->push($id_categorian1->nombrecategoria, route('categoria.get', [$cat-2, $id_categorian2])  );
         $breadcrumbs->push(ucfirst($category->nombrecategoria), route('categoria.get', [$cat-1, $id_categorian2])  );
     }
 */
      if ($cat==4) {
-   
+
       $id_categorian3= Categorian4modelo::select('id_categorian3')->where('slug', $id)->value('id_categorian3');
       $actual= Categorian4modelo::where('slug', $id)->first();
       $category= Categorian3modelo::where('slug', $id_categorian3)->first();
@@ -132,7 +139,7 @@ Breadcrumbs::register('categoria.get', function($breadcrumbs, $cat, $id) {
 
 
      if ($cat==5) {
-   
+
       $id_categorian4= Categorian5modelo::select('id_categorian4')->where('slug', $id)->value('id_categorian4');
       $actual= Categorian5modelo::where('slug', $id)->first();
       $category= Categorian4modelo::where('slug', $id_categorian4)->first();
@@ -164,13 +171,13 @@ if ($cat=='search') {
 //productos
 
 
-Breadcrumbs::register('product.show', function($breadcrumbs, $id)
+Breadcrumbs::for('product.show', function($breadcrumbs, $id)
 {
 
-  $product=Productomodelo::where('slug', $id)->first();   
+  $product=Productomodelo::where('slug', $id)->first();
 
   $breadcrumbs->parent('store.index');
-  
+
   $breadcrumbs->push(  ucfirst($product->hasOneCategory1->nombrecategoria),  route('categoria.get', [1, $product->hasOneCategory1->slug])  );
   if ($product->id_categorian2) {
   $breadcrumbs->push(  ucfirst($product->hasOneCategory2->nombrecategoria),  route('categoria.get', [2, $product->hasOneCategory2->slug])  );

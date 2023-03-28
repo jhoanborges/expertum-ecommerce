@@ -59,11 +59,16 @@ protected static function boot()
   });
 }
 
-public function sluggable()
-{
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable(): array
+    {
   return [
     'slug' => [
-              //aca seria materile +  nombre de producto + marca 
+              //aca seria materile +  nombre de producto + marca
       'source' => 'nombre_producto'
                                 //'source' =>['referencia', 'nombre_producto']
     ]
@@ -209,7 +214,7 @@ public function setPrecioVentaIvaAttribute($value)
       ->join('products_categories', 'products_categories.productomodelo_id', '=', 'productos.id')
       ->whereIn('products_categories.category_id', $categoryIds);
     }
-    
+
  public function promocion()
   {
     return $this->hasOne('App\Promociones', 'id', 'promocion_id');

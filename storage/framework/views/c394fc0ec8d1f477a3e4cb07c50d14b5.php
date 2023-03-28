@@ -28,4 +28,4 @@
             </div>
 
         </div>
-<?php /**PATH C:\xampp\htdocs\developerweb\ecommerce.developerweb.dev\resources\views/partials/newsletter.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\laragon\www\expertum-ecommerce\resources\views/partials/newsletter.blade.php ENDPATH**/ ?>

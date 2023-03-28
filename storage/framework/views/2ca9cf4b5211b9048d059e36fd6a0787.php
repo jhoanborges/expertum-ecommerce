@@ -28,4 +28,4 @@
 </script>
     <?php endif; ?>
 <?php endif; ?>
-<?php /**PATH C:\xampp\htdocs\developerweb\ecommerce.developerweb.dev\resources\views/vendor/sweetalert/alert.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\laragon\www\expertum-ecommerce\resources\views/vendor/sweetalert/alert.blade.php ENDPATH**/ ?>

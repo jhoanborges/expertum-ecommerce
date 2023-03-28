@@ -10,20 +10,20 @@ return [
     | Choose a view to display when Breadcrumbs::render() is called.
     | Built in templates are:
     |
-    | - 'breadcrumbs::bootstrap5'  - Bootstrap 5
     | - 'breadcrumbs::bootstrap4'  - Bootstrap 4
+    | - 'breadcrumbs::bootstrap3'  - Bootstrap 3
+    | - 'breadcrumbs::bootstrap2'  - Bootstrap 2
     | - 'breadcrumbs::bulma'       - Bulma
     | - 'breadcrumbs::foundation6' - Foundation 6
-    | - 'breadcrumbs::json-ld'     - JSON-LD Structured Data
     | - 'breadcrumbs::materialize' - Materialize
-    | - 'breadcrumbs::tailwind'    - Tailwind CSS
     | - 'breadcrumbs::uikit'       - UIkit
+    | - 'breadcrumbs::json-ld'     - JSON-LD Structured Data
     |
     | Or a custom view, e.g. '_partials/breadcrumbs'.
     |
     */
-
-    'view' => 'breadcrumbs::bootstrap5',
+'view' => 'partials.breadcrumbs',
+    //'view' => 'breadcrumbs::bootstrap4',
 
     /*
     |--------------------------------------------------------------------------
@@ -49,10 +49,10 @@ return [
     */
 
     // When route-bound breadcrumbs are used but the current route doesn't have a name (UnnamedRouteException)
-    'unnamed-route-exception' => true,
+    'unnamed-route-exception' => false,
 
     // When route-bound breadcrumbs are used and the matching breadcrumb doesn't exist (InvalidBreadcrumbException)
-    'missing-route-bound-breadcrumb-exception' => true,
+    'missing-route-bound-breadcrumb-exception' => false,
 
     // When a named breadcrumb is used but doesn't exist (InvalidBreadcrumbException)
     'invalid-named-breadcrumb-exception' => true,
@@ -67,9 +67,9 @@ return [
     */
 
     // Manager
-    'manager-class' => Diglactic\Breadcrumbs\Manager::class,
+    //'manager-class' => DaveJamesMiller\Breadcrumbs\BreadcrumbsManager::class,
 
     // Generator
-    'generator-class' => Diglactic\Breadcrumbs\Generator::class,
+    'generator-class' => DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator::class,
 
 ];
