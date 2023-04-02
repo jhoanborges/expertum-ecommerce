@@ -37,6 +37,8 @@
   href="https://fonts.googleapis.com/icon?family=Material+Icons"
 />
        <?php if(config('app.env') == 'local'): ?>
+
+        <link rel="stylesheet" href="<?php echo e(asset('css/custom.css')); ?>">
         <link rel="stylesheet" href="<?php echo e(asset('css/all.css')); ?>">
         <?php else: ?>
         <link rel="stylesheet" href="<?php echo e(asset(mix('css/all.css'), true)); ?>">
@@ -50,7 +52,7 @@
 
 <body>
 
-  
+
   <div class="super_container">
     <div id="cart-component"
     data-total="<?php echo e($total); ?>"
@@ -70,13 +72,15 @@
     <?php echo $__env->make('partials.modalCiudadesSelector', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
   </div>
 
+<?php echo app('Tightenco\Ziggy\BladeRouteGenerator')->generate(); ?>
+
+
 <?php if(config('app.env') == 'local'): ?>
 <script src="<?php echo e(asset(mix('js/all.js'))); ?>"></script>
 <?php else: ?>
 <script src="<?php echo e(asset(mix('js/all.js'), true)); ?>"></script>
 <?php endif; ?>
 
-@routes
 
 
   <script type="text/javascript" src="<?php echo e(asset('js/app.js')); ?>"></script>
@@ -111,7 +115,8 @@
 
 <!-- add or no pixel MAIN code-->
 <?php if(App\Pixel::first()->pixel_id !=null): ?>
-<?php echo \App\Pixel::first()->code; ?> 
+<?php echo \App\Pixel::first()->code; ?>
+
 <?php endif; ?>
 
 

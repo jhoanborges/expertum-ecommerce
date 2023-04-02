@@ -158,8 +158,7 @@ Route::get('/masvendidos/filter', 'StoreController@masvendidos_filter')->name('m
 
 
 
-Route::get('/{cat2}/{id}/', 'NewController@index')->name('categoria.get');
-
+Route::get('/{cat}/{id}/', 'NewController@index')->name('categoria.get');
 Route::get('/filtros/{id}/', 'FiltrosController@show')->name('filtros.get');
 
 

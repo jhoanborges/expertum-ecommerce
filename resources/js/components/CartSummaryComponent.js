@@ -34,7 +34,7 @@ function CartSummaryComponent(props) {
         setLoading(true);
 
         await axios
-            .get(route('getCartProducts'))
+            .get( route('getCartProducts') )
             .then(res => {
                 let result = res.data;
                 setProducts(result.products)
@@ -60,8 +60,8 @@ function CartSummaryComponent(props) {
     }, [])
 
     const goToFavorites = (rowIDProduct) => {
-        //let routeToGo = route('favoritos.swichtf', rowIDProduct) 
-        let routeToGo = route('register') 
+        //let routeToGo = route('favoritos.swichtf', rowIDProduct)
+        let routeToGo = route('register')
         window.open( routeToGo, "_self");
     }
 
@@ -72,10 +72,10 @@ function CartSummaryComponent(props) {
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#0076bd',
-            cancelButtonColor: '#dc3545', 
+            cancelButtonColor: '#dc3545',
             confirmButtonText: 'Sí, crear mi cuenta ahora.',
             cancelButtonText:'No, en otro momento.'
-            
+
          }).then((result) => {
             if(result.value){
              console.log('go to favorites')
@@ -90,11 +90,11 @@ function CartSummaryComponent(props) {
 
     const [newQTY, setNewQTY] = useState(0);
     const [open, setOpen] = useState(false);
-   
+
     const handleClickOpen = () => {
       setOpen(true);
     };
-   
+
     const handleClose = (value) => {
       setOpen(false);
     };
@@ -108,14 +108,14 @@ function CartSummaryComponent(props) {
         setProductIDToUpdate(product_id)
         setOpen(true);
       };
- 
+
       const handleChange = (e) => {
         setNum(e.target.value);
       };
 
-      
 
-      
+
+
 
       const deleteItemFromCart = (rowId)  => {
 
@@ -125,13 +125,13 @@ function CartSummaryComponent(props) {
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#0076bd',
-            cancelButtonColor: '#dc3545', 
+            cancelButtonColor: '#dc3545',
             confirmButtonText: 'Sí, eliminar del carrito.',
             cancelButtonText:'No, conservar mi producto.'
-            
+
          }).then((result) => {
             if(result.value){
-        
+
                 setLoading(true);
 
                 axios
@@ -141,7 +141,7 @@ function CartSummaryComponent(props) {
                     .then(res => {
                         let result = res.data;
                         toastr.success(res.data.message);
-        
+
                     })
                     .catch(error => {
                         //console.log("error");
@@ -163,13 +163,13 @@ function CartSummaryComponent(props) {
 
       const addProductToFavorite = (slug, rowIDProduct)  => {
             setLoading(true);
-    
+
             axios
                 .get(route('addProductToFavorite',slug))
                 .then(res => {
                     let result = res.data;
                     toastr.success(res.data.message);
-    
+
                 })
                 .catch(error => {
                     //console.log("error");
@@ -182,7 +182,7 @@ function CartSummaryComponent(props) {
 //console.log(error.response);
 toastr.error(error.response.data.message);
                     }
-                    
+
                 })
                 .finally(() => {
                     setLoading(false);
@@ -195,7 +195,7 @@ toastr.error(error.response.data.message);
         console.log('itemToUpdate ' + itemToUpdate)
 
             setLoading(true);
-    
+
             axios
                 .post(route('updateCartQuantity'),{
                     id: itemToUpdate,
@@ -207,7 +207,7 @@ toastr.error(error.response.data.message);
                     toastr.success(res.data.message);
                     setOpen(false)
                     fetchData()
-    
+
                 })
                 .catch(error => {
                     //console.log("error");
@@ -229,7 +229,7 @@ toastr.error(error.response.data.message);
           });
       }
 
-       
+
     return (
         <>
             <LoadingOverlay
@@ -288,17 +288,17 @@ toastr.error(error.response.data.message);
                                                         <td className="text-center bold black">{formatPriceJS(product.price)}
                                                             {/*{formatPrice(parseInt(precioNew(product.id)) / (product.options.iva / 100 + 1))}*/}
                                                         </td>
-                                                        <td className="text-center"> 
+                                                        <td className="text-center">
                                                         {product.iva + ' %'}
                                                         </td>
 
 
                                                         <td className="text-center pointer">
-                                      
+
                                                         <div className="input-group ">
                                                             <div className='d-flex text-center justify-content-center my-auto align-items-center'>
                                                         <span className='mr-2'>{product.qty}</span>
-        
+
 
 <IconButton aria-label="delete" size="large" onClick={() => updateProductQty(product.rowId, product.id) }>
         <EditOutlinedIcon />
@@ -324,14 +324,14 @@ toastr.error(error.response.data.message);
                                                         </td>
                                                         <td className="text-center">
 
-                                                          
-                                                                <button type="button" 
-                                                                className="icons btn-transparent" 
+
+                                                                <button type="button"
+                                                                className="icons btn-transparent"
                                                                 data-toggle="tooltip" data-placement="top" title="Agregar a favoritos"
                                                                 onClick={() => addProductToFavorite(product.id,product.rowId )}>
                                                                     <img src={props.heart} className="img-fluid cart-icon-new"></img>
                                                                 </button>
-                                                       
+
 
 
                                                         </td>
@@ -339,7 +339,7 @@ toastr.error(error.response.data.message);
 
                                                                 <button type="submit" className="icons btn-transparent"
                                                                  onClick={() => deleteItemFromCart(product.rowId)}
-                                                                
+
                                                                 >
                                                                     <img src={props.trash} className="img-fluid cart-icon-new"></img>
                                                                 </button>
@@ -449,7 +449,7 @@ toastr.error(error.response.data.message);
             button
             //onClick={() => handleListItemClick(email)}
           >
-    
+
     <TextField
           label="Cantidad"
           type="number"

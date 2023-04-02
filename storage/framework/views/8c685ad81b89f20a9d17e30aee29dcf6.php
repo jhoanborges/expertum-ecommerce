@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('content'); ?>
 
 <?php $__env->startSection('extra-css'); ?>
@@ -41,7 +40,7 @@
                                             <?php $__currentLoopData = $categorias; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <li>
                                                     <a class="category-name"
-                                                        href="<?php echo e(route('categoria.get', ['cat' => $cat2, 'categoria' => $category->slug])); ?> "><?php echo e($category->nombrecategoria); ?></a>
+                                                        href="<?php echo e(route('categoria.get', ['cat' => $cat2 ?? 'null', 'categoria' => $category->slug ?? 'null'])); ?> "><?php echo e($category->nombrecategoria); ?></a>
                                                 </li>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </ul>
@@ -140,9 +139,6 @@
             <div class="col-lg-10 ">
 
                 <!-- Shop Content -->
-
-
-
                 <div class="shop_content ">
                     <div class="store_title mayus mb-2">
                         <?php echo e($categorias_nombre['nombrecategoria'] != null ? $categorias_nombre['nombrecategoria'] : 'PRODUCTOS ENCONTRADOS: ' . $search_key); ?>
@@ -153,12 +149,16 @@
                         <div class="short-by">
                             <select onChange="window.document.location.href=this.options[this.selectedIndex].value;">
                                 <option
-                                    value="<?php echo e(route('categoria.get', ['cat' => $oldcat2, 'categoria' => $idd, 'todos' => 'todos'])); ?>"
+                                    value="<?php echo e(route('categoria.get', ['cat' => $oldcat2 ?? 'null',
+                                        'id' => $id ?? 'null',
+
+                                    'categoria' => $idd ?? 'null', 'todos' => 'todos'])); ?>"
                                     <?php echo e('todos' == $selected ? 'selected="selected"' : ''); ?>>Ordenar por:</option>
                                 <option
                                     value="<?php echo e(route('categoria.get', [
-                                        'cat' => $oldcat2,
-                                        'categoria' => $idd,
+                                        'cat' => $oldcat2 ?? 'null',
+                                        'categoria' => $idd ?? 'null',
+                                        'id' => $id ?? 'null',
                                         'filtros' => request()->filtros,
                                         'marcas' => request()->marcas,
                                         'range' => request()->range,
@@ -169,21 +169,25 @@
                                 </option>
                                 <option
                                     value="<?php echo e(route('categoria.get', [
-                                        'cat' => $oldcat2,
-                                        'categoria' => $idd,
+                                        'cat' => $oldcat2 ?? 'null',
+                                        'categoria' => $idd ?? 'null',
+                                        'id' => $id ?? 'null',
+
                                         'filtros' => request()->filtros,
                                         'marcas' => request()->marcas,
                                         'order' => request()->order,
                                         'range' => request()->range,
                                         'search' => request()->search,
                                         'sort' => 'mayor_menor',
-                                    ])); ?>"
+                                    ])); ?>">
                                     <?php echo e('mayor_menor' == request()->sort ? 'selected="selected"' : ''); ?>">Mayor precio
                                 </option>
                                 <option
                                     value="<?php echo e(route('categoria.get', [
-                                        'cat' => $oldcat2,
-                                        'categoria' => $idd,
+                                        'cat' => $oldcat2 ?? 'null',
+                                        'id' => $id ?? 'null',
+
+                                        'categoria' => $idd ?? 'null',
                                         'filtros' => request()->filtros,
                                         'marcas' => request()->marcas,
                                         'sort' => request()->sort,
@@ -194,8 +198,10 @@
                                     <?php echo e('asc' == request()->order ? 'selected="selected"' : ''); ?>>A-Z</option>
                                 <option
                                     value="<?php echo e(route('categoria.get', [
-                                        'cat' => $oldcat2,
-                                        'categoria' => $idd,
+                                        'cat' => $oldcat2 ?? 'null',
+                                        'id' => $id ?? 'null',
+
+                                        'categoria' => $idd ?? 'null',
                                         'filtros' => request()->filtros,
                                         'marcas' => request()->marcas,
                                         'sort' => request()->sort,
@@ -219,7 +225,7 @@
                                     <!--<div class="product_border"></div>-->
                                     <div class="product-image-content product-item text-center">
                                         <a class="product-img"
-                                            href="<?php echo e(route('product.show', ['product' => $producto['slug']])); ?>">
+                                            href="<?php echo e(route('product.show', ['slug' => isset($producto['slug']) ? $producto['slug'] : 'null'])); ?>">
 
                                             <?php if($producto->hasManyImagenes->first()): ?>
                                                 <img class="img-fluid"
@@ -246,7 +252,7 @@
                                         <div class="pmd-card-title">
                                             <ul class="list-inline text-center">
                                                 <a
-                                                    href="<?php echo e(route('product.show', ['product' => $producto['slug']])); ?>">
+                                                href="<?php echo e(route('product.show', ['slug' => isset($producto['slug']) ? $producto['slug'] : 'null'])); ?>">
                                                     <li
                                                         class="pmd-card-subtitle-text blue body-text title-height list-inline  text-center justify-content-center align-items-center d-flex mb-0">
                                                         <p class="two-row mb-0 "><?php echo e($producto['nombre_producto']); ?>
@@ -368,8 +374,9 @@
 
                 var url =
                     '<?php echo e(route('categoria.get', [
-                        'cat' => $oldcat2,
-                        'categoria' => $idd,
+                        'cat' => $oldcat2 ?? 'null',
+                        'categoria' => $idd ?? 'null',
+                        'id' => $id ?? 'null',
                         'filtros' => ':filtros',
                         'search' => request()->search,
                         'marcas' => request()->marcas,
@@ -392,8 +399,10 @@
 
                 var url =
                     '<?php echo e(route('categoria.get', [
-                        'cat' => $oldcat2,
-                        'categoria' => $idd,
+                        'cat' => $oldcat2 ?? 'null',
+                        'id' => $id ?? 'null',
+
+                        'categoria' => $idd ?? 'null',
                         'marcas' => ':marcas',
                         'filtros' => request()->filtros,
                         'search' => request()->search,
@@ -416,8 +425,10 @@
                 valor.push(ini, end);
                 var url =
                     '<?php echo e(route('categoria.get', [
-                        'cat' => $oldcat2,
-                        'categoria' => $idd,
+                        'cat' => $oldcat2 ?? 'null',
+                        'id' => $id ?? 'null',
+
+                        'categoria' => $idd ?? 'null',
                         'filtros' => request()->filtros,
                         'marcas' => request()->marcas,
                         'search' => request()->search,

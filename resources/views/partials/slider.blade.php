@@ -12,7 +12,7 @@
                 @foreach ($sliders as $slide)
                     <li data-transition="boxfade" data-link="{{ $slide->link }}" data-target="" data-slideindex="back">
 
-                        <img src="{{ $slide->url ?? asset('img/slider.png') }}" alt="{{ $slide->url }}"
+                        <img src="{{ $slide->image ?? asset('img/slider.png') }}" alt="{{ $slide->url }}"
                             class="rev-slidebg">
 
                         <div class="tp-caption fadeout"
@@ -39,8 +39,15 @@
                                 data-x="{{ $slide->button_position_x }}" data-y="{{ $slide->button_position_y }}"
                                 data-speed="1500" data-start="1600" data-easing="Power3.easeInOut" data-splitin="none"
                                 data-splitout="none" data-elementdelay="0.01" data-endelementdelay="0.1"
-                                data-linktoslide="next"><a href='{{ $slide->link }}'
-                                    class='largebtn solid'>{!! $slide->button !!}</a> </div>
+                                data-linktoslide="next">
+                                <a href='{{ $slide->link }}'
+                                class='arrow-button '
+                                target="{{$slide->open_in_new_window == true ? '_blank' : '_self'}}"
+                                style="background-color: {{$slide->button_color}}"
+                                >{!! $slide->button !!} </a>
+                            </div>
+
+
                         @endif
 
                     </li>

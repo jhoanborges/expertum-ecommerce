@@ -47,7 +47,7 @@
 
       @else
       <link itemprop="itemCondition" href="http://schema.org/UsedCondition">
-      
+
       @endif
 
 
@@ -55,7 +55,7 @@
       <meta itemprop="priceCurrency" content="{{$moneda->name}} ">
     </div>
   </div>
-  
+
     <form action="{{ route('resumen.store') }}" method="POST" class="form-prevent">
         {{ csrf_field() }}
         <input type="hidden" name="id" value="{{ $producto->slug }}">
@@ -242,7 +242,7 @@
                                                         <button type="submit" class="btn btn-danger checkout-button">No
                                                             disponible</button>
                                                     @else
-                                                        <button 
+                                                        <button
                                                         id="AddToCart"
                                                         type="submit" class="btn btn-primary checkout-button">
                                                             <img src="{{ asset('img/cart-white.png') }}"
@@ -261,7 +261,9 @@
                                         <li>
 
                                             <a class="facebook-share-button"
-                                                href="https://www.facebook.com/sharer/sharer.php?u={{ route('product.show', ['slug_' => $producto->slug]) }}"
+                                                href="https://www.facebook.com/sharer/sharer.php?u={{ route('product.show',
+                                                 ['slug' => isset($producto->slug) ? $producto->slug : 'null']
+                                                 ) }}"
                                                 target="_blank">
                                                 <img src="{{ asset('img/fb.png') }}" class="img-fluid mr-1 img-footer"
                                                     width="40" alt="{{ $producto->nombre_producto }}">
@@ -277,9 +279,12 @@
 
 
                                             <a class="twitter-share-button"
-                                                href="https://twitter.com/intent/tweet?text={{ $producto->nombre_producto }} {{ route('product.show', ['slug_' => $producto->slug]) }}"
+                                                href="https://twitter.com/intent/tweet?text={{ $producto->nombre_producto }} {{ route('product.show', ['slug' => isset($producto->slug) ? $producto->slug : 'null'
+                                                ]) }}"
                                                 data-size="large" data-text="{{ $producto->nombre_producto }}"
-                                                data-url="{{ route('product.show', ['slug_' => $producto->slug]) }}"
+                                                data-url="{{ route('product.show', ['slug' =>
+                                                isset($producto->slug) ? $producto->slug : 'null'
+                                                ]) }}"
                                                 data-hashtags="{{ $producto->referencia }},{{ $producto->alias }},{{ $param->nombre_tienda }}"
                                                 data-via="" data-related="twitterapi,twitter" target="_blank">
                                                 <img src="{{ asset('img/tw.png') }}" class="img-fluid mr-1 img-footer"
@@ -458,8 +463,8 @@
 
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org/", 
-  "@type": "Product", 
+  "@context": "https://schema.org/",
+  "@type": "Product",
   "name": "{{$producto->nombre_producto}}",
   "image": "{{$allImages->first()->urlimagen}}",
   "description": "{{$producto->descripcion}}",
@@ -509,7 +514,7 @@
     var nombre="{{$producto->nombre_producto}}"
     var cantidad = $('.qty').val()
     var precio="{{$producto->precioventa_iva}}"
-    
+
 </script>
 
 <script type="text/javascript">

@@ -56,6 +56,8 @@
   href="https://fonts.googleapis.com/icon?family=Material+Icons"
 />
        @if (config('app.env') == 'local')
+
+        <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
         <link rel="stylesheet" href="{{ asset('css/all.css') }}">
         @else
         <link rel="stylesheet" href="{{asset(mix('css/all.css'), true)}}">
@@ -69,7 +71,7 @@
 
 <body>
 
-  
+
   <div class="super_container">
     <div id="cart-component"
     data-total="{{$total}}"
@@ -89,13 +91,15 @@
     @include('partials.modalCiudadesSelector')
   </div>
 
+@routes
+
+
 @if (config('app.env') == 'local')
 <script src="{{asset(mix('js/all.js'))}}"></script>
 @else
 <script src="{{asset(mix('js/all.js'), true)}}"></script>
 @endif
 
-@routes
 
 
   <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
@@ -133,7 +137,7 @@
 
 <!-- add or no pixel MAIN code-->
 @if(App\Pixel::first()->pixel_id !=null)
-{!!\App\Pixel::first()->code!!} 
+{!!\App\Pixel::first()->code!!}
 @endif
 
 

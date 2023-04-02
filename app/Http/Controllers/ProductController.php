@@ -28,7 +28,6 @@ class ProductController extends Controller
 
   public function show($id)
   {
-
     $now=Carbon::now()->format('Y-m-d');
     $filters=[];
 
@@ -122,6 +121,7 @@ $graph->product()->offers(
 $schema_org = $graph->toScript();
 */
 $moneda = Monedas::where('id', $productos->id_moneda)->first();
+
 
     return view ('layouts.product')->with([
       //'schema_org'=> $schema_org,

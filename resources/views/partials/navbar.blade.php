@@ -71,7 +71,9 @@
               <ul class="shopping-cart-items">
                 @foreach (Cart::instance('default')->content() as $product)
                 <li class="clearfix d-block">
-                  <a href="{{route('product.show' , ['product'=>$product->id ])}}">
+                  <a href="{{route('product.show' , ['slug'=>
+                  isset( $product->slug) ? $product->slug : 'null'
+                   ])}}">
                     <img src="{{$product->options->imagen }}" class="img-fluid" alt="item1" />
                     <span class="item-name top-text">{{$product->name}}</span>
                     {{--<span class="item-name ">{{$producto->getMarcaProduct($producto->id)['nombre'] }}</span>--}}
@@ -240,7 +242,7 @@
                       <ul class="dropdown-menu">
 @foreach ($categoriasBoot as $category)
                         <li class="nav-item">
-                          <a class="nav-link text-capitalize" href="{{route('categoria.get', ['cat2' => ($cat2 ?? 1)   , 'id' => $category->slug ?? 'null']) }} ">{{$category->nombrecategoria}}</a>
+                          <a class="nav-link text-capitalize" href="{{route('categoria.get', ['cat' => ($cat2 ?? 1)   , 'id' => $category->slug ?? 'null']) }} ">{{$category->nombrecategoria}}</a>
                         </li>
              @endforeach
                       </ul>

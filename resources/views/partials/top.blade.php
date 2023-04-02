@@ -8,7 +8,9 @@
 
             <div class="col-lg-12">
 
-                <a href="{{route('product.show' , ['product'=>$to['slug'] ])}}" class="d-flex pt-2 pb-2 border-bottom-custom">
+                <a href="{{route('product.show' , ['slug'=>
+                isset($to['slug']) ? $to['slug'] : 'null'
+                 ])}}" class="d-flex pt-2 pb-2 border-bottom-custom">
                     <img src="{{url(  $to->hasManyImagenes->first()->urlimagen )}}" class="top-image">
 
                     <div class="pmd-card-title pt-0 pb-0 pr-0 align-self-center">

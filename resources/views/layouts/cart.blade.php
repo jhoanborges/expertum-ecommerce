@@ -58,7 +58,7 @@ data-cart="{{ asset('img/cart-white.png') }}"
                                       <p class="mb-0">{{$product->options->brand}} </p>
                                     </td>
                                     <td class="text-center"><i class="fas fa-check fa-2x lightgreen"></i></td>
-                                    <td class="text-center bold black">$ 
+                                    <td class="text-center bold black">$
                                       {{formatPrice( intval( precioNew($product->id)) /($product->options->iva/100+1) )}}
                                     </td>
                                     <td class="text-center"> {{$product->options->iva.''.'%' }}</td>
@@ -69,12 +69,12 @@ data-cart="{{ asset('img/cart-white.png') }}"
                                         data-id="{{$product->rowId}}" />
                                         <input type='number' onkeyup="this.value=this.value.replace(/[^1-9]/g,'');" name='quantity' id="{{$product->rowId}}" value='{{$product->qty}}' class='qty' data-id="{{$product->rowId}}"/>
 
-                                        <input type='button' value='+' class='qtyplus' field='quantity' 
+                                        <input type='button' value='+' class='qtyplus' field='quantity'
                                         data-id="{{$product->rowId}}"/>
                                       </div>
 
                                     </td>
-                                    <td class="text-center bold black">$ 
+                                    <td class="text-center bold black">$
                                       {{formatPrice( intval( (precioNew($product->id)*$product->qty) ) )}}
                                     </td>
                                     <td class="text-center">

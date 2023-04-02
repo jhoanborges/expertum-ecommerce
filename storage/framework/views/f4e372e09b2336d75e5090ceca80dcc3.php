@@ -65,7 +65,9 @@
               <ul class="shopping-cart-items">
                 <?php $__currentLoopData = Cart::instance('default')->content(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <li class="clearfix d-block">
-                  <a href="<?php echo e(route('product.show' , ['product'=>$product->id ])); ?>">
+                  <a href="<?php echo e(route('product.show' , ['slug'=>
+                  isset( $product->slug) ? $product->slug : 'null'
+                   ])); ?>">
                     <img src="<?php echo e($product->options->imagen); ?>" class="img-fluid" alt="item1" />
                     <span class="item-name top-text"><?php echo e($product->name); ?></span>
                     
@@ -229,7 +231,7 @@
                       <ul class="dropdown-menu">
 <?php $__currentLoopData = $categoriasBoot; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <li class="nav-item">
-                          <a class="nav-link text-capitalize" href="<?php echo e(route('categoria.get', ['cat2' => ($cat2 ?? 1)   , 'id' => $category->slug ?? 'null'])); ?> "><?php echo e($category->nombrecategoria); ?></a>
+                          <a class="nav-link text-capitalize" href="<?php echo e(route('categoria.get', ['cat' => ($cat2 ?? 1)   , 'id' => $category->slug ?? 'null'])); ?> "><?php echo e($category->nombrecategoria); ?></a>
                         </li>
              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                       </ul>

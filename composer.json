@@ -21,6 +21,7 @@
         "nicolaslopezj/searchable": "1.*",
         "realrashid/sweet-alert": "^6.0",
         "spatie/schema-org": "^3.14",
+        "tightenco/ziggy": "^1.5",
         "tucker-eric/eloquentfilter": "*"
     },
     "require-dev": {

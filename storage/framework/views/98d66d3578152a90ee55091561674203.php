@@ -12,7 +12,7 @@
                 <?php $__currentLoopData = $sliders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $slide): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <li data-transition="boxfade" data-link="<?php echo e($slide->link); ?>" data-target="" data-slideindex="back">
 
-                        <img src="<?php echo e($slide->url ?? asset('img/slider.png')); ?>" alt="<?php echo e($slide->url); ?>"
+                        <img src="<?php echo e($slide->image ?? asset('img/slider.png')); ?>" alt="<?php echo e($slide->url); ?>"
                             class="rev-slidebg">
 
                         <div class="tp-caption fadeout"
@@ -40,8 +40,15 @@
                                 data-x="<?php echo e($slide->button_position_x); ?>" data-y="<?php echo e($slide->button_position_y); ?>"
                                 data-speed="1500" data-start="1600" data-easing="Power3.easeInOut" data-splitin="none"
                                 data-splitout="none" data-elementdelay="0.01" data-endelementdelay="0.1"
-                                data-linktoslide="next"><a href='<?php echo e($slide->link); ?>'
-                                    class='largebtn solid'><?php echo $slide->button; ?></a> </div>
+                                data-linktoslide="next">
+                                <a href='<?php echo e($slide->link); ?>'
+                                class='arrow-button '
+                                target="<?php echo e($slide->open_in_new_window == true ? '_blank' : '_self'); ?>"
+                                style="background-color: <?php echo e($slide->button_color); ?>"
+                                ><?php echo $slide->button; ?> </a>
+                            </div>
+
+
                         <?php endif; ?>
 
                     </li>

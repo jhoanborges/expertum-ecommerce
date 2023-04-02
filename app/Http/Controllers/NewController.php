@@ -579,20 +579,28 @@ class NewController extends Controller{
                 //los productos asignados a esa marca que tengan categoria1 HasOneCategory1
 
 
-                $sliders=collect([]);
-                if ($oldcat2==1) {
-                    $slider= SlidersCategoria1::where('category_id', $categorias_nombre->id)->get();
+               // $sliders=collect([]);
+               // if ($oldcat2==1) {
+                    $sliders= Slider::
+                    where('category1', $categorias_nombre->slug)
+                    ->orWhere('category2', $categorias_nombre->slug)
+                    ->orWhere('category3', $categorias_nombre->slug)
+                    ->orWhere('category4', $categorias_nombre->slug)
+                    ->orWhere('category5', $categorias_nombre->slug)
+                    ->get();
+/*
                     $slider_ids=[];
                     foreach ($slider as $sl) {
                         $slider_ids[]=$sl->slider_id;
                     }
                     $sliders=Slider::whereIn('id', $slider_ids )->get();
-                }
-
+                    */
+                //}
+/*
 
                 if ($oldcat2==2) {
 
-                    $slider= SlidersCategoria2::where('category_id', $categorias_nombre->id)->get();
+                    $slider= SlidersCategoria2::where('category2', $categorias_nombre->slug)->get();
                     $slider_ids=[];
                     foreach ($slider as $sl) {
                         $slider_ids[]=$sl->slider_id;
@@ -602,7 +610,7 @@ class NewController extends Controller{
                 }
 
                 if ($oldcat2==3) {
-                    $slider= SlidersCategoria3::where('category_id', $categorias_nombre->id)->get();
+                    $slider= SlidersCategoria3::where('category3', $categorias_nombre->slug)->get();
                     $slider_ids=[];
                     foreach ($slider as $sl) {
                         $slider_ids[]=$sl->slider_id;
@@ -611,7 +619,7 @@ class NewController extends Controller{
                 }
 
                 if ($oldcat2==4) {
-                    $slider= SlidersCategoria4::where('category_id', $categorias_nombre->id)->get();
+                    $slider= SlidersCategoria4::where('category4', $categorias_nombre->slug)->get();
                     $slider_ids=[];
                     foreach ($slider as $sl) {
                         $slider_ids[]=$sl->slider_id;
@@ -621,13 +629,14 @@ class NewController extends Controller{
 
 
                 if ($oldcat2==5) {
-                    $slider= SlidersCategoria5::where('category_id', $categorias_nombre->id)->get();
+                    $slider= SlidersCategoria5::where('category5', $categorias_nombre->slug)->get();
                     $slider_ids=[];
                     foreach ($slider as $sl) {
                         $slider_ids[]=$sl->slider_id;
                     }
                     $sliders=Slider::whereIn('id', $slider_ids )->get();
                 }
+                */
 
                 //dd("pp");
 

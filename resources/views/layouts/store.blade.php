@@ -41,7 +41,7 @@
                                             @foreach ($categorias as $category)
                                                 <li>
                                                     <a class="category-name"
-                                                        href="{{ route('categoria.get', ['cat' => $cat2, 'categoria' => $category->slug]) }} ">{{ $category->nombrecategoria }}</a>
+                                                        href="{{ route('categoria.get', ['cat' => $cat2 ?? 'null', 'categoria' => $category->slug ?? 'null']) }} ">{{ $category->nombrecategoria }}</a>
                                                 </li>
                                             @endforeach
                                         </ul>
@@ -139,9 +139,6 @@
             <div class="col-lg-10 ">
 
                 <!-- Shop Content -->
-
-
-
                 <div class="shop_content ">
                     <div class="store_title mayus mb-2">
                         {{ $categorias_nombre['nombrecategoria'] != null ? $categorias_nombre['nombrecategoria'] : 'PRODUCTOS ENCONTRADOS: ' . $search_key }}
@@ -151,12 +148,16 @@
                         <div class="short-by">
                             <select onChange="window.document.location.href=this.options[this.selectedIndex].value;">
                                 <option
-                                    value="{{ route('categoria.get', ['cat' => $oldcat2, 'categoria' => $idd, 'todos' => 'todos']) }}"
+                                    value="{{ route('categoria.get', ['cat' => $oldcat2 ?? 'null',
+                                        'id' => $id ?? 'null',
+
+                                    'categoria' => $idd ?? 'null', 'todos' => 'todos']) }}"
                                     {{ 'todos' == $selected ? 'selected="selected"' : '' }}>Ordenar por:</option>
                                 <option
                                     value="{{ route('categoria.get', [
-                                        'cat' => $oldcat2,
-                                        'categoria' => $idd,
+                                        'cat' => $oldcat2 ?? 'null',
+                                        'categoria' => $idd ?? 'null',
+                                        'id' => $id ?? 'null',
                                         'filtros' => request()->filtros,
                                         'marcas' => request()->marcas,
                                         'range' => request()->range,
@@ -167,21 +168,25 @@
                                 </option>
                                 <option
                                     value="{{ route('categoria.get', [
-                                        'cat' => $oldcat2,
-                                        'categoria' => $idd,
+                                        'cat' => $oldcat2 ?? 'null',
+                                        'categoria' => $idd ?? 'null',
+                                        'id' => $id ?? 'null',
+
                                         'filtros' => request()->filtros,
                                         'marcas' => request()->marcas,
                                         'order' => request()->order,
                                         'range' => request()->range,
                                         'search' => request()->search,
                                         'sort' => 'mayor_menor',
-                                    ]) }}"
+                                    ]) }}">
                                     {{ 'mayor_menor' == request()->sort ? 'selected="selected"' : '' }}">Mayor precio
                                 </option>
                                 <option
                                     value="{{ route('categoria.get', [
-                                        'cat' => $oldcat2,
-                                        'categoria' => $idd,
+                                        'cat' => $oldcat2 ?? 'null',
+                                        'id' => $id ?? 'null',
+
+                                        'categoria' => $idd ?? 'null',
                                         'filtros' => request()->filtros,
                                         'marcas' => request()->marcas,
                                         'sort' => request()->sort,
@@ -192,8 +197,10 @@
                                     {{ 'asc' == request()->order ? 'selected="selected"' : '' }}>A-Z</option>
                                 <option
                                     value="{{ route('categoria.get', [
-                                        'cat' => $oldcat2,
-                                        'categoria' => $idd,
+                                        'cat' => $oldcat2 ?? 'null',
+                                        'id' => $id ?? 'null',
+
+                                        'categoria' => $idd ?? 'null',
                                         'filtros' => request()->filtros,
                                         'marcas' => request()->marcas,
                                         'sort' => request()->sort,
@@ -217,7 +224,7 @@
                                     <!--<div class="product_border"></div>-->
                                     <div class="product-image-content product-item text-center">
                                         <a class="product-img"
-                                            href="{{ route('product.show', ['product' => $producto['slug']]) }}">
+                                            href="{{ route('product.show', ['slug' => isset($producto['slug']) ? $producto['slug'] : 'null']) }}">
 
                                             @if ($producto->hasManyImagenes->first())
                                                 <img class="img-fluid"
@@ -244,7 +251,7 @@
                                         <div class="pmd-card-title">
                                             <ul class="list-inline text-center">
                                                 <a
-                                                    href="{{ route('product.show', ['product' => $producto['slug']]) }}">
+                                                href="{{ route('product.show', ['slug' => isset($producto['slug']) ? $producto['slug'] : 'null']) }}">
                                                     <li
                                                         class="pmd-card-subtitle-text blue body-text title-height list-inline  text-center justify-content-center align-items-center d-flex mb-0">
                                                         <p class="two-row mb-0 ">{{ $producto['nombre_producto'] }}
@@ -351,11 +358,11 @@
     @include('partials.js.slider')
     {{-- <script src="{{url('js/wNumb.js')}}"></script>
             <script src="{{url('js/nouislider.js')}}"></script>
-            
-            
+
+
             @if (!empty($max))
             <script>
-              
+
               // multiple range slider with default tooltip open
               var pmdSliderRangeTooltip = document.getElementById('pmd-slider-range-tooltip');
               noUiSlider.create(pmdSliderRangeTooltip, {
@@ -367,7 +374,7 @@
                   'max': {{floor  (floatval($max) )}}
                 }
               });
-              
+
             </script>
             @endif --}}
 
@@ -383,8 +390,9 @@
 
                 var url =
                     '{{ route('categoria.get', [
-                        'cat' => $oldcat2,
-                        'categoria' => $idd,
+                        'cat' => $oldcat2 ?? 'null',
+                        'categoria' => $idd ?? 'null',
+                        'id' => $id ?? 'null',
                         'filtros' => ':filtros',
                         'search' => request()->search,
                         'marcas' => request()->marcas,
@@ -407,8 +415,10 @@
 
                 var url =
                     '{{ route('categoria.get', [
-                        'cat' => $oldcat2,
-                        'categoria' => $idd,
+                        'cat' => $oldcat2 ?? 'null',
+                        'id' => $id ?? 'null',
+
+                        'categoria' => $idd ?? 'null',
                         'marcas' => ':marcas',
                         'filtros' => request()->filtros,
                         'search' => request()->search,
@@ -431,8 +441,10 @@
                 valor.push(ini, end);
                 var url =
                     '{{ route('categoria.get', [
-                        'cat' => $oldcat2,
-                        'categoria' => $idd,
+                        'cat' => $oldcat2 ?? 'null',
+                        'id' => $id ?? 'null',
+
+                        'categoria' => $idd ?? 'null',
                         'filtros' => request()->filtros,
                         'marcas' => request()->marcas,
                         'search' => request()->search,
