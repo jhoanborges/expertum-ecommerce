@@ -141,7 +141,7 @@
                 <!-- Shop Content -->
                 <div class="shop_content ">
                     <div class="store_title mayus mb-2">
-                        {{ $categorias_nombre['nombrecategoria'] != null ? $categorias_nombre['nombrecategoria'] : 'PRODUCTOS ENCONTRADOS: ' . $search_key }}
+                        {{ isset($categorias_nombre['nombrecategoria']) ? $categorias_nombre['nombrecategoria'] : 'PRODUCTOS ENCONTRADOS: ' . $search_key }}
                     </div>
 
                     <div class="d-flex flex-row-reverse mb-3">

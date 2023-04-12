@@ -141,7 +141,7 @@
                 <!-- Shop Content -->
                 <div class="shop_content ">
                     <div class="store_title mayus mb-2">
-                        <?php echo e($categorias_nombre['nombrecategoria'] != null ? $categorias_nombre['nombrecategoria'] : 'PRODUCTOS ENCONTRADOS: ' . $search_key); ?>
+                        <?php echo e(isset($categorias_nombre['nombrecategoria']) ? $categorias_nombre['nombrecategoria'] : 'PRODUCTOS ENCONTRADOS: ' . $search_key); ?>
 
                     </div>
 
