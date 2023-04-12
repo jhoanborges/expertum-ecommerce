@@ -120,8 +120,6 @@
 
         <div class="shop_content ">
 
-
-
           <div class="product_grid">
             <div class="product_grid_border"></div>
 
