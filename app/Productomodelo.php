@@ -23,6 +23,11 @@ class Productomodelo extends Model
  public $timestamps = false;
 
 
+     /**
+     * Searchable rules.
+     *
+     * @var array
+     */
  protected $searchable = [
   'columns' => [
     'productos.nombre_producto' => 10,

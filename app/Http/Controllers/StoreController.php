@@ -326,6 +326,7 @@ public function index2(){
       }
 
 
+
       $searchData= $request->search;
 
       $parametros=Parametromodelo::first();
@@ -387,6 +388,7 @@ public function index2(){
 
     $ids=array();
 
+    //dd( $query->get() );
     foreach ($query->get() as $key) {
       $ids[]=$key->id;
     }
@@ -577,6 +579,7 @@ public function categoria_get($id)
   $categorias_nombre = Category::where('id' , $id)->select('name')->first();
 
   $categories = Category::all()->toHierarchy();
+  dd( $producto->getMarcaProduct($producto->id)  );
 
   return view('layouts.store')->with([
     'categorias_principales' =>$categorias_principales ,

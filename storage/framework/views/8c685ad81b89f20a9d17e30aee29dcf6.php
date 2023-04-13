@@ -267,9 +267,17 @@
                                                 <?php echo $__env->make('partials.products_reference', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
                                                 <li class="pmd-card-subtitle-text blue body-text">
-                                                    <a href="<?php echo e(route('store.search', ['search' => $producto->getMarcaProduct($producto->id)['nombre']])); ?>"
+                                                    <a href="<?php echo e(route('store.search', ['search' =>
+                                                     $producto->getMarcaProduct($producto->id) != null
+                                                      && isset($producto->getMarcaProduct($producto->id)->nombre )
+                                                      ? $producto->getMarcaProduct($producto->id)->nombre : 'null'
+                                                    ])); ?>"
                                                         class="no-decoration bold">
-                                                        <?php echo e($producto->getMarcaProduct($producto->id)['nombre']); ?>
+                                                        nombre:
+                                                      <?php echo e($producto->getMarcaProduct($producto->id) != null
+                                                        && isset($producto->getMarcaProduct($producto->id)->nombre )
+                                                        ? $producto->getMarcaProduct($producto->id)->nombre : 'null'); ?>
+
 
                                                     </a>
                                                 </li>

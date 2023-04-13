@@ -265,9 +265,19 @@
                                                 @include('partials.products_reference')
 
                                                 <li class="pmd-card-subtitle-text blue body-text">
-                                                    <a href="{{ route('store.search', ['search' => $producto->getMarcaProduct($producto->id)['nombre']]) }}"
-                                                        class="no-decoration bold">
-                                                        {{ $producto->getMarcaProduct($producto->id)['nombre'] }}
+                                                    <a href="{{ route('store.search', ['search' =>
+                                                     $producto->getMarcaProduct($producto->id) != null
+                                                      && isset($producto->getMarcaProduct($producto->id)->nombre )
+                                                      ? $producto->getMarcaProduct($producto->id)->nombre : 'null'
+                                                    ]) }}"
+                                                        class="no-decoration bold">¿
+                                                      {{
+                                                        $producto->getMarcaProduct($producto->id) != null
+                                                        && isset($producto->getMarcaProduct($producto->id)->nombre )
+                                                        ? $producto->getMarcaProduct($producto->id)->nombre : 'null'
+
+                                                      }}
+
                                                     </a>
                                                 </li>
 
