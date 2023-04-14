@@ -13,13 +13,15 @@
         "artesaos/seotools": "^1.1",
         "cviebrock/eloquent-sluggable": "*",
         "diglactic/laravel-breadcrumbs": "*",
+        "doctrine/dbal": "^3.0",
         "guzzlehttp/guzzle": "^7.5.0",
         "laravel/framework": "^10.0",
         "laravel/helpers": "*",
+        "laravel/scout": "^10.1",
         "laravel/ui": "^4.2",
         "msurguy/honeypot": "*",
-        "nicolaslopezj/searchable": "^1.13",
         "realrashid/sweet-alert": "^6.0",
+        "spatie/laravel-ignition": "^2.0",
         "spatie/schema-org": "^3.14",
         "tightenco/ziggy": "^1.5",
         "tucker-eric/eloquentfilter": "*"
@@ -59,7 +61,7 @@
             "Tests\\": "tests/"
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true,
     "scripts": {
         "post-autoload-dump": [

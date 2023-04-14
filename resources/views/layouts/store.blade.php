@@ -268,13 +268,13 @@
                                                     <a href="{{ route('store.search', ['search' =>
                                                      $producto->getMarcaProduct($producto->id) != null
                                                       && isset($producto->getMarcaProduct($producto->id)->nombre )
-                                                      ? $producto->getMarcaProduct($producto->id)->nombre : 'null'
+                                                      ? $producto->getMarcaProduct($producto->id)->nombre : ''
                                                     ]) }}"
-                                                        class="no-decoration bold">¿
+                                                        class="no-decoration bold">
                                                       {{
                                                         $producto->getMarcaProduct($producto->id) != null
                                                         && isset($producto->getMarcaProduct($producto->id)->nombre )
-                                                        ? $producto->getMarcaProduct($producto->id)->nombre : 'null'
+                                                        ? $producto->getMarcaProduct($producto->id)->nombre : ''
 
                                                       }}
 

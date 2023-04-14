@@ -26,6 +26,7 @@ use App\Marcas;
 use App\Categoria7;
 use App\Traits\SEOTrait;
 use Illuminate\Support\Arr;
+use Spatie\Searchable\Search;
 
 class StoreController extends Controller
 {
@@ -331,6 +332,10 @@ public function index2(){
 
       $parametros=Parametromodelo::first();
 
+      $query = Productomodelo::search($searchData ?? '')
+      ;
+
+      /*
       if(!$request->categoria==null){
         $query = Productomodelo::has('hasOneCategory1')
         -> filter( request()->all())
@@ -386,9 +391,21 @@ public function index2(){
 
     }
 
+    */
+    /*
+    $query->when($parametros->store_show== true, function ($q) {
+        return $q;
+      });
+       $query->when($parametros->store_show== false, function ($q) {
+        return $q->where('cantidad','>', 0);
+      });
+
+*/
+
     $ids=array();
 
     //dd( $query->get() );
+
     foreach ($query->get() as $key) {
       $ids[]=$key->id;
     }
@@ -475,7 +492,7 @@ if (!empty ($query->get()) ) {
   $search_like=Productomodelo::
   has('hasOneCategory1')->
   where('estado', true)->take(6)
-  ->paginateFilter($pagination);
+  ->paginate($pagination);
 }
 
 $checked=[];
@@ -486,7 +503,7 @@ if ($request->marcas) {
 
 
 return view('layouts.store')->with([
-  'productos'=> $query->paginateFilter($pagination),
+  'productos'=> $query->paginate($pagination),
   'productos2'=> $query->get(),
   'searchData'=> $searchData,
   'marcas'=> $marcas,
