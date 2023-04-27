@@ -1,6 +1,7 @@
 <?php
 
-
+//public route no middle ware auth
+Route::get('/crear-pedido-y-pagar-despues', 'PedidosController@index')->name('pedido');
 
 Route::get('/feed', 'RssFeedController@generate_rss_feed')->name('feed');
 
@@ -98,6 +99,8 @@ Route::get('/addProductToFavorite/{id}', 'FavoritosController@addProductToFavori
 Route::post('/deleteItemFromCart/', 'ResumenController@deleteItemFromCart')->name('deleteItemFromCart');
 
 Route::get('/resumen/checkout', 'CheckoutController@index')->name('checkout')->middleware('auth');
+
+
 
 Route::get('trm/update', 'TrmController@webservistrm')->name('trm.update');
 Route::get('/notifications.mp', 'MercadoPagoController@index')->name('notifications.mp');

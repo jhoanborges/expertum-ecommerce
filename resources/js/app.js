@@ -16,3 +16,4 @@ require('./bootstrap');
 require('./components/CartComponent');
 require('./components/MyStoresComponent');
 require('./components/CartSummaryComponent');
+require('./components/PedidosComponent');

@@ -399,15 +399,21 @@ toastr.error(error.response.data.message);
 
                             <div className="container">
 
-                                <div className="row justify-content-end pt-4 pb-2">
+                                <div className="d-flex justify-content-end pt-4 pb-2">
 
                                     <a href={route('home')} className="btn btn-primary checkout-button continue-button mr-3">
                                         Seguir comprando</a>
 
 
-                                    <a href={ route('checkout') } className="btn btn-danger checkout-button">
+                                    <a href={ route('checkout') } className="btn btn-danger checkout-button mr-3">
                                         <img src={props.cart} className="img-fluid header-icon"></img>
                                         Ir a Pagar $ </a>
+
+
+                                    <a href={ route('pedido') } className="btn btn-info checkout-button">
+                                        <img src={props.cart} className="img-fluid header-icon"></img>
+                                        Crear un pedido y pagar después</a>
+
                                 </div>
                             </div>
 

@@ -21,11 +21,12 @@ use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 // Home
 Breadcrumbs::for('welcome', function(BreadcrumbTrail $breadcrumbs)
 {
-  if  (  session()->get('main')==1 ){
- $breadcrumbs->push('Inicio', route('welcome'));
-}else{
-  $breadcrumbs->push('Inicio', route('welcome'));
-}
+    if( Route::currentRouteName() == 'welcome' ){
+
+    }else{
+        $breadcrumbs->push('Inicio', route('welcome'));
+    }
+
 
 });
 

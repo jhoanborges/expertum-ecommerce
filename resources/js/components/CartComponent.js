@@ -23,8 +23,8 @@ const useStyles = makeStyles({
   fab: {
     zIndex: 999,
     position: "fixed !important",
-    bottom: "9rem",
-    right: "0.7rem"
+    bottom: "140px",
+    right: "15px"
   },
   list: {
     width: MAX_WIDTH,
@@ -101,7 +101,7 @@ function CartComponent(props) {
   const gotToCheckout = () => {
     window.location.href = route('checkout')
   }
-  
+
 
   const removeItem = (item) => {
     setLoading(true);
@@ -122,8 +122,8 @@ function CartComponent(props) {
   };
 
 
-  
-  
+
+
   const _renderList = () => (
     <div
       role="presentation"
@@ -141,9 +141,9 @@ function CartComponent(props) {
     }}
       spinner={<ClipLoader size={50} color={"#f50057"} />}
     >
-      
+
           <List>
-            {data.length > 0 ? 
+            {data.length > 0 ?
             <div>
             {data.map((item, index) => (
               <div  key={item.rowId} className="d-flex">
@@ -165,11 +165,11 @@ function CartComponent(props) {
                       </div>
             ))}
             </div>
-            : 
-            
+            :
+
             <ListItem>
               <ListItemIcon>
-              <img width="50" src={props.productimage ? props.productimage : 
+              <img width="50" src={props.productimage ? props.productimage :
               <RemoveShoppingCartOutlinedIcon/>
               }></img>
 
@@ -177,11 +177,11 @@ function CartComponent(props) {
             <ListItemText primary='Carrito de compras vacio' secondary='Selecciona un producto y haz click en el botón comprar' />
 
           </ListItem>}
-          
+
 
           </List>
           <Divider />
-  
+
           <List  style={{ paddingTop:0,paddingBottom:0 }}>
     <ListItem  style={{ paddingTop:0,paddingBottom:0 }}>
     <ListItemText primary={'Total'} secondary={formatNumber( parseFloat(props.total))} style={{ textAlign: 'right' }} >

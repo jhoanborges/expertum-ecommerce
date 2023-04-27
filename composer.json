@@ -24,7 +24,8 @@
         "spatie/laravel-ignition": "^2.0",
         "spatie/schema-org": "^3.14",
         "tightenco/ziggy": "^1.5",
-        "tucker-eric/eloquentfilter": "*"
+        "tucker-eric/eloquentfilter": "*",
+        "yoeunes/toastr": "^2.3"
     },
     "require-dev": {
         "mockery/mockery": "^1.0",

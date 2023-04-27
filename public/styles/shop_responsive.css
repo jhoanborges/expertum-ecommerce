@@ -205,10 +205,11 @@
 		-o-transform: none;
 		transform: none;
 	}
+    /*
 	.shop_content
 	{
 		margin-top: 60px;
-	}
+	}*/
 	.product_item
 	{
 		width: 25%;

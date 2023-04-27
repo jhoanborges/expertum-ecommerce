@@ -21000,7 +21000,6 @@ select option
 .shop
 {
 	background: #FFFFFF;
-	padding-top: 80px;
 	/*padding-bottom: 139px;*/
 }
 .shop_content
@@ -22234,10 +22233,11 @@ select option
 		-o-transform: none;
 		transform: none;
 	}
+    /*
 	.shop_content
 	{
 		margin-top: 60px;
-	}
+	}*/
 	.product_item
 	{
 		width: 25%;
@@ -27462,7 +27462,6 @@ font-size: 10px;
   padding-right: 4px;
   padding-bottom: 4px;
   padding-left: 4px;
-  width: 120px;
 }
 .continue-button{
   width: 160px;
@@ -28314,7 +28313,7 @@ float: left;
 .arrow-button {
     display: flex;
     color: #C2FFE9;
-    background-color: #00E692;
+    /*background-color: #00E692;*/
     padding: 10px 16px;
     border-radius: 20px;
     transition: all .3s ease;

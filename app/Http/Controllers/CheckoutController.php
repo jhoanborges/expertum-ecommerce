@@ -59,6 +59,8 @@ class CheckoutController extends Controller
 	}
 
 
+
+
 	private function storeCart()
 	{
 		if(Auth::check())
@@ -68,10 +70,6 @@ class CheckoutController extends Controller
 			Cart::store($user_id);
 		}
 	}
-
-
-
-
 
 
 	public function index(){
@@ -249,12 +247,12 @@ class CheckoutController extends Controller
 					//cargo de cliente sinose selecciona el cargo
 		$cargo  = $request->cargos ?? 'cargo_cliente';
 		$total_saferbo=0;
-	
+
 
         if($cargo === 'cargo_cliente'){
 			//si es cargo al cliente, no se calcula el valor del flete
 			$observaciones = 'El comprado ha seleccionado Envío a cargo del cliente. Transportista: ';
-					
+
 
 			$transportista = Transportadores::
 			where('nombretrasportador', 'like', '%'. $request->transportista.'%')->first();
@@ -265,10 +263,10 @@ class CheckoutController extends Controller
 			}else{
 				$observaciones = $observaciones . ' '.$request->transportista;
 			}
-			
+
 			$observaciones = $observaciones .'. Observaciones: ' . $request->observaciones;
 
-            
+
         }else if($cargo === 'recoger_tienda'){
             //flete igual a cero
 			$observaciones = 'El comprado ha seleccionado Recoger en tienda. Observaciones: ' . $request->observaciones;
@@ -278,7 +276,7 @@ class CheckoutController extends Controller
 
 			$servicio = new Flete_Saferbo();
 			$total_saferbo = $servicio->flete($request,$trans->id);
-		
+
 			if($total_saferbo == 'error'){
 				toast('No se ha podido conectar con el servidor de envíos, por favor, intente nuevamente','warning','top-right');
 			return redirect()->back()->withInput();
@@ -333,7 +331,7 @@ class CheckoutController extends Controller
 				$merchantId = $pasarela->merchantid;
 				$accountId = $pasarela->accountid;
 				$endpoint_url ="https://checkout.payulatam.com/ppp-web-gateway-payu/";
-				
+
 				if(env('APP_ENV') == 'local'){
 				//TEST PAYU
 					$merchantId = "508029";
@@ -367,7 +365,7 @@ class CheckoutController extends Controller
 					]);
 
 
-			}else if($pasarelaPago == 'credibanco'){	
+			}else if($pasarelaPago == 'credibanco'){
 				$transaction = $this->createOrderCrediBanco($totalizacion, $factura->id);
 				return Redirect::to($transaction['formUrl']);
 
@@ -457,7 +455,7 @@ class CheckoutController extends Controller
 				return redirect()->back();
 			}
 
-	
+
 			$factura_update = Factura::where('id', $factura->id)->update([
 				'id_transportador' => $trans->id,
 				'flete' => $total_saferbo,
@@ -496,7 +494,7 @@ class CheckoutController extends Controller
 		$data = Cart::instance('default')->content()->toArray();
 		$objects = [];
 		foreach($data as $cart){
-	
+
 			$objects [] = $cart;
 		}
 		return response()->json($objects);
@@ -526,7 +524,8 @@ class CheckoutController extends Controller
 
 
 
-	
+
+
 
 
 }
