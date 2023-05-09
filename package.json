@@ -38,6 +38,7 @@
         "@material-ui/icons": "^4.11.2",
         "antd": "^5.4.6",
         "cross-env": "^7.0.3",
+        "mdb-react-ui-kit": "^6.0.0",
         "moment": "^2.29.3",
         "momentjs": "^2.0.0",
         "react-bootstrap": "^2.2.0",

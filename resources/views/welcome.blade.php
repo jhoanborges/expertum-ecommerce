@@ -168,7 +168,7 @@
 
 
   @include('partials.js.city_selector')
-@toastr_render
+
 <div id="myDiv"></div>
 
 <a href="{{route('about_us')}}" class="float d-flex justify-content-center btn-top-home">
