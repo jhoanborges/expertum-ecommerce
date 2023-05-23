@@ -141,7 +141,6 @@ class StoreController extends Controller
 
 
   Session::put('main', 0);
-
   return view('layouts.store')->with([
     'marcas'=> $marcas,
     'top'=> $top,
@@ -502,6 +501,7 @@ if ($request->marcas) {
 }
 
 
+
 return view('layouts.store')->with([
   'productos'=> $query->paginate($pagination),
   'productos2'=> $query->get(),
@@ -529,7 +529,7 @@ return view('layouts.store')->with([
   'max'=> $max,
   'search_key'=> $searchData,
   'cat_search' => $request->categoria,
-  'idd'=> $idd,
+  'idd'=>1,
   'checked'=> $checked,
   'search_like'=> $search_like,
   'strict'=> $request->strict,

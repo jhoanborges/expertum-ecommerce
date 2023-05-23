@@ -149,15 +149,14 @@
                             <select onChange="window.document.location.href=this.options[this.selectedIndex].value;">
                                 <option
                                     value="{{ route('categoria.get', ['cat' => $oldcat2 ?? 'null',
-                                        'id' => $id ?? 'null',
+                                        'id' => $idd ?? 'null',
 
-                                    'categoria' => $idd ?? 'null', 'todos' => 'todos']) }}"
+                                    'todos' => 'todos']) }}"
                                     {{ 'todos' == $selected ? 'selected="selected"' : '' }}>Ordenar por:</option>
                                 <option
                                     value="{{ route('categoria.get', [
                                         'cat' => $oldcat2 ?? 'null',
-                                        'categoria' => $idd ?? 'null',
-                                        'id' => $id ?? 'null',
+                                        'id' => $idd ?? 'null',
                                         'filtros' => request()->filtros,
                                         'marcas' => request()->marcas,
                                         'range' => request()->range,
@@ -170,23 +169,20 @@
                                     value="{{ route('categoria.get', [
                                         'cat' => $oldcat2 ?? 'null',
                                         'categoria' => $idd ?? 'null',
-                                        'id' => $id ?? 'null',
-
+                                        'id' => $idd,
                                         'filtros' => request()->filtros,
                                         'marcas' => request()->marcas,
                                         'order' => request()->order,
                                         'range' => request()->range,
                                         'search' => request()->search,
                                         'sort' => 'mayor_menor',
-                                    ]) }}">
-                                    {{ 'mayor_menor' == request()->sort ? 'selected="selected"' : '' }}">Mayor precio
+                                    ]) }}"
+                                    {{ 'mayor_menor' == request()->sort ? 'selected="selected"' : '' }}>Mayor precio
                                 </option>
                                 <option
                                     value="{{ route('categoria.get', [
                                         'cat' => $oldcat2 ?? 'null',
-                                        'id' => $id ?? 'null',
-
-                                        'categoria' => $idd ?? 'null',
+                                        'id' => $idd ?? 'null',
                                         'filtros' => request()->filtros,
                                         'marcas' => request()->marcas,
                                         'sort' => request()->sort,
@@ -198,9 +194,7 @@
                                 <option
                                     value="{{ route('categoria.get', [
                                         'cat' => $oldcat2 ?? 'null',
-                                        'id' => $id ?? 'null',
-
-                                        'categoria' => $idd ?? 'null',
+                                        'id' => $idd ?? 'null',
                                         'filtros' => request()->filtros,
                                         'marcas' => request()->marcas,
                                         'sort' => request()->sort,
@@ -401,8 +395,7 @@
                 var url =
                     '{{ route('categoria.get', [
                         'cat' => $oldcat2 ?? 'null',
-                        'categoria' => $idd ?? 'null',
-                        'id' => $id ?? 'null',
+                        'id' => $idd ?? 'null',
                         'filtros' => ':filtros',
                         'search' => request()->search,
                         'marcas' => request()->marcas,
@@ -425,13 +418,11 @@
 
                 var url =
                     '{{ route('categoria.get', [
-                        'cat' => $oldcat2 ?? 'null',
-                        'id' => $id ?? 'null',
-
-                        'categoria' => $idd ?? 'null',
-                        'marcas' => ':marcas',
+                        'cat' => $oldcat2,
+                        'id' => $idd,
                         'filtros' => request()->filtros,
                         'search' => request()->search,
+                        'marcas' => ':marcas',
                     ]) }}';
 
                 var parseResult = new DOMParser().parseFromString(url, "text/html");
@@ -449,12 +440,11 @@
                 var ini = $('.min').val();
                 var end = $('.max').val();
                 valor.push(ini, end);
+
                 var url =
                     '{{ route('categoria.get', [
-                        'cat' => $oldcat2 ?? 'null',
-                        'id' => $id ?? 'null',
-
-                        'categoria' => $idd ?? 'null',
+                        'cat' => $oldcat2 ,
+                        'id' => $idd ,
                         'filtros' => request()->filtros,
                         'marcas' => request()->marcas,
                         'search' => request()->search,

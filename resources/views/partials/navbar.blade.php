@@ -196,6 +196,8 @@
                   </label>
                   --}}
                 </div>
+
+
                 <form action="{{route('store.search')}}" method="get" accept-charset="utf-8">
 
                   <input type="text" name="search" id="search" class="form-control search button-rounded body-text" placeholder="Buscar... Palabra clave o Referencia (Enter)" value="{{isset($search_key) ?$search_key : '' }}" >
@@ -208,6 +210,7 @@
 
 
 
+            <div id="search-component"><div>
 
 
 

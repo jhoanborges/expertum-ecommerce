@@ -13,6 +13,8 @@ class TestController extends Controller
 {
     public function index(){
 
+        return response()->json(Productomodelo::take(50)->get() , 200);
+
 
 $mp = new MP ("888625201623812", "d4NiFuY3A80jR1LWaTYdv4hlGMeuIfOy");
 $params = ["access_token" => $mp->get_access_token()];//

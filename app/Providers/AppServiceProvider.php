@@ -19,6 +19,7 @@ use App\Productomodelo;
 use Illuminate\Support\Facades\Validator;
 use Spatie\SchemaOrg\Schema as SchemaSpatie;
 use Spatie\SchemaOrg\Graph;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,6 +30,8 @@ class AppServiceProvider extends ServiceProvider
    */
   public function boot()
   {
+
+    Paginator::defaultView('vendor.pagination.bootstrap-4');
 
 
     Validator::extend('recaptcha', 'App\\Validators\\ReCaptcha@validate');

@@ -29,7 +29,7 @@ class Productomodelo extends Model
 
     public function marca()
     {
-        return $this->hasOne('App\Marcas', 'id_marca', 'id');
+        return $this->hasOne('App\Marcas', 'id', 'id_marca');
     }
 
     protected function makeAllSearchableUsing($query)

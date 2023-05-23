@@ -20,23 +20,23 @@ class ProductomodeloFilter extends ModelFilter
 
 
 
-
+/*
   public function categoria($id)
   {
 
     return $this->where('category_id', 13);
   }
-
+*/
   public function sort($sort)
   {
-  /*  
+  /*
     $products=array();
     foreach($this->get()->toArray() as $index => $product){
       $real_price = precioNew($product['slug']);
       $product['precioventa_iva'] = $real_price;
       $products[] = $product;
     }
-    
+
     $collection =collect($products);
 dd( $collection->sortBy('precioventa_iva') );
 */
@@ -81,7 +81,7 @@ dd( $collection->sortBy('precioventa_iva') );
 
     public function marcas($marcas)
     {
-  
+
       $ids = explode(',', $marcas);
 
       $query = $this->whereHas('belongsToManyMarcas', function ($q) use ($ids)

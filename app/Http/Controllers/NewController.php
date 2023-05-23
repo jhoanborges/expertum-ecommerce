@@ -33,6 +33,7 @@ use App\SlidersCategoria5;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Traits\SEOTrait;
 
+use function Ramsey\Uuid\v1;
 
 class NewController extends Controller{
 
@@ -66,18 +67,22 @@ class NewController extends Controller{
         }
 
         */
+
+
         $now=Carbon::now()->format('Y-m-d');
         $index=1;
         $grid=0;
 
         if (request()->search ){
 
+
             $searchData = request()->search ;
+
 
             $productos=Productomodelo::
             has('hasOneCategoria1')->
             filter( request()->all())
-            ->search($searchData, null, true, true)
+            //->search($searchData, null, true, true)
             ->paginateFilter(request()->mostrar);
 
             $productos2=Productomodelo::
@@ -101,6 +106,7 @@ class NewController extends Controller{
         }else{
 
             $id_categoria_principal = session()->get('id_categoria_principal');
+
             switch ($cat2) {
 
                 case 1:
@@ -120,6 +126,7 @@ class NewController extends Controller{
                     ->orderBy('nombrecategoria' ,  'asc')
                     ->get();
 
+
                     $categorias_nombre= Categorian1modelo::
                     where('slug', '=', $id)
                     ->first();
@@ -127,6 +134,7 @@ class NewController extends Controller{
                     $categories=Categorian1modelo::
                     where('slug', $id)->
                     first();
+
 
 
                     $marcas = DB::table('productos')
@@ -638,7 +646,7 @@ class NewController extends Controller{
                 }
                 */
 
-                //dd("pp");
+
 
                 return view('layouts.store')->with([
                     'sliders'=> $sliders,
