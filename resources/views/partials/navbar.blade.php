@@ -210,7 +210,7 @@
 
 
 
-            <div id="search-component"><div>
+            {{--<div id="search-component"><div> --}}
 
 
 

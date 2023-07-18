@@ -16,6 +16,7 @@
 <div class="shop">
     <div class="container-fluid home-padding">
         <div class="row justify-content-center">
+            @if(\Route::currentRouteName() != 'store.search')
             <div class="col-lg-2">
 
                 <!-- Shop Sidebar -->
@@ -132,7 +133,7 @@
 
             </div>
 
-
+@endif
 
 
 

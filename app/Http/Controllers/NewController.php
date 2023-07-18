@@ -85,13 +85,20 @@ class NewController extends Controller{
             //->search($searchData, null, true, true)
             ->paginateFilter(request()->mostrar);
 
-            $productos2=Productomodelo::
+            $query=Productomodelo::
             has('hasOneCategoria1')->
-            filter( request()->all() )
-            ->search($searchData, null, true, true)
-            ->get();
+            filter( request()->all() );
+            //->search($searchData, null, true, true)
+            //->get();
 
-            //   Session::put('id_categoria_principal', $id);
+            Session::put('id_categoria_principal', $id);
+
+
+            $ids2= Productomodelo::
+            where('estado', true)
+            ->where('productos.cantidad', '!=', 0)
+            ->where('id_categorian1', '=', $id)
+            ->pluck('id');
 
 
             $categorias= DB::table('categoria_n2')
@@ -99,9 +106,19 @@ class NewController extends Controller{
             ->orderBy('nombrecategoria' ,  'asc')
             ->get();
 
+
             $categories=Categorian1modelo::
             orderBy('nombrecategoria', 'ASC')
             ->first();
+
+/*
+            $categorias_nombre= Categorian1modelo::
+            where('slug', '=', $id)
+            ->first();
+            dd($categorias_nombre);
+            */
+
+
 
         }else{
 
@@ -589,6 +606,7 @@ class NewController extends Controller{
 
                // $sliders=collect([]);
                // if ($oldcat2==1) {
+
                     $sliders= Slider::
                     where('category1', $categorias_nombre->slug)
                     ->orWhere('category2', $categorias_nombre->slug)
