@@ -13,12 +13,12 @@ use App\SEO;
 use Illuminate\Support\Str;
 
 trait SEOTrait {
-  
-  
-  
+
+
+
   public function setSEOManager()
   {
-    
+   try{
     $data = SEO::first();
 
     $title=$data->title;
@@ -33,7 +33,7 @@ trait SEOTrait {
     SEOMeta::setDescription($description);
     SEOMeta::setCanonical($url);
     SEOMeta::addKeyword([$keywords]);
-    
+
     OpenGraph::setDescription($description);
     OpenGraph::setTitle($title);
     OpenGraph::setUrl($url);//slug
@@ -42,7 +42,7 @@ trait SEOTrait {
     OpenGraph::addImage(['url' => $logo, 'size' => 300]);
     OpenGraph::addImage($logo, ['height' => 300, 'width' => 300]);
     OpenGraph::addImage($logo, ['height' => 600, 'width' => 600]);
-    
+
     TwitterCard::setTitle($title);
     TwitterCard::setSite($hashtag);
     TwitterCard::setDescription($description); // description of twitter card tag
@@ -55,9 +55,9 @@ trait SEOTrait {
     JsonLd::setDescription($description); // description of twitter card tag
     JsonLd::setUrl($url); // url of twitter card tag
     JsonLd::setImage($logo); // add image url
-    
-    
-    
+
+
+
     JsonLdMulti::setTitle($title);
     JsonLdMulti::setDescription($description);
     JsonLdMulti::setType('WebPage');
@@ -67,6 +67,10 @@ trait SEOTrait {
         JsonLdMulti::setType('WebPage');
         JsonLdMulti::setTitle('Page Article - '.$title);
     }
+
+   }catch(\Exception $e){
+
+   }
 
 
 
@@ -78,14 +82,14 @@ trait SEOTrait {
     public function setSEOManagerShow($product, $filters, $allImages)
   {
     $data = SEO::first();
-    
+
     $title=$product->nombre_producto;
     $description = Str::limit($product->descripcion , 140 , '...');
-    $url =$data->url . $product->slug ; 
+    $url =$data->url . $product->slug ;
     $logo = $allImages[0]['urlimagen'];
     $hashtag = $data->hashtag;
     $keywords = $data->keywords;
-    
+
 
     SEOMeta::setTitle($title, false);
     SEOMeta::setDescription($description);
@@ -95,7 +99,7 @@ trait SEOTrait {
     SEOMeta::addMeta('product:section', $product->id_categorian1, 'property');
     SEOMeta::setCanonical($url);
     SEOMeta::addKeyword([$keywords]);
-    
+
     OpenGraph::setDescription($description);
     OpenGraph::setTitle($title);
     OpenGraph::setUrl($url);//slug
@@ -108,7 +112,7 @@ trait SEOTrait {
     OpenGraph::addImage($logo, ['height' => 300, 'width' => 300]);
     OpenGraph::addImage($logo, ['height' => 600, 'width' => 600]);
 
-    
+
     //JsonLd::addImage($logo);
     JsonLd::setTitle($title); // title of twitter card tag
     JsonLd::setDescription($description); // description of twitter card tag
@@ -116,7 +120,7 @@ trait SEOTrait {
     JsonLd::addImage($logo); // add image url
 
 
-    
+
     JsonLdMulti::setTitle($title);
     JsonLdMulti::setDescription($description);
     JsonLdMulti::setType('Product');
@@ -147,10 +151,10 @@ trait SEOTrait {
                 'tag' => $keywords
             ]);
 
-    
+
     //return true;
   }
-  
-  
-  
+
+
+
 }

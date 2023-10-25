@@ -41,6 +41,8 @@ object-assign
  * Date: 2022-08-26T17:52Z
  */
 
+/*! algoliasearch.umd.js | 4.17.0 | © Algolia, inc. | https://github.com/algolia/algoliasearch-client-javascript */
+
 /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */
 
 /**
@@ -63,17 +65,19 @@ object-assign
  */
 
 /**
+ * @mui/styled-engine v5.12.0
+ *
+ * @license MIT
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/**
  * A better abstraction over CSS.
  *
  * @copyright Oleg Isonen (Slobodskoi) / Isonen 2014-present
  * @website https://github.com/cssinjs/jss
  * @license MIT
- */
-
-/** @license MUI v5.10.16
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
  */
 
 /** @license React v0.19.1

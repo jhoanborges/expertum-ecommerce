@@ -127,13 +127,13 @@ class RegisterController extends Controller
        'razon_social' => $request->razon_social,
        'numeroidentificacion' => $request->nit,
        'apellidos' => $request->razon_social,
-       'tipo_identificacion' => 2, //nit        
+       'tipo_identificacion' => 2, //nit
        'email' => strtoupper($request->email),
        'username' => $request->email,
-       'password' => bcrypt($request->password),    
+       'password' => bcrypt($request->password),
        'activation_code' => str_random(30).time(),
        'tipo' => 2,
-             //'codigo_confirmacion' => $data['codigo_confirmacion']    
+             //'codigo_confirmacion' => $data['codigo_confirmacion']
      ]);
 
       if ($user) {
@@ -150,7 +150,7 @@ class RegisterController extends Controller
 
       $user->notify(new UserRegisteredSuccessfully($user));
       alert()->success('¡Enhorabuena!','Tu cuenta ha sido creada exitosamente. Hemos enviado un correo electrónico a ' .$request->email.'');
-      return redirect()->route('home');    
+      return redirect()->route('home');
     } catch (\Exception $exception) {
      alert()->error('Error!','No se ha podido crear el usuario');
      return redirect()->back()->withInput();
@@ -175,11 +175,12 @@ class RegisterController extends Controller
 
 protected function register(Request $request)
 {
+    /*
 
   $secret = env('GOOGLE_RECAPTCHA_SECRET');
 
   if (isset($_POST['g-recaptcha-response'])) {
-    $captcha = $_POST['g-recaptcha-response']; 
+    $captcha = $_POST['g-recaptcha-response'];
     $url = 'https://www.google.com/recaptcha/api/siteverify';
     $data = array(
     'secret' => $secret,
@@ -204,27 +205,27 @@ protected function register(Request $request)
 
   if ($jsonResponse->success === true) {
 
-  // Si el código es correcto, seguimos procesando el formulario como siempre 
+  // Si el código es correcto, seguimos procesando el formulario como siempre
 
-  } else { 
+  } else {
 
-  // Si el código no es válido, lanzamos mensaje de error al usuario 
+  // Si el código no es válido, lanzamos mensaje de error al usuario
     toast('error recaptcha','error','top-right');
-      //return redirect()->route('home'); 
+      //return redirect()->route('home');
 
     return redirect()->back()
     ->withInput();
 
   }
- 
-  
+ */
+
 
   /*
   $recaptcha = $_POST["g-recaptcha-response"];
- 
+
   $url = 'https://www.google.com/recaptcha/api/siteverify';
   $data = array(
-    'header' => "Content-Type: application/x-www-form-urlencoded\r\n", 
+    'header' => "Content-Type: application/x-www-form-urlencoded\r\n",
     'secret' => env('GOOGLE_RECAPTCHA_SECRET'),
     'response' => $recaptcha
   );
@@ -244,7 +245,7 @@ protected function register(Request $request)
   } else {
       //alert()->success('¡Enhorabuena!','Tu cuenta ha sido creada exitosamente. Hemos enviado un correo electrónico a ' .$request->email.'');
       toast('error recaptcha','error','top-right');
-      return redirect()->route('home'); 
+      return redirect()->route('home');
   }
   */
 
@@ -292,7 +293,7 @@ protected function register(Request $request)
     //echo json_encode($data,  JSON_FORCE_OBJECT);
 
     //echo "error";
-    
+
 
     return redirect()->back()
     ->withErrors($validator)
@@ -317,7 +318,7 @@ protected function register(Request $request)
        'telefono' => strtoupper($request->telefono),
        'email' => strtoupper($request->email),
        'username' => $request->email,
-       'password' => bcrypt($request->password),    
+       'password' => bcrypt($request->password),
        'activation_code' => $email_required_on_register === 1 ? str_random(30).time() : null,
        'status' => $email_required_on_register === 1 ? 0: 1,
      ]);
@@ -331,15 +332,15 @@ protected function register(Request $request)
         if($email_required_on_register === 1){
           $user->notify(new UserRegisteredSuccessfully($user));
           alert()->success('¡Activación requerida!','Por favor revisa en la BANDEJA DE ENTRADA o en la carpeta SPAM para CONFIRMAR la propiedad de ' .$request->email.' '. 'y ACTIVAR la cuenta')->autoclose(0);
-          return redirect()->route('home');  
+          return redirect()->route('home');
           $user->notify(new UserRegisteredSuccessfully($user));
 
         }else{
-          //enviar email de bienvenida 
+          //enviar email de bienvenida
         $name = $user->name;
         $subject = 'Bienvenido '. $name . '! ';
         $body = "Tu cuenta ha sido creada y activada exitosamente";
-        
+
         $body = $body . '<br> <div style="background-color: ghostwhite; border-radius: 4px; padding: 20px 30px;">
         <center>
         <p><strong>Datos de acceso</p>
@@ -347,7 +348,7 @@ protected function register(Request $request)
         <p><strong>Clave: </strong> '.$request->password.'</p>
         </center>
         </div>';
-        
+
         try{
             SendEmailJob::dispatch($user->email, $user, $subject, $body);
           }catch(\Exception $e){
@@ -361,9 +362,9 @@ protected function register(Request $request)
       }catch (\Exception $exception) {}
 
       alert()->success('Tu cuenta se ha creado con éxito.');
-      return redirect()->route('home');    
-   
-  
+      return redirect()->route('home');
+
+
 
 
 }
@@ -378,7 +379,7 @@ public function activateUser(string $activationCode)
     $user = User::where('activation_code', $activationCode)->first();
     if (!$user) {
       toast('El código de activación es inválido expirado','info','top-right');
-      return redirect()->route('home');    
+      return redirect()->route('home');
     }
 
     $user->status= 1;

@@ -8,7 +8,7 @@
             </div>
         </div>
     </div>
-    
+
     <form class="mb-5" method="POST" action="{{ route('register') }}" onsubmit="return validaForm();">
     {{--<form id="form" method="POST">--}}
         @csrf
@@ -49,14 +49,14 @@
 
                 <div class="row">
                   <div class="col-sm-6 form-group">
-                    <label class="required bold black mb-2 title-text">Tipo de identificación</label>         
-                   
+                    <label class="required bold black mb-2 title-text">Tipo de identificación</label>
+
                     <select class="form-control" id="tipo_identificacion" name="tipo_identificacion" required="required">
                     <option disabled selected value="">Seleccione una opción</option>
                     <!--
                     @foreach ($identificacion as $idf)
                     <option
-                    value="{{$idf->id}}" 
+                    value="{{$idf->id}}"
                     >{{$idf->nombre}}
                     </option>
                     @endforeach
@@ -65,7 +65,7 @@
                     <option value="{{$idf->id}}" {{ (old("tipo_identificacion") == $idf->id ? "selected":"") }}>{{$idf->nombre}}
                     </option>
                     @endforeach
-                    </select>      
+                    </select>
 
                     @error('tipo_identificacion')
                     <span class="invalid-feedback" role="alert">
@@ -86,8 +86,8 @@
 
                 <div class="row">
                   <div class="col-sm-6 form-group">
-                    <label class="required bold black mb-2 title-text">Departamento</label>         
-                   
+                    <label class="required bold black mb-2 title-text">Departamento</label>
+
                     <select   required="required"  class="form-control state" name="state" id="state" >
                     <option disabled selected value="">Seleccione una opción</option>
                     <!--
@@ -99,7 +99,7 @@
                     <option value="{{$dep->id}}" {{ (old("state") == $dep->id ? "selected":"") }}>{{$dep->region}}
                     </option>
                     @endforeach
-                    </select> 
+                    </select>
 
                     @error('state')
                     <span class="invalid-feedback" role="alert">
@@ -108,9 +108,9 @@
                     @enderror
                   </div>
                   <div class="col-sm-6 form-group">
-                    <label class="required bold black mb-2 title-text">Ciudad</label>         
+                    <label class="required bold black mb-2 title-text">Ciudad</label>
                     <select class="select2city2 form-control city" name="city" id="city" style="width: 100%" required="required">
-                    </select>             
+                    </select>
                     @error('city')
                     <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -176,22 +176,24 @@
                   </div>
                 </div>
 
+                {{--
                 <div class="row">
                   <div class="col-sm-6 form-group">
                     @if(env('GOOGLE_RECAPTCHA_KEY'))
                     <div class="g-recaptcha" data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}" data-callback="enabledSubmit">></div>
                     <!--<div class="g-recaptcha" data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}">></div>-->
                     @endif
-                  </div>                  
+                  </div>
                 </div>
+            --}}
 
                 <div class="row">
                   <div class="col-sm-6 form-group">
                     <!--<button type="submit" name="enviar" class="btn btn-primary" id="btnSubmit" disabled=""><i class="fas fa-user mr-2"></i>Aceptar Política y Registrarme</button>-->
                     <button type="submit" name="enviar" class="btn btn-primary" id="btnSubmit"><i class="fas fa-user mr-2"></i>Aceptar Política y Registrarme</button>
                   </div>
-                </div> 
-                  
+                </div>
+
         </div>
       </div>
     </form>
@@ -322,7 +324,7 @@
             toastr.clear()
             //alert(response);
             //console.log(response);
-        
+
             //alert()->success('¡Enhorabuena!','Tu cuenta ha sido creada exitosamente. Hemos enviado un correo electrónico a ' .$request->email.'');
 
             if (response == 'ok'){
@@ -376,21 +378,21 @@
         toastr["error"]('Confirmación de contraseña inválida');
         return false;
       }
-
+/*
       var response = grecaptcha.getResponse();
 
       if(response.length == 0){
         //alert("Captcha no verificado")
         var testVar = "reCAPTCHA no válido." ;
           Swal.fire(testVar).then(function() {
-        });           
+        });
         return false;
       } else {
         //alert("Captcha verificado");
 
-      }      
+      }
       return true;
-      
+  */
 
       //$('#password').val();
       //$('#password-confirm').val();
@@ -403,7 +405,7 @@
           //alert("Captcha no verificado")
           var testVar = "reCAPTCHA no válido." ;
             Swal.fire(testVar).then(function() {
-          });           
+          });
           return false;
         } else {
           //alert("Captcha verificado");
@@ -421,8 +423,8 @@
     }
     */
 
-      
-    
+
+
 
   </script>
 

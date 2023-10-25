@@ -60,33 +60,68 @@ class AppServiceProvider extends ServiceProvider
             'index', 'App\Http\ViewComposers\IndexComposer'
         );
      */
-    $parametros =  Parametromodelo::first();
 
-    $pais = Parametromodelo::first()->join('country', 'parametros.pais', 'country.id')
-      ->select('country.country')
-      ->value('country');
-    $estado = Parametromodelo::first()->join('region', 'parametros.estado', 'region.id')
-      ->select('region.region')
-      ->value('region');
-    $ciudad = Parametromodelo::first()->join('city', 'parametros.ciudad', 'city.id')
-      ->select('city.city')
-      ->value('city');
-    $param = DB::table('parametros')
-      ->first();
+$parametros = [];
+$pais= [];
+$estado= [];
+$ciudad= [];
+$param = [];
+$redes = [];
+$footer = [];
+$segmendatas = [];
+$departamentos = [];
+$trm = [];
+$categorias = [];
+$top = [];
+$categoriasBoot = [];
+
+     try{
+
+        $parametros =  Parametromodelo::first();
+        $trm = Trm::orderBy('fecha', 'DESC')->first();
+        if (empty($trm)) {
+            app('App\Http\Controllers\TrmController')->webservistrm();
+          }
+
+        $pais = Parametromodelo::first()->join('country', 'parametros.pais', 'country.id')
+          ->select('country.country')
+          ->value('country');
+        $estado = Parametromodelo::first()->join('region', 'parametros.estado', 'region.id')
+          ->select('region.region')
+          ->value('region');
+        $ciudad = Parametromodelo::first()->join('city', 'parametros.ciudad', 'city.id')
+          ->select('city.city')
+          ->value('city');
+
+    $categoriasBoot = Categorian1modelo::has('productos')
+    ->orderBy('nombrecategoria',   'asc')->get();
+
+        $param = DB::table('parametros')
+          ->first();
+          $redes = RedesSociales::all();
+          $footer = Footer::with('items')->get();
+          $top = Productomodelo::with('hasManyImagenes')
+          ->where('destacado', true)
+          ->get();
+          $segmendatas = Ciudades::where('segmentada', true)->orderBy('city', 'ASC')->get();
+          $departamentos = Estados::orderBy('region', 'ASC')->get();
+    $categorias = Categorian1modelo::has('productos')->orderBy('nombrecategoria',   'asc')->get();
+
+     }catch(\Exception $e){
+
+     }
 
 
 
-
-    View::share('telefono1', $parametros->numerocontacto);
-    View::share('telefono2', $parametros->telefono);
+    View::share('telefono1', $parametros->numerocontacto ?? null);
+    View::share('telefono2', $parametros->telefono ?? null);
     // View::share('email', $parametros->correo);
     View::share('pais', $pais);
     View::share('estado', $estado);
     View::share('ciudad', $ciudad);
-    View::share('direccion', $parametros->direccion);
-    View::share('nombre_tienda', $parametros->nombre_tienda);
+    View::share('direccion', $parametros->direccion ?? null);
+    View::share('nombre_tienda', $parametros->nombre_tienda ?? null);
     View::share('param', $param);
-    $redes = RedesSociales::all();
     View::share('redes', $redes);
 
     $oldcat2 = null;
@@ -96,23 +131,13 @@ class AppServiceProvider extends ServiceProvider
 
 
 
-    $footer = Footer::with('items')->get();
+
     View::share('footer', $footer);
-
-
-    $segmendatas = Ciudades::where('segmentada', true)->orderBy('city', 'ASC')->get();
-    $departamentos = Estados::orderBy('region', 'ASC')->get();
 
     $cat_search = null;
     View::share('cat_search', $cat_search);
     View::share('segmendatas', $segmendatas);
     View::share('departamentos', $departamentos);
-
-    $trm = Trm::orderBy('fecha', 'DESC')->first();
-
-    if (empty($trm)) {
-      app('App\Http\Controllers\TrmController')->webservistrm();
-    }
 
     View::share('trm', $trm);
 
@@ -120,10 +145,6 @@ class AppServiceProvider extends ServiceProvider
     $sliders = collect([]);
     View::share('sliders', $sliders);
 
-
-    $top = Productomodelo::with('hasManyImagenes')
-      ->where('destacado', true)
-      ->get();
     View::share('top', $top);
 
 
@@ -134,22 +155,19 @@ class AppServiceProvider extends ServiceProvider
 
 
 
-    $categorias = Categorian1modelo::has('productos')->orderBy('nombrecategoria',   'asc')->get();
 
     View::share('categorias', $categorias);
 
     //$categ= DB::table('categoria_n1')->get();
 
 
-    $categoriasBoot = Categorian1modelo::has('productos')
-      ->orderBy('nombrecategoria',   'asc')->get();
 
 
     View::share('categoriasBoot', $categoriasBoot);
 
     $localBusiness = SchemaSpatie::localBusiness()
-      ->name($param->nombre_tienda)
-      ->email($param->correo)
+      ->name($param->nombre_tienda ?? null)
+      ->email($param->correo ?? null)
       ->contactPoint(SchemaSpatie::contactPoint()->areaServed('Worldwide'));
     $schema_org = $localBusiness->toScript();
 
@@ -160,11 +178,11 @@ class AppServiceProvider extends ServiceProvider
 
     $graph
       ->organization()
-      ->name($param->nombre_tienda);
+      ->name($param->nombre_tienda ?? null);
     // Create a product and prelink organization
     $graph
       ->product()
-      ->name($param->nombre_tienda)
+      ->name($param->nombre_tienda ?? null)
       ->brand($graph->organization());
     View::share('graph', $graph);
   }

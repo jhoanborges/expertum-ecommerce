@@ -327,12 +327,14 @@ public function index2(){
 
 
 
-      $searchData= $request->search;
+      $searchData= trim($request->get('search')) ?? '' ;
 
       $parametros=Parametromodelo::first();
 
-      $query = Productomodelo::search($searchData ?? '')
-      ;
+      $query = Productomodelo::search($searchData ?? '');
+
+      //$query = Productomodelo::search($searchData ?? '');
+
 
       /*
       if(!$request->categoria==null){

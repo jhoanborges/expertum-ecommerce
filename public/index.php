@@ -6,8 +6,15 @@
  * @package  Laravel
  * @author   Taylor Otwell <taylor@laravel.com>
  */
+   // Temporarily increase memory limit to 256MB
+
+    ini_set('memory_limit','256M');
+ini_set('set_time_limit ', '7200');
+ini_set('max_execution_time', '7200');
+ini_set('default_socket_timeout', '7200');
 
 define('LARAVEL_START', microtime(true));
+
 
 /*
 |--------------------------------------------------------------------------

@@ -75,6 +75,8 @@ Route::get('/contacto', 'ContactController@about_us')->name('about_us');
 Route::get('/tiendas', 'TiendasController@index')->name('tiendas');
 
 Route::get('search', 'StoreController@search')->name('store.search');
+Route::get('search-by/{id}', 'SearchController@index')->name('filter.search');
+
 Route::get('search-filter', 'StoreController@searchFilter')->name('store.filter.search');
 
 Route::get('/epayco', 'ePaycoController@index')->name('epayco');
@@ -161,7 +163,7 @@ Route::get('/masvendidos/filter', 'StoreController@masvendidos_filter')->name('m
 
 
 
-Route::get('/{cat}/{id}/', 'NewController@index')->name('categoria.get');
+Route::get('/{cat}/{id}', 'NewController@index')->name('categoria.get');
 Route::get('/filtros/{id}/', 'FiltrosController@show')->name('filtros.get');
 
 

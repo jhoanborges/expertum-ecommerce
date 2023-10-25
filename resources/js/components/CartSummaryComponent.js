@@ -410,9 +410,10 @@ toastr.error(error.response.data.message);
                                         Ir a Pagar $ </a>
 
 
-                                    <a href={ route('pedido') } className="btn btn-info checkout-button">
+                                    {/*<a href={ route('pedido') } className="btn btn-info checkout-button">
                                         <img src={props.cart} className="img-fluid header-icon"></img>
                                         Crear un pedido y pagar después</a>
+                                        */}
 
                                 </div>
                             </div>

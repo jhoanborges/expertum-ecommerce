@@ -12,7 +12,8 @@ use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Laravel\Scout\Searchable;
-
+use Laravel\Scout\Attributes\SearchUsingFullText;
+use Laravel\Scout\Attributes\SearchUsingPrefix;
 
 class Productomodelo extends Model
 {
@@ -37,62 +38,35 @@ class Productomodelo extends Model
         return $query->with('marca');
     }
 
+/**
+ * Get the indexable data array for the model.
+ *
+ * @return array<string, mixed>
+ */
+#[SearchUsingPrefix(['id', 'email'])]
+#[SearchUsingFullText(['bio'])]
+public function toSearchableArray(): array
+{
 
-    /**
-     * Get the indexable data array for the model.
-     *
-     * @return array<string, mixed>
-     */
-    public function toSearchableArray(): array
-    {
-        return [
-            'id' => (int) $this->id,
-            'nombre_producto' => $this->nombre_producto,
-            'id_categorian1' => $this->id_categoria_n1,
-            'id_categorian2' => $this->id_categoria_n2,
-            'id_categorian3' => $this->id_categoria_n3,
-            'id_categorian4' => $this->id_categoria_n4,
-            'id_categorian5' => $this->id_categoria_n5,
-            'alias_producto' => $this->alias_producto,
-            'referencia' => $this->referencia,
-            'referencia_propia' => $this->referencia_propia,
-            'descripcion_larga' => $this->descripcion_larga,
-            'descripcion' => $this->descripcion,
-            //'marcas.nombre' => $this->marcas->nombre ?? '',
+    return [
+        'id' => $this->id,
+        'nombre_producto' => $this->nombre_producto,
+        'id_categorian1' => $this->id_categorian1,
+        'id_categorian2' => $this->id_categorian2,
+        'id_categorian3' => $this->id_categorian3,
+        'id_categorian4' => $this->id_categorian4,
+        'id_categorian5' => $this->id_categorian5,
+    ];
+}
 
-        ];
-    }
+/**
+ * Determine if the model should be searchable.
+ */
+public function shouldBeSearchable(): bool
+{
+    return $this->categoria7();
+}
 
-    /**
-     * Searchable rules.
-     *
-     * @var array
-     */
-    /*protected $searchable = [
-  'columns' => [
-    'productos.nombre_producto' => 10,
-    'productos.alias_producto' => 10,
-    'productos.referencia' => 10,
-    'productos.referencia_propia' => 10,
-    'productos.descripcion_larga' => 10,
-    'productos.descripcion' => 10,
-    'marcas.nombre' => 10,
-    'categoria_n1.nombrecategoria' => 10,
-    'categoria_n2.nombrecategoria' => 10,
-    'categoria_n3.nombrecategoria' => 10,
-    'categoria_n4.nombrecategoria' => 10,
-    'categoria_n5.nombrecategoria' => 10,
-  ],
-  'joins' => [
-   'marcas' => ['productos.id_marca','marcas.id'],
-   'categoria_n1' => ['productos.id_categorian1','categoria_n1.slug'],
-   'categoria_n2' => ['productos.id_categorian2','categoria_n2.slug'],
-   'categoria_n3' => ['productos.id_categorian3','categoria_n3.slug'],
-   'categoria_n4' => ['productos.id_categorian4','categoria_n4.slug'],
-   'categoria_n5' => ['productos.id_categorian5','categoria_n5.slug'],
- ],
-];
-*/
     protected static function boot()
     {
         parent::boot();
@@ -120,17 +94,6 @@ class Productomodelo extends Model
     }
 
 
-    public function getSearchResult(): SearchResult
-    {
-        //$url = route('blogPost.show', $this->slug);
-
-        return new \Spatie\Searchable\SearchResult(
-            $this,
-            $this->nombre_producto,
-            $this->slug,
-            //$url
-        );
-    }
 
     public function promotionIsNotExpired($product)
     {
